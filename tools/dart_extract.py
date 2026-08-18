@@ -47,6 +47,10 @@ MONEY = re.compile(
     r"[\d,]+(?:\.\d+)?\s*(?:원\s*/\s*톤|원/톤|천원|백만원|억원|원|%|퍼센트)")
 SENT_SPLIT = re.compile(r"(?<=[.。!?])\s+|\n+")
 
+# 단일분기 역산에 쓸 부문별 누계 매출액 표
+REV_HINT = re.compile(r"매출\s*실적|매출\s*및\s*수주|매출액|생산\s*및\s*매출|부문별\s*매출")
+REV_ROW = re.compile(r"매출|수익")
+
 QMAP = {"03": "1Q", "06": "2Q", "09": "3Q", "12": "4Q"}
 
 
@@ -77,8 +81,13 @@ def table_to_grid(tbl) -> list[list[str]]:
     return [[grid.get((r, c), "") for c in range(cols)] for r in range(rows)]
 
 
-def preceding_context(tbl, limit: int = 400) -> str:
-    """표 직전의 제목/문단 텍스트만 문맥으로 수집 (앞선 표 내용은 제외)."""
+def preceding_context(tbl, limit: int = 400) -> tuple[str, str]:
+    """표 직전의 제목/문단 텍스트를 (근접문맥, 전체문맥) 으로 반환.
+
+    근접문맥 = 표 바로 앞 2개 문단. 표 종류(단가표/매출표) 판정에 쓴다.
+    전체문맥 = 최대 limit 자. 사람이 읽는 출처 표기에 쓴다.
+    앞선 '표'의 내용은 문맥에서 제외한다 (인접 표끼리 오염되는 문제 방지).
+    """
     parts: list[str] = []
     node = tbl
     while node is not None and len(" ".join(parts)) < limit:
@@ -96,7 +105,8 @@ def preceding_context(tbl, limit: int = 400) -> str:
             node = node.getparent()
             continue
         node = prev
-    return " | ".join(reversed(parts))[-limit:]
+    near = " | ".join(parts[:2])
+    return near, " | ".join(reversed(parts))[-limit:]
 
 
 def extract_prose(doc) -> list[tuple[str, str]]:
@@ -192,7 +202,10 @@ def load_manifest(xlsx: Path) -> dict[str, dict]:
 
 
 def extract(raw: Path, manifest: dict) -> tuple[list[dict], list[dict], list[dict]]:
-    """(표 발췌 셀, 산문 발췌 문장, 보고서별 로그) 반환."""
+    """(표 발췌 셀, 산문 발췌 문장, 보고서별 로그) 반환.
+
+    표 레코드에는 부문별 누계 매출액(단일분기 단가 역산용)도 '종류'='매출' 로 포함된다.
+    """
     records: list[dict] = []
     prose: list[dict] = []
     log: list[dict] = []
@@ -228,11 +241,27 @@ def extract(raw: Path, manifest: dict) -> tuple[list[dict], list[dict], list[dic
                 if len(grid) < 2:
                     continue
                 flat = " ".join(" ".join(r) for r in grid)
-                ctx = preceding_context(tbl)
-                is_price_tbl = bool(DANGA_HINT.search(flat) or DANGA_HINT.search(ctx))
-                if not is_price_tbl:
+                near, ctx = preceding_context(tbl)
+                # 표 종류 판정: 표 본문 > 바로 앞 문단 순으로 가중 (먼 제목에 끌려가지 않게)
+                d_flat, r_flat = DANGA_HINT.search(flat), REV_HINT.search(flat)
+                d_near, r_near = DANGA_HINT.search(near), REV_HINT.search(near)
+                if d_flat and not r_flat:
+                    kind = "단가"
+                elif r_flat and not d_flat:
+                    kind = "매출"
+                elif d_near and not r_near:
+                    kind = "단가"
+                elif r_near and not d_near:
+                    kind = "매출"
+                elif d_flat or d_near:
+                    kind = "단가"
+                elif r_flat or r_near:
+                    kind = "매출"
+                else:
                     continue
-                n_hit += 1
+                is_price_tbl = kind == "단가"
+                if is_price_tbl:
+                    n_hit += 1
 
                 # 헤더 행 = 숫자가 가장 적은 상단 1~3행 중 마지막
                 hdr_i = 0
@@ -258,17 +287,71 @@ def extract(raw: Path, manifest: dict) -> tuple[list[dict], list[dict], list[dic
                             "연도": year, "분기": q, "집계기준": basis_of(meta["name"]),
                             "문맥": ctx[-180:], "표번호": f"{f.name}#{ti}",
                             "항목": label, "열머리": col, "값": v, "원문": cell,
-                            "매립여부": bool(LANDFILL.search(label)
-                                          and not NON_PRICE.search(label)
-                                          and not NON_PRICE_ROW.search(label)),
-                            "단가성": not bool(NON_PRICE_ROW.search(label)
-                                            or NON_PRICE.search(label)),
+                            "종류": kind,
+                            # NON_PRICE_ROW(매출액·물량 등)는 '단가표'에서만 배제한다.
+                            # 매출표에서는 '매립 매출액' 행이 역산 입력이므로 살려야 한다.
+                            "매립여부": bool(
+                                LANDFILL.search(label)
+                                and not NON_PRICE.search(label)
+                                and not (is_price_tbl and NON_PRICE_ROW.search(label))),
+                            "단가성": is_price_tbl and not bool(
+                                NON_PRICE_ROW.search(label) or NON_PRICE.search(label)),
                         })
 
         log.append({"접수일자": meta["date"], "보고서명": meta["name"], "접수번호": rcp,
                     "표 총수": n_tables, "단가관련 표": n_hit,
                     "산문 단가언급": n_prose, "링크": meta["url"]})
     return records, prose, log
+
+
+
+QORDER = {"1Q": 1, "2Q": 2, "3Q": 3, "4Q": 4}
+
+
+def backout_quarterly(price_cum: dict, rev_cum: dict) -> dict:
+    """누계 단가 + 누계 매출액에서 단일 분기 단가를 역산한다.
+
+    정기보고서의 가격변동추이는 당해연도 누계 평균 단가(= 누계 매출액 ÷ 누계 처리량)다.
+    따라서 누계 물량은 rev / price 로 복원할 수 있고, 인접 분기 차분을 취하면
+
+        p_Q(n) = (rev(n) - rev(n-1)) / (rev(n)/p(n) - rev(n-1)/p(n-1))
+
+    이 된다. 매출액 단위(원·천원·백만원)는 분자·분모에서 상쇄되므로 단위 환산이 필요 없다.
+    1분기는 누계 = 단일분기이므로 공시값을 그대로 쓴다.
+    반환값: {(연도, 분기): {"단가": float|None, "물량": float|None, "사유": str}}
+    """
+    out: dict = {}
+    for (y, q), p_cum in price_cum.items():
+        prev_q = {"2Q": "1Q", "3Q": "2Q", "4Q": "3Q"}.get(q)
+        if prev_q is None:                       # 1분기: 누계 = 단일분기
+            out[(y, q)] = {"단가": p_cum, "물량": None, "사유": "1분기 = 누계와 동일"}
+            continue
+
+        p_prev = price_cum.get((y, prev_q))
+        r_now, r_prev = rev_cum.get((y, q)), rev_cum.get((y, prev_q))
+        if p_prev is None:
+            out[(y, q)] = {"단가": None, "물량": None, "사유": f"직전 {prev_q} 누계단가 없음"}
+            continue
+        if r_now is None or r_prev is None:
+            out[(y, q)] = {"단가": None, "물량": None, "사유": "부문별 누계 매출액 미확보"}
+            continue
+        if not p_cum or not p_prev:
+            out[(y, q)] = {"단가": None, "물량": None, "사유": "단가 0 또는 결측"}
+            continue
+
+        v_now, v_prev = r_now / p_cum, r_prev / p_prev
+        d_rev, d_vol = r_now - r_prev, v_now - v_prev
+        if d_vol <= 0 or d_rev <= 0:
+            out[(y, q)] = {"단가": None, "물량": None,
+                           "사유": "차분 물량/매출이 0 이하 (공시 정정·기준 변경 의심)"}
+            continue
+        note = f"{prev_q} 누계 차분으로 역산"
+        # 공시 누계단가는 정수 반올림돼 있어, 분기 물량 비중이 작으면 오차가 증폭된다.
+        share = d_vol / v_now if v_now else 0
+        if share < 0.10:
+            note += f" (분기 물량비중 {share:.1%} — 반올림 오차 증폭 주의)"
+        out[(y, q)] = {"단가": d_rev / d_vol, "물량": d_vol, "사유": note}
+    return out
 
 
 def build_workbook(records, prose, log, manifest, out: Path) -> None:
@@ -301,26 +384,42 @@ def build_workbook(records, prose, log, manifest, out: Path) -> None:
         ws.auto_filter.ref = ws.dimensions
         return ws
 
-    # 1) 매립단가 분기 시계열
-    land = [r for r in records if r["매립여부"] and r["연도"]]
+    # 1) 매립단가 분기 시계열 — 공시 누계 원값 + 단일분기 역산 동시 제공
+    land = [r for r in records
+            if r["매립여부"] and r["연도"] and r["종류"] == "단가"]
     series: dict[tuple[int, str], dict] = {}
     for r in land:
-        # 각 보고서의 '당기(첫 수치 열)' 값을 해당 분기 값으로 채택
+        # 각 보고서에서 '당기' = 가장 왼쪽 수치 열을 그 분기의 누계값으로 채택
         k = (r["연도"], r["분기"])
         cur = series.get(k)
         if cur is None or r["표번호"] < cur["표번호"]:
             series[k] = r
-    qorder = ["1Q", "2Q", "3Q", "4Q"]
+
+    rev_rows = [r for r in records
+                if r["매립여부"] and r["연도"] and r["종류"] == "매출"]
+    rev_series: dict[tuple[int, str], float] = {}
+    for r in rev_rows:
+        k = (r["연도"], r["분기"])
+        if k not in rev_series:
+            rev_series[k] = r["값"]
+
+    price_cum = {k: v["값"] for k, v in series.items()}
+    bo = backout_quarterly(price_cum, rev_series)
+
     rows = []
-    for (y, q) in sorted(series, key=lambda k: (k[0], qorder.index(k[1]))):
+    for (y, q) in sorted(series, key=lambda k: (k[0], QORDER[k[1]])):
         r = series[(y, q)]
+        b = bo.get((y, q), {})
         rows.append([y, q, f"{y} {q}", r["항목"], r["값"], r["열머리"], r["집계기준"],
+                     rev_series.get((y, q)), b.get("단가"), b.get("물량"), b.get("사유"),
                      r["보고서명"], r["접수일자"], r["접수번호"], r["링크"]])
     sheet("매립단가_분기",
-          ["연도", "분기", "기간", "항목", "단가", "공시 열머리", "집계기준",
+          ["연도", "분기", "기간", "항목", "공시 단가(누계)", "공시 열머리", "집계기준",
+           "누계 매출액(공시단위)", "단일분기 단가(역산)", "단일분기 물량(상대값)", "역산 비고",
            "출처 보고서", "접수일자", "접수번호", "DART 링크"],
-          rows, widths={3: 12, 4: 22, 5: 14, 6: 20, 7: 16, 8: 24, 11: 46},
-          numfmt={5: "#,##0"})
+          rows, widths={3: 12, 4: 22, 5: 16, 6: 14, 7: 18, 8: 20, 9: 18, 10: 20,
+                        11: 34, 12: 24, 15: 46},
+          numfmt={5: "#,##0", 8: "#,##0", 9: "#,##0", 10: "#,##0"})
 
     # 2) 매립 외 전 품목 단가
     others = [r for r in records
@@ -336,12 +435,12 @@ def build_workbook(records, prose, log, manifest, out: Path) -> None:
 
     # 3) 원자료 전량
     sheet("원자료_발췌표",
-          ["접수일자", "보고서명", "접수번호", "연도", "분기", "표번호", "문맥",
+          ["접수일자", "보고서명", "접수번호", "연도", "분기", "종류", "표번호", "문맥",
            "항목", "열머리", "값", "원문", "DART 링크"],
-          [[r["접수일자"], r["보고서명"], r["접수번호"], r["연도"], r["분기"],
+          [[r["접수일자"], r["보고서명"], r["접수번호"], r["연도"], r["분기"], r["종류"],
             r["표번호"], r["문맥"], r["항목"], r["열머리"], r["값"], r["원문"], r["링크"]]
            for r in records],
-          widths={2: 24, 7: 60, 8: 28, 12: 46})
+          widths={2: 24, 8: 60, 9: 28, 13: 46})
 
     # 3-2) 산문 속 단가 언급
     prose_sorted = sorted(prose, key=lambda r: (not r["매립언급"], r["접수일자"]))
