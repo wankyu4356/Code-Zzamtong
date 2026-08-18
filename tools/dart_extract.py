@@ -37,6 +37,16 @@ NON_PRICE_ROW = re.compile(
     r"자본금|자산|부채|주식|지분|합\s*계|소\s*계")
 NUM = re.compile(r"^-?[\d,]+(?:\.\d+)?$")
 
+# 표가 아니라 서술형 문장 속에 들어 있는 단가 언급을 잡기 위한 패턴
+PROSE_HINT = re.compile(
+    r"단가|톤당|톤\s*당|원/톤|원\s*/\s*톤|처리비|처리비용|반입료|반입\s*단가|"
+    r"판가|매립\s*가격|가격\s*(인상|인하|상승|하락|변동|경쟁)|"
+    r"요율|수수료율|평균\s*가격|평균\s*단가|공급\s*가격")
+# 산문에서 뽑아낼 금액·비율 표현
+MONEY = re.compile(
+    r"[\d,]+(?:\.\d+)?\s*(?:원\s*/\s*톤|원/톤|천원|백만원|억원|원|%|퍼센트)")
+SENT_SPLIT = re.compile(r"(?<=[.。!?])\s+|\n+")
+
 QMAP = {"03": "1Q", "06": "2Q", "09": "3Q", "12": "4Q"}
 
 
@@ -87,6 +97,46 @@ def preceding_context(tbl, limit: int = 400) -> str:
             continue
         node = prev
     return " | ".join(reversed(parts))[-limit:]
+
+
+def extract_prose(doc) -> list[tuple[str, str]]:
+    """표를 제거한 뒤 본문에서 단가를 언급한 문장을 (문장, 추출된 금액) 으로 반환."""
+    import copy
+    d = copy.deepcopy(doc)
+    for t in d.xpath("//table"):
+        parent = t.getparent()
+        if parent is not None:
+            parent.remove(t)
+
+    chunks: list[str] = []
+    leaves = d.xpath("//p|//li|//div|//span")
+    for el in leaves:
+        if el.xpath(".//p|.//li|.//div"):      # 컨테이너는 건너뛰고 말단만
+            continue
+        t = re.sub(r"\s+", " ", el.text_content()).strip()
+        if t:
+            chunks.append(t)
+    if not chunks:                              # 태그가 빈약한 옛 문서 대비
+        raw = re.sub(r"[ \t]+", " ", d.text_content())
+        chunks = [c.strip() for c in raw.split("\n") if c.strip()]
+
+    out: list[tuple[str, str]] = []
+    seen: set[str] = set()
+    for chunk in chunks:
+        for sent in SENT_SPLIT.split(chunk):
+            sent = sent.strip()
+            if len(sent) < 8 or len(sent) > 600:
+                continue
+            if not PROSE_HINT.search(sent):
+                continue
+            if sent in seen:
+                continue
+            # 숫자 없는 짧은 표 제목·단위 표기는 문장으로 보지 않음
+            if len(sent) < 20 and not re.search(r"\d", sent):
+                continue
+            seen.add(sent)
+            out.append((sent, ", ".join(dict.fromkeys(MONEY.findall(sent)))))
+    return out
 
 
 def parse_num(s: str) -> float | None:
@@ -141,9 +191,10 @@ def load_manifest(xlsx: Path) -> dict[str, dict]:
     return out
 
 
-def extract(raw: Path, manifest: dict) -> tuple[list[dict], list[dict]]:
-    """(발췌 셀 레코드, 보고서별 로그) 반환."""
+def extract(raw: Path, manifest: dict) -> tuple[list[dict], list[dict], list[dict]]:
+    """(표 발췌 셀, 산문 발췌 문장, 보고서별 로그) 반환."""
     records: list[dict] = []
+    prose: list[dict] = []
     log: list[dict] = []
 
     for d in sorted(p for p in raw.iterdir() if p.is_dir()):
@@ -151,7 +202,7 @@ def extract(raw: Path, manifest: dict) -> tuple[list[dict], list[dict]]:
         meta = manifest.get(rcp, {"date": d.name.split("_")[0], "name": "?",
                                   "rcp": rcp, "url": ""})
         year, q = report_period(meta["name"], meta["date"])
-        n_tables = n_hit = 0
+        n_tables = n_hit = n_prose = 0
 
         for f in sorted(d.glob("*")):
             if f.suffix.lower() not in (".xml", ".html", ".htm") or f.name == "_main.html":
@@ -160,6 +211,16 @@ def extract(raw: Path, manifest: dict) -> tuple[list[dict], list[dict]]:
                 doc = lxml.html.fromstring(f.read_text(encoding="utf-8"))
             except Exception:  # noqa: BLE001
                 continue
+
+            for sent, money in extract_prose(doc):
+                n_prose += 1
+                prose.append({
+                    "접수일자": meta["date"], "보고서명": meta["name"],
+                    "접수번호": rcp, "링크": meta["url"],
+                    "연도": year, "분기": q, "집계기준": basis_of(meta["name"]),
+                    "파일": f.name, "문장": sent, "추출 금액": money,
+                    "매립언급": bool(LANDFILL.search(sent)),
+                })
 
             for ti, tbl in enumerate(doc.xpath("//table")):
                 n_tables += 1
@@ -205,11 +266,12 @@ def extract(raw: Path, manifest: dict) -> tuple[list[dict], list[dict]]:
                         })
 
         log.append({"접수일자": meta["date"], "보고서명": meta["name"], "접수번호": rcp,
-                    "표 총수": n_tables, "단가관련 표": n_hit, "링크": meta["url"]})
-    return records, log
+                    "표 총수": n_tables, "단가관련 표": n_hit,
+                    "산문 단가언급": n_prose, "링크": meta["url"]})
+    return records, prose, log
 
 
-def build_workbook(records, log, manifest, out: Path) -> None:
+def build_workbook(records, prose, log, manifest, out: Path) -> None:
     import openpyxl
     from openpyxl.styles import Alignment, Border, Font, PatternFill, Side
     from openpyxl.utils import get_column_letter
@@ -281,8 +343,22 @@ def build_workbook(records, log, manifest, out: Path) -> None:
            for r in records],
           widths={2: 24, 7: 60, 8: 28, 12: 46})
 
+    # 3-2) 산문 속 단가 언급
+    prose_sorted = sorted(prose, key=lambda r: (not r["매립언급"], r["접수일자"]))
+    sheet("산문_단가언급",
+          ["연도", "분기", "매립 언급", "단가 언급 문장", "추출 금액",
+           "출처 보고서", "접수일자", "접수번호", "파일", "DART 링크"],
+          [[r["연도"], r["분기"], "O" if r["매립언급"] else "", r["문장"],
+            r["추출 금액"], r["보고서명"], r["접수일자"], r["접수번호"],
+            r["파일"], r["링크"]] for r in prose_sorted],
+          widths={3: 10, 4: 90, 5: 24, 6: 24, 10: 46})
+    ws = wb["산문_단가언급"]
+    for r in range(2, ws.max_row + 1):
+        ws.cell(r, 4).alignment = Alignment(wrap_text=True, vertical="top")
+
     # 4) 출처 공시목록
-    used = {r["접수번호"] for r in records} or {l["접수번호"] for l in log}
+    used = ({r["접수번호"] for r in records} | {r["접수번호"] for r in prose}
+            or {l["접수번호"] for l in log})
     src = [manifest[k] for k in sorted(used) if k in manifest]
     src.sort(key=lambda m: m["date"])
     sheet("출처_공시목록",
@@ -292,15 +368,17 @@ def build_workbook(records, log, manifest, out: Path) -> None:
 
     # 5) 수집 로그
     sheet("수집로그",
-          ["접수일자", "보고서명", "접수번호", "표 총수", "단가관련 표", "DART 링크"],
+          ["접수일자", "보고서명", "접수번호", "표 총수", "단가관련 표",
+           "산문 단가언급", "DART 링크"],
           [[l["접수일자"], l["보고서명"], l["접수번호"], l["표 총수"],
-            l["단가관련 표"], l["링크"]] for l in log],
-          widths={2: 30, 6: 46})
+            l["단가관련 표"], l["산문 단가언급"], l["링크"]] for l in log],
+          widths={2: 30, 7: 46})
 
     wb.remove(wb["Sheet"])
     out.parent.mkdir(parents=True, exist_ok=True)
     wb.save(out)
-    print(f"저장: {out}  (매립 {len(rows)}분기 / 전체 발췌 {len(records)}셀)")
+    print(f"저장: {out}  (매립 {len(rows)}분기 / 표 발췌 {len(records)}셀 / "
+          f"산문 발췌 {len(prose)}문장)")
 
 
 def main() -> int:
@@ -314,8 +392,8 @@ def main() -> int:
         print(f"원문이 없습니다: {args.raw}  → 먼저 tools/dart_fetch.py 를 실행하세요.")
         return 2
     manifest = load_manifest(args.xlsx)
-    records, log = extract(args.raw, manifest)
-    build_workbook(records, log, manifest, args.out)
+    records, prose, log = extract(args.raw, manifest)
+    build_workbook(records, prose, log, manifest, args.out)
     return 0
 
 
