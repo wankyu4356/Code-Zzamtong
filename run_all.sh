@@ -6,7 +6,7 @@ set -euo pipefail
 XLSX="${1:?사용법: DART_API_KEY=<키> ./run_all.sh \"DART 공시목록.xlsx\"}"
 : "${DART_API_KEY:=}"
 
-python3 -m pip install --quiet openpyxl lxml requests
+python3 -m pip install --quiet openpyxl lxml requests formulas
 
 echo "[1/3] 분기 <-> 출처 보고서 매핑 프레임 생성"
 python3 tools/build_frame.py --xlsx "$XLSX" \
@@ -15,9 +15,15 @@ python3 tools/build_frame.py --xlsx "$XLSX" \
 echo "[2/3] DART 원문 수집 (2016년 이후 정기보고서 + 감사보고서)"
 python3 tools/dart_fetch.py --xlsx "$XLSX" --outdir data/raw --since 2016-01-01
 
-echo "[3/3] 단가 발췌 및 엑셀 출력"
+echo "[3/5] 단가 발췌 및 엑셀 출력"
 python3 tools/dart_extract.py --raw data/raw --xlsx "$XLSX" \
   --out "out/인선이엔티_매립단가_분기.xlsx"
+
+echo "[4/5] 수식 검증 (계산 결과를 발췌 데이터와 대조)"
+python3 tools/verify_formulas.py "out/인선이엔티_매립단가_분기.xlsx" expected.tsv || true
+
+echo "[5/5] 수식 셀에 계산 결과 캐시값 주입"
+python3 tools/cache_values.py "out/인선이엔티_매립단가_분기.xlsx"
 
 echo
 echo "완료 → out/인선이엔티_매립단가_분기.xlsx"
