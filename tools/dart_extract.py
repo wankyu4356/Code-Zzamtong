@@ -15,6 +15,7 @@
 from __future__ import annotations
 
 import argparse
+import gzip
 import re
 from collections import defaultdict
 from pathlib import Path
@@ -33,8 +34,8 @@ NON_PRICE = re.compile(
     r"(잔여|누적|총)?\s*매립\s*(량|용량|시설|면적|가능)|매립가능|매립잔여")
 # 단가 표가 아닌 수량·금액 행 (요약 시트에서 제외)
 NON_PRICE_ROW = re.compile(
-    r"용량|처리량|반입량|생산량|판매량|매출액|매출액|면적|톤수|인원|명|㎡|㎥|"
-    r"자본금|자산|부채|주식|지분|합\s*계|소\s*계")
+    r"용량|처리량|반입량|생산량|판매량|매출액|면적|톤수|인원|명|㎡|㎥|"
+    r"자본|자산|부채|이익잉여금|영업이익|당기순|주식|지분|합\s*계|소\s*계|총\s*계")
 NUM = re.compile(r"^-?[\d,]+(?:\.\d+)?$")
 
 # 표가 아니라 서술형 문장 속에 들어 있는 단가 언급을 잡기 위한 패턴
@@ -149,14 +150,29 @@ def extract_prose(doc) -> list[tuple[str, str]]:
     return out
 
 
+# 2016~2018년 보고서는 셀 안에 단위를 함께 적었다: "32,043원/톤"
+UNIT_SUFFIX = re.compile(
+    r"(원/(톤|대|kg|ℓ|L|리터)|원|천원|백만원|억원|톤|대|배|주|건|명)+$")
+PERCENT = re.compile(r"[%％]|퍼센트")
+
+
 def parse_num(s: str) -> float | None:
-    s = s.strip().replace(" ", "")
+    s = s.strip().replace(" ", "").replace("\xa0", "")
+    if not s or s in ("-", "－", "—", "·"):
+        return None
+    if PERCENT.search(s):        # 비율 셀은 단가·매출액이 아니므로 수치로 보지 않음
+        return None
+    neg = s.startswith("(") and s.endswith(")")     # 회계 표기 음수 (1,234)
+    if neg:
+        s = s[1:-1]
+    s = UNIT_SUFFIX.sub("", s)
     if not s or not NUM.match(s):
         return None
     try:
-        return float(s.replace(",", ""))
+        v = float(s.replace(",", ""))
     except ValueError:
         return None
+    return -v if neg else v
 
 
 # ── 보고서 기간 판정 ──────────────────────────────────────────────────────────
@@ -209,6 +225,7 @@ def extract(raw: Path, manifest: dict) -> tuple[list[dict], list[dict], list[dic
     records: list[dict] = []
     prose: list[dict] = []
     log: list[dict] = []
+    blank_land: dict[str, str] = {}      # 접수번호 -> 매립 행 원문 ('-' 등)
 
     for d in sorted(p for p in raw.iterdir() if p.is_dir()):
         rcp = d.name.split("_")[-1]
@@ -218,10 +235,17 @@ def extract(raw: Path, manifest: dict) -> tuple[list[dict], list[dict], list[dic
         n_tables = n_hit = n_prose = 0
 
         for f in sorted(d.glob("*")):
-            if f.suffix.lower() not in (".xml", ".html", ".htm") or f.name == "_main.html":
+            if not re.search(r"\.(xml|html?)(\.gz)?$", f.name, re.I) or f.name.startswith("_"):
                 continue
             try:
-                doc = lxml.html.fromstring(f.read_text(encoding="utf-8"))
+                if f.name.endswith(".gz"):
+                    with gzip.open(f, "rt", encoding="utf-8") as fh:
+                        text = fh.read()
+                else:
+                    text = f.read_text(encoding="utf-8")
+                if not text.strip():
+                    continue
+                doc = lxml.html.fromstring(text)
             except Exception:  # noqa: BLE001
                 continue
 
@@ -266,16 +290,35 @@ def extract(raw: Path, manifest: dict) -> tuple[list[dict], list[dict], list[dic
                 # 헤더 행 = 숫자가 가장 적은 상단 1~3행 중 마지막
                 hdr_i = 0
                 for r in range(min(3, len(grid))):
-                    if sum(1 for c in grid[r] if parse_num(c) is not None) == 0:
-                        hdr_i = r
+                    if any(parse_num(c) is not None for c in grid[r]):
+                        break        # 숫자가 나오면 그 앞까지가 머리글
+                    hdr_i = r
                 header = grid[hdr_i]
 
                 for r in range(hdr_i + 1, len(grid)):
                     row = grid[r]
+                    # 빈칸 표시('-')는 품목명에 섞이지 않게 제외
                     label = " ".join(dict.fromkeys(
-                        [c for c in row[:3] if c and parse_num(c) is None])).strip()
+                        [c for c in row[:3]
+                         if c and c not in ("-", "－", "—", "·")
+                         and parse_num(c) is None])).strip()
                     if not label:
                         continue
+                    # 단가표에 매립 행은 있는데 '당해연도 열'이 비어 있으면 미공시로 기록.
+                    # 가격변동추이 표는 당기·전기·전전기를 함께 실으므로 당기 열만 본다.
+                    if (is_price_tbl and LANDFILL.search(label)
+                            and not NON_PRICE.search(label)):
+                        yr_col = next((c for c in range(len(row))
+                                       if c < len(header) and year
+                                       and str(year) in (header[c] or "")), None)
+                        raw_row = " | ".join(c for c in row if c)[:120]
+                        if yr_col is not None:
+                            if parse_num(row[yr_col]) is None:
+                                blank_land.setdefault(
+                                    rcp, f"{raw_row}  (당기 열 '{header[yr_col]}' = "
+                                         f"'{row[yr_col] or ''}')")
+                        elif not any(parse_num(c) is not None for c in row):
+                            blank_land.setdefault(rcp, raw_row)
                     for c, cell in enumerate(row):
                         v = parse_num(cell)
                         if v is None:
@@ -301,11 +344,14 @@ def extract(raw: Path, manifest: dict) -> tuple[list[dict], list[dict], list[dic
         log.append({"접수일자": meta["date"], "보고서명": meta["name"], "접수번호": rcp,
                     "표 총수": n_tables, "단가관련 표": n_hit,
                     "산문 단가언급": n_prose, "링크": meta["url"]})
-    return records, prose, log
+    return records, prose, log, blank_land
 
 
 
 QORDER = {"1Q": 1, "2Q": 2, "3Q": 3, "4Q": 4}
+# 정기보고서 공시 수치의 누계 구간
+BASIS = {"1Q": "1분기 누계(1~3월)", "2Q": "반기 누계(1~6월)",
+         "3Q": "3분기 누계(1~9월)", "4Q": "연간 누계(1~12월)"}
 
 
 def backout_quarterly(price_cum: dict, rev_cum: dict) -> dict:
@@ -354,7 +400,7 @@ def backout_quarterly(price_cum: dict, rev_cum: dict) -> dict:
     return out
 
 
-def build_workbook(records, prose, log, manifest, out: Path) -> None:
+def build_workbook(records, prose, log, manifest, blank_land, out: Path) -> None:
     import openpyxl
     from openpyxl.styles import Alignment, Border, Font, PatternFill, Side
     from openpyxl.utils import get_column_letter
@@ -384,12 +430,17 @@ def build_workbook(records, prose, log, manifest, out: Path) -> None:
         ws.auto_filter.ref = ws.dimensions
         return ws
 
-    # 1) 매립단가 분기 시계열 — 공시 누계 원값 + 단일분기 역산 동시 제공
+    # 1) 매립단가 분기 시계열 — 공시 누계 원값 + 단일분기 역산
+    #    보고서가 존재하는 모든 분기를 빠짐없이 싣고, 값이 없으면 사유를 남긴다.
     land = [r for r in records
             if r["매립여부"] and r["연도"] and r["종류"] == "단가"]
     series: dict[tuple[int, str], dict] = {}
     for r in land:
-        # 각 보고서에서 '당기' = 가장 왼쪽 수치 열을 그 분기의 누계값으로 채택
+        # 가격변동추이 표는 [당기 | 전기 | 전전기] 3개 연도를 나란히 싣는다.
+        # '행에서 처음 나오는 숫자'를 쓰면 당기가 '-' 일 때 몇 해 전 값을 잘못
+        # 집어오므로, 열머리에 보고서 당해연도가 박힌 열만 채택한다.
+        if str(r["연도"]) not in (r["열머리"] or ""):
+            continue
         k = (r["연도"], r["분기"])
         cur = series.get(k)
         if cur is None or r["표번호"] < cur["표번호"]:
@@ -406,24 +457,48 @@ def build_workbook(records, prose, log, manifest, out: Path) -> None:
     price_cum = {k: v["값"] for k, v in series.items()}
     bo = backout_quarterly(price_cum, rev_series)
 
+    # 실제로 원문을 수집한 정기보고서의 분기만 프레임으로 삼는다
+    collected = {l["접수번호"] for l in log}
+    frame: dict[tuple[int, str], dict] = {}
+    for m in manifest.values():
+        if m["rcp"] not in collected:
+            continue
+        y, q = report_period(m["name"], m["date"])
+        if y and re.search(r"(사업|반기|분기)보고서", m["name"]):
+            frame.setdefault((y, q), m)
+
     rows = []
-    for (y, q) in sorted(series, key=lambda k: (k[0], QORDER[k[1]])):
-        r = series[(y, q)]
+    for (y, q) in sorted(frame, key=lambda k: (k[0], QORDER[k[1]])):
+        m = frame[(y, q)]
+        r = series.get((y, q))
         b = bo.get((y, q), {})
-        rows.append([y, q, f"{y} {q}", r["항목"], r["값"], r["열머리"], r["집계기준"],
-                     rev_series.get((y, q)), b.get("단가"), b.get("물량"), b.get("사유"),
-                     r["보고서명"], r["접수일자"], r["접수번호"], r["링크"]])
+        if r is not None:
+            rows.append([y, q, f"{y} {q}", r["항목"], r["값"], r["열머리"], BASIS[q],
+                         rev_series.get((y, q)), b.get("단가"), b.get("물량"),
+                         b.get("사유"), "공시", m["name"], m["date"], m["rcp"], m["url"]])
+        else:
+            raw = blank_land.get(m["rcp"])
+            why = (f"보고서 단가표에 매립 행이 '{raw}' 로 비어 있음 (해당 사업 단가 미공시)"
+                   if raw else "보고서 단가표에서 매립 단가 항목을 찾지 못함")
+            rows.append([y, q, f"{y} {q}", "매립폐기물 최종처리용역", None, None, BASIS[q],
+                         rev_series.get((y, q)), None, None, why,
+                         "미공시", m["name"], m["date"], m["rcp"], m["url"]])
+
     sheet("매립단가_분기",
           ["연도", "분기", "기간", "항목", "공시 단가(누계)", "공시 열머리", "집계기준",
-           "누계 매출액(공시단위)", "단일분기 단가(역산)", "단일분기 물량(상대값)", "역산 비고",
-           "출처 보고서", "접수일자", "접수번호", "DART 링크"],
-          rows, widths={3: 12, 4: 22, 5: 16, 6: 14, 7: 18, 8: 20, 9: 18, 10: 20,
-                        11: 34, 12: 24, 15: 46},
+           "누계 매출액(공시단위)", "단일분기 단가(역산)", "단일분기 물량(상대값)", "비고",
+           "상태", "출처 보고서", "접수일자", "접수번호", "DART 링크"],
+          rows, widths={3: 12, 4: 24, 5: 16, 6: 16, 7: 18, 8: 20, 9: 18, 10: 20,
+                        11: 52, 12: 10, 13: 24, 16: 46},
           numfmt={5: "#,##0", 8: "#,##0", 9: "#,##0", 10: "#,##0"})
+    ws_l = wb["매립단가_분기"]
+    for rr in range(2, ws_l.max_row + 1):
+        ws_l.cell(rr, 11).alignment = Alignment(wrap_text=True, vertical="top")
 
     # 2) 매립 외 전 품목 단가
+    NOISE = re.compile(r"^증감|증감율|증감률|전년대비|비\s*율$")
     others = [r for r in records
-              if not r["매립여부"] and r["단가성"]
+              if r["단가성"] and not NOISE.search(r["항목"])
               and (ITEM_HINT.search(r["항목"]) or DANGA_HINT.search(r["항목"])
                    or DANGA_HINT.search(r["문맥"]))]
     sheet("단가항목_전체",
@@ -432,6 +507,24 @@ def build_workbook(records, prose, log, manifest, out: Path) -> None:
           [[r["연도"], r["분기"], r["항목"], r["값"], r["열머리"], r["집계기준"],
             r["문맥"], r["보고서명"], r["접수번호"], r["링크"]] for r in others],
           widths={3: 28, 7: 60, 8: 24, 10: 46}, numfmt={4: "#,##0.##"})
+
+    # 2-2) 품목 × 분기 피벗 — 각 보고서의 '당해연도 열' 값만 사용
+    piv: dict[str, dict[tuple[int, str], float]] = {}
+    for r in records:
+        if not r["단가성"] or not r["연도"] or NOISE.search(r["항목"]):
+            continue
+        if str(r["연도"]) not in (r["열머리"] or ""):
+            continue
+        if not (ITEM_HINT.search(r["항목"]) or DANGA_HINT.search(r["항목"])):
+            continue
+        piv.setdefault(r["항목"], {}).setdefault((r["연도"], r["분기"]), r["값"])
+    periods = sorted({k for v in piv.values() for k in v},
+                     key=lambda k: (k[0], QORDER[k[1]]))
+    sheet("단가_품목별_분기",
+          ["품목"] + [f"{y} {q}" for y, q in periods],
+          [[item] + [vals.get(k) for k in periods]
+           for item, vals in sorted(piv.items(), key=lambda kv: -len(kv[1]))],
+          widths={1: 36}, numfmt={c: "#,##0.##" for c in range(2, len(periods) + 2)})
 
     # 3) 원자료 전량
     sheet("원자료_발췌표",
@@ -491,8 +584,8 @@ def main() -> int:
         print(f"원문이 없습니다: {args.raw}  → 먼저 tools/dart_fetch.py 를 실행하세요.")
         return 2
     manifest = load_manifest(args.xlsx)
-    records, prose, log = extract(args.raw, manifest)
-    build_workbook(records, prose, log, manifest, args.out)
+    records, prose, log, blank_land = extract(args.raw, manifest)
+    build_workbook(records, prose, log, manifest, blank_land, args.out)
     return 0
 
 
