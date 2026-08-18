@@ -402,43 +402,64 @@ def backout_quarterly(price_cum: dict, rev_cum: dict) -> dict:
 
 def build_workbook(records, prose, log, manifest, blank_land, out: Path) -> None:
     import openpyxl
+    from openpyxl.chart import LineChart, Reference
     from openpyxl.styles import Alignment, Border, Font, PatternFill, Side
     from openpyxl.utils import get_column_letter
 
-    wb = openpyxl.Workbook()
-    hdr_fill = PatternFill("solid", fgColor="D6D2C4")
-    hdr_font = Font(bold=True, color="000000")
-    thin = Side(style="thin", color="A5AAAA")
-    border = Border(left=thin, right=thin, top=thin, bottom=thin)
+    # 색 팔레트
+    INK, SECTION, GOLD = "73531D", "523227", "AB955D"
+    CARD, LINE, MUTED = "F7EFDA", "A5AAAA", "8A8A8A"
+    FONT = "Arial"
 
-    def sheet(title, headers, rows, widths=None, numfmt=None):
+    thin = Side(style="thin", color=LINE)
+    border = Border(left=thin, right=thin, top=thin, bottom=thin)
+    hdr_fill = PatternFill("solid", fgColor=SECTION)
+    hdr_font = Font(name=FONT, bold=True, color="FFFFFF", size=10)
+    body_font = Font(name=FONT, size=10)
+    muted_font = Font(name=FONT, size=10, color=MUTED, italic=True)
+
+    wb = openpyxl.Workbook()
+
+    def sheet(title, headers, rows, widths=None, numfmt=None, wrap=(), freeze="A2"):
         ws = wb.create_sheet(title)
         ws.append(headers)
         for c in range(1, len(headers) + 1):
             cell = ws.cell(1, c)
             cell.fill, cell.font, cell.border = hdr_fill, hdr_font, border
-            cell.alignment = Alignment(horizontal="center", vertical="center", wrap_text=True)
+            cell.alignment = Alignment(horizontal="center", vertical="center",
+                                       wrap_text=True)
+        ws.row_dimensions[1].height = 30
         for r in rows:
             ws.append(r)
         for c in range(1, len(headers) + 1):
-            ws.column_dimensions[get_column_letter(c)].width = (widths or {}).get(c, 16)
-        if numfmt:
-            for col, fmt in numfmt.items():
-                for r in range(2, ws.max_row + 1):
-                    ws.cell(r, col).number_format = fmt
-        ws.freeze_panes = "A2"
-        ws.auto_filter.ref = ws.dimensions
+            ws.column_dimensions[get_column_letter(c)].width = (widths or {}).get(c, 14)
+        # 셀 단위 서식은 파일을 크게 만들고 계산도 느려지므로 큰 시트에서는 생략한다
+        # (원자료 시트는 2만 행이 넘는다 — 열 서식만 적용)
+        if ws.max_row <= 2000:
+            for r in range(2, ws.max_row + 1):
+                for c in range(1, len(headers) + 1):
+                    cell = ws.cell(r, c)
+                    cell.font = body_font
+                    cell.alignment = Alignment(
+                        wrap_text=c in wrap, vertical="top",
+                        horizontal=("right" if isinstance(cell.value, (int, float))
+                                    else "left"))
+        for col, fmt in (numfmt or {}).items():
+            for r in range(2, ws.max_row + 1):
+                ws.cell(r, col).number_format = fmt
+        ws.freeze_panes = freeze
+        if ws.max_row > 1:
+            ws.auto_filter.ref = ws.dimensions
         return ws
 
-    # 1) 매립단가 분기 시계열 — 공시 누계 원값 + 단일분기 역산
-    #    보고서가 존재하는 모든 분기를 빠짐없이 싣고, 값이 없으면 사유를 남긴다.
+    # ── 매립단가 분기 시계열 ──────────────────────────────────────────────────
     land = [r for r in records
             if r["매립여부"] and r["연도"] and r["종류"] == "단가"]
     series: dict[tuple[int, str], dict] = {}
     for r in land:
-        # 가격변동추이 표는 [당기 | 전기 | 전전기] 3개 연도를 나란히 싣는다.
-        # '행에서 처음 나오는 숫자'를 쓰면 당기가 '-' 일 때 몇 해 전 값을 잘못
-        # 집어오므로, 열머리에 보고서 당해연도가 박힌 열만 채택한다.
+        # 가격변동추이 표는 [당기 | 전기 | 전전기] 를 나란히 싣는다. '행에서 처음
+        # 나오는 숫자'를 쓰면 당기가 '-' 일 때 몇 해 전 값을 집어오므로,
+        # 열머리에 보고서 당해연도가 박힌 열만 채택한다.
         if str(r["연도"]) not in (r["열머리"] or ""):
             continue
         k = (r["연도"], r["분기"])
@@ -446,18 +467,14 @@ def build_workbook(records, prose, log, manifest, blank_land, out: Path) -> None
         if cur is None or r["표번호"] < cur["표번호"]:
             series[k] = r
 
-    rev_rows = [r for r in records
-                if r["매립여부"] and r["연도"] and r["종류"] == "매출"]
     rev_series: dict[tuple[int, str], float] = {}
-    for r in rev_rows:
-        k = (r["연도"], r["분기"])
-        if k not in rev_series:
-            rev_series[k] = r["값"]
+    for r in records:
+        if r["매립여부"] and r["연도"] and r["종류"] == "매출":
+            rev_series.setdefault((r["연도"], r["분기"]), r["값"])
 
     price_cum = {k: v["값"] for k, v in series.items()}
     bo = backout_quarterly(price_cum, rev_series)
 
-    # 실제로 원문을 수집한 정기보고서의 분기만 프레임으로 삼는다
     collected = {l["접수번호"] for l in log}
     frame: dict[tuple[int, str], dict] = {}
     for m in manifest.values():
@@ -469,34 +486,172 @@ def build_workbook(records, prose, log, manifest, blank_land, out: Path) -> None
 
     rows = []
     for (y, q) in sorted(frame, key=lambda k: (k[0], QORDER[k[1]])):
-        m = frame[(y, q)]
-        r = series.get((y, q))
-        b = bo.get((y, q), {})
+        m, r, b = frame[(y, q)], series.get((y, q)), bo.get((y, q), {})
         if r is not None:
-            rows.append([y, q, f"{y} {q}", r["항목"], r["값"], r["열머리"], BASIS[q],
-                         rev_series.get((y, q)), b.get("단가"), b.get("물량"),
-                         b.get("사유"), "공시", m["name"], m["date"], m["rcp"], m["url"]])
+            rows.append([y, q, f"{y} {q}", "공시", r["값"], b.get("단가"),
+                         rev_series.get((y, q)), BASIS[q], r["열머리"], b.get("사유"),
+                         m["name"], m["date"], m["rcp"], m["url"]])
         else:
             raw = blank_land.get(m["rcp"])
-            why = (f"보고서 단가표에 매립 행이 '{raw}' 로 비어 있음 (해당 사업 단가 미공시)"
-                   if raw else "보고서 단가표에서 매립 단가 항목을 찾지 못함")
-            rows.append([y, q, f"{y} {q}", "매립폐기물 최종처리용역", None, None, BASIS[q],
-                         rev_series.get((y, q)), None, None, why,
-                         "미공시", m["name"], m["date"], m["rcp"], m["url"]])
+            why = (f"보고서 단가표의 매립 행이 비어 있음 → {raw}" if raw
+                   else "보고서 단가표에서 매립 단가 항목을 찾지 못함")
+            rows.append([y, q, f"{y} {q}", "미공시", None, None,
+                         rev_series.get((y, q)), BASIS[q], None, why,
+                         m["name"], m["date"], m["rcp"], m["url"]])
 
-    sheet("매립단가_분기",
-          ["연도", "분기", "기간", "항목", "공시 단가(누계)", "공시 열머리", "집계기준",
-           "누계 매출액(공시단위)", "단일분기 단가(역산)", "단일분기 물량(상대값)", "비고",
-           "상태", "출처 보고서", "접수일자", "접수번호", "DART 링크"],
-          rows, widths={3: 12, 4: 24, 5: 16, 6: 16, 7: 18, 8: 20, 9: 18, 10: 20,
-                        11: 52, 12: 10, 13: 24, 16: 46},
-          numfmt={5: "#,##0", 8: "#,##0", 9: "#,##0", 10: "#,##0"})
-    ws_l = wb["매립단가_분기"]
-    for rr in range(2, ws_l.max_row + 1):
-        ws_l.cell(rr, 11).alignment = Alignment(wrap_text=True, vertical="top")
+    ws = sheet("매립단가_분기",
+               ["연도", "분기", "기간", "상태", "공시 단가\n(누계, 원/톤)",
+                "단일분기 단가\n(역산, 원/톤)", "누계 매출액\n(공시 단위)", "집계기준",
+                "공시 열머리", "비고", "출처 보고서", "접수일자", "접수번호", "DART 원문 링크"],
+               rows,
+               widths={1: 7, 2: 7, 3: 10, 4: 9, 5: 14, 6: 14, 7: 15, 8: 18,
+                       9: 18, 10: 58, 11: 22, 12: 12, 13: 16, 14: 44},
+               numfmt={5: "#,##0", 6: "#,##0", 7: "#,##0"}, wrap=(10,))
+    n_last = ws.max_row
+    grey = Font(name=FONT, size=10, color=MUTED)
+    for r in range(2, n_last + 1):
+        if ws.cell(r, 4).value == "미공시":
+            ws.cell(r, 4).font = Font(name=FONT, size=10, color=MUTED, italic=True)
+            for c in (10,):
+                ws.cell(r, c).font = grey
+            for c in range(1, 15):
+                ws.cell(r, c).fill = PatternFill("solid", fgColor=CARD)
 
-    # 2) 매립 외 전 품목 단가
+    # ── 요약 ─────────────────────────────────────────────────────────────────
+    S = wb.create_sheet("요약", 0)
+    S.sheet_properties.tabColor = INK
+    S.column_dimensions["A"].width = 3
+    for col, w in zip("BCDEFGH", (22, 16, 16, 16, 16, 16, 30)):
+        S.column_dimensions[col].width = w
+
+    def put(cell, value, *, size=10, bold=False, color="000000", fill=None,
+            fmt=None, align=None):
+        c = S[cell]
+        c.value = value
+        c.font = Font(name=FONT, size=size, bold=bold, color=color)
+        if fill:
+            c.fill = PatternFill("solid", fgColor=fill)
+        if fmt:
+            c.number_format = fmt
+        if align:
+            c.alignment = Alignment(horizontal=align, vertical="center")
+        return c
+
+    put("B2", "인선이엔티 (060150) — 매립단가 분기 시계열", size=16, bold=True, color=INK)
+    put("B3", "DART 정기보고서 원문 발췌 · 2015 4Q ~ 2026 2Q", size=10, color=MUTED)
+
+    put("B5", "수집 범위", size=11, bold=True, color=SECTION)
+    for i, (k, v) in enumerate([
+            ("대상 회사", "인선이엔티 (코스닥 060150, 고유번호 00375931)"),
+            ("수집 보고서", f"정기보고서 {len(log)}건 (사업·반기·분기보고서 원문 전량)"),
+            ("발췌 대상", "II. 사업의 내용 > 주요 제품 등의 가격변동추이 / 매출 및 수주상황"),
+            ("출처", "DART 전자공시시스템 (dart.fss.or.kr) 원문")]):
+        put(f"B{6+i}", k, bold=True)
+        put(f"C{6+i}", v)
+
+    # 요약 수치는 같은 발췌 데이터에서 파이썬으로 계산해 값으로 기록한다.
+    # (수식 대신 값을 쓰는 이유: 이 워크북은 확정된 공시 원문에서 tools/dart_extract.py
+    #  가 통째로 재생성하는 산출물이라, 셀을 손으로 고쳐 재계산할 대상이 아니다.)
+    pub = [r for r in rows if r[4] is not None]          # 단가가 공시된 분기
+    hi = max(pub, key=lambda r: r[4])
+    lo = min(pub, key=lambda r: r[4])
+    latest = pub[-1]
+
+    r0 = 11
+    put(f"B{r0}", "매립단가 요약", size=11, bold=True, color=SECTION)
+    stats = [
+        ("공시된 분기 수", len(pub), '0"개 분기"'),
+        ("미공시 분기 수", len(rows) - len(pub), '0"개 분기"'),
+        ("최고 단가 (원/톤)", hi[4], "#,##0"),
+        ("최고 시점", hi[2], None),
+        ("최저 단가 (원/톤)", lo[4], "#,##0"),
+        ("최저 시점", lo[2], None),
+        ("최근 단가 (원/톤)", latest[4], "#,##0"),
+        ("최근 시점", latest[2], None),
+    ]
+    for i, (k, v, fmt) in enumerate(stats):
+        put(f"B{r0+1+i}", k, fill=CARD)
+        put(f"C{r0+1+i}", v, fmt=fmt, bold=True, align="right")
+    put(f"D{r0+1}", "← 모두 '매립단가_분기' 시트에서 산출", size=9, color=MUTED)
+
+    r1 = r0 + len(stats) + 3
+    put(f"B{r1}", "연도별 매립단가 (원/톤)", size=11, bold=True, color=SECTION)
+    put(f"B{r1+1}", "연도", bold=True, color="FFFFFF", fill=SECTION, align="center")
+    for j, q in enumerate(["1Q", "2Q", "3Q", "4Q"]):
+        put(f"{chr(67+j)}{r1+1}", f"{q} 단일분기", bold=True, color="FFFFFF",
+            fill=SECTION, align="center")
+    put(f"G{r1+1}", "연간 누계", bold=True, color="FFFFFF", fill=SECTION, align="center")
+
+    by_yq = {(r[0], r[1]): r for r in rows}
+    years = sorted({r[0] for r in pub})
+    for i, y in enumerate(years):
+        rr = r1 + 2 + i
+        put(f"B{rr}", y, align="center")
+        for j, q in enumerate(["1Q", "2Q", "3Q", "4Q"]):
+            src_row = by_yq.get((y, q))
+            put(f"{chr(67+j)}{rr}", src_row[5] if src_row else None,
+                fmt="#,##0", align="right")
+        yr_row = by_yq.get((y, "4Q"))
+        put(f"G{rr}", yr_row[4] if yr_row else None, fmt="#,##0",
+            align="right", bold=True)
+    for rr in range(r1 + 1, r1 + 2 + len(years)):
+        for cc in range(2, 8):
+            S.cell(rr, cc).border = border
+
+    note_r = r1 + len(years) + 3
+    put(f"B{note_r}", "읽는 법", size=11, bold=True, color=SECTION)
+    for i, t in enumerate([
+            "정기보고서의 가격변동추이는 당해연도 누계 평균 단가로 공시된다. "
+            "반기보고서 값은 1~6월 누계, 사업보고서 값은 연간 누계다.",
+            "'단일분기 단가'는 누계 물량을 (매출액 ÷ 단가) 로 복원해 인접 분기 차분으로 "
+            "역산한 값이다. 매출액 단위는 분자·분모에서 상쇄된다.",
+            "매립단가는 2019년 반기보고서부터 공시된다. 그 이전 분기는 추출 실패가 아니라 "
+            "보고서 단가표의 매립 행이 '-' 로 비어 있다 (매립단가_분기 시트 비고 열 참조).",
+            "모든 수치는 원문 표에서 기계 발췌했으며, 각 행에 출처 보고서·접수번호·"
+            "DART 원문 링크가 붙어 있다.",
+            "위 요약값은 '매립단가_분기' 시트의 공시 단가(E열)·단일분기 단가(F열)에서 "
+            "직접 산출한 것이다. 원문이 갱신되면 tools/dart_extract.py 로 워크북 전체를 "
+            "다시 생성한다."]):
+        c = put(f"B{note_r+1+i}", f"· {t}", size=9, color="333333")
+        S.merge_cells(f"B{note_r+1+i}:H{note_r+1+i}")
+        c.alignment = Alignment(wrap_text=True, vertical="top")
+        S.row_dimensions[note_r + 1 + i].height = 26
+
+    ch = LineChart()
+    ch.title = "매립단가 추이 (원/톤)"
+    ch.height, ch.width = 8.5, 20
+    ch.y_axis.title, ch.x_axis.title = "원/톤", None
+    data = Reference(ws, min_col=5, max_col=6, min_row=1, max_row=n_last)
+    cats = Reference(ws, min_col=3, min_row=2, max_row=n_last)
+    ch.add_data(data, titles_from_data=True)
+    ch.set_categories(cats)
+    for i, s_ in enumerate(ch.series):
+        s_.graphicalProperties.line.width = 22000
+        s_.graphicalProperties.line.solidFill = (SECTION, GOLD)[i]
+        s_.smooth = False
+    S.add_chart(ch, "I5")
+    S.sheet_view.showGridLines = False
+
+    # ── 품목 × 분기 피벗 ─────────────────────────────────────────────────────
     NOISE = re.compile(r"^증감|증감율|증감률|전년대비|비\s*율$")
+    piv: dict[str, dict[tuple[int, str], float]] = {}
+    for r in records:
+        if (not r["단가성"] or not r["연도"] or NOISE.search(r["항목"])
+                or str(r["연도"]) not in (r["열머리"] or "")):
+            continue
+        if not (ITEM_HINT.search(r["항목"]) or DANGA_HINT.search(r["항목"])):
+            continue
+        piv.setdefault(r["항목"], {}).setdefault((r["연도"], r["분기"]), r["값"])
+    periods = sorted({k for v in piv.values() for k in v},
+                     key=lambda k: (k[0], QORDER[k[1]]))
+    sheet("단가_품목별_분기",
+          ["품목 (원/톤)"] + [f"{y} {q}" for y, q in periods],
+          [[item] + [vals.get(k) for k in periods]
+           for item, vals in sorted(piv.items(), key=lambda kv: -len(kv[1]))],
+          widths={1: 30, **{c: 11 for c in range(2, len(periods) + 2)}},
+          numfmt={c: "#,##0.##" for c in range(2, len(periods) + 2)}, freeze="B2")
+
+    # ── 전 품목 단가 (롱 포맷) ───────────────────────────────────────────────
     others = [r for r in records
               if r["단가성"] and not NOISE.search(r["항목"])
               and (ITEM_HINT.search(r["항목"]) or DANGA_HINT.search(r["항목"])
@@ -506,71 +661,51 @@ def build_workbook(records, prose, log, manifest, blank_land, out: Path) -> None
            "출처 보고서", "접수번호", "DART 링크"],
           [[r["연도"], r["분기"], r["항목"], r["값"], r["열머리"], r["집계기준"],
             r["문맥"], r["보고서명"], r["접수번호"], r["링크"]] for r in others],
-          widths={3: 28, 7: 60, 8: 24, 10: 46}, numfmt={4: "#,##0.##"})
+          widths={1: 7, 2: 7, 3: 30, 4: 12, 5: 18, 6: 16, 7: 52, 8: 22, 9: 16, 10: 40},
+          numfmt={4: "#,##0.##"}, wrap=(7,))
 
-    # 2-2) 품목 × 분기 피벗 — 각 보고서의 '당해연도 열' 값만 사용
-    piv: dict[str, dict[tuple[int, str], float]] = {}
-    for r in records:
-        if not r["단가성"] or not r["연도"] or NOISE.search(r["항목"]):
-            continue
-        if str(r["연도"]) not in (r["열머리"] or ""):
-            continue
-        if not (ITEM_HINT.search(r["항목"]) or DANGA_HINT.search(r["항목"])):
-            continue
-        piv.setdefault(r["항목"], {}).setdefault((r["연도"], r["분기"]), r["값"])
-    periods = sorted({k for v in piv.values() for k in v},
-                     key=lambda k: (k[0], QORDER[k[1]]))
-    sheet("단가_품목별_분기",
-          ["품목"] + [f"{y} {q}" for y, q in periods],
-          [[item] + [vals.get(k) for k in periods]
-           for item, vals in sorted(piv.items(), key=lambda kv: -len(kv[1]))],
-          widths={1: 36}, numfmt={c: "#,##0.##" for c in range(2, len(periods) + 2)})
+    # ── 산문 속 단가 언급 ────────────────────────────────────────────────────
+    prose_sorted = sorted(prose, key=lambda r: (not r["매립언급"], r["접수일자"]))
+    sheet("산문_단가언급",
+          ["연도", "분기", "매립", "단가 언급 문장", "추출 금액", "출처 보고서",
+           "접수일자", "접수번호", "DART 링크"],
+          [[r["연도"], r["분기"], "●" if r["매립언급"] else "", r["문장"],
+            r["추출 금액"], r["보고서명"], r["접수일자"], r["접수번호"], r["링크"]]
+           for r in prose_sorted],
+          widths={1: 7, 2: 7, 3: 6, 4: 92, 5: 22, 6: 22, 7: 12, 8: 16, 9: 40},
+          wrap=(4,))
 
-    # 3) 원자료 전량
+    # ── 출처 / 로그 / 원자료 ─────────────────────────────────────────────────
+    used = ({r["접수번호"] for r in records} | {r["접수번호"] for r in prose}
+            or {l["접수번호"] for l in log})
+    src = sorted((manifest[k] for k in used if k in manifest), key=lambda m: m["date"])
+    sheet("출처_공시목록",
+          ["접수일자", "보고서명", "제출인", "접수번호", "DART 원문 링크"],
+          [[m["date"], m["name"], m["filer"], m["rcp"], m["url"]] for m in src],
+          widths={1: 12, 2: 26, 3: 14, 4: 18, 5: 46})
+
+    sheet("수집로그",
+          ["접수일자", "보고서명", "접수번호", "표 총수", "단가 관련 표",
+           "산문 단가언급", "DART 링크"],
+          [[l["접수일자"], l["보고서명"], l["접수번호"], l["표 총수"],
+            l["단가관련 표"], l["산문 단가언급"], l["링크"]] for l in log],
+          widths={1: 12, 2: 26, 3: 18, 4: 10, 5: 13, 6: 13, 7: 44})
+
     sheet("원자료_발췌표",
           ["접수일자", "보고서명", "접수번호", "연도", "분기", "종류", "표번호", "문맥",
            "항목", "열머리", "값", "원문", "DART 링크"],
           [[r["접수일자"], r["보고서명"], r["접수번호"], r["연도"], r["분기"], r["종류"],
             r["표번호"], r["문맥"], r["항목"], r["열머리"], r["값"], r["원문"], r["링크"]]
            for r in records],
-          widths={2: 24, 8: 60, 9: 28, 13: 46})
-
-    # 3-2) 산문 속 단가 언급
-    prose_sorted = sorted(prose, key=lambda r: (not r["매립언급"], r["접수일자"]))
-    sheet("산문_단가언급",
-          ["연도", "분기", "매립 언급", "단가 언급 문장", "추출 금액",
-           "출처 보고서", "접수일자", "접수번호", "파일", "DART 링크"],
-          [[r["연도"], r["분기"], "O" if r["매립언급"] else "", r["문장"],
-            r["추출 금액"], r["보고서명"], r["접수일자"], r["접수번호"],
-            r["파일"], r["링크"]] for r in prose_sorted],
-          widths={3: 10, 4: 90, 5: 24, 6: 24, 10: 46})
-    ws = wb["산문_단가언급"]
-    for r in range(2, ws.max_row + 1):
-        ws.cell(r, 4).alignment = Alignment(wrap_text=True, vertical="top")
-
-    # 4) 출처 공시목록
-    used = ({r["접수번호"] for r in records} | {r["접수번호"] for r in prose}
-            or {l["접수번호"] for l in log})
-    src = [manifest[k] for k in sorted(used) if k in manifest]
-    src.sort(key=lambda m: m["date"])
-    sheet("출처_공시목록",
-          ["접수일자", "보고서명", "제출인", "접수번호", "DART 원문 링크"],
-          [[m["date"], m["name"], m["filer"], m["rcp"], m["url"]] for m in src],
-          widths={2: 30, 5: 52})
-
-    # 5) 수집 로그
-    sheet("수집로그",
-          ["접수일자", "보고서명", "접수번호", "표 총수", "단가관련 표",
-           "산문 단가언급", "DART 링크"],
-          [[l["접수일자"], l["보고서명"], l["접수번호"], l["표 총수"],
-            l["단가관련 표"], l["산문 단가언급"], l["링크"]] for l in log],
-          widths={2: 30, 7: 46})
+          widths={1: 12, 2: 22, 3: 16, 8: 46, 9: 26, 12: 14, 13: 38})
 
     wb.remove(wb["Sheet"])
     out.parent.mkdir(parents=True, exist_ok=True)
     wb.save(out)
-    print(f"저장: {out}  (매립 {len(rows)}분기 / 표 발췌 {len(records)}셀 / "
-          f"산문 발췌 {len(prose)}문장)")
+    print(f"저장: {out}")
+    print(f"  매립단가 {sum(1 for r in rows if r[4] is not None)}분기 공시 / "
+          f"{len(rows)}분기 프레임 · 표 발췌 {len(records):,}셀 · 산문 {len(prose)}문장")
+
 
 
 def main() -> int:
