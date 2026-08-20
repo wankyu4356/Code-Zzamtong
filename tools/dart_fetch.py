@@ -151,23 +151,74 @@ def fetch_report(s: requests.Session, t: dict, outdir: Path) -> dict:
     return {**t, "status": "ok", "sections": saved}
 
 
-def load_targets(xlsx: Path, since: str) -> list[dict]:
+# DART 공시목록 엑셀은 배포마다 시트·열 이름이 다르다. 뜻이 같은 열을 하나로 묶는다.
+COLS = {
+    "date": ("접수일자",),
+    "name": ("보고서명", "공시명(보고서명)", "공시명"),
+    "filer": ("제출인",),
+    "rcp": ("접수번호", "접수번호(rcpNo)", "rcpNo"),
+    "url": ("공시 링크", "DART 링크", "링크"),
+    "final": ("최종본",),
+}
+
+
+def read_manifest_rows(xlsx: Path) -> list[dict]:
+    """공시목록 엑셀을 열 이름에 상관없이 표준 딕셔너리 목록으로 읽는다."""
     import openpyxl
     wb = openpyxl.load_workbook(xlsx, data_only=True)
-    ws = wb["공시목록"]
-    head = [c.value for c in next(ws.iter_rows(min_row=1, max_row=1))]
-    idx = {n: head.index(n) for n in ("접수일자", "보고서명", "제출인", "접수번호", "공시 링크")}
-    targets = []
+    ws = None
+    for cand in ("공시목록", "전체공시"):
+        if cand in wb.sheetnames:
+            ws = wb[cand]
+            break
+    if ws is None:                                  # 첫 시트를 쓴다
+        ws = wb.worksheets[0]
+
+    head = [str(c.value).strip() if c.value else "" 
+            for c in next(ws.iter_rows(min_row=1, max_row=1))]
+    idx = {}
+    for key, names in COLS.items():
+        for n in names:
+            if n in head:
+                idx[key] = head.index(n)
+                break
+    missing = {"date", "name", "rcp"} - set(idx)
+    if missing:
+        raise RuntimeError(f"공시목록에서 열을 못 찾음: {missing} (헤더: {head})")
+
+    out = []
     for row in ws.iter_rows(min_row=2, values_only=True):
-        name = (row[idx["보고서명"]] or "").strip()
-        date = row[idx["접수일자"]] or ""
+        def get(key, default=None):
+            i = idx.get(key)
+            return row[i] if i is not None and i < len(row) else default
+
+        date = get("date")
+        if hasattr(date, "strftime"):               # datetime 로 들어오는 배포가 있다
+            date = date.strftime("%Y-%m-%d")
+        date = str(date or "").strip()[:10]
+        rcp = str(get("rcp") or "").strip()
+        if not rcp or not date:
+            continue
+        out.append({"date": date, "name": str(get("name") or "").strip(),
+                    "filer": get("filer"), "rcp": rcp,
+                    "url": get("url") or
+                           f"https://dart.fss.or.kr/dsaf001/main.do?rcpNo={rcp}",
+                    "final": get("final")})
+    return out
+
+
+def load_targets(xlsx: Path, since: str) -> list[dict]:
+    targets = []
+    for rec in read_manifest_rows(xlsx):
+        name = rec["name"]
         if not REPORT_RE.search(name) or name.endswith("제출"):
             continue
-        if date < since:
+        if rec["date"] < since:
             continue
-        targets.append({"date": date, "name": name, "filer": row[idx["제출인"]],
-                        "rcp": str(row[idx["접수번호"]]).strip(),
-                        "url": row[idx["공시 링크"]]})
+        # 정정 전 원본이 함께 실린 배포에서는 최종본만 받는다
+        if rec.get("final") not in (None, "", "Y", "y"):
+            continue
+        targets.append(rec)
     targets.sort(key=lambda t: t["date"])
     return targets
 
