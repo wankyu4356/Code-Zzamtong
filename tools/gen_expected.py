@@ -41,7 +41,7 @@ def main() -> int:
         price, rev = {}, {}
         tok = sc["token"]
         for r in records:
-            if (r.get("역할") == "단가" and r["항목"] == sc["label"] and r["연도"]):
+            if (r.get("역할") == "단가" and r["항목"] in sc["labels"] and r["연도"]):
                 price.setdefault((r["연도"], r["분기"]), r["값"])
             if (r.get("역할") == "매출액" and r["연도"] and tok
                     and tok in r["항목"]):

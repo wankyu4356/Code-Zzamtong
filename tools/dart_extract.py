@@ -216,188 +216,6 @@ def report_period(name: str, date: str) -> tuple[int, str] | tuple[None, None]:
     return None, None
 
 
-def basis_of(name: str) -> str:
-    """공시 수치의 집계 기준(누계/연간)을 표기."""
-    if "사업보고서" in name:
-        return "연간 누계"
-    if "반기보고서" in name:
-        return "반기 누계(1~6월)"
-    if "(09)" in name or ".09)" in name:
-        return "3분기 누계(1~9월)"
-    if "분기보고서" in name:
-        return "분기 누계"
-    return ""
-
-
-# ── 메인 ─────────────────────────────────────────────────────────────────────
-def load_manifest(xlsx: Path) -> dict[str, dict]:
-    """공시목록 엑셀을 접수번호 -> 메타 딕셔너리로 읽는다 (열 이름 배포차 흡수)."""
-    import sys
-    sys.path.insert(0, str(Path(__file__).parent))
-    from dart_fetch import read_manifest_rows
-    return {rec["rcp"]: rec for rec in read_manifest_rows(xlsx)}
-
-
-def extract(raw: Path, manifest: dict) -> tuple[list[dict], list[dict], list[dict]]:
-    """(표 발췌 셀, 산문 발췌 문장, 보고서별 로그) 반환.
-
-    표 레코드에는 부문별 누계 매출액(단일분기 단가 역산용)도 '종류'='매출' 로 포함된다.
-    """
-    records: list[dict] = []
-    prose: list[dict] = []
-    log: list[dict] = []
-    # (품목명, 접수번호) -> 그 행의 원문. 단가표에 품목 행은 있는데 당해연도
-    # 열이 비어 있는 경우를 '미공시' 근거로 남긴다.
-    blank_land: dict[tuple[str, str], str] = {}
-
-    for d in sorted(p for p in raw.iterdir() if p.is_dir()):
-        rcp = d.name.split("_")[-1]
-        meta = manifest.get(rcp, {"date": d.name.split("_")[0], "name": "?",
-                                  "rcp": rcp, "url": ""})
-        year, q = report_period(meta["name"], meta["date"])
-        n_tables = n_hit = n_prose = 0
-
-        for f in sorted(d.glob("*")):
-            if not re.search(r"\.(xml|html?)(\.gz)?$", f.name, re.I) or f.name.startswith("_"):
-                continue
-            try:
-                if f.name.endswith(".gz"):
-                    with gzip.open(f, "rt", encoding="utf-8") as fh:
-                        text = fh.read()
-                else:
-                    text = f.read_text(encoding="utf-8")
-                if not text.strip():
-                    continue
-                doc = lxml.html.fromstring(text)
-            except Exception:  # noqa: BLE001
-                continue
-
-            for sent, money in extract_prose(doc):
-                n_prose += 1
-                prose.append({
-                    "접수일자": meta["date"], "보고서명": meta["name"],
-                    "접수번호": rcp, "링크": meta["url"],
-                    "연도": year, "분기": q, "집계기준": basis_of(meta["name"]),
-                    "파일": f.name, "문장": sent, "추출 금액": money,
-                    "매립언급": bool(LANDFILL.search(sent)),
-                })
-
-            for ti, tbl in enumerate(doc.xpath("//table")):
-                n_tables += 1
-                grid = table_to_grid(tbl)
-                if len(grid) < 2:
-                    continue
-                flat = " ".join(" ".join(r) for r in grid)
-                near, ctx = preceding_context(tbl)
-                um = UNIT_RE.search(near) or UNIT_RE.search(ctx)
-                unit = re.sub(r"\s+", "", um.group(1))[:12] if um else ""
-                # 표 종류 판정: 표 본문 > 바로 앞 문단 순으로 가중 (먼 제목에 끌려가지 않게)
-                d_flat, r_flat = DANGA_HINT.search(flat), REV_HINT.search(flat)
-                d_near, r_near = DANGA_HINT.search(near), REV_HINT.search(near)
-                if d_flat and not r_flat:
-                    kind = "단가"
-                elif r_flat and not d_flat:
-                    kind = "매출"
-                elif d_near and not r_near:
-                    kind = "단가"
-                elif r_near and not d_near:
-                    kind = "매출"
-                elif d_flat or d_near:
-                    kind = "단가"
-                elif r_flat or r_near:
-                    kind = "매출"
-                else:
-                    continue
-                is_price_tbl = kind == "단가"
-                if is_price_tbl:
-                    n_hit += 1
-
-                # 머리글 = 상단의 연속된 비수치 행. 중간에 값이 전부 '-' 인
-                # 데이터 행을 머리글로 오인하지 않도록 첫 숫자 앞까지만 본다.
-                hdr_i = 0
-                for r in range(min(3, len(grid))):
-                    if any(parse_num(c) is not None for c in grid[r]):
-                        break
-                    hdr_i = r
-                # 열별 머리글을 상단 행들에서 합성한다.
-                # 코엔텍 매출실적처럼 '제33기 / 수량·금액' 2단 머리글을 쓰는 표가 있다.
-                ncol = max(len(g) for g in grid)
-                header = []
-                for c in range(ncol):
-                    parts = [grid[r][c] for r in range(hdr_i + 1)
-                             if c < len(grid[r]) and grid[r][c]]
-                    header.append(" ".join(dict.fromkeys(parts)).strip())
-                top = grid[0] if grid else []
-
-                # 당기 열: 숫자가 처음 나오는 열과 최상단 머리글이 같은 열들.
-                # (인선은 '2026년(제30기)', 코엔텍은 '제33기' 처럼 표기가 달라
-                #  연도 문자열 매칭 대신 위치로 판정한다.)
-                cur_col = None
-                for c in range(ncol):
-                    if any(c < len(grid[r]) and parse_num(grid[r][c]) is not None
-                           for r in range(hdr_i + 1, len(grid))):
-                        cur_col = c
-                        break
-                cur_top = top[cur_col] if (cur_col is not None
-                                           and cur_col < len(top)) else None
-                is_cur = [bool(cur_top) and c < len(top) and top[c] == cur_top
-                          for c in range(ncol)]
-                if cur_col is not None and not any(is_cur):
-                    is_cur = [c == cur_col for c in range(ncol)]
-
-                for r in range(hdr_i + 1, len(grid)):
-                    row = grid[r]
-                    # 빈칸 표시('-')는 품목명에 섞이지 않게 제외
-                    label = " ".join(dict.fromkeys(
-                        [c for c in row[:3]
-                         if c and c not in ("-", "－", "—", "·")
-                         and parse_num(c) is None])).strip()
-                    if not label:
-                        continue
-                    # 단가표에 품목 행은 있는데 '당해연도 열'이 비어 있으면 미공시로 기록.
-                    # 가격변동추이 표는 당기·전기·전전기를 함께 실으므로 당기 열만 본다.
-                    if is_price_tbl and not NON_PRICE.search(label):
-                        yr_col = next((c for c in range(ncol) if is_cur[c]), None)
-                        raw_row = " | ".join(c for c in row if c)[:120]
-                        if yr_col is not None and yr_col < len(row):
-                            if parse_num(row[yr_col]) is None:
-                                blank_land.setdefault(
-                                    (label, rcp),
-                                    f"{raw_row}  (당기 열 '{header[yr_col]}' = "
-                                    f"'{row[yr_col] or ''}')")
-                        elif not any(parse_num(c) is not None for c in row):
-                            blank_land.setdefault((label, rcp), raw_row)
-                    for c, cell in enumerate(row):
-                        v = parse_num(cell)
-                        if v is None:
-                            continue
-                        col = header[c] if c < len(header) else ""
-                        records.append({
-                            "접수일자": meta["date"], "보고서명": meta["name"],
-                            "접수번호": rcp, "링크": meta["url"],
-                            "연도": year, "분기": q, "집계기준": basis_of(meta["name"]),
-                            "문맥": ctx[-180:], "표번호": f"{f.name}#{ti}",
-                            "항목": label, "열머리": col, "값": v, "원문": cell,
-                            "종류": kind, "당기": "Y" if is_cur[c] else "",
-                            "역할": role(kind, col, is_cur[c]),
-                            "단위": unit,
-                            # NON_PRICE_ROW(매출액·물량 등)는 '단가표'에서만 배제한다.
-                            # 매출표에서는 '매립 매출액' 행이 역산 입력이므로 살려야 한다.
-                            "매립여부": bool(
-                                LANDFILL.search(label)
-                                and not NON_PRICE.search(label)
-                                and not (is_price_tbl and NON_PRICE_ROW.search(label))),
-                            "단가성": is_price_tbl and not bool(
-                                NON_PRICE_ROW.search(label) or NON_PRICE.search(label)),
-                        })
-
-        log.append({"접수일자": meta["date"], "보고서명": meta["name"], "접수번호": rcp,
-                    "표 총수": n_tables, "단가관련 표": n_hit,
-                    "산문 단가언급": n_prose, "링크": meta["url"]})
-    return records, prose, log, blank_land
-
-
-
 QORDER = {"1Q": 1, "2Q": 2, "3Q": 3, "4Q": 4}
 # 정기보고서 공시 수치의 누계 구간
 BASIS = {"1Q": "1분기 누계(1~3월)", "2Q": "반기 누계(1~6월)",
@@ -489,26 +307,40 @@ def revenue_token(label: str, rev_index: dict[str, set]) -> str | None:
 def pick_series(records) -> list[dict]:
     """단가표에서 자체 시계열 시트를 만들 품목을 고른다.
 
-    각 보고서의 '당기 열'(역할='단가') 값이 MIN_QUARTERS 분기 이상 잡히는 품목만.
+    같은 품목이라도 표기가 시기마다 바뀐다 (코엔텍 소각처리는 2009~10 '폐기물처리(내수)',
+    2011~ '소각부분(내수)', 2014년 일부 '소각부문(내수)'). 품목 토큰이 같고 등장 분기가
+    서로 하나도 겹치지 않으면 같은 계열로 보고 합친다. 한 분기라도 겹치면 별개 품목이므로
+    (인선 '콘크리트용 순환골재판매' vs '도로공사용 순환골재판매' 는 같은 6개 분기에 공존)
+    합치지 않고 가장 많이 나온 표기만 쓴다.
     """
     from collections import Counter, defaultdict
-    cnt = Counter()
-    for r in records:
-        if (r.get("역할") == "단가" and r["단가성"]
-                and r["연도"] and ITEM_HINT.search(r["항목"])
-                and not FINANCIAL.search(r["항목"])):
-            cnt[r["항목"]] += 1
 
-    # 매출액 행 색인: 항목명(원문 그대로) -> 등장한 (연도, 분기) 집합.
-    # 엑셀 SUMIFS 는 셀 원문에 와일드카드를 걸므로, 공백을 뺀 문자열로 고르면
-    # '건설폐기물중간처리용역' 처럼 실제 셀('…중간처리 용역 …')에 없는 검색어가
-    # 나올 수 있다. 반드시 원문 기준으로 찾는다.
+    per: dict[str, set] = defaultdict(set)
+    for r in records:
+        if (r.get("역할") == "단가" and r["단가성"] and r["연도"]
+                and ITEM_HINT.search(r["항목"]) and not FINANCIAL.search(r["항목"])):
+            per[r["항목"]].add((r["연도"], r["분기"]))
+
+    groups: dict[str, list[str]] = defaultdict(list)
+    for label in per:
+        parts = label.split()
+        groups[parts[-1] if parts else label].append(label)
+
+    merged: list[tuple[list[str], set]] = []
+    for _key, labels in groups.items():
+        labels.sort(key=lambda l: -len(per[l]))
+        disjoint = all(not (per[a] & per[b])
+                       for i, a in enumerate(labels) for b in labels[i + 1:])
+        if disjoint:
+            merged.append((labels, set().union(*(per[l] for l in labels))))
+        else:
+            merged.append(([labels[0]], per[labels[0]]))
+
     rev_index: dict[str, set] = defaultdict(set)
     for r in records:
         if r.get("역할") == "매출액" and r["연도"]:
             rev_index[r["항목"]].add((r["연도"], r["분기"]))
 
-    # 품목별 공시 단위 ('원/톤' vs '천원/톤') — 회사마다 다르므로 원문에서 읽는다
     units: dict[str, Counter] = defaultdict(Counter)
     for r in records:
         if r.get("역할") == "단가" and r.get("단위"):
@@ -524,20 +356,21 @@ def pick_series(records) -> list[dict]:
 
     taken: set[str] = set()
     out = []
-    for label, n in cnt.most_common():
-        if n < MIN_QUARTERS:
+    for labels, pset in sorted(merged, key=lambda m: -len(m[1])):
+        if len(pset) < MIN_QUARTERS:
             continue
-        u = units[label].most_common(1)
-        key = series_key(label, taken)
-        unit = u[0][0] if u else "원/톤"
-        # 검증식 배율: (매출액 단위) / (단가 금액 단위)
+        primary = labels[0]
+        u = Counter()
+        for l in labels:
+            u += units[l]
+        unit = u.most_common(1)[0][0] if u else "원/톤"
         pm, rm = money_scale(unit), money_scale(rev_unit)
-        factor = (rm / pm) if (pm and rm) else None
-        tok = revenue_token(label, rev_index)
-        has_qty = any(tok and tok in it for it in qty_seen) if tok else False
-        out.append({"label": label, "n": n, "token": tok, "key": key,
-                    "sheet": f"{key}단가_분기", "unit": unit,
-                    "rev_unit": rev_unit, "factor": factor, "has_qty": has_qty})
+        tok = revenue_token(primary, rev_index)
+        key = series_key(primary, taken)
+        out.append({"label": primary, "labels": labels, "n": len(pset), "token": tok,
+                    "key": key, "sheet": f"{key}단가_분기", "unit": unit,
+                    "rev_unit": rev_unit, "factor": (rm / pm) if (pm and rm) else None,
+                    "has_qty": any(tok and tok in it for it in qty_seen) if tok else False})
     return out
 
 
@@ -839,6 +672,16 @@ def build_workbook(records, prose, log, manifest, blank_land, out: Path,
         args = ",".join(f"{rng},{crit}" for rng, crit in pairs)
         return f'=IF(COUNTIFS({args})=0,"",SUMIFS({val_rng},{args}))'
 
+    def sumifs_any(val_rng, item_rng, labels, pairs):
+        """품목 표기가 여러 개인 계열용. 표기별 SUMIFS 를 더한다 (기간이 겹치지 않음)."""
+        cnts, sums = [], []
+        for lb in labels:
+            args = ",".join([f'{item_rng},"{lb}"']
+                            + [f"{rng},{crit}" for rng, crit in pairs])
+            cnts.append(f"COUNTIFS({args})")
+            sums.append(f"SUMIFS({val_rng},{args})")
+        return f'=IF({"+".join(cnts)}=0,"",{"+".join(sums)})'
+
     # ── 원자료 · 단가항목 (모든 참조의 뿌리) ─────────────────────────────────
     RAW = "원자료_발췌표"
     raw_rows = [[r["접수일자"], r["보고서명"], r["접수번호"], r["연도"], r["분기"],
@@ -882,10 +725,10 @@ def build_workbook(records, prose, log, manifest, blank_land, out: Path,
     series = pick_series(records)
 
     # 품목별 '당기 열머리'와 매출액 단위는 발췌값이므로 상수로 둔다
-    def col_headers(label):
+    def col_headers(labels):
         out = {}
         for r in records:
-            if r.get("역할") == "단가" and r["항목"] == label and r["연도"]:
+            if r.get("역할") == "단가" and r["항목"] in labels and r["연도"]:
                 out.setdefault((r["연도"], r["분기"]), r["열머리"])
         return out
 
@@ -903,7 +746,7 @@ def build_workbook(records, prose, log, manifest, blank_land, out: Path,
 
     # ── 품목별 분기 시계열 시트 ─────────────────────────────────────────────
     for si, sc in enumerate(series):
-        hdrs = col_headers(sc["label"])
+        hdrs = col_headers(set(sc["labels"]))
         runits = rev_units_by_period(sc["token"])
         price_scale = money_scale(sc["unit"]) or 1.0
         rows = []
@@ -912,7 +755,8 @@ def build_workbook(records, prose, log, manifest, blank_land, out: Path,
             rows.append([y, q, None, None, None, None, None, None,
                          runits.get((y, q)), None, None,
                          None, hdrs.get((y, q)), None,
-                         blank_land.get((sc["label"], m["rcp"])),
+                         next((blank_land[(lb, m["rcp"])] for lb in sc["labels"]
+                               if (lb, m["rcp"]) in blank_land), None),
                          m["name"], m["date"], m["rcp"], m["url"]])
 
         name = sc["sheet"]
@@ -935,9 +779,9 @@ def build_workbook(records, prose, log, manifest, blank_land, out: Path,
             r = i + 2
             ws.cell(r, 3).value = f'=$A{r}&" "&$B{r}'
             ws.cell(r, 4).value = f'=IF($E{r}="","미공시","공시")'
-            ws.cell(r, 5).value = sumifs(T_VAL, [
-                (T_ITEM, f'"{sc["label"]}"'), (T_YEAR, f"$A{r}"), (T_Q, f"$B{r}"),
-                (T_ROLE, '"단가"')])
+            ws.cell(r, 5).value = sumifs_any(
+                T_VAL, T_ITEM, sc["labels"],
+                [(T_YEAR, f"$A{r}"), (T_Q, f"$B{r}"), (T_ROLE, '"단가"')])
             ws.cell(r, 7).value = (sumifs(R_VAL, [
                 (R_ITEM, f'"*{sc["token"]}*"'), (R_ROLE, '"매출액"'),
                 (R_YEAR, f"$A{r}"), (R_Q, f"$B{r}")]) if sc["token"] else None)
