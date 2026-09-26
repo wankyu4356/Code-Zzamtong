@@ -1,0 +1,213 @@
+"""Timeline loading, validation and frame math shared by the engine tools.
+
+load(path) returns the parsed JSON with these fields attached:
+    shot["start_f"], shot["end_f"]   global frame indices, end exclusive
+    shot["frames"]                   end_f - start_f
+    tl["total_frames"]
+"src" and "audio" paths are resolved to absolute paths relative to the JSON file.
+bg defaults are filled in. Text/card/flash defaults live in overlay.html.
+"""
+import json
+import math
+import os
+
+BG_TYPES = ("black", "white", "color", "clip", "image")
+ZOOMS = ("in", "out", "none")
+ANIM_IN = ("hit", "slam", "fade", "rise", "none")
+ANIM_OUT = ("cut", "fade", "none")
+CARD_TYPES = ("review",)
+GRADE_DEFAULTS = {"contrast": 1.0, "saturation": 1.0, "brightness": 0.0, "gamma": 1.0}
+
+
+class TimelineError(Exception):
+    pass
+
+
+def to_frame(sec, fps):
+    """Seconds -> frame index. floor(x + 0.5) so Python and JS agree exactly."""
+    return int(math.floor(sec * fps + 0.5))
+
+
+def color_to_ffmpeg(c):
+    """'#fff' / '#ffffff' / 'black' -> ffmpeg color string."""
+    c = str(c).strip()
+    if c.startswith("#"):
+        h = c[1:]
+        if len(h) == 3:
+            h = "".join(ch * 2 for ch in h)
+        if len(h) != 6:
+            raise TimelineError(f"bad color {c!r}")
+        return "0x" + h
+    return c
+
+
+def _is_num(v):
+    return isinstance(v, (int, float)) and not isinstance(v, bool)
+
+
+def load(path):
+    with open(path, encoding="utf-8") as f:
+        tl = json.load(f)
+    validate(tl, os.path.dirname(os.path.abspath(path)))
+    return tl
+
+
+def _resolve(path, base_dir):
+    return path if os.path.isabs(path) else os.path.normpath(os.path.join(base_dir, path))
+
+
+def validate(tl, base_dir):
+    errs = []
+    err = errs.append
+
+    fps = tl.get("fps")
+    if not (isinstance(fps, int) and fps > 0):
+        err("fps must be a positive integer")
+    for k in ("width", "height"):
+        v = tl.get(k)
+        if not (isinstance(v, int) and v > 0 and v % 2 == 0):
+            err(f"{k} must be a positive even integer")
+    dur = tl.get("duration")
+    if not (_is_num(dur) and dur > 0):
+        err("duration must be a number > 0")
+    shots = tl.get("shots")
+    if not (isinstance(shots, list) and shots):
+        err("shots must be a non-empty list")
+    if errs:
+        raise TimelineError("invalid timeline:\n  - " + "\n  - ".join(errs))
+
+    audio = tl.get("audio")
+    if audio:
+        tl["audio"] = _resolve(audio, base_dir)
+        if not os.path.isfile(tl["audio"]):
+            err(f"audio not found: {tl['audio']}")
+    else:
+        tl["audio"] = None
+
+    tl["total_frames"] = to_frame(dur, fps)
+    ids = set()
+    prev_end, prev_end_f = 0.0, 0
+    for i, s in enumerate(shots):
+        s["id"] = str(s.get("id") or f"shot{i}")
+        sid = s["id"]
+        if sid in ids:
+            err(f"shot {sid}: duplicate id")
+        ids.add(sid)
+        st, en = s.get("start"), s.get("end")
+        if not (_is_num(st) and _is_num(en)) or en <= st:
+            err(f"shot {sid}: start/end must be numbers with end > start")
+            continue
+        if i == 0 and abs(st) > 1e-6:
+            err(f"shot {sid}: first shot must start at 0 (starts at {st})")
+        elif abs(st - prev_end) > 1e-6:
+            err(f"shot {sid}: starts at {st} but previous shot ends at {prev_end} "
+                "(shots must tile [0, duration] with no gaps or overlaps)")
+        if abs(en * fps - round(en * fps)) > 1e-3:
+            err(f"shot {sid}: end {en}s is not on a frame boundary at {fps} fps")
+        s["start_f"] = prev_end_f
+        s["end_f"] = to_frame(en, fps)
+        s["frames"] = s["end_f"] - s["start_f"]
+        if s["frames"] <= 0:
+            err(f"shot {sid}: shorter than one frame")
+        prev_end, prev_end_f = en, s["end_f"]
+
+        _validate_bg(s, base_dir, err)
+        for j, t in enumerate(s.get("texts") or []):
+            _validate_text(t, f"shot {sid} texts[{j}]", err)
+        for j, c in enumerate(s.get("cards") or []):
+            _validate_card(c, f"shot {sid} cards[{j}]", err)
+        for j, fl in enumerate(s.get("flashes") or []):
+            _validate_flash(fl, f"shot {sid} flashes[{j}]", err)
+
+    if abs(prev_end - dur) > 1e-6:
+        err(f"last shot ends at {prev_end} but duration is {dur}")
+    if errs:
+        raise TimelineError("invalid timeline:\n  - " + "\n  - ".join(errs))
+
+
+def _validate_bg(s, base_dir, err):
+    sid = s["id"]
+    bg = s.get("bg")
+    if not isinstance(bg, dict):
+        err(f"shot {sid}: bg must be an object")
+        return
+    t = bg.get("type")
+    if t not in BG_TYPES:
+        err(f"shot {sid}: bg.type must be one of {BG_TYPES}")
+        return
+    if t == "color" and not isinstance(bg.get("color"), str):
+        err(f"shot {sid}: bg.color (e.g. '#1a1a1a') is required for type 'color'")
+    if t in ("clip", "image"):
+        src = bg.get("src")
+        if not isinstance(src, str):
+            err(f"shot {sid}: bg.src is required for type '{t}'")
+        else:
+            bg["src"] = _resolve(src, base_dir)
+            if not os.path.isfile(bg["src"]):
+                err(f"shot {sid}: bg.src not found: {bg['src']}")
+    bg.setdefault("in", 0.0)
+    bg.setdefault("speed", 1.0)
+    bg.setdefault("fit", "cover")
+    bg.setdefault("zoom", "none")
+    bg.setdefault("zoom_amount", 0.06)
+    bg.setdefault("vignette", False)
+    bg.setdefault("grain", 0.0)
+    grade = dict(GRADE_DEFAULTS)
+    grade.update(bg.get("grade") or {})
+    bg["grade"] = grade
+    if not (_is_num(bg["in"]) and bg["in"] >= 0):
+        err(f"shot {sid}: bg.in must be >= 0")
+    if not (_is_num(bg["speed"]) and bg["speed"] > 0):
+        err(f"shot {sid}: bg.speed must be > 0")
+    if bg["fit"] != "cover":
+        err(f"shot {sid}: bg.fit only supports 'cover'")
+    if bg["zoom"] not in ZOOMS:
+        err(f"shot {sid}: bg.zoom must be one of {ZOOMS}")
+    if not (_is_num(bg["zoom_amount"]) and bg["zoom_amount"] >= 0):
+        err(f"shot {sid}: bg.zoom_amount must be >= 0")
+    if not (_is_num(bg["grain"]) and 0 <= bg["grain"] <= 1):
+        err(f"shot {sid}: bg.grain must be between 0 and 1")
+    for k, v in grade.items():
+        if k not in GRADE_DEFAULTS or not _is_num(v):
+            err(f"shot {sid}: bg.grade.{k} must be a number ({', '.join(GRADE_DEFAULTS)})")
+
+
+def _validate_span(o, where, err):
+    st, en = o.get("start"), o.get("end")
+    if not (_is_num(st) and _is_num(en)) or en <= st:
+        err(f"{where}: start/end must be numbers with end > start")
+    if o.get("anim_in", "hit") not in ANIM_IN:
+        err(f"{where}: anim_in must be one of {ANIM_IN}")
+    if o.get("anim_out", "cut") not in ANIM_OUT:
+        err(f"{where}: anim_out must be one of {ANIM_OUT}")
+
+
+def _validate_text(t, where, err):
+    if not isinstance(t.get("text"), str) or not t["text"]:
+        err(f"{where}: text must be a non-empty string")
+    _validate_span(t, where, err)
+    for k in ("size", "weight", "letter_spacing", "line_height", "max_width"):
+        if k in t and not _is_num(t[k]):
+            err(f"{where}: {k} must be a number")
+
+
+def _validate_card(c, where, err):
+    if c.get("type") not in CARD_TYPES:
+        err(f"{where}: type must be one of {CARD_TYPES}")
+    if not isinstance(c.get("text"), str):
+        err(f"{where}: text must be a string")
+    stars = c.get("stars", 5)
+    if not (isinstance(stars, int) and 0 <= stars <= 5):
+        err(f"{where}: stars must be an integer 0..5")
+    _validate_span(c, where, err)
+
+
+def _validate_flash(fl, where, err):
+    if not _is_num(fl.get("at")):
+        err(f"{where}: at must be a number (seconds)")
+    frames = fl.get("frames", 2)
+    if not (isinstance(frames, int) and frames >= 1):
+        err(f"{where}: frames must be an integer >= 1")
+    op = fl.get("opacity", 0.9)
+    if not (_is_num(op) and 0 <= op <= 1):
+        err(f"{where}: opacity must be between 0 and 1")

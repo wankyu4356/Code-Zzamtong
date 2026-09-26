@@ -1,0 +1,64 @@
+{
+  "_comment": "Demo timeline, 10.0s. The clips are synthetic stand-ins (ffmpeg testsrc2/smptebars/gradients) generated in the session scratchpad; replace bg.src with real footage. Paths are relative to this file.",
+  "fps": 30,
+  "width": 1920,
+  "height": 1080,
+  "duration": 10.0,
+  "audio": null,
+  "shots": [
+    {
+      "id": "s01", "start": 0.0, "end": 2.0,
+      "bg": { "type": "black" },
+      "texts": [
+        { "text": "아침에", "start": 0.0, "end": 0.5, "size": 220, "anim_in": "hit" },
+        { "text": "점심에", "start": 0.5, "end": 1.0, "size": 220, "anim_in": "hit" },
+        { "text": "저녁에도", "start": 1.0, "end": 1.5, "size": 220, "anim_in": "hit" },
+        { "text": "언제나", "start": 1.5, "end": 2.0, "size": 220, "anim_in": "hit" }
+      ]
+    },
+    {
+      "id": "s02", "start": 2.0, "end": 2.5,
+      "bg": { "type": "clip", "src": "../../../../../../tmp/claude-0/-home-user-Code-Zzamtong/6777a2d0-3b1c-5e78-87d6-3446c2a48b8a/scratchpad/engine_test/clips/clip_a.mp4",
+              "in": 0.5, "zoom": "in", "zoom_amount": 0.06, "grade": { "contrast": 1.05, "saturation": 0.9 }, "vignette": true },
+      "texts": [ { "text": "걷고", "start": 2.0, "end": 2.5, "size": 240, "weight": 900, "anim_in": "slam" } ],
+      "flashes": [ { "at": 2.0, "frames": 2, "color": "#fff", "opacity": 0.9 } ]
+    },
+    {
+      "id": "s03", "start": 2.5, "end": 3.0,
+      "bg": { "type": "clip", "src": "../../../../../../tmp/claude-0/-home-user-Code-Zzamtong/6777a2d0-3b1c-5e78-87d6-3446c2a48b8a/scratchpad/engine_test/clips/clip_b.mp4",
+              "in": 1.0, "zoom": "in", "zoom_amount": 0.06, "grade": { "contrast": 1.05, "saturation": 0.9 } },
+      "texts": [ { "text": "뛰고", "start": 2.5, "end": 3.0, "size": 240, "weight": 900, "anim_in": "hit" } ]
+    },
+    {
+      "id": "s04", "start": 3.0, "end": 3.5,
+      "bg": { "type": "clip", "src": "../../../../../../tmp/claude-0/-home-user-Code-Zzamtong/6777a2d0-3b1c-5e78-87d6-3446c2a48b8a/scratchpad/engine_test/clips/clip_c.mp4",
+              "in": 2.0, "speed": 1.5, "zoom": "in", "zoom_amount": 0.08, "grain": 0.08 },
+      "texts": [ { "text": "들고", "start": 3.0, "end": 3.5, "size": 240, "weight": 900, "anim_in": "hit" } ]
+    },
+    {
+      "id": "s05", "start": 3.5, "end": 4.0,
+      "bg": { "type": "clip", "src": "../../../../../../tmp/claude-0/-home-user-Code-Zzamtong/6777a2d0-3b1c-5e78-87d6-3446c2a48b8a/scratchpad/engine_test/clips/clip_a.mp4",
+              "in": 2.5, "zoom": "in", "zoom_amount": 0.06, "vignette": true },
+      "texts": [ { "text": "안고", "start": 3.5, "end": 4.0, "size": 240, "weight": 900, "anim_in": "hit" } ]
+    },
+    {
+      "id": "s06", "start": 4.0, "end": 7.0,
+      "bg": { "type": "clip", "src": "../../../../../../tmp/claude-0/-home-user-Code-Zzamtong/6777a2d0-3b1c-5e78-87d6-3446c2a48b8a/scratchpad/engine_test/clips/clip_c.mp4",
+              "in": 0.5, "zoom": "out", "zoom_amount": 0.05, "grade": { "contrast": 1.05, "saturation": 0.85 }, "vignette": true },
+      "cards": [
+        { "type": "review", "start": 4.2, "end": 7.0, "stars": 5,
+          "text": "무릎이 아파서 계단도 못 내려갔는데, 두 달 만에 다시 산에 올랐어요. 설명을 정말 자세히 해주셔서 마음이 놓였습니다.",
+          "source": "네이버 방문자 리뷰", "anim_in": "rise", "anim_out": "fade", "width": 1100 }
+      ]
+    },
+    {
+      "id": "s07", "start": 7.0, "end": 10.0,
+      "bg": { "type": "black" },
+      "texts": [
+        { "text": "당신의 하루를\n다시 걷게 하는 곳", "start": 7.0, "end": 10.0, "size": 150, "weight": 800, "anim_in": "fade", "anim_out": "fade" },
+        { "text": "OO정형외과  |  02-000-0000  |  평일 09:00 - 18:00", "start": 7.4, "end": 10.0, "size": 34, "weight": 500,
+          "letter_spacing": -0.01, "y": "bottom", "anim_in": "rise", "anim_out": "fade", "shadow": false, "color": "rgba(255,255,255,0.7)" }
+      ]
+    }
+  ]
+}
