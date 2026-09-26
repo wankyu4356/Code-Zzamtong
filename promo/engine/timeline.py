@@ -154,6 +154,13 @@ def _validate_bg(s, base_dir, err):
     bg.setdefault("zoom_amount", 0.06)
     bg.setdefault("vignette", False)
     bg.setdefault("grain", 0.0)
+    bg.setdefault("punch", 1.0)
+    bg.setdefault("anchor", [0.5, 0.5])
+    if not (_is_num(bg["punch"]) and bg["punch"] >= 1.0):
+        err(f"shot {sid}: bg.punch must be a number >= 1")
+    an = bg["anchor"]
+    if not (isinstance(an, list) and len(an) == 2 and all(_is_num(v) and 0 <= v <= 1 for v in an)):
+        err(f"shot {sid}: bg.anchor must be [x, y] with values between 0 and 1")
     grade = dict(GRADE_DEFAULTS)
     grade.update(bg.get("grade") or {})
     bg["grade"] = grade

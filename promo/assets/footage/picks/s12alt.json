@@ -1,0 +1,32 @@
+{
+  "shot_id": "s12alt",
+  "no_good_match": true,
+  "chosen": {
+    "mixkit_id": "17088",
+    "title": "human skeleton model",
+    "file": "/home/user/Code-Zzamtong/promo/assets/footage/s12alt.mp4",
+    "quality": "720",
+    "duration": 19.0,
+    "in_point": 6.4,
+    "fit_score": 4,
+    "faces": "none (skull cropped out of frame at in-point; mandible edge appears at top from ~7.4s)",
+    "why": "Only hand-free, face-free anatomical model still life found. CG skeleton torso slowly rotating on black; at 6.4-7.3s the camera tilt places the cervical spine top-center. Placeholder only: reads as 'skeleton/bones', not 'spine model', and black CG background clashes with natural-light tone."
+  },
+  "alternates": [
+    {
+      "mixkit_id": "47994",
+      "file": "/home/user/Code-Zzamtong/promo/assets/footage/candidates/s12alt_47994.mp4",
+      "duration": 19.0,
+      "in_point": 6.4,
+      "why": "Same CG skeleton series, tighter rib-cage framing; cervical/upper thoracic vertebrae visible top-center 6.4-7.8s before jaw enters at ~7.9s. No hands, no face. Same tone drawbacks as 17088."
+    },
+    {
+      "mixkit_id": "36704",
+      "file": "/home/user/Code-Zzamtong/promo/assets/footage/candidates/s12alt_36704.mp4",
+      "duration": 13.2,
+      "in_point": 11.5,
+      "why": "The only real physical spine model on Mixkit: natural-light clinic, spine reads instantly. But doctor's hands hold it and his face is visible (looking down at 11.5-12.7s, least frontal), patient seen from behind. Violates the no-hands spec and faces=avoid; use only if the spec is relaxed."
+    }
+  ],
+  "notes": "Searched: 'spine model' (0 results), 'anatomy model' (1), 'skeleton model' (2), 'skeleton' (19), 'spine' (10), 'chiropractor' (16). Mixkit has no hands-free spine model still life. Closest candidates: 17088/47994 (CG skeleton torso, no hands/faces, but dark black background and rib cage dominant, spine only peripheral) and 36704 (real spine model but held by a doctor, faces visible). 47995 rejected: full skull dominates frame. All four downloads are 720p only (no 1080p on Mixkit for these). 17088 is copied to s12alt.mp4 as a placeholder so the timeline is not empty; since this shot is a backup for the director photo, recommend either using the director photo, shooting a 2-second spine-model insert at the clinic, or sourcing from Pexels/Pixabay ('spine model', 'vertebrae model')."
+}

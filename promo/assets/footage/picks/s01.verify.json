@@ -1,0 +1,28 @@
+{
+  "shot_id": "s01",
+  "approve": true,
+  "use": "chosen",
+  "mixkit_id": "49010",
+  "file": "/home/user/Code-Zzamtong/promo/assets/footage/s01.mp4",
+  "in_point": 4.4,
+  "out_point": 5.6,
+  "need_sec": 1.2,
+  "reason": "직접 스트립(4.4~5.9s, 0.1s 간격 / 0~11.8s 전체 0.6s 간격) 확인. 4.4s 첫 프레임에서 침대 끝에 앉은 사람의 손이 이미 허리에 얹혀 있어 '손이 허리로'가 즉시 읽힌다. 어깨 아래로 크롭되어 얼굴 없음, 글자·워터마크 없음. 흰 침구·헤드보드·회색 바지·줄무늬 상의로 '아침 침대' 맥락과 저채도 톤 모두 충족. 4.4~5.0s에 손가락을 폈다가 허리를 누르는 미세 동작이 있어 1.2초 컷이 정지화면처럼 죽지 않는다. 카메라는 느린 푸시인. 대안 47605는 서 있는 자세+벽돌벽이라 침대 맥락이 없고, 47607은 옆얼굴이 노출되고 노란 소파라 faces=avoid와 톤 조건에 미달. 유일한 감점은 720p(1280x720, 25fps)뿐이며 클로즈업 정적 샷이라 1080p 업스케일 열화는 허용 범위.",
+  "checks": {
+    "reads_at_in_point": true,
+    "action_holds_for_need_sec": true,
+    "faces": "none",
+    "text_or_watermark": "none",
+    "resolution": "1280x720 @25fps (upscale needed for 1080p)"
+  },
+  "alternates_reviewed": {
+    "47605": "standing pose, brick wall, no bed context - rejected",
+    "47607": "side profile visible, yellow sofa - rejected (faces=avoid)"
+  },
+  "strips": [
+    "/tmp/claude-0/-home-user-Code-Zzamtong/6777a2d0-3b1c-5e78-87d6-3446c2a48b8a/scratchpad/stock/s01_verify_1.jpg",
+    "/tmp/claude-0/-home-user-Code-Zzamtong/6777a2d0-3b1c-5e78-87d6-3446c2a48b8a/scratchpad/stock/s01_verify_2.jpg",
+    "/tmp/claude-0/-home-user-Code-Zzamtong/6777a2d0-3b1c-5e78-87d6-3446c2a48b8a/scratchpad/stock/s01_verify_3.jpg",
+    "/tmp/claude-0/-home-user-Code-Zzamtong/6777a2d0-3b1c-5e78-87d6-3446c2a48b8a/scratchpad/stock/s01_verify_4.jpg"
+  ]
+}

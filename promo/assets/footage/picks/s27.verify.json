@@ -1,0 +1,46 @@
+{
+  "shot_id": "s27",
+  "approve": true,
+  "use": "chosen",
+  "mixkit_id": "50759",
+  "file": "/home/user/Code-Zzamtong/promo/assets/footage/s27.mp4",
+  "in_point": 3.4,
+  "out_point": 4.1,
+  "need_sec": 0.7,
+  "reason": "조건부 승인(적합도 6/10). 직접 스트립(3.4~4.4s 0.1s / 1.5~3.5s 0.2s / 4.4~10.4s 0.6s / 10.4~12.4s 0.2s) 확인. 3.4s 첫 프레임부터 오른팔이 가슴을 가로질러 잠기고 왼손이 팔꿈치를 잡은 크로스바디 어깨 스트레칭이 완성돼 있어 컷 시작에서 '스트레칭/어깨'가 읽히고, 3.4~4.1s 내내 자세가 유지돼 0.7초(타임라인 실사용 0.5초, 6% 줌인)가 정지처럼 죽지 않는다. 1920x1080 24fps, 글자·로고·워터마크 없음, 얼굴은 역광 실루엣이라 식별 불가(faces=ok). 감점: (1) 전신 와이드샷이라 스토리보드가 요구한 '목·어깨·무릎·허리 4컷 클로즈업으로 좁아지기' 리듬에서 이 컷만 넓게 빠진다. 어깨 제스처가 프레임 상단 중앙 약 22%x14% 영역의 실루엣이라 '어깨'라기보다 '스트레칭하는 사람'으로 읽힐 위험이 있다. (2) 문자 그대로의 어깨 돌리기가 아니라 크로스바디 스트레칭이고, 옥상 맨발 운동 톤이라 학생·직장인·할머님의 일상 톤과 약간 어긋난다. 인점 3.4 유지: 3.2~3.3은 팔이 올라오는 중이라 첫 프레임 읽힘이 나빠지고, 11.4(반대팔)는 크기·동작이 동일해 이득 없음. 대안 40761(4.0s)은 미디엄 정면 크로스바디 스트레칭으로 어깨 읽힘은 전 후보 중 최고지만 스포츠브라 밴드에 'ACTIVE ACTIVE' 글자가 전 구간(0~11s) 하단에 선명히 읽히고 엔진이 fit=cover 중앙크롭만 지원해 잘라낼 수 없으며, 노출 많은 피트니스 광고 룩이 병원 프로모 톤과 어긋나 기각. 대안 31407(2.5s)은 뒷모습으로 양손을 목 뒤에 깍지 낀 자세라 '목'으로 읽히고 창문 화이트아웃이 심해 기각. 추가로 단일어 쿼리 9개(shoulder pain=0건, shoulders, stretch, posture, pain, tired, massage, exercise, office)를 시트로 훑고 50760·5731·47969·33744·11540을 내려받아 확인했으나 어깨 돌리기 클로즈업은 없음: 50760은 같은 옥상 촬영의 로우앵글 머리 위 스트레칭(어깨 아님), 5731은 야근 사무실 만세 스트레칭+목 잡기(720p, 목), 47969는 트랙에서 목 좌우 기울이기(720p, 배경 인물 다수), 33744는 맨등 목 잡기(720p, 33026과 같은 스튜디오 시리즈, 목), 11540은 마사지 테이블 위 어깨 마사지(720p, 어깨는 문자 그대로지만 치료사 손·스파 톤이 일상 동작 시퀀스와 이질적). 결론: Mixkit 내에서 글자 없는 어깨 클로즈업은 없으므로 깨끗한 50759를 쓰고, 렌더에서 어깨 읽힘이 약하면 (a) 엔진에 크롭 앵커 옵션을 추가해 40761을 상단 1.25배 펀치인으로 밴드 글자를 잘라 쓰거나, (b) 11540 어깨 마사지를 톤 예외로 검토할 것을 권고.",
+  "checked": {
+    "source": "1920x1080 @23.976fps, 13.51s, 16:9 so cover fit = no crop",
+    "reads_at_in_point": "yes, weakly: cross-body shoulder stretch already locked at 3.4s, but subject is a full-body silhouette",
+    "action_holds_for_need_sec": "yes, static hold 3.4-7.4s",
+    "faces": "backlit silhouette, not identifiable (faces=ok anyway)",
+    "text_or_watermark": "none",
+    "windows_checked": ["3.4-4.4 @0.1", "1.5-3.5 @0.2", "4.4-10.4 @0.6", "10.4-12.4 @0.2"]
+  },
+  "alternates_reviewed": {
+    "40761": "4.0-5.0 @0.1, 0-3.0 @0.3, 5.0-11.0 @0.6. Best shoulder read (medium frontal cross-body stretch, golden light, 1920x1080) but 'ACTIVE ACTIVE' band text readable at bottom of frame in every usable window; engine cannot crop it out; sports-bra fitness look off-tone for a clinic promo. Rejected.",
+    "31407": "2.5-3.5 @0.1. Back view, hands clasped behind neck, reads 'neck' not 'shoulder'; window blown out. Rejected.",
+    "52120": "0-30 @3. Wrist stretch, forward bends, side bends; no shoulder beat. Rejected (agrees with researcher)."
+  },
+  "extra_search": {
+    "queries": ["shoulder pain (0)", "shoulders (24, all over-the-shoulder desk shots)", "stretch (24)", "posture (14)", "pain (24)", "tired (24)", "massage (24)", "exercise (24)", "office (24)"],
+    "downloaded_and_rejected": {
+      "50760": "same rooftop shoot, low-angle overhead arm stretch/side bend, no shoulder gesture (1080p)",
+      "5731": "home office night, arms-overhead stretch then hands behind head and neck rub; no shoulder roll (720p)",
+      "47969": "track, head tilts side to side (neck), other people in background (720p)",
+      "33744": "bare back, hand rubbing neck; same white-studio series as 33026 (720p)",
+      "11540": "shoulder massage on table, literal shoulder but therapist/spa context (720p)"
+    },
+    "lead_files": "/tmp/claude-0/-home-user-Code-Zzamtong/6777a2d0-3b1c-5e78-87d6-3446c2a48b8a/scratchpad/stock/s27_lead_<id>.mp4"
+  },
+  "strips": [
+    "/tmp/claude-0/-home-user-Code-Zzamtong/6777a2d0-3b1c-5e78-87d6-3446c2a48b8a/scratchpad/stock/s27_verify_1.jpg",
+    "/tmp/claude-0/-home-user-Code-Zzamtong/6777a2d0-3b1c-5e78-87d6-3446c2a48b8a/scratchpad/stock/s27_verify_2.jpg",
+    "/tmp/claude-0/-home-user-Code-Zzamtong/6777a2d0-3b1c-5e78-87d6-3446c2a48b8a/scratchpad/stock/s27_verify_3.jpg",
+    "/tmp/claude-0/-home-user-Code-Zzamtong/6777a2d0-3b1c-5e78-87d6-3446c2a48b8a/scratchpad/stock/s27_verify_4.jpg",
+    "/tmp/claude-0/-home-user-Code-Zzamtong/6777a2d0-3b1c-5e78-87d6-3446c2a48b8a/scratchpad/stock/s27_verify_5.jpg",
+    "/tmp/claude-0/-home-user-Code-Zzamtong/6777a2d0-3b1c-5e78-87d6-3446c2a48b8a/scratchpad/stock/s27_verify_6.jpg",
+    "/tmp/claude-0/-home-user-Code-Zzamtong/6777a2d0-3b1c-5e78-87d6-3446c2a48b8a/scratchpad/stock/s27_verify_10.jpg",
+    "/tmp/claude-0/-home-user-Code-Zzamtong/6777a2d0-3b1c-5e78-87d6-3446c2a48b8a/scratchpad/stock/s27_verify_11.jpg",
+    "/tmp/claude-0/-home-user-Code-Zzamtong/6777a2d0-3b1c-5e78-87d6-3446c2a48b8a/scratchpad/stock/s27_verify_12.jpg"
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "shot_id": "s18",
+  "no_good_match": false,
+  "chosen": {
+    "mixkit_id": "98",
+    "title": "person walking on crosswalk",
+    "file": "/home/user/Code-Zzamtong/promo/assets/footage/s18.mp4",
+    "quality": "1080",
+    "duration": 10.55,
+    "in_point": 2.2,
+    "fit_score": 8,
+    "faces": "none",
+    "why": "Low-angle close-up of sneakers walking toward camera on urban pavement (zebra crossing), natural daylight, no face, no text/logo. At 2.2s the lead foot heel-strikes the ground (toe up), so 'walking' reads instantly; the trailing foot swings through and plants again by ~3.3s, covering the 0.7s cut cleanly. Slight deduction because it is a crosswalk rather than a plain sidewalk."
+  },
+  "alternates": [
+    {
+      "mixkit_id": "21289",
+      "file": "/home/user/Code-Zzamtong/promo/assets/footage/candidates/s18_21289.mp4",
+      "duration": 6.07,
+      "in_point": 1.0,
+      "why": "Tight top-down close-up of shoes on grey concrete sidewalk walking toward camera, no face, neutral desaturated look. Only 720p available; foot plants at ~1.0s."
+    },
+    {
+      "mixkit_id": "4893",
+      "file": "/home/user/Code-Zzamtong/promo/assets/footage/candidates/s18_4893.mp4",
+      "duration": 5.37,
+      "in_point": 1.0,
+      "why": "1080p, actual paved sidewalk, waist-down legs walking toward camera, no face. Framing is wider (legs rather than feet close-up) and the image is bright/high-key; foot plants at ~1.0s."
+    }
+  ],
+  "notes": "Searched: walking feet, feet walking city, walking legs sidewalk (0 results), walking sidewalk, legs walking street. Also downloaded 23410 (man walking on concrete sidewalk, rear low angle, sidewalk, no face) as a 4th candidate but left it out of alternates: only 720p and heavily cool/blue graded. Chosen clip 98 duration 10.55s; in_point 2.2 + 0.7 + 0.1 = 3.0 <= 10.55. Alternate in_point ~4.9s in clip 98 is another heel strike if a later section is preferred."
+}

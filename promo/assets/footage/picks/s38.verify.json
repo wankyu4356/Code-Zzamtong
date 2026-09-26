@@ -1,0 +1,29 @@
+{
+  "shot_id": "s38",
+  "approve": true,
+  "use": "chosen",
+  "mixkit_id": "42897",
+  "file": "/home/user/Code-Zzamtong/promo/assets/footage/s38.mp4",
+  "in_point": 2.5,
+  "out_point": 3.2,
+  "need_sec": 0.7,
+  "in_point_adjusted_from": 2.6,
+  "reason": "직접 스트립(1.8~2.7s, 2.6~3.6s, 0.1s 간격) 확인. 협탁 위 디지털 시계가 7:00을 붉게 표시하고 오른쪽에서 손이 들어와 2.1~2.4s 뻗고 2.5s에 손끝이 시계 윗버튼에 닿아 2.6s부터 누른 채 머문다. 리서처 인점 2.6s는 이미 손이 시계에 완전히 얹힌 뒤라 '끄는 순간'이 컷 밖으로 빠지므로 0.1s 앞당겨 2.5s로 조정: 2.5~3.2s 컷에 접촉->누름이 들어가고 첫 프레임에서도 '7시 알람 끄는 손'이 즉시 읽힌다. 배경의 잠든 사람은 완전히 아웃포커스된 형체뿐이라 얼굴 없음. 디스플레이 위 브랜드 라벨은 보케에 묻혀 판독 불가, 워터마크 없음. 자연광 창빛·따뜻한 침실 톤으로 '월요일 아침' 맥락 충족. 빨간 매니큐어가 유일한 채도 포인트인데 계획된 저채도 그레이드로 잡힌다. 대안 14850은 720p이고 우측 배경에 머리/얼굴 형체가 보이며, 50753은 시계 아래 책 표지의 'New Scandinavian Design' 글자가 또렷이 읽혀 탈락.",
+  "checks": {
+    "reads_at_in_point": true,
+    "action_holds_for_need_sec": true,
+    "faces": "none (background sleeper fully out of focus, no features)",
+    "text_or_watermark": "none legible (blurred brand label above display, not readable)",
+    "resolution": "1920,1080,24000/1001"
+  },
+  "alternates_reviewed": {
+    "14850": "twin-bell clock, 720p only, soft-focus head/face shape in background - rejected",
+    "50753": "readable book title 'New Scandinavian Design' under the clock, blurred person behind - rejected"
+  },
+  "strips": [
+    "/tmp/claude-0/-home-user-Code-Zzamtong/6777a2d0-3b1c-5e78-87d6-3446c2a48b8a/scratchpad/stock/s38_verify_1.jpg",
+    "/tmp/claude-0/-home-user-Code-Zzamtong/6777a2d0-3b1c-5e78-87d6-3446c2a48b8a/scratchpad/stock/s38_verify_2.jpg",
+    "/tmp/claude-0/-home-user-Code-Zzamtong/6777a2d0-3b1c-5e78-87d6-3446c2a48b8a/scratchpad/stock/s38_verify_3.jpg",
+    "/tmp/claude-0/-home-user-Code-Zzamtong/6777a2d0-3b1c-5e78-87d6-3446c2a48b8a/scratchpad/stock/s38_verify_4.jpg"
+  ]
+}

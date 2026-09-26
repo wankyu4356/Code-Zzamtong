@@ -1,0 +1,13 @@
+{
+  "shot_id": "s43",
+  "approve": true,
+  "use": "chosen",
+  "mixkit_id": "33729",
+  "file": "/home/user/Code-Zzamtong/promo/assets/footage/s43.mp4",
+  "in_point": 0.6,
+  "need_sec": 0.7,
+  "verified_range": [0.6, 1.6],
+  "strip": "/tmp/claude-0/-home-user-Code-Zzamtong/6777a2d0-3b1c-5e78-87d6-3446c2a48b8a/scratchpad/stock/s43_verify_1.jpg",
+  "reason": "Family of three (mom, small child, dad) holding hands walking away across an autumn park lawn. At 0.6s the shot already reads as a weekend family park walk; walking motion is continuous through 1.6s with figures at their largest in frame. Back view only, no faces, no on-screen text, no watermark. Caveats are technical, not fit: 720p source needs upscale, and the golden-hour grade is strongly orange (planned desaturation handles it). Alternates rejected: 47736 has cropped heads and a blank billboard entering frame; 40754 is a couple, not a family.",
+  "verified_at": "2026-09-26"
+}

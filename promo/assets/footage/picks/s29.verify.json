@@ -1,0 +1,31 @@
+{
+  "shot_id": "s29",
+  "approve": true,
+  "use": "chosen",
+  "mixkit_id": "47605",
+  "file": "/home/user/Code-Zzamtong/promo/assets/footage/s29.mp4",
+  "in_point": 1.0,
+  "out_point": 1.7,
+  "need_sec": 0.7,
+  "in_point_adjusted_from": 1.5,
+  "reason": "직접 스트립(0.4~1.5s, 1.5~2.5s 각 0.1s 간격) 확인. 리서처 인점 1.5s에서는 이미 양손이 허리에 붙어 있고 1.5~2.5s 동안 사실상 정지 상태(미세한 누름만)라 '허리'는 즉시 읽히지만 '짚는 손'이라는 동작이 없다. 0.4~1.4s 구간을 보면 0.7~0.9s에 오른손이 허리로 올라와 닿고, 1.0~1.4s에 왼손이 합류해 양손으로 허리를 잡는 정점이 온다. 그래서 인점을 1.0s로 당긴다: 1.0s 첫 프레임에 오른손이 이미 허리에 얹혀 있어 컷 시작에서 '허리'가 바로 읽히고, 0.7초(1.0~1.7s) 안에 왼손이 허리에 닿아 양손으로 누르는 동작이 완성돼 컷이 살아 있다. 허리 높이 뒷모습 클로즈업이라 얼굴 없음, 글자·워터마크 없음. 프레임 스케일(허리+양손 클로즈업)이 s01(49010, 4.4s)과 거의 같아 북엔드 운(rhyme)이 성립한다. 대안 47607은 프레임 상단에 옆얼굴(턱·머리)이 노출되고 노란 소파 채도가 높아 faces=avoid에 미달, 12866은 와이드샷 정면 얼굴+잠옷 노인+벽난로로 톤과 faces 조건 모두 위반이며 손 위치도 허리보다 골반 옆이라 탈락. 감점: '의자에서 일어나는' 동작은 없음(Mixkit에 해당 클립 부재로 수용), 붉은 벽돌 배경은 그레이딩에서 채도 감소 필요, 720p라 1080p 타임라인에서 약 150% 확대 필요(정적 클로즈업이라 허용).",
+  "checks": {
+    "reads_at_in_point": true,
+    "action_holds_for_need_sec": true,
+    "faces": "none",
+    "text_or_watermark": "none",
+    "resolution": "1280x720 @25fps (upscale needed for 1080p)",
+    "grading_note": "red brick wall - desaturate to match s01 low-saturation tone"
+  },
+  "alternates_reviewed": {
+    "47607": "side profile (chin/head) visible at top of frame, yellow sofa high saturation - rejected (faces=avoid)",
+    "12866": "wide shot, full frontal face, elderly man in pajamas by fireplace, hands at hips not lower back - rejected"
+  },
+  "strips": [
+    "/tmp/claude-0/-home-user-Code-Zzamtong/6777a2d0-3b1c-5e78-87d6-3446c2a48b8a/scratchpad/stock/s29_verify_1.jpg",
+    "/tmp/claude-0/-home-user-Code-Zzamtong/6777a2d0-3b1c-5e78-87d6-3446c2a48b8a/scratchpad/stock/s29_verify_2.jpg",
+    "/tmp/claude-0/-home-user-Code-Zzamtong/6777a2d0-3b1c-5e78-87d6-3446c2a48b8a/scratchpad/stock/s29_verify_3.jpg",
+    "/tmp/claude-0/-home-user-Code-Zzamtong/6777a2d0-3b1c-5e78-87d6-3446c2a48b8a/scratchpad/stock/s29_verify_4.jpg",
+    "/tmp/claude-0/-home-user-Code-Zzamtong/6777a2d0-3b1c-5e78-87d6-3446c2a48b8a/scratchpad/stock/s29_verify_5.jpg"
+  ]
+}

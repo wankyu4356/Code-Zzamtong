@@ -1,0 +1,12 @@
+{
+  "shot_id": "s22",
+  "approve": true,
+  "use": "chosen",
+  "in_point": 6.2,
+  "reason": "Chosen 28823 verified on a 6.2-7.2s strip plus full frames at 6.2/6.5. At 6.2 the frame already reads as stair-climbing: granite steps rising to the upper right, front boot on step 1 with heel raised (push-off), rear boot on the ground heel-up, second climber's boot on step 2 at frame right. 6.3-6.6 the rear boot lifts to knee height and swings forward, 6.8 it lands on the next step, 6.9-7.2 weight settles, so a complete ascending stride sits inside the 0.7s window. Step-level low angle, legs only, no faces, no text/logos/watermarks, natural hard sunlight fits the everyday-urban tone. Alternates checked: 22223 reads as climbing but is a dim indoor glass-lit hotel staircase with silhouetted black trousers, which will clash tonally with natural-light footage; 49513 is the cleanest single subject but white dress + stiletto heels reads bridal/fashion, wrong register for this promo. Keep in_point 6.2 (6.3 also acceptable if a lift-first frame is preferred).",
+  "checked": {
+    "chosen_strip": "/tmp/claude-0/-home-user-Code-Zzamtong/6777a2d0-3b1c-5e78-87d6-3446c2a48b8a/scratchpad/stock/s22_verify_1.jpg",
+    "alt_22223_strip": "/tmp/claude-0/-home-user-Code-Zzamtong/6777a2d0-3b1c-5e78-87d6-3446c2a48b8a/scratchpad/stock/s22_verify_2.jpg",
+    "alt_49513_strip": "/tmp/claude-0/-home-user-Code-Zzamtong/6777a2d0-3b1c-5e78-87d6-3446c2a48b8a/scratchpad/stock/s22_verify_3.jpg"
+  }
+}

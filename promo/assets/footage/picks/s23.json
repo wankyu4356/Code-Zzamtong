@@ -1,0 +1,32 @@
+{
+  "shot_id": "s23",
+  "no_good_match": false,
+  "chosen": {
+    "mixkit_id": "4851",
+    "title": "girl running during sunset ties her shoelaces",
+    "file": "/home/user/Code-Zzamtong/promo/assets/footage/s23.mp4",
+    "quality": "1080",
+    "duration": 15.77,
+    "in_point": 6.6,
+    "fit_score": 7.5,
+    "faces": "none visible (hair covers face while bent over; body only)",
+    "why": "Only candidate where the actual bend is on screen: the runner stops at 6.0s and folds from standing between 6.3s and 6.8s; at 6.6s arms are clearly reaching down and hands touch the shoe at 6.8s, so the 0.7s cut is the descent plus lace grab. Wide back/front-low angle on a city promenade, natural golden-hour light, 16:9 1080p, no text/logos. Downside: strong orange sunset grade and flare (to be tamed in grading) and the shoe is small in frame."
+  },
+  "alternates": [
+    {
+      "mixkit_id": "36142",
+      "file": "/home/user/Code-Zzamtong/promo/assets/footage/candidates/s23_36142.mp4",
+      "duration": 10.41,
+      "in_point": 0.3,
+      "why": "Close-up of a foot with hands dropping into frame at 0.2-0.5s to grab the laces; reads as reaching down but the torso bend is not visible. No face. 720p only, very saturated blue shoe/bottle and a blown-out white background."
+    },
+    {
+      "mixkit_id": "37003",
+      "file": "/home/user/Code-Zzamtong/promo/assets/footage/candidates/s23_37003.mp4",
+      "duration": 20.94,
+      "in_point": 0.5,
+      "why": "Clean urban crouch-and-tie close-up under a bridge, natural light, no face, muted tones. Already crouched from frame 0 so it reads 'tying' not 'bending'; 720p only."
+    }
+  ],
+  "notes": "Sheets: tying shoelaces (5), tying shoes (3), runner tying sneakers (0), shoelaces (8), lacing sneakers (1), putting on sneakers (1, irrelevant). 101368/101369 thumbnails failed to load and were skipped. 40136 and 50105 rejected for visible faces; 16231 downloaded but is a crouched hands close-up with no bend and only 5.4s (pink nails, dirt trail). Only 4851 was available in 1080p; the other three candidates are 720p."
+}

@@ -1,0 +1,35 @@
+{
+  "shot_id": "s11",
+  "approve": true,
+  "use": "chosen",
+  "mixkit_id": "48790",
+  "file": "/home/user/Code-Zzamtong/promo/assets/footage/s11.mp4",
+  "in_point": 4.7,
+  "out_point": 5.9,
+  "need_sec": 1.2,
+  "reason": "승인, 인점 4.7 유지. 직접 스트립(4.7~6.2s 0.1s 간격 / 0~8s 0.5s 간격 / 4.0~5.0s 0.1s 간격) 확인. 4.7s 첫 프레임: 두 노인 손과 검은 지팡이 손잡이가 화면 중앙을 채워 '노인이 몸을 지탱하고 서 있다'가 0프레임에 읽힌다. 윗손이 4.5~4.6s에 살짝 들렸다가 4.7s에 내려오기 시작해 4.9s에 손잡이를 꽉 쥐고, 이후 5.9s까지 미세한 자리잡기만 있는 정지 상태라 hit 컷 직후 0.2초 안에 '움켜쥠'이 완성되고 나머지 0.8초는 4% 줌인이 정지를 보강한다. 얼굴 없음, 글자·로고·워터마크 없음, 저채도 청록 니트+자연광이라 GRADE로 눌러도 손 디테일이 살아남는다. 스펙과의 차이: 계단·난간이 없고 무릎도 직접 보이지 않는다. 그러나 s09 기각 사유였던 '인물 충돌'이 여기엔 없다. 지팡이는 노년의 다리·무릎 문제를 뜻하는 가장 즉각적인 기호라 '계단 앞, 무릎.' 자막과 서로 모순되지 않고 오히려 문장을 완성해 준다(계단 앞에서 멈춘 이유가 무릎이라는 것을 지팡이가 대신 말한다). 소개글의 세 인물 중 세 번째 '할머님' 자리에 노인 손이 들어가 인물 배치도 맞다. 검은 화면으로 갈 경우 s08·s09 블랙 뒤 s10 실사 한 컷만 있다가 다시 블랙이 되어 빌드 리듬이 끊기고, 스토리보드 22행의 '11번 샷의 계단이 다시 움직인다' 호응도 완전히 사라지지만, 지팡이 컷이면 '지팡이 짚던 노인 → 계단 오르는 다리'로 의미상 호응이 남는다. 감점: 1280x720 25fps 업스케일(s10도 720p라 세트 내 일관), 성별이 특정되지 않는 손(자막에 '할머님'이 없으므로 무해). 인점 4.6은 첫 프레임이 들린 손이라 '놓는다'로 오독될 여지가 있고, 4.8은 움켜쥠이 2~3프레임 만에 끝나 남는 0.9초가 더 죽는다. 4.7이 '내려앉는 손'으로 시작해 가장 균형이 좋다.",
+  "checks": {
+    "reads_at_in_point": "yes (elderly hands + cane handle visible from frame 0; grip closes by 4.9s)",
+    "action_holds_for_need_sec": "grip motion 4.7-4.9s, then steady hold to 5.9s (4% zoom-in carries the still)",
+    "faces": "none (hands-only close-up, sweater torso blurred)",
+    "text_or_watermark": "none",
+    "resolution": "1280x720 @25fps (upscale needed, same as s10)",
+    "duration_ok": "4.7 + 1.2 + 0.3 = 6.2 <= 8.04",
+    "spec_gap": "no stairs/handrail, knee not in frame; cane stands in for knee/mobility, no contradiction with caption",
+    "persona": "elderly, gender-ambiguous; fills the third persona slot (할머님) without colliding with s09/s10"
+  },
+  "alternates_reviewed": {
+    "28823": "3.5~5.0s 확인. 야외 석조 계단, 정장 바지·청바지 차림 여러 명이 빠르게 오르는 다리. 젊고 빠르고 멈춤이 없어 '할머님·무릎'과 정반대이고, s22(오르고)의 선택 클립이라 중복 사용이 된다. 기각.",
+    "22223": "3.5~5.0s 확인. 실내 호텔 계단을 오르는 정장 남성 다리 뒷모습, 인공광. 인물·톤·동작 모두 불일치. 기각.",
+    "48789": "0~16s 1s 간격 확인. 갈색 담요 위에 놓인 노인 손 클로즈업. 16초 내내 완전 정지이고 무릎으로 식별되지 않아(담요 위 손으로만 읽힘) '멈춤/지탱'도 '무릎'도 전달하지 못한다. 기각."
+  },
+  "fallback_considered": "black frame allowed by shots.json/storyboard row 11, rejected because the cane clip adds persona and support without contradicting the caption",
+  "strips": [
+    "/tmp/claude-0/-home-user-Code-Zzamtong/6777a2d0-3b1c-5e78-87d6-3446c2a48b8a/scratchpad/stock/s11_verify_1.jpg",
+    "/tmp/claude-0/-home-user-Code-Zzamtong/6777a2d0-3b1c-5e78-87d6-3446c2a48b8a/scratchpad/stock/s11_verify_2.jpg",
+    "/tmp/claude-0/-home-user-Code-Zzamtong/6777a2d0-3b1c-5e78-87d6-3446c2a48b8a/scratchpad/stock/s11_verify_3.jpg",
+    "/tmp/claude-0/-home-user-Code-Zzamtong/6777a2d0-3b1c-5e78-87d6-3446c2a48b8a/scratchpad/stock/s11_verify_4.jpg",
+    "/tmp/claude-0/-home-user-Code-Zzamtong/6777a2d0-3b1c-5e78-87d6-3446c2a48b8a/scratchpad/stock/s11_verify_5.jpg",
+    "/tmp/claude-0/-home-user-Code-Zzamtong/6777a2d0-3b1c-5e78-87d6-3446c2a48b8a/scratchpad/stock/s11_verify_6.jpg"
+  ]
+}

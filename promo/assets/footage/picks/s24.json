@@ -1,0 +1,32 @@
+{
+  "shot_id": "s24",
+  "no_good_match": false,
+  "chosen": {
+    "mixkit_id": "41878",
+    "title": "man cycling down a street in a city",
+    "file": "/home/user/Code-Zzamtong/promo/assets/footage/s24.mp4",
+    "quality": "1080",
+    "duration": 11.845,
+    "in_point": 0.7,
+    "fit_score": 8,
+    "faces": "side profile, cap, not looking at camera",
+    "why": "Side-tracking shot of a man pedaling along a city sidewalk past a glass storefront and brick building; the whole bike and the pedal stroke are readable in the first frame. Natural light, muted palette, 16:9 1080p, no text or logos. At 0.7s the rider is clear of the foreground tree trunks with the storefront behind him; a thin trunk crosses briefly around 1.1-1.3s."
+  },
+  "alternates": [
+    {
+      "mixkit_id": "41892",
+      "file": "/home/user/Code-Zzamtong/promo/assets/footage/candidates/s24_41892.mp4",
+      "duration": 13.347,
+      "in_point": 2.0,
+      "why": "Low-angle rear tracking of the same rider on a city sidewalk with parked cars and office buildings; back view, no face. Reads as urban commuting but the low angle and backlight flare make the action slightly less instant than the side profile."
+    },
+    {
+      "mixkit_id": "41884",
+      "file": "/home/user/Code-Zzamtong/promo/assets/footage/candidates/s24_41884.mp4",
+      "duration": 10.01,
+      "in_point": 0.5,
+      "why": "Two cyclists riding down a sunlit city street, seen from behind. Usable only before ~2.5s because a CHUBB sign becomes legible in the background afterwards; harsh contrast and small figures."
+    }
+  ],
+  "notes": "Searched: cycling city, riding bicycle, bike commuter, woman riding bike city, bike lane, bicycle street. Downloaded 41878, 41892, 41884, 11846. 11846 (rider through a city park) is a clean rear shot but is a park path rather than a city street and only 720p, so it was dropped. Alternate in-point for 41878: 4.7s gives the cleanest unobstructed side profile against a concrete/corten wall if the storefront window is not needed. Candidate files left in assets/footage/candidates."
+}

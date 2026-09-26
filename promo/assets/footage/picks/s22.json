@@ -1,0 +1,32 @@
+{
+  "shot_id": "s22",
+  "no_good_match": false,
+  "chosen": {
+    "mixkit_id": "28823",
+    "title": "people walking up the stairs",
+    "file": "/home/user/Code-Zzamtong/promo/assets/footage/s22.mp4",
+    "quality": "720",
+    "duration": 26.06,
+    "in_point": 6.2,
+    "fit_score": 8,
+    "faces": "none - legs and feet only, step-level low angle",
+    "why": "Step-level low angle on outdoor stone stairs in hard natural sunlight; legs only, no faces, no text or logos. At 6.2s the front boot has just planted on the step (weight transfer visible), the rear boot lifts at 6.3-6.5 and lands on the next step by 6.9s, so the full climbing stride reads inside the 0.7s window. Black leggings + brown boots keep colors neutral for later desaturation; the blue-jeans stride at 4.7s and the navy-trouser stride at 10.5s are usable backups inside the same clip. Only 720p was available on Mixkit."
+  },
+  "alternates": [
+    {
+      "mixkit_id": "22223",
+      "file": "/home/user/Code-Zzamtong/promo/assets/footage/candidates/s22_22223.mp4",
+      "duration": 15.08,
+      "in_point": 1.3,
+      "why": "Clean single subject from behind, low angle, black trousers climbing a hotel glass staircase; right foot lands at 1.3s, left foot lifts and lands by ~1.8s, right foot lifts again with sole visible by 2.0s. Reads instantly as climbing, but the indoor cool corporate look is weaker on the natural-light urban tone. 720p."
+    },
+    {
+      "mixkit_id": "49513",
+      "file": "/home/user/Code-Zzamtong/promo/assets/footage/candidates/s22_49513.mp4",
+      "duration": 30.0,
+      "in_point": 1.0,
+      "why": "Low angle on outdoor stone steps in sunlight, heels climbing; right heel is lifting at ~1.0s and lands by ~1.5s (in point estimated from a 0.5s strip only). Styled white dress and heels feel more fashion-stock than everyday city, so lower fit. 720p."
+    }
+  ],
+  "notes": "Searched 6 sheets: 'climbing stairs', 'walking up stairs feet', 'legs going up stairs' (0 results), 'running up stairs', 'stairs', 'walking upstairs'. Downloaded 4 candidates (22223, 28823, 22148, 49513); all Mixkit files were 720p only, no 1080p variant. 22148 (child with leg braces climbing) was rejected because the braces pull the read toward rehab rather than a plain 'climbing' beat. Chosen clip has a second, slightly busier crowd of black-trousered legs in the first 4s; the 6.2s boot stride and the 10.5s navy-trouser stride are the cleanest single-subject moments. Candidate files left in candidates folder."
+}

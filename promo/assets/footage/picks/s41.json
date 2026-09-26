@@ -1,0 +1,32 @@
+{
+  "shot_id": "s41",
+  "no_good_match": false,
+  "chosen": {
+    "mixkit_id": "6652",
+    "title": "young boy scoring free kick goal",
+    "file": "/home/user/Code-Zzamtong/promo/assets/footage/s41.mp4",
+    "quality": "720",
+    "duration": 17.45,
+    "in_point": 1.0,
+    "fit_score": 8,
+    "faces": "ok",
+    "why": "Kids in kit on an outdoor pitch, natural daylight; a boy in black runs in and his foot contacts the ball at exactly 1.0s, ball is airborne toward the wall/goal by 1.1s, so 1.0-1.7s reads instantly as 'kid kicks ball'. 16:9, no logos or watermarks, wide framing. Only 720p available (no 1080p)."
+  },
+  "alternates": [
+    {
+      "mixkit_id": "34230",
+      "file": "/home/user/Code-Zzamtong/promo/assets/footage/candidates/s41_34230.mp4",
+      "duration": 7.96,
+      "in_point": 3.4,
+      "why": "Low wide-angle shot: oversized ball in foreground, kid goalkeeper in the yellow-wall goal, a (adult) foot enters and strikes the ball at ~3.4s. Very graphic kick moment but the kicker is an adult and the wide-angle/yellow wall looks more stylized; 720p only."
+    },
+    {
+      "mixkit_id": "35981",
+      "file": "/home/user/Code-Zzamtong/promo/assets/footage/candidates/s41_35981.mp4",
+      "duration": 19.09,
+      "in_point": 0.0,
+      "why": "Kids' team in blue kit warming up in a line with a ball in the foreground; strong 'kids soccer' atmosphere and clean natural light but no kick action, so only a fallback if the kick beat is dropped. 720p only."
+    }
+  ],
+  "notes": "Mixkit's kids-soccer inventory is small (4 unique kid clips across 6 queries: 6652, 34230, 35981, 13727, 35934). 13727 (boy holding deflated ball watching through a fence) and 35934 (aerial pitch) have no kick and were not shortlisted. None of the candidates had a 1080p rendition; all are 1280x720. 6652 has a second kick later in the clip (~3.0-3.5s a second boy shoots) if another take is needed."
+}

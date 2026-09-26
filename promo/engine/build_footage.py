@@ -54,12 +54,13 @@ def count_frames(path):
     return int(p.stdout.strip())
 
 
-def cover_zoom_filters(src_w, src_h, W, H, zoom, amount, n):
-    """Scale to cover WxH, with an optional linear zoom driven by frame number n,
-    then center-crop. Sizes are computed in Python so the crop offsets can be
-    written as explicit expressions (crop does not refresh in_w per frame)."""
+def cover_zoom_filters(src_w, src_h, W, H, zoom, amount, n, punch=1.0, anchor=(0.5, 0.5)):
+    """Scale to cover WxH (times a static punch-in), with an optional linear zoom
+    driven by frame number n, then crop around an anchor point (fractions of the
+    scaled frame; 0.5,0.5 is center). Sizes are computed in Python so the crop
+    offsets can be written as explicit expressions (crop does not refresh in_w per frame)."""
     a = src_w / src_h
-    cw, ch = max(W, H * a), max(H, W / a)
+    cw, ch = max(W, H * a) * punch, max(H, W / a) * punch
     den = max(n - 1, 1)
     if zoom == "in" and amount > 0:
         z = f"(1+{amount}*n/{den})"
@@ -69,8 +70,9 @@ def cover_zoom_filters(src_w, src_h, W, H, zoom, amount, n):
         z = "1"
     sw = f"ceil({cw:.4f}*{z}/2)*2"
     sh = f"ceil({ch:.4f}*{z}/2)*2"
+    ax, ay = anchor
     return [f"scale=w='{sw}':h='{sh}':eval=frame:flags=lanczos",
-            f"crop={W}:{H}:x='({sw}-{W})/2':y='({sh}-{H})/2'",
+            f"crop={W}:{H}:x='({sw}-{W})*{ax:.4f}':y='({sh}-{H})*{ay:.4f}'",
             "setsar=1"]
 
 
@@ -101,7 +103,8 @@ def segment_command(shot, tl, out_path):
 
     info = probe(bg["src"])
     vf = cover_zoom_filters(info["width"], info["height"], W, H,
-                            bg["zoom"], float(bg["zoom_amount"]), n) + look_filters(bg)
+                            bg["zoom"], float(bg["zoom_amount"]), n,
+                            float(bg.get("punch", 1.0)), tuple(bg.get("anchor", [0.5, 0.5]))) + look_filters(bg)
     if t == "image":
         return head + ["-loop", "1", "-framerate", str(fps), "-i", bg["src"],
                        "-vf", ",".join(vf + ["format=yuv420p"])] + tail

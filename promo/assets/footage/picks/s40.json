@@ -1,0 +1,32 @@
+{
+  "shot_id": "s40",
+  "no_good_match": false,
+  "chosen": {
+    "mixkit_id": "982",
+    "title": "people carrying market bags filled with vegetables",
+    "file": "/home/user/Code-Zzamtong/promo/assets/footage/s40.mp4",
+    "quality": "1080",
+    "duration": 15.04,
+    "in_point": 3.0,
+    "fit_score": 7,
+    "faces": "none (back view, torso-down framing)",
+    "why": "At 3.0s the subject walks away from camera with a paper grocery bag in the left hand and a market basket with greens in the right, plus a tote on the shoulder - both hands full of groceries, mid-stride, so the 'carrying groceries and walking' read is instant. Natural sunlight, outdoor market/urban ground, no faces, no on-screen text or logos, true 1080p. Frame is stable from 2.5-3.8s with both bags fully inside the frame; after 4.0s the bags start cropping at the edges. Only compromise: the right hand holds a basket rather than a second bag."
+  },
+  "alternates": [
+    {
+      "mixkit_id": "25379",
+      "file": "/home/user/Code-Zzamtong/promo/assets/footage/candidates/s40_25379.mp4",
+      "duration": 28.0,
+      "in_point": 5.0,
+      "why": "Couple walking toward camera on a city sidewalk carrying red plastic grocery bags at golden hour - the strongest 'just went grocery shopping' read of all candidates, full body visible. Held back by 720p-only source, heavy backlight/lens flare washing out the frame, and each person carrying one bag per hand rather than a single person with both hands full."
+    },
+    {
+      "mixkit_id": "40177",
+      "file": "/home/user/Code-Zzamtong/promo/assets/footage/candidates/s40_40177.mp4",
+      "duration": 10.68,
+      "in_point": 0.3,
+      "why": "Best literal match for the brief at 0.0-1.0s: woman walking with a jute grocery bag in each hand (wine bottle, herbs visible), warm natural light, 1080p, torso-down framing. Rejected as primary because the right bag is printed with large legible produce words (PAPAYA, Pina, PLATANO, Manzana...) filling much of the frame - on-screen text - and the camera tilts up from ~2s to reveal a pink face mask. Use only if prop text is acceptable; keep the cut inside 0.0-1.2s."
+    }
+  ],
+  "notes": "Searched 6 sheets: grocery bags (4), carrying groceries (1), shopping bags walking (11), grocery shopping (15), paper bags groceries (0), shopping bags (20). Mixkit's grocery-carrying inventory is thin; most 'shopping bags' hits are fashion-retail paper bags (6302, 28749, 21330, 21331) rather than groceries. 992 (market shoppers) was downloaded and rejected: crowded legs, rolling trolley and a dog, no single readable subject. 25379 is only available in 720p."
+}

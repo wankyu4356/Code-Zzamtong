@@ -1,0 +1,32 @@
+{
+  "shot_id": "s20",
+  "no_good_match": false,
+  "chosen": {
+    "mixkit_id": "31218",
+    "title": "man in his living room finishes packing a box to move",
+    "file": "/home/user/Code-Zzamtong/promo/assets/footage/s20.mp4",
+    "quality": "1080",
+    "duration": 18.208,
+    "in_point": 16.7,
+    "fit_score": 7.5,
+    "faces": "ok",
+    "why": "16.7s: man on a couch grips a sealed moving box and hoists it as he stands - the exact lift-and-straighten moment. Box comes up against his chest by 17.0 and he steps away by 17.4, so the 0.7s cut reads as one clean lift. 1080p, natural window light, no text/logos, not looking at camera. Downsides: indoor domestic not street, slightly warm/saturated palette, subject exits frame right after."
+  },
+  "alternates": [
+    {
+      "mixkit_id": "15182",
+      "file": "/home/user/Code-Zzamtong/promo/assets/footage/candidates/s20_15182.mp4",
+      "duration": 12.179,
+      "in_point": 7.9,
+      "why": "Moving-in scene, man walks into frame carrying a box and sets it on a stack (7.9-8.6s). Reads as carrying, but the motion is a put-down not a lift; 720p only, low angle, camera hides faces."
+    },
+    {
+      "mixkit_id": "14931",
+      "file": "/home/user/Code-Zzamtong/promo/assets/footage/candidates/s20_14931.mp4",
+      "duration": 12.312,
+      "in_point": 0.0,
+      "why": "Delivery man holding a large box outdoors in natural light. Static holding shot facing camera, staged stock feel, no lifting motion; 720p only. Fallback if a plain carrying image is acceptable."
+    }
+  ],
+  "notes": "Searched: lifting box (0 results), carrying box (2), man lifting boxes moving (0), picking up box (6), moving boxes (10), warehouse worker box (0). Mixkit has few true box-lifting clips; 31218 is the only one with a genuine hoist-and-stand beat, near the end of the clip (16.5-17.5s). 47730 (soda crate) was downloaded and rejected: static, talking to camera. 15182 contains only set-down motions."
+}

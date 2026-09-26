@@ -1,0 +1,33 @@
+{
+  "shot_id": "s40",
+  "approve": true,
+  "use": "chosen",
+  "mixkit_id": "982",
+  "file": "/home/user/Code-Zzamtong/promo/assets/footage/s40.mp4",
+  "in_point": 3.0,
+  "out_point": 3.7,
+  "need_sec": 0.7,
+  "reason": "직접 스트립(3.0~4.0s 0.1s 간격, 1.0~3.0s 0.2s 간격, 4~15s 1s 간격) 및 3.0s/3.4s 풀해상도 프레임 확인. 3.0s 첫 프레임에서 카메라를 등진 인물이 왼손에 종이봉투+비닐봉투, 오른손에 채소가 담긴 장바구니, 어깨에 파란 에코백을 메고 걷는 중이라 '장 본 봉지를 양손에 들고 걷는 사람'이 0프레임에 읽힌다. 3.0~3.7s 동안 보행이 이어지고 양손 짐이 모두 프레임 안에 유지되며(3.8s 이후 종이봉투가 왼쪽 가장자리로 밀림), 뒷모습 허리 아래 크롭이라 얼굴 없음, 글자·로고·워터마크 없음, 1920x1080 24fps, 자연광. 감점은 오른손이 봉지가 아니라 바구니이고 프레임 오른쪽에서 일부 잘린다는 것뿐인데 손잡이를 쥔 손과 채소가 선명해 '장바구니'로 즉시 읽히므로 0.7초 컷에는 문제 없다. 3.0s 이전(2.0~2.8s)은 바구니가 더 잘리고 6s 이후는 종이봉투가 프레임 밖으로 나가며 8s 이후는 다른 인물로 바뀌므로 3.0s가 최적 인점. 대안 40177은 1080p에 양손 마대가방으로 브리프에 가장 문자적으로 맞지만 풀해상도에서 오른쪽 가방의 PAPAYA/Piña/Manzana/PLATA/Cal, 왼쪽 가방의 Carry/Eneldo/Pimienta/Orégano 등 인쇄 글자가 화면 하단 1/3을 채울 정도로 크고 또렷해 자막 컷에 부적합. 대안 25379는 1280x720에 역광 플레어로 화면이 날아가고 남녀 각자 한 손에 한 봉지씩이라 '양손' 조건 미달.",
+  "checks": {
+    "reads_at_in_point": true,
+    "action_holds_for_need_sec": true,
+    "faces": "none (back view, torso-down)",
+    "text_or_watermark": "none",
+    "resolution": "1920x1080 @24fps",
+    "framing_note": "basket partially cropped at right edge; paper bag drifts to left edge after 3.8s - keep cut inside 3.0-3.8s"
+  },
+  "alternates_reviewed": {
+    "40177": "1080p, two jute bags in both hands, best literal match - rejected: large legible printed words (PAPAYA, Piña, Manzana, PLATA, Carry, Eneldo, Pimienta...) fill lower third of frame at 0.0-1.4s; camera tilts up from ~1.6s toward face",
+    "25379": "720p, heavy backlight/lens flare washes out frame, couple each carrying one bag - rejected"
+  },
+  "strips": [
+    "/tmp/claude-0/-home-user-Code-Zzamtong/6777a2d0-3b1c-5e78-87d6-3446c2a48b8a/scratchpad/stock/s40_verify_1.jpg",
+    "/tmp/claude-0/-home-user-Code-Zzamtong/6777a2d0-3b1c-5e78-87d6-3446c2a48b8a/scratchpad/stock/s40_verify_2.jpg",
+    "/tmp/claude-0/-home-user-Code-Zzamtong/6777a2d0-3b1c-5e78-87d6-3446c2a48b8a/scratchpad/stock/s40_verify_3.jpg",
+    "/tmp/claude-0/-home-user-Code-Zzamtong/6777a2d0-3b1c-5e78-87d6-3446c2a48b8a/scratchpad/stock/s40_verify_4.jpg",
+    "/tmp/claude-0/-home-user-Code-Zzamtong/6777a2d0-3b1c-5e78-87d6-3446c2a48b8a/scratchpad/stock/s40_verify_5.jpg",
+    "/tmp/claude-0/-home-user-Code-Zzamtong/6777a2d0-3b1c-5e78-87d6-3446c2a48b8a/scratchpad/stock/s40_verify_6.jpg",
+    "/tmp/claude-0/-home-user-Code-Zzamtong/6777a2d0-3b1c-5e78-87d6-3446c2a48b8a/scratchpad/stock/s40_full_chosen_3.0.jpg",
+    "/tmp/claude-0/-home-user-Code-Zzamtong/6777a2d0-3b1c-5e78-87d6-3446c2a48b8a/scratchpad/stock/s40_full_40177_0.3.jpg"
+  ]
+}

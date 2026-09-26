@@ -1,0 +1,7 @@
+{
+  "shot_id": "s19",
+  "approve": true,
+  "use": "chosen",
+  "in_point": 3.6,
+  "reason": "Strip 3.6-4.6s of clip 5149 checked frame by frame. At 3.60s the runner is already in full side profile mid-stride with the front arm at its forward extreme, so 'running' reads on the first frame; the stride and arm pump continue without interruption through 4.3s and beyond (the bush occlusion ends at ~2.5s, well before the in-point). Lateral tracking, park with houses behind, natural light, 1080p, no text or watermark, no brand marks. Two known compromises: the subject wears a black face mask plus cap (COVID-era look, but it also anonymises the face, which suits the project's 'feet/hands/back over faces' rule) and the framing is waist-up so foot strikes are cropped. Alternates are worse: 40765 (feet on sidewalk) is fully black-and-white, which would break the unified -10% saturation grade in an 8-cut colour montage, shows a shoe brand swoosh, and being another feet close-up right after s18's walking feet would blur the 'walking -> running' contrast the storyboard wants from a whole-body side track; 40134 is also masked and additionally hazy/backlit with worse contrast; 609 is a track sprinter with NB logos and saturated red track, non-urban. In-point 3.6 kept as is."
+}

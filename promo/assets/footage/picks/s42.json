@@ -1,0 +1,32 @@
+{
+  "shot_id": "s42",
+  "no_good_match": false,
+  "chosen": {
+    "mixkit_id": "6754",
+    "title": "city street traffic by night",
+    "file": "/home/user/Code-Zzamtong/promo/assets/footage/s42.mp4",
+    "quality": "720",
+    "duration": 25.43,
+    "in_point": 2.3,
+    "fit_score": 6,
+    "faces": "none",
+    "why": "Night city street at street level: a wall of lit signs rendered as soft bokeh across the top of frame (no readable text), parked scooters silhouetted in the foreground, a car pulling away with red tail lights centre-frame at 2.3s. Reads instantly as 'evening street, signs lit, people heading home'. Natural documentary feel, not staged. Downsides: only 720p available on Mixkit, no pedestrians in frame, and the neon bokeh is fairly saturated (will need the planned desaturation grade). Avoid 20s onward: the clip racks out of focus and goes dark."
+  },
+  "alternates": [
+    {
+      "mixkit_id": "4451",
+      "file": "/home/user/Code-Zzamtong/promo/assets/footage/candidates/s42_4451.mp4",
+      "duration": 22.36,
+      "in_point": 3.0,
+      "why": "1080p Tokyo street corner with many lit shop signs and pedestrians crossing; at 3.0s a man in a red shirt and others cross under the signs. Caveats: Japanese sign text is clearly readable (violates the no-text rule and looks foreign for a Korean promo), footage is sped-up with a blurred passer-by crossing the foreground at 1.5-2.0s, and the colour is very warm/yellow and saturated."
+    },
+    {
+      "mixkit_id": "3433",
+      "file": "/home/user/Code-Zzamtong/promo/assets/footage/candidates/s42_3433.mp4",
+      "duration": 8.01,
+      "in_point": 3.5,
+      "why": "1080p tree-lined pedestrian street at night with lamp light and people walking toward camera (sharpest group around 3.5s). Caveats: it is a long-exposure timelapse so people ghost and jump between frames, and there are no lit shop signs, so the 'sign' half of the brief is missing."
+    }
+  ],
+  "notes": "Sheets used: 'city night street' (20), 'evening street lights' (3), 'people walking city night' (13), 'commuters evening' (0), 'neon signs street' (6), 'shopping street night' (6). Rejected on sight: 41160 (English marquee text), 2011 (Chinese gate text), 3558 (staged two women laughing to camera under pink neon, faces large), 20089/20087 (wide aerial timelapse of Seoul), 8845/100862 (staged couple/friends), aerial and driving-timelapse clips. 4th download 3558 was reviewed and dropped. Chosen 6754 is the only candidate where lit signage and a street-level evening street read instantly with no text/logos, but it is 720p and has no pedestrians, hence fit 6. If the editor wants 1080p with people, 4451 is the fallback provided Japanese signage is acceptable."
+}

@@ -1,0 +1,7 @@
+{
+  "shot_id": "s39",
+  "approve": true,
+  "use": "chosen",
+  "in_point": 1.2,
+  "reason": "1788 verified on strip 1.2-2.2s (step 0.1) and full 1920x1080 frame at 1.2s. Reads 'office typing' immediately at the in_point: blazer, laptop, window blinds, desk plant, both hands on keyboard mid-keystroke. Typing continues without pause through 2.2s, so the 0.7s cut has continuous motion. Side profile looking at screen, no camera awareness, no on-screen text, no watermark. Top-of-head crop is a standard tight stock framing, not a defect. Alternates checked: 4827 (hands-only ECU) reads 'typing' but has no office context and is more generic; 4809 (top-down meeting table) has blown-out sun highlights and three small figures that take longer than 0.7s to parse. Chosen clip kept at in_point 1.2 unchanged."
+}

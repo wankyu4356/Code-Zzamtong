@@ -1,0 +1,32 @@
+{
+  "shot_id": "s39",
+  "no_good_match": false,
+  "chosen": {
+    "mixkit_id": "1788",
+    "title": "a woman working with her laptop",
+    "file": "/home/user/Code-Zzamtong/promo/assets/footage/s39.mp4",
+    "quality": "1080",
+    "duration": 12.8,
+    "in_point": 1.2,
+    "fit_score": 8,
+    "faces": "side profile, looking at screen (not camera)",
+    "why": "Reads as 'office work' the instant it appears: natural window light, laptop, blazer, plant, steady typing. Side profile, no camera-aware acting, muted natural palette that will grade down easily. At 1.2s both hands are mid-keystroke and framing is clean; typing continues well past the 0.7s cut."
+  },
+  "alternates": [
+    {
+      "mixkit_id": "4827",
+      "file": "/home/user/Code-Zzamtong/promo/assets/footage/candidates/s39_4827.mp4",
+      "duration": 10.7,
+      "in_point": 1.0,
+      "why": "Extreme close-up of a man's hands typing on a laptop (suit cuff, wood desk). Reads 'typing' instantly, no face, neutral color. Less office context than 1788 and slightly more generic-stock."
+    },
+    {
+      "mixkit_id": "4809",
+      "file": "/home/user/Code-Zzamtong/promo/assets/footage/candidates/s39_4809.mp4",
+      "duration": 37.4,
+      "in_point": 1.0,
+      "why": "Top-down meeting table with three people and printed charts; man reaching across to point at a chart around 1.0s. Reads 'meeting' immediately. Harsher sun beams / higher contrast than the brief's tone."
+    }
+  ],
+  "notes": "Sheets: typing keyboard, office typing, busy office, business meeting. Downloaded 4827, 1788, 4809, 39852, 42662. 39852 is vertical 1080x1920 and was disqualified. 42662 (top-down woman's hands on laptop) is usable but only 5.0s and drifts soft-focus; left in candidates but not listed as an alternate. Word '화' read as a weekday marker (화요일) -> ordinary office workday image."
+}

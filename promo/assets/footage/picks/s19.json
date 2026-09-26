@@ -1,0 +1,32 @@
+{
+  "shot_id": "s19",
+  "no_good_match": false,
+  "chosen": {
+    "mixkit_id": "5149",
+    "title": "young man with face mask running in a park",
+    "file": "/home/user/Code-Zzamtong/promo/assets/footage/s19.mp4",
+    "quality": "1080",
+    "duration": 10.17,
+    "in_point": 3.6,
+    "fit_score": 6.5,
+    "faces": "side profile, partly covered by cap and face mask",
+    "why": "Clean lateral tracking shot of a runner in full side profile, natural late-afternoon light, park with houses behind (urban-residential). Stride and arm pump read as running instantly; no text or logos. In-point 3.6s is after the foreground bush occlusion (1.0-2.5s) at a strong arm-swing extreme with lawn behind the body. Drawback: subject wears a black face mask (COVID-era feel) and frame is waist-up so foot strikes are cropped."
+  },
+  "alternates": [
+    {
+      "mixkit_id": "40765",
+      "file": "/home/user/Code-Zzamtong/promo/assets/footage/candidates/s19_40765.mp4",
+      "duration": 14.13,
+      "in_point": 2.0,
+      "why": "Low side-tracking shot of running shoes on a city sidewalk; foot lands flat at 2.0s so the action peak is exact and no face at all. But the clip is fully black-and-white (would stand out even after desaturation) and a small shoe brand mark is visible."
+    },
+    {
+      "mixkit_id": "40134",
+      "file": "/home/user/Code-Zzamtong/promo/assets/footage/candidates/s19_40134.mp4",
+      "duration": 14.17,
+      "in_point": 4.0,
+      "why": "Side tracking of a woman jogging along a tree-lined street with cars and buildings behind, backlit natural light. Also wears a face mask and the image is hazy/low-contrast; framing is waist-up like 5149."
+    }
+  ],
+  "notes": "Searched 6 sheets (running side view, man running city, jogging street, woman running morning, runner tracking shot, man jogging park slow motion). Mixkit's true lateral tracking shots of runners are all either masked (5149, 40134) or cropped to legs/feet (40765 B&W sidewalk, 609 sprinter on a red athletics track with NB logo and strong colour, rejected as non-urban and too saturated). Most other results are front/back views. Also downloaded 609 to candidates but did not shortlist it. If the mask is unacceptable, 40765 is the safest fallback despite being monochrome."
+}

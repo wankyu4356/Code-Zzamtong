@@ -1,0 +1,32 @@
+{
+  "shot_id": "s38",
+  "no_good_match": false,
+  "chosen": {
+    "mixkit_id": "42897",
+    "title": "woman turning off her alarm clock",
+    "file": "/home/user/Code-Zzamtong/promo/assets/footage/s38.mp4",
+    "quality": "1080",
+    "duration": 15.015,
+    "in_point": 2.6,
+    "fit_score": 8,
+    "faces": "none - only a hand and forearm enter frame; sleeper stays a blurred shape in the background",
+    "why": "Digital clock reading 7:00 on a nightstand, natural window light, warm bedroom tone. A hand enters from the right at 2.2s and lands on the clock's top button at 2.6-2.8s, so the 0.7s cut (2.6-3.3) shows the fingers touching down and pressing. Reads instantly as 'morning alarm being switched off' with no face and no readable text; 16:9 1080p."
+  },
+  "alternates": [
+    {
+      "mixkit_id": "14850",
+      "file": "/home/user/Code-Zzamtong/promo/assets/footage/candidates/s38_14850.mp4",
+      "duration": 10.76,
+      "in_point": 2.9,
+      "why": "Silver twin-bell clock on a white nightstand, hand reaches in at 2.5s and presses the top button at 2.9-4.0s. Clean, no text, but only 720p and a soft-focus face lies in the background."
+    },
+    {
+      "mixkit_id": "50753",
+      "file": "/home/user/Code-Zzamtong/promo/assets/footage/candidates/s38_50753.mp4",
+      "duration": 7.049,
+      "in_point": 1.6,
+      "why": "1080p black analog clock, hand grabs it at 1.5-3.5s with a nice reach. Downgraded because a book under the clock shows readable text ('New Scandinavian Design') and a blurred face is visible behind."
+    }
+  ],
+  "notes": "Sheets tried: alarm clock, turning off alarm, waking up alarm, morning alarm hand, snooze (0 results), phone alarm bed. Downloaded 42897, 50753, 14850, 4758. 4758 rejected: pastel, over-styled prop look (blue floral clock, pink cup) and the hand only clips the top of frame for ~0.5s, face peeks in at 5.5s. Chosen clip caveats: a small out-of-focus brand label sits above the digital display (not legible at 1080p), and the red nail polish is a saturated accent that the planned desaturation grade will tame."
+}

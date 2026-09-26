@@ -1,0 +1,31 @@
+{
+  "shot_id": "s28",
+  "approve": true,
+  "use": "chosen",
+  "mixkit_id": "15134",
+  "file": "/home/user/Code-Zzamtong/promo/assets/footage/s28.mp4",
+  "in_point": 1.4,
+  "out_point": 2.1,
+  "need_sec": 0.7,
+  "reason": "직접 스트립(1.4~2.4s 0.1s 간격 / 0~24s 2s 간격 / 3.2~4.2s 0.1s 간격) 확인. 1.4s 첫 프레임: 허벅지 중간에서 크롭된 로우앵글 측면 다리 샷, 앞다리는 아래 계단에 뻗어 착지, 뒷다리는 무릎이 굽은 채 화면 중앙에 있어 '무릎'과 '내려간다'가 한 프레임에서 바로 읽힌다. 계단은 화면 왼쪽 아래로 흐르고 0~24s 전체에서 인물은 계속 하강하므로 방향 문제 없음. 1.4~2.1s 동안 뒷발이 떠서 앞으로 스윙해 2.3s에 다음 아랫계단에 착지하는 연속 동작이라 0.7초 컷(타임라인 실사용 0.5초)이 정지처럼 죽지 않는다. 얼굴 없음, 글자·워터마크·로고 없음, 배경은 자연광 도시 계단. 감점: 1280x720 30fps라 업스케일 필요(0.5초 컷+그레인 0.08+비네트라 허용), 하이힐과 짧은 스커트로 패션 스톡 느낌이 약간 있고 순수 무릎 단독 클로즈업은 아니라 다리 샷 안의 무릎이다. 그러나 320px '무릎' 자막이 화면을 지배하는 0.5초 드롭 컷이라 무릎+계단 하강만 읽히면 충분하고, Mixkit에 진짜 무릎 단독 하강 클로즈업이 없다는 리서처 검색 기록(7개 쿼리)도 타당하다. 3.4s 대체 인점은 1.4s와 동작·프레이밍이 거의 같아 이득 없음. 인점 1.4 유지.",
+  "checks": {
+    "reads_at_in_point": true,
+    "action_holds_for_need_sec": true,
+    "direction_descending": true,
+    "faces": "none (legs only, cropped at mid-thigh)",
+    "text_or_watermark": "none",
+    "resolution": "1280x720 @29.97fps (upscale needed for 1080p)",
+    "duration_ok": "1.4 + 0.7 + 0.1 = 2.2 <= 24.66"
+  },
+  "alternates_reviewed": {
+    "28823": "2.5~3.5s 확인. 정장 바지 무릎·구두 타이트 클로즈업으로 무릎 자체는 잘 읽히지만 여러 명이 계단을 올라가는 장면이라 '내려가는'과 정반대. 게다가 이미 s22(오르고)의 선택 클립이라 같은 영상 2회 사용이 됨. 기각.",
+    "27771": "1.3~2.3s 확인. 나무 계단 아래에서 올려다본 앵글이라 프레임에 맨발과 정강이 아랫부분만 있고 무릎이 거의 보이지 않음. 강한 오렌지 실내 그레이드와 맨발이 다른 컷들의 톤과 어긋남. 기각."
+  },
+  "strips": [
+    "/tmp/claude-0/-home-user-Code-Zzamtong/6777a2d0-3b1c-5e78-87d6-3446c2a48b8a/scratchpad/stock/s28_verify_0.jpg",
+    "/tmp/claude-0/-home-user-Code-Zzamtong/6777a2d0-3b1c-5e78-87d6-3446c2a48b8a/scratchpad/stock/s28_verify_1.jpg",
+    "/tmp/claude-0/-home-user-Code-Zzamtong/6777a2d0-3b1c-5e78-87d6-3446c2a48b8a/scratchpad/stock/s28_verify_2.jpg",
+    "/tmp/claude-0/-home-user-Code-Zzamtong/6777a2d0-3b1c-5e78-87d6-3446c2a48b8a/scratchpad/stock/s28_verify_3.jpg",
+    "/tmp/claude-0/-home-user-Code-Zzamtong/6777a2d0-3b1c-5e78-87d6-3446c2a48b8a/scratchpad/stock/s28_verify_4.jpg"
+  ]
+}

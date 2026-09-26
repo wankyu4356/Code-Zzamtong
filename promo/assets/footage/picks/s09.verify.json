@@ -1,0 +1,38 @@
+{
+  "shot_id": "s09",
+  "approve": false,
+  "use": "none",
+  "in_point": 0.5,
+  "mixkit_id": null,
+  "file": null,
+  "reason": "불승인, 검은 화면. 직접 스트립(14643: 0.5~2.0s 0.1s 간격 + 0~7.0s 0.5s 간격 / 33025: 2.2~3.7s / 23982: 6.6~8.6s 0.1s 간격 + 0~15s 0.5s 간격) 확인. 14643은 0.5s 첫 프레임부터 손이 뒷목을 쥐고 1.5초 이상 유지되며 얼굴·글자·워터마크도 없어 '목'이라는 동작만 보면 흠이 없다. 그러나 프레임의 절반이 맨살 승모근과 검은 탱크톱 끈이고 뒤로 거울벽·기구가 흐리게 깔려 '헬스장 남자'가 0프레임에 읽힌다. 스토리보드 36행이 이 세 컷(수능·모니터·계단)은 '상황을 읽어야 통하는 장면'이라고 못박았고, 원장 소개글의 세 인물(수험생/직장인/할머님) 중 첫 번째 자리에 근육질 헬스장 남자가 들어가면 '수능 앞' 카피와 정면으로 어긋난다. 7초 검은 화면 뒤 처음 나오는 실사라 시선이 그대로 꽂히는 자리라 더 위험하다. 대안 33025는 뒷모습·뒷목 파지·얼굴 없음까지는 좋지만 손등 주름과 핏줄이 화면 1/4을 차지해 '노년 여성'으로 읽혀 s11 할머님 인물과 겹친다. 대안 23982는 7.1s부터 고개를 젖혀 얼굴이 가려지고 책상·노트북·모니터 맥락은 있지만, 정면 앵글에 양손 깍지를 머리 뒤로 두고 몸을 젖히는 '기지개' 동작이라 뒷목 통증이 아니라 휴식으로 읽히고, 체크셔츠 성인+듀얼 모니터 사무실이라 s10 직장인 인물과 겹치며, 역광 창으로 화면이 날아간다. 세 후보 모두 '책상 앞 수험생'을 못 만들고 각각 다른 인물로 읽히므로, 브리프와 스토리보드가 명시한 대로 검은 화면에 글자만 둔다. build_timeline.py는 use=none이면 자동으로 black bg로 떨어진다.",
+  "checks": {
+    "14643": {
+      "reads_at_in_point": "gesture yes (hand grips nape from 0.5s), context no (gym/tank top)",
+      "action_holds_for_need_sec": true,
+      "faces": "none (back of head)",
+      "text_or_watermark": "none",
+      "resolution": "1280x720 @25fps",
+      "verdict": "rejected - persona reads gym athlete, not student"
+    },
+    "33025": {
+      "reads_at_in_point": "gesture yes, context no (aged hand, white studio)",
+      "faces": "none",
+      "verdict": "rejected - reads elderly woman, collides with s11 persona"
+    },
+    "23982": {
+      "reads_at_in_point": "desk context yes, gesture reads stretch not neck pain",
+      "faces": "hidden from 7.1s (head tilted back), visible before 7.0s",
+      "verdict": "rejected - frontal, office worker with dual monitors collides with s10, backlit/blown-out"
+    }
+  },
+  "fallback": "black frame with text only, as allowed by shots.json visual and storyboard_v1.md shot 9",
+  "strips": [
+    "/tmp/claude-0/-home-user-Code-Zzamtong/6777a2d0-3b1c-5e78-87d6-3446c2a48b8a/scratchpad/stock/s09_verify_1.jpg",
+    "/tmp/claude-0/-home-user-Code-Zzamtong/6777a2d0-3b1c-5e78-87d6-3446c2a48b8a/scratchpad/stock/s09_verify_2.jpg",
+    "/tmp/claude-0/-home-user-Code-Zzamtong/6777a2d0-3b1c-5e78-87d6-3446c2a48b8a/scratchpad/stock/s09_verify_3.jpg",
+    "/tmp/claude-0/-home-user-Code-Zzamtong/6777a2d0-3b1c-5e78-87d6-3446c2a48b8a/scratchpad/stock/s09_verify_4.jpg",
+    "/tmp/claude-0/-home-user-Code-Zzamtong/6777a2d0-3b1c-5e78-87d6-3446c2a48b8a/scratchpad/stock/s09_verify_5.jpg",
+    "/tmp/claude-0/-home-user-Code-Zzamtong/6777a2d0-3b1c-5e78-87d6-3446c2a48b8a/scratchpad/stock/s09_verify_6.jpg"
+  ]
+}

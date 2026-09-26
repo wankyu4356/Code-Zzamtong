@@ -58,6 +58,8 @@
 | type | "black" \| "white" \| "color" \| "clip" \| "image" | 필수 | |
 | color | string | | type이 color일 때 "#1a1a1a" 형식 |
 | src | string | | clip/image 파일 경로 |
+| punch | number | 1.0 | 정적 펀치인 배율. 1.3이면 30% 확대한 상태에서 시작 |
+| anchor | [x, y] | [0.5, 0.5] | 크롭 기준점(확대된 프레임의 비율). [0.5, 0.2]면 위쪽을 남긴다 |
 | in | number | 0 | 클립 인 포인트(초) |
 | speed | number | 1.0 | 재생 속도. 2.0이면 두 배 빠르게. 소스가 speed * 샷길이 만큼 필요하다 |
 | fit | "cover" | cover | 화면을 꽉 채우도록 확대 후 중앙 크롭. 현재 cover만 지원 |

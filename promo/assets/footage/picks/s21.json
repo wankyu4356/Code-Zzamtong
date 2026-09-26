@@ -1,0 +1,32 @@
+{
+  "shot_id": "s21",
+  "no_good_match": false,
+  "chosen": {
+    "mixkit_id": "33784",
+    "title": "parents playing with their little son in the park",
+    "file": "/home/user/Code-Zzamtong/promo/assets/footage/s21.mp4",
+    "quality": "720",
+    "duration": 13.08,
+    "in_point": 1.9,
+    "fit_score": 8,
+    "faces": "ok",
+    "why": "아빠가 아이를 머리 위로 번쩍 던져 올리는 동작이 2.5초 주기로 반복되는 자작나무 공원 로우앵글 컷. 1.9s에 아이가 가슴에서 위로 밀려 올라가기 시작해 2.1s에 손을 떠나고 2.3~2.6s에 정점. 0.7초 컷(1.9~2.6s)이 '올라가는 순간'에서 시작해 정점에 도달. 자연광 야외 16:9, 글자/로고 없음. 감점: 1080p 없어 720p, 가을 노랑 채도 높음(그레이딩으로 보정 예정), 엄마가 옆에서 박수치는 연출감."
+  },
+  "alternates": [
+    {
+      "mixkit_id": "49942",
+      "file": "/home/user/Code-Zzamtong/promo/assets/footage/candidates/s21_49942.mp4",
+      "duration": 16.58,
+      "in_point": 0.0,
+      "why": "1080p, 자연광 실내에서 엄마가 아기를 얼굴 높이로 안아 든 상태. '안고'는 읽히지만 번쩍 올리는 순간은 없고 0~2s 이후 아기를 가슴으로 내려 안는다. 화질 우선이면 예비."
+    },
+    {
+      "mixkit_id": "33389",
+      "file": "/home/user/Code-Zzamtong/promo/assets/footage/candidates/s21_33389.mp4",
+      "duration": 23.96,
+      "in_point": 0.5,
+      "why": "가을 공원 역광에서 엄마가 아기를 눈높이로 안아 올려 마주보는 컷. 안은 상태의 정서는 좋으나 들어올리는 동작 없음, 720p, 색이 매우 따뜻하고 채도 높음."
+    }
+  ],
+  "notes": "queries의 'father lifting child', 'dad lifts daughter', 'father throws child in the air'는 Mixkit discover 태그 페이지가 없어 0건. 짧은 태그형 검색('father and daughter', 'mother lifting baby', 'father and son', 'family park')으로 대체. 33784는 두 번째 들어올림(in 4.6s, 정점 5.1~5.4s)도 동일하게 쓸 수 있고, 6~13s 구간은 부모 둘이 함께 받는 컷이라 다소 연출적. 33177(아빠 손에 들린 아기 클로즈업)은 들어올림 동작이 없어 후보에서 제외. candidates 폴더에 4개 파일 모두 유지."
+}

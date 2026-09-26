@@ -1,0 +1,15 @@
+{
+  "shot_id": "s26",
+  "approve": true,
+  "use": "chosen",
+  "in_point": 4.6,
+  "mixkit_id": "5065",
+  "file": "/home/user/Code-Zzamtong/promo/assets/footage/s26.mp4",
+  "reason": "승인. 단, 리서처 메모의 '16:9 1080p'는 틀렸다. s26.mp4는 1080x1920 세로 소스다. 엔진 cover(확대 후 중앙 크롭)를 적용하면 세로 프레임의 가운데 1/3만 남아 손과 눈은 프레임 밖으로 나가고 턱선-목-티셔츠 깃만 화면을 채운다. 실제 렌더 크롭을 4.3~5.7초 0.1초 간격으로 확인: 4.6초 첫 프레임부터 옆으로 늘인 목이 대각선으로 화면 전체를 채워 '목'이 즉시 읽히고, 0.7초 동안 정점 유지(거의 정지, 6% 줌으로 움직임 보강). 얼굴이 크롭으로 빠져 '얼굴보다 부위' 톤 규칙에 오히려 더 맞는다. 글자·워터마크 없음. 우려: 1080폭을 1920으로 1.78배 업스케일이라 소프트하지만 15프레임 컷에 그레인 8%면 세트 내 720p 클립(1.5배)과 비슷한 수준. 프레임이 피부+흰 티로 밝아 흰 글자 '목'은 shadow에 의존하니 렌더에서 약하면 clip_bg brightness -0.15 권장. 대안 32630은 어둡고 머리카락에 목이 가려 약함, 33026은 정면 통증 표정+스튜디오 흰 배경+720p라 열세.",
+  "checked": {
+    "source_resolution": "1080x1920 (portrait)",
+    "rendered_crop": "center 1080x608 of portrait, upscaled x1.78 to 1920x1080",
+    "window_checked": "4.3-5.7s @0.1s on the cover-cropped preview, plus 0-10s @0.5s overview",
+    "alternates_checked": ["32630 @2.5-3.5", "33026 @4.5-5.5"]
+  }
+}

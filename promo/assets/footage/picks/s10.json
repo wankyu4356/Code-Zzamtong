@@ -2,31 +2,31 @@
   "shot_id": "s10",
   "no_good_match": false,
   "chosen": {
-    "mixkit_id": "39854",
-    "title": "exhausted man working in an office overtime",
+    "mixkit_id": "49479",
+    "title": "working from home with lower back pain",
     "file": "/home/user/Code-Zzamtong/promo/assets/footage/s10.mp4",
-    "quality": "1080",
-    "duration": 12.012,
-    "in_point": 0.3,
+    "quality": "720",
+    "duration": 14.68,
+    "in_point": 1.3,
     "fit_score": 7,
     "faces": "avoid",
-    "why": "Over-the-shoulder back view of a man at a desktop monitor: back rounded, head pushed forward toward the screen, hands on keyboard. 0.3-1.5s is a steady hunched typing pose so the word reads on the first frame; no face visible; 1080p 16:9; no logos or watermarks (screen shows only generic UI). Downsides: dark, blue-tinted night office rather than natural light (saturation will be pulled down in grading), slightly handheld."
+    "why": "Pure side profile of a woman typing at a desk screen: shoulders rounded, chin pushed forward over the keyboard, so 'monitor + turtle neck' reads on the very first frame. 1.3-2.5s is the deepest, steadiest hunch; she only starts lifting off the keyboard at ~2.6s and grabs her lower back from 2.9s, so the cut ends just as the rise begins. Face is in profile only (no frontal), 16:9, natural window light, neutral white/grey palette that will grade down easily, no on-screen text or logos. Downsides: only 720p available; laptop rather than a desktop monitor, and a slightly staged stock look."
   },
   "alternates": [
     {
-      "mixkit_id": "24344",
-      "file": "/home/user/Code-Zzamtong/promo/assets/footage/candidates/s10_24344.mp4",
-      "duration": 14.68,
-      "in_point": 3.0,
-      "why": "3/4 side view of a man leaning into a desktop monitor in a night office; hunched posture reads but the face is visible and it is 720p only."
+      "mixkit_id": "39854",
+      "file": "/home/user/Code-Zzamtong/promo/assets/footage/candidates/s10_39854.mp4",
+      "duration": 12.012,
+      "in_point": 0.3,
+      "why": "Best posture read of all (over-the-shoulder back view, rounded back, head forward at a desktop monitor, no face, 1080) BUT the file is 9:16 PORTRAIT (1080x1920); the strip tool stretches cells so it looked landscape. Usable only if a 1080x608 centre crop upscaled to 16:9 is acceptable, or in a split/pillarbox layout."
     },
     {
-      "mixkit_id": "24063",
-      "file": "/home/user/Code-Zzamtong/promo/assets/footage/candidates/s10_24063.mp4",
-      "duration": 25.64,
-      "in_point": 0.8,
-      "why": "Frontal wide shot; at 0.8-2.0s the worker leans forward into the monitor, then stretches. Weak fit: face-on, 720p, reads 'tired' more than 'turtle neck'."
+      "mixkit_id": "41637",
+      "file": "/home/user/Code-Zzamtong/promo/assets/footage/candidates/s10_41637.mp4",
+      "duration": 10.26,
+      "in_point": 0.2,
+      "why": "1080p 16:9 back-of-head view of a programmer hunched at a code monitor; no face. Heavy blue/teal grade, code text and a red toy on the desk, and the camera pans off the person after ~2.5s, so only 0-2.4s is usable."
     }
   ],
-  "notes": "Mixkit discover pages exist only for short tags, so the multi-word queries (office worker back view computer / hunched over computer / neck pain office / bad posture desk) returned nothing; 'tired office worker computer', 'neck pain' and 'working late' produced results. 'neck pain' results were clinic/physio clips with no monitor, so they were skipped. In-point 0.3 + 1.2 + 0.1 = 1.6 <= 12.01."
+  "notes": "Mixkit's discover pages only exist for short tags, so the multi-word queries (office worker back view computer / hunched over computer / neck pain office / bad posture desk) returned nothing; 'tired office worker computer', 'neck pain', 'working late', 'back pain', 'programmer' and 'overtime' produced results (sheet budget was exceeded by a few because the first pick 39854 turned out to be portrait after download). 'neck pain' results were clinic/physio clips with no monitor and were skipped. Also downloaded and rejected: 24344 (720p, 3/4 frontal face at monitor) and 24063 (720p, frontal stretch). Files left in candidates/: s10_39854, s10_24344, s10_24063, s10_49479, s10_41637. Always verify orientation with ffprobe: the sheet/strip cells are force-resized and do not reveal aspect ratio."
 }

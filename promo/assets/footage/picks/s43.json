@@ -1,0 +1,32 @@
+{
+  "shot_id": "s43",
+  "no_good_match": false,
+  "chosen": {
+    "mixkit_id": "33729",
+    "title": "family walking in the park full shot",
+    "file": "/home/user/Code-Zzamtong/promo/assets/footage/s43.mp4",
+    "quality": "720",
+    "duration": 9.81,
+    "in_point": 0.6,
+    "fit_score": 8,
+    "faces": "back view only, no faces",
+    "why": "Static full shot of mom-child-dad holding hands walking away across an autumn park lawn. Reads as 'weekend family park walk' in a single frame; back view keeps it un-staged. At 0.6s the child's stride is at full extension with the lead foot planted and the dad's rear heel lifting, and the figures are still large in frame. Deductions: 720p only, and the golden-hour autumn grade is strongly orange (planned desaturation will help)."
+  },
+  "alternates": [
+    {
+      "mixkit_id": "47736",
+      "file": "/home/user/Code-Zzamtong/promo/assets/footage/candidates/s43_47736.mp4",
+      "duration": 23.04,
+      "in_point": 2.5,
+      "why": "Family of three running away down a paved park path, back view, neutral natural light, higher energy (fits 'jogging'). Heads are cropped until ~3.0s and a large blank white billboard enters top-center from ~3.0s; around 2.5s the boy's foot lands and the billboard is still mostly out of frame. 720p."
+    },
+    {
+      "mixkit_id": "40754",
+      "file": "/home/user/Code-Zzamtong/promo/assets/footage/candidates/s43_40754.mp4",
+      "duration": 12.67,
+      "in_point": 1.0,
+      "why": "Man and woman jogging away along a city park path, back view, muted natural light, true 1080p. Clean 'weekend jog in the park' read but it is a couple, not a family."
+    }
+  ],
+  "notes": "Sheets: 'family park' (20), 'family walking park' (6), 'jogging park' (20); 'family weekend' and 'family running park' returned 0. Downloaded 4 candidates: 33729, 47736, 33176, 40754. 33176 (parents in white outfits/heels with toddler walking toward camera) was rejected as too staged/photoshoot-like. Only 40754 had a 1080p source; the chosen 33729 is 720p (1280x720, 29.97fps) and will need upscaling."
+}
