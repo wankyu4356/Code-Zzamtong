@@ -1,0 +1,763 @@
+{
+ "fps": 30,
+ "width": 1920,
+ "height": 1080,
+ "duration": 49.5,
+ "audio": "/home/user/Code-Zzamtong/promo/music/render/film3_music.wav",
+ "shots": [
+  {
+   "id": "s01",
+   "start": 0.0,
+   "end": 2.0,
+   "bg": {
+    "type": "color",
+    "color": "#f5f5f7"
+   },
+   "texts": [
+    {
+     "weight": 700,
+     "letter_spacing": -0.035,
+     "line_height": 1.14,
+     "max_width": 1700,
+     "shadow": false,
+     "align": "center",
+     "x": "center",
+     "y": "center",
+     "anim_in": "none",
+     "in_frames": 6,
+     "anim_out": "cut",
+     "text": "허리든, 무릎이든.",
+     "start": 0.0,
+     "end": 2.0,
+     "size": 136,
+     "color": "#1d1d1f",
+     "accent_color": "#003070",
+     "words": [
+      0.05,
+      0.55
+     ],
+     "word_frames": 8
+    }
+   ],
+   "_sound": "beat",
+   "_motion": "words",
+   "_note": ""
+  },
+  {
+   "id": "s02",
+   "start": 2.0,
+   "end": 4.5,
+   "bg": {
+    "type": "color",
+    "color": "#f5f5f7"
+   },
+   "texts": [
+    {
+     "weight": 700,
+     "letter_spacing": -0.035,
+     "line_height": 1.14,
+     "max_width": 1700,
+     "shadow": false,
+     "align": "center",
+     "x": "center",
+     "y": "center",
+     "anim_in": "none",
+     "in_frames": 6,
+     "anim_out": "cut",
+     "text": "언제부터\n어떻게 아픈지.",
+     "start": 2.0,
+     "end": 4.5,
+     "size": 150,
+     "color": "#1d1d1f",
+     "accent_color": "#003070",
+     "words": [
+      2.05,
+      2.55,
+      2.8
+     ],
+     "word_frames": 8
+    }
+   ],
+   "_sound": "beat",
+   "_motion": "stack",
+   "_note": ""
+  },
+  {
+   "id": "s03",
+   "start": 4.5,
+   "end": 6.0,
+   "bg": {
+    "type": "color",
+    "color": "#f5f5f7"
+   },
+   "texts": [
+    {
+     "weight": 700,
+     "letter_spacing": -0.035,
+     "line_height": 1.14,
+     "max_width": 1700,
+     "shadow": false,
+     "align": "center",
+     "x": "center",
+     "y": "center",
+     "anim_in": "hit",
+     "in_frames": 3,
+     "anim_out": "cut",
+     "text": "다 말씀하세요.",
+     "start": 4.5,
+     "end": 6.0,
+     "size": 168,
+     "color": "#1d1d1f",
+     "accent_color": "#003070",
+     "hit_scale": 1.08
+    }
+   ],
+   "_sound": "hit",
+   "_motion": "cut",
+   "_note": ""
+  },
+  {
+   "id": "s04",
+   "start": 6.0,
+   "end": 8.5,
+   "bg": {
+    "type": "color",
+    "color": "#f5f5f7"
+   },
+   "texts": [
+    {
+     "weight": 700,
+     "letter_spacing": -0.035,
+     "line_height": 1.14,
+     "max_width": 1700,
+     "shadow": false,
+     "align": "center",
+     "x": "center",
+     "y": "center",
+     "anim_in": "fade",
+     "in_frames": 9,
+     "anim_out": "cut",
+     "text": "다 *듣습니다.*",
+     "start": 6.0,
+     "end": 8.5,
+     "size": 168,
+     "color": "#1d1d1f",
+     "accent_color": "#003070"
+    }
+   ],
+   "_sound": "silence",
+   "_motion": "cut",
+   "_note": ""
+  },
+  {
+   "id": "s05",
+   "start": 8.5,
+   "end": 12.0,
+   "bg": {
+    "type": "image",
+    "src": "/home/user/Code-Zzamtong/promo/assets/hospital/doctor_portrait_16x9.jpg",
+    "zoom": "in",
+    "zoom_amount": 0.05,
+    "anchor": [
+     0.62,
+     0.5
+    ],
+    "grade": {
+     "contrast": 1.02,
+     "saturation": 0.9
+    },
+    "vignette": true,
+    "grain": 0.03
+   },
+   "texts": [
+    {
+     "weight": 700,
+     "letter_spacing": -0.035,
+     "line_height": 1.14,
+     "max_width": 1000,
+     "shadow": false,
+     "align": "left",
+     "x": 140,
+     "y": 369,
+     "anim_in": "none",
+     "in_frames": 3,
+     "anim_out": "cut",
+     "text": "서두르지 않고\n한 번에 한 분.",
+     "start": 8.5,
+     "end": 12.0,
+     "size": 150,
+     "color": "#1d1d1f",
+     "accent_color": "#5b9cff",
+     "hit_scale": 1.08,
+     "words": [
+      8.55,
+      8.8,
+      9.05,
+      9.3,
+      9.55,
+      9.8
+     ],
+     "word_frames": 8
+    }
+   ],
+   "_sound": "hit",
+   "_motion": "stack",
+   "_note": ""
+  },
+  {
+   "id": "s06",
+   "start": 12.0,
+   "end": 14.0,
+   "bg": {
+    "type": "color",
+    "color": "#000000"
+   },
+   "texts": [
+    {
+     "weight": 700,
+     "letter_spacing": -0.035,
+     "line_height": 1.14,
+     "max_width": 1700,
+     "shadow": false,
+     "align": "center",
+     "x": "center",
+     "y": "center",
+     "anim_in": "fade",
+     "in_frames": 6,
+     "anim_out": "cut",
+     "text": "듣고 나서 진찰합니다.",
+     "start": 12.0,
+     "end": 14.0,
+     "size": 136,
+     "color": "#f5f5f7",
+     "accent_color": "#5b9cff"
+    }
+   ],
+   "_sound": "beat",
+   "_motion": "cut",
+   "_note": ""
+  },
+  {
+   "id": "s07",
+   "start": 14.0,
+   "end": 17.0,
+   "bg": {
+    "type": "color",
+    "color": "#000000"
+   },
+   "texts": [
+    {
+     "weight": 700,
+     "letter_spacing": -0.035,
+     "line_height": 1.14,
+     "max_width": 1700,
+     "shadow": false,
+     "align": "center",
+     "x": "center",
+     "y": "center",
+     "anim_in": "none",
+     "in_frames": 6,
+     "anim_out": "cut",
+     "text": "왜 아픈지\n보여드립니다.",
+     "start": 14.0,
+     "end": 17.0,
+     "size": 150,
+     "color": "#f5f5f7",
+     "accent_color": "#5b9cff",
+     "words": [
+      14.05,
+      14.3,
+      14.55
+     ],
+     "word_frames": 8
+    }
+   ],
+   "_sound": "beat",
+   "_motion": "stack",
+   "_note": ""
+  },
+  {
+   "id": "s08",
+   "start": 17.0,
+   "end": 20.5,
+   "bg": {
+    "type": "color",
+    "color": "#000000"
+   },
+   "texts": [
+    {
+     "size": 96,
+     "weight": 600,
+     "letter_spacing": -0.03,
+     "line_height": 1.28,
+     "max_width": 1560,
+     "shadow": false,
+     "align": "center",
+     "x": "center",
+     "y": "center",
+     "anim_in": "fade",
+     "in_frames": 6,
+     "anim_out": "cut",
+     "text": "“모형으로까지 설명해주셔서\n이해가 쏙쏙 됐어요.”",
+     "start": 17.0,
+     "end": 20.5,
+     "color": "#f5f5f7",
+     "accent_color": "#5b9cff"
+    },
+    {
+     "size": 40,
+     "weight": 500,
+     "letter_spacing": 0.0,
+     "line_height": 1.2,
+     "max_width": 1400,
+     "shadow": false,
+     "align": "center",
+     "x": "center",
+     "anim_in": "fade",
+     "in_frames": 8,
+     "anim_out": "cut",
+     "text": "네이버 방문자 리뷰 · 영수증 인증 · 발췌",
+     "start": 17.35,
+     "end": 20.5,
+     "color": "rgba(245,245,247,0.6)",
+     "y": 718
+    }
+   ],
+   "_sound": "beat",
+   "_motion": "quote",
+   "_note": ""
+  },
+  {
+   "id": "s09",
+   "start": 20.5,
+   "end": 22.5,
+   "bg": {
+    "type": "color",
+    "color": "#000000"
+   },
+   "texts": [
+    {
+     "weight": 700,
+     "letter_spacing": -0.035,
+     "line_height": 1.14,
+     "max_width": 1700,
+     "shadow": false,
+     "align": "center",
+     "x": "center",
+     "y": "center",
+     "anim_in": "fade",
+     "in_frames": 6,
+     "anim_out": "cut",
+     "text": "치료는 그다음에 정합니다.",
+     "start": 20.5,
+     "end": 22.5,
+     "size": 118,
+     "color": "#f5f5f7",
+     "accent_color": "#5b9cff"
+    }
+   ],
+   "_sound": "beat",
+   "_motion": "cut",
+   "_note": ""
+  },
+  {
+   "id": "s10",
+   "start": 22.5,
+   "end": 24.5,
+   "bg": {
+    "type": "color",
+    "color": "#000000"
+   },
+   "texts": [
+    {
+     "weight": 700,
+     "letter_spacing": -0.035,
+     "line_height": 1.14,
+     "max_width": 1700,
+     "shadow": false,
+     "align": "center",
+     "x": "center",
+     "y": "center",
+     "anim_in": "hit",
+     "in_frames": 3,
+     "anim_out": "cut",
+     "text": "필요한 치료부터 차근차근.",
+     "start": 22.5,
+     "end": 24.5,
+     "size": 118,
+     "color": "#f5f5f7",
+     "accent_color": "#5b9cff",
+     "hit_scale": 1.08
+    }
+   ],
+   "_sound": "hit",
+   "_motion": "cut",
+   "_note": ""
+  },
+  {
+   "id": "s11",
+   "start": 24.5,
+   "end": 28.5,
+   "bg": {
+    "type": "color",
+    "color": "#000000"
+   },
+   "texts": [
+    {
+     "size": 96,
+     "weight": 600,
+     "letter_spacing": -0.03,
+     "line_height": 1.28,
+     "max_width": 1560,
+     "shadow": false,
+     "align": "center",
+     "x": "center",
+     "y": "center",
+     "anim_in": "fade",
+     "in_frames": 6,
+     "anim_out": "cut",
+     "text": "“필요한 치료만 딱 해주셔서\n안심하고 다녔습니다.”",
+     "start": 24.5,
+     "end": 28.5,
+     "color": "#f5f5f7",
+     "accent_color": "#5b9cff"
+    },
+    {
+     "size": 40,
+     "weight": 500,
+     "letter_spacing": 0.0,
+     "line_height": 1.2,
+     "max_width": 1400,
+     "shadow": false,
+     "align": "center",
+     "x": "center",
+     "anim_in": "fade",
+     "in_frames": 8,
+     "anim_out": "cut",
+     "text": "네이버 방문자 리뷰 · 영수증 인증 · 발췌",
+     "start": 24.85,
+     "end": 28.5,
+     "color": "rgba(245,245,247,0.6)",
+     "y": 718
+    }
+   ],
+   "_sound": "beat",
+   "_motion": "quote",
+   "_note": ""
+  },
+  {
+   "id": "s12",
+   "start": 28.5,
+   "end": 31.5,
+   "bg": {
+    "type": "color",
+    "color": "#000000"
+   },
+   "texts": [
+    {
+     "size": 108,
+     "weight": 600,
+     "letter_spacing": -0.03,
+     "line_height": 1.28,
+     "max_width": 1560,
+     "shadow": false,
+     "align": "center",
+     "x": "center",
+     "y": "center",
+     "anim_in": "fade",
+     "in_frames": 6,
+     "anim_out": "cut",
+     "text": "“의사선생님이\n완전 친절하세요!”",
+     "start": 28.5,
+     "end": 31.5,
+     "color": "#f5f5f7",
+     "accent_color": "#5b9cff"
+    },
+    {
+     "size": 40,
+     "weight": 500,
+     "letter_spacing": 0.0,
+     "line_height": 1.2,
+     "max_width": 1400,
+     "shadow": false,
+     "align": "center",
+     "x": "center",
+     "anim_in": "fade",
+     "in_frames": 8,
+     "anim_out": "cut",
+     "text": "네이버 방문자 리뷰 · 영수증 인증 · 발췌",
+     "start": 28.85,
+     "end": 31.5,
+     "color": "rgba(245,245,247,0.6)",
+     "y": 734
+    }
+   ],
+   "_sound": "beat",
+   "_motion": "quote",
+   "_note": ""
+  },
+  {
+   "id": "s13",
+   "start": 31.5,
+   "end": 34.5,
+   "bg": {
+    "type": "image",
+    "src": "/home/user/Code-Zzamtong/promo/assets/hospital/reception_16x9.jpg",
+    "zoom": "in",
+    "zoom_amount": 0.05,
+    "grade": {
+     "contrast": 1.02,
+     "saturation": 0.88,
+     "brightness": -0.28
+    },
+    "vignette": true,
+    "grain": 0.03
+   },
+   "texts": [
+    {
+     "weight": 700,
+     "letter_spacing": -0.035,
+     "line_height": 1.14,
+     "max_width": 1400,
+     "shadow": true,
+     "align": "left",
+     "x": 200,
+     "y": 520,
+     "anim_in": "none",
+     "in_frames": 6,
+     "anim_out": "cut",
+     "text": "낙성대역 4번 출구\n걸어서 1분.",
+     "start": 31.5,
+     "end": 34.5,
+     "size": 128,
+     "color": "#f5f5f7",
+     "accent_color": "#5b9cff",
+     "words": [
+      31.55,
+      31.8,
+      32.05,
+      32.05,
+      32.3
+     ],
+     "word_frames": 8
+    }
+   ],
+   "_sound": "beat",
+   "_motion": "stack",
+   "_note": ""
+  },
+  {
+   "id": "s14",
+   "start": 34.5,
+   "end": 38.0,
+   "bg": {
+    "type": "image",
+    "src": "/home/user/Code-Zzamtong/promo/assets/hospital/reception_16x9.jpg",
+    "zoom": "in",
+    "zoom_amount": 0.05,
+    "grade": {
+     "contrast": 1.02,
+     "saturation": 0.88,
+     "brightness": -0.28
+    },
+    "vignette": true,
+    "grain": 0.03
+   },
+   "texts": [
+    {
+     "weight": 700,
+     "letter_spacing": -0.035,
+     "line_height": 1.14,
+     "max_width": 1400,
+     "shadow": true,
+     "align": "left",
+     "x": 200,
+     "y": 520,
+     "anim_in": "none",
+     "in_frames": 6,
+     "anim_out": "cut",
+     "text": "토요일도 진료합니다.\n9시부터 오후 2시까지.",
+     "start": 34.5,
+     "end": 38.0,
+     "size": 118,
+     "color": "#f5f5f7",
+     "accent_color": "#5b9cff",
+     "words": [
+      34.55,
+      34.8,
+      35.05,
+      35.3,
+      35.55
+     ],
+     "word_frames": 8
+    }
+   ],
+   "_sound": "beat",
+   "_motion": "stack",
+   "_note": ""
+  },
+  {
+   "id": "s15",
+   "start": 38.0,
+   "end": 40.0,
+   "bg": {
+    "type": "color",
+    "color": "#f5f5f7"
+   },
+   "texts": [
+    {
+     "weight": 700,
+     "letter_spacing": -0.035,
+     "line_height": 1.14,
+     "max_width": 1700,
+     "shadow": false,
+     "align": "center",
+     "x": "center",
+     "y": "center",
+     "anim_in": "fade",
+     "in_frames": 6,
+     "anim_out": "cut",
+     "text": "목이든, 어깨든.",
+     "start": 38.0,
+     "end": 40.0,
+     "size": 168,
+     "color": "#1d1d1f",
+     "accent_color": "#003070"
+    }
+   ],
+   "_sound": "swell",
+   "_motion": "cut",
+   "_note": ""
+  },
+  {
+   "id": "s16",
+   "start": 40.0,
+   "end": 43.0,
+   "bg": {
+    "type": "color",
+    "color": "#f5f5f7"
+   },
+   "texts": [
+    {
+     "weight": 700,
+     "letter_spacing": -0.035,
+     "line_height": 1.14,
+     "max_width": 1700,
+     "shadow": false,
+     "align": "center",
+     "x": "center",
+     "y": 414,
+     "anim_in": "fade",
+     "in_frames": 9,
+     "anim_out": "cut",
+     "text": "*듣는* 정형외과.",
+     "start": 40.0,
+     "end": 49.5,
+     "size": 220,
+     "color": "#1d1d1f",
+     "accent_color": "#003070",
+     "y_to": 210,
+     "move_at": 43.0,
+     "move_frames": 14
+    }
+   ],
+   "_sound": "silence",
+   "_motion": "cut",
+   "_note": ""
+  },
+  {
+   "id": "s17",
+   "start": 43.0,
+   "end": 45.5,
+   "bg": {
+    "type": "color",
+    "color": "#f5f5f7"
+   },
+   "texts": [
+    {
+     "size": 48,
+     "weight": 500,
+     "letter_spacing": -0.015,
+     "line_height": 1.3,
+     "max_width": 1500,
+     "shadow": false,
+     "align": "center",
+     "x": "center",
+     "anim_in": "fade",
+     "in_frames": 10,
+     "anim_out": "cut",
+     "text": "김철신정형외과의원",
+     "start": 43.4,
+     "end": 49.5,
+     "color": "#1d1d1f",
+     "y": 745
+    }
+   ],
+   "_sound": "hit",
+   "_motion": "cut",
+   "_note": "",
+   "images": [
+    {
+     "src": "/home/user/Code-Zzamtong/promo/assets/hospital/logo_color.png",
+     "start": 43.0,
+     "end": 49.5,
+     "width": 720,
+     "y": 520,
+     "anim_in": "fade",
+     "in_frames": 12,
+     "anim_out": "none"
+    }
+   ]
+  },
+  {
+   "id": "s18",
+   "start": 45.5,
+   "end": 49.5,
+   "bg": {
+    "type": "color",
+    "color": "#f5f5f7"
+   },
+   "texts": [
+    {
+     "size": 48,
+     "weight": 500,
+     "letter_spacing": -0.015,
+     "line_height": 1.3,
+     "max_width": 1500,
+     "shadow": false,
+     "align": "center",
+     "x": "center",
+     "anim_in": "fade",
+     "in_frames": 8,
+     "anim_out": "cut",
+     "text": "낙성대역 4번 출구 · 주차 무료",
+     "start": 45.5,
+     "end": 49.5,
+     "color": "#1d1d1f",
+     "y": 850
+    },
+    {
+     "size": 64,
+     "weight": 600,
+     "letter_spacing": 0.02,
+     "line_height": 1.3,
+     "max_width": 1500,
+     "shadow": false,
+     "align": "center",
+     "x": "center",
+     "anim_in": "fade",
+     "in_frames": 8,
+     "anim_out": "cut",
+     "text": "02-872-3301",
+     "start": 45.65,
+     "end": 49.5,
+     "color": "#1d1d1f",
+     "y": 916
+    }
+   ],
+   "_sound": "beat",
+   "_motion": "cut",
+   "_note": ""
+  }
+ ]
+}
