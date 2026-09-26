@@ -2,31 +2,38 @@
   "shot_id": "f18",
   "no_good_match": false,
   "chosen": {
-    "mixkit_id": "517",
-    "title": "person and dog walk among trees",
-    "file": "/home/user/Code-Zzamtong/promo/assets/footage2/f18.mp4",
-    "quality": "1080",
-    "duration": 21.98,
-    "in_point": 8.4,
-    "fit_score": 0.72,
-    "faces": "none (back view only)",
-    "why": "Back view of a person walking away through trees with low-sun flare flickering through the canopy; faded, low-saturation film-like grade matches the tone. Section 8.4-11.1s carries a lens flare that sweeps in around 9.8-10.6s, giving the 'sunlight flickering through leaves' beat. Forest path rather than a paved tree-lined sidewalk, and a dog walks alongside, but no text/logo, no face, no stock-ad acting."
+    "mixkit_id": "31709",
+    "title": "man walking in a park in africa tracking shot",
+    "file": "/home/user/Code-Zzamtong/promo/assets/footage2/candidates/f18_31709.mp4",
+    "quality": "720",
+    "duration": 20.48,
+    "in_point": 4.5,
+    "fit_score": 7.0,
+    "faces": "none",
+    "why": "핸드헬드 카메라가 연한 살구색 티셔츠의 남성 뒤를 따라 올리브나무가 늘어선 공원 흙길을 걷는 트래킹 샷. 4.5~7.0초 창에서 오후 햇빛이 왼쪽 위 나뭇잎 사이로 들어와 5.25~6.75초에 플레어가 깜빡이고 바닥에 얼룩 그늘이 흔들린다. 인물은 시종 뒷모습(뒤통수만)이고 다른 사람은 없으며 0~3초에 있던 녹색 아랍어 표지판도 4초 이후엔 프레임 밖이다. 먼지 낀 흙길·회록색 잎이라 자연스럽게 채도가 낮고 톤이 따뜻하다. 실시간 속도, 걷는 리듬의 완만한 핸드헬드 흔들림. 감점: 도시 보도가 아니라 흙길 공원이고 앞사람이 프레임의 1/3을 차지해 순수 1인칭보다 '뒤따라 걷기'로 읽힌다. 플레어가 너무 세다고 느끼면 7.25~9.75초(플레어 없이 얼룩 그늘만, 8.75초부터 왼쪽 가장자리에 흰옷 입은 앉은 사람이 아주 작게 들어옴)로 인포인트를 옮겨도 된다. 720p(1280x720, 25fps)."
   },
   "alternates": [
     {
-      "mixkit_id": "33503",
-      "file": "/home/user/Code-Zzamtong/promo/assets/footage2/candidates/f18_33503.mp4",
-      "duration": 32.3,
-      "in_point": 2.0,
-      "why": "Back view of a woman walking away down a sunlit autumn forest path; steady and long, but strongly saturated yellow foliage and only 720p; would need desaturation."
+      "mixkit_id": "35361",
+      "file": "/home/user/Code-Zzamtong/promo/assets/footage2/candidates/f18_35361.mp4",
+      "duration": 14.16,
+      "in_point": 2.75,
+      "why": "회색 체크 코트의 남성이 나무 터널 같은 돌길을 걸어 멀어지는 고정 뒷모습 샷. 역광의 노란 햇빛이 잎 사이로 번져 가장 '따뜻하고 조용한' 무드. 2.75~5.25초 동안 얼굴 없이 걸어가고 인물 크기가 적당하다. 감점: 카메라 고정(POV 아님), 정원/숲길이라 '가로수 보도'와 거리가 있고 안개 같은 플레어가 필터처럼 보일 수 있음. 코트 차림이라 계절감 주의. 720p."
     },
     {
-      "mixkit_id": "4893",
-      "file": "/home/user/Code-Zzamtong/promo/assets/footage2/candidates/f18_4893.mp4",
-      "duration": 5.37,
-      "in_point": 1.0,
-      "why": "Legs/feet only walking toward camera on a paved sidewalk with soft warm light; no face, but urban buildings instead of trees and some orange/graffiti color accents."
+      "mixkit_id": "35893",
+      "file": "/home/user/Code-Zzamtong/promo/assets/footage2/candidates/f18_35893.mp4",
+      "duration": 19.16,
+      "in_point": 3.0,
+      "why": "흰 티셔츠 남성이 가로수가 양쪽에 늘어선 공원 포장길을 걸어 멀어지는 고정 뒷모습. 3.0~5.5초에 길 위 햇빛 얼룩 사이를 지나가며 얼굴 없음. 설정(가로수 사이 보도)은 가장 정확하지만 채도가 매우 높은 초록과 평평한 광질이라 탈채도 그레이딩이 필수. 720p."
+    },
+    {
+      "mixkit_id": "32748",
+      "file": "/home/user/Code-Zzamtong/promo/assets/footage2/candidates/f18_32748.mp4",
+      "duration": 14.54,
+      "in_point": 3.0,
+      "why": "검정 트레이닝복 여성의 뒷모습을 낮은 카메라가 따라가는 1080p 트래킹. 나무가 있는 공원길, 얼굴 없음, 채도 낮음. 그러나 흐린 날이라 햇빛 깜빡임이 전혀 없고 운동복이라 '산책' 대신 '운동'으로 읽힘. 1080p가 필요할 때의 대안."
     }
   ],
-  "notes": "Sheets tried: 'walking under trees sunlight' (0 results), 'walking park', 'walking trees', 'feet walking autumn' (0), 'walking autumn', 'feet walking', 'sun trees'. No clip of a paved tree-lined sidewalk with back view/feet and sun flicker was found; 517 is the closest in mood (film-like, low saturation, sun through trees, back view). 104 was downloaded but rejected: dark exposure and the subject turns her face to camera at ~6.5s. If a literal sidewalk is required, cream-paper fallback is acceptable."
+  "notes": "브리프 쿼리: walking under trees sunlight(0), pov walking park path(0), walking tree lined street(1: 8918 자전거 커플), sunlight through leaves walking(0), person walking back view trees(0). 추가 쿼리: walking in park(24), walking through park/walk in the park(24), man walking park(24), woman walking park(24), park path(24), walking path(24), sunny park(24), walking sunny(24), walking nature(24), walking under trees(24), forest walk(24), autumn walk(19), walking alone(20), walking from behind(15), walking away(5), walking sidewalk(24), walking street trees(24), trees sunlight(24, 인물 없는 숲), tree shadows(24), tree lined(13), avenue(24, 차량), boulevard(1), footpath(1), promenade(0), walking forward(4), gimbal(4), steadicam walking(0), walking camera(24), walking shadow(2). 가장 이상적인 클립은 40656 'slowly walking down a path in a park'(큰 가로수 아래 공원길을 천천히 전진하는 POV)였으나 세로 영상(1080x1920)이라 규칙상 불가. 내려받아 확인 후 탈락: 40656(세로), 26820(31709와 같은 촬영분이지만 빨간 다리 난간이 채도 높고 0초에 파란 옷 인물이 가장자리에 걸림), 28827(단풍 숲 데크 POV, 주황 채도 과다, 숲), 24998(초록 터널 아래 멀리 여성, 고정, 채도 높음, 인물 너무 작음), 8312(숲에서 손잡은 아이 둘), 974(텃밭 정원, 나무 캐노피 없음), 49670(빨간 철제 다리). 검색만으로 탈락: 4825/4871/32617/32614/9020/4886(정면 얼굴), 12915/6776/47907/16085/41880(커플), 35909(비 오는 흐린 날), 28749(정면·쇼핑백), 36723/41877(항공), 25009/23434/28879(달리기·개). 채도: 31709는 원본이 이미 저채도라 그레이딩 부담이 적고, 35893은 강한 탈채도가 필요하다. 후보 파일은 candidates/에 모두 보존."
 }

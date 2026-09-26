@@ -4,22 +4,36 @@
   "chosen": {
     "mixkit_id": "35987",
     "title": "feet in high heels of a woman walking down steps",
-    "file": "/home/user/Code-Zzamtong/promo/assets/footage2/f17.mp4",
+    "file": "/home/user/Code-Zzamtong/promo/assets/footage2/candidates/f17_35987.mp4",
     "quality": "720",
     "duration": 15.35,
-    "in_point": 1.4,
-    "fit_score": 7,
+    "in_point": 7.25,
+    "fit_score": 5.5,
     "faces": "none",
-    "why": "Outdoor stone steps in bright daylight, low side angle on feet only, continuous descent 0-10s with steady step rhythm; low-saturation stone/sky palette. Only miss: high heels read slightly dressier than a soft morning POV."
+    "why": "f03에 쓴 것과 같은 클립의 뒷부분(7.25~10.25초)이다. 낮은 측면 앵글로 돌계단과 발만 보이고 허벅지 위는 잘려 얼굴이 전혀 없다. 7.25초에 한 발이 계단에 닿고 8.0초, 8.9초, 9.7초에 다음 발이 차례로 내려와 3초 동안 멈춤 없이 마지막 세 계단을 내려간다. 10.25초 직후 보도에 닿기 때문에 '계단을 다 내려온다'는 도착감이 생기고, f03(0.6초, 윗계단)과 같은 앵글·같은 신발이라 아침/오후의 라임이 된다. 낮은 늦은 오후 햇빛, 회갈색 화강암 계단, 뒤 건물은 아웃포커스로 채도가 낮다. 카메라는 발을 따라가는 느린 핸드헬드. 감점: 톱다운 POV가 아니고 검정 스트랩 스틸레토 힐이라 '평범한 신발'이 아니다. f03과 같은 소스라 중복으로 느껴질 수 있으니 f03보다 타이트하게 센터 크롭하고 같은 그레이딩(탈채도+웜)을 적용할 것을 권함. 720p(1280x720, 29.97fps)라 1080p 타임라인에서는 150% 확대 필요."
   },
   "alternates": [
     {
-      "mixkit_id": "4893",
-      "file": "/home/user/Code-Zzamtong/promo/assets/footage2/candidates/f17_4893.mp4",
-      "duration": 5.37,
-      "in_point": 0.6,
-      "why": "Frontal knee-down walking shot, sneakers, bright daylight sidewalk, no face; not stairs (flat street) so only a fallback if stairs are dropped."
+      "mixkit_id": "15134",
+      "file": "/home/user/Code-Zzamtong/promo/assets/footage2/candidates/f17_15134.mp4",
+      "duration": 24.66,
+      "in_point": 2.5,
+      "why": "같은 촬영분(같은 검정 스트랩 힐, 같은 키예프 광장 계단)을 더 넓게 잡은 측면 로우앵글. 2.5~5.5초에 두 계단을 연속으로 내려가고 24초 내내 멈추지 않는다. 얼굴 없음(허벅지 위 크롭). f03과 소스가 달라 중복 우려가 없고 신발 연속성은 유지된다. 감점: 치마·검정 토트백까지 보여 '비즈니스우먼' 스톡 느낌이 강하고, 파란 하늘과 상단 왼쪽의 노란 깃발이 채도가 튀어 상단 5~8% 크롭이 필요하다. 720p."
+    },
+    {
+      "mixkit_id": "25156",
+      "file": "/home/user/Code-Zzamtong/promo/assets/footage2/candidates/f17_25156.mp4",
+      "duration": 10.56,
+      "in_point": 0.0,
+      "why": "이탈리아 구시가지 돌계단을 여성이 멀리서 내려오는 고정 와이드샷. 0~3초 구간은 인물이 작아 얼굴 식별이 안 되지만 4.5초부터 얼굴이 커지고 7.5초에는 정면 클로즈업이 되므로 0.0~3.0 창만 가능. 1인칭이 아니라 3인칭 관찰 샷이라 브리프의 POV 감정과 맞지 않는 비상용. 햇빛/그늘 대비가 강함. 720p."
+    },
+    {
+      "mixkit_id": "28823",
+      "file": "/home/user/Code-Zzamtong/promo/assets/footage2/candidates/f17_28823.mp4",
+      "duration": 26.06,
+      "in_point": 4.5,
+      "why": "분홍빛 화강암 계단을 여러 사람의 다리가 오르내리는 로우앵글. 4.5~7.5초에 청바지+갈색 부츠, 검정 레깅스+갈색 힐부츠가 차례로 내려간다. 얼굴 없음. 그러나 인파, 강한 정오 햇빛, 채도 높은 청바지 때문에 '조용한' 톤과 어긋난다. 720p."
     }
   ],
-  "notes": "Searched: walking down stairs feet, stairs, walking down steps, feet walking, legs stairs, staircase, going down stairs. Mixkit has almost no feet-only outdoor stair descents. Rejected: 770 (face visible, indoor black stair), 40755 (athletic man, face, stadium), 1297/22223/28823 (faces or ascending). 35987 source is 720p (Mixkit max for this clip). Its descent pauses on a landing at ~11-12.5s, so keep the cut inside 0-10s; 1.4-4.6s window recommended."
+  "notes": "브리프 쿼리: walking down stairs outdoor(1), feet stairs outside(0), pov walking down steps(0), descending stairs feet(0), legs walking down steps(1). 추가 쿼리: walking down stairs(19), stairs(24), staircase(24), steps(24), walking feet(24), legs walking(20), footsteps(2), shoes walking(9), sneakers walking(3), going down stairs(7), downstairs(3), down the stairs(24), down stairs(24), stone steps(1), outdoor stairs(9), concrete stairs(0), climbing stairs(4), stairs walking/walking stairs(18), feet steps(7), walking down steps(4), steps down/step down(24), city stairs(18), stairs park(1), steps outdoor(9), shoes stairs(1), boots stairs(0), close up feet(24), top view feet(1), pov(24, 전부 운전·실내), first person(8), point of view(24). Mixkit에는 '내 발을 내려다보는' 톱다운 계단 POV가 없고 야외 계단을 내려가는 발 클립 자체가 35987/15134(같은 촬영분) 둘뿐이다. 내려받아 확인 후 탈락: 40758(스타디움 계단을 뛰어 올라가는 남성, 5초부터 뒷모습 전신, 노란 좌석 채도 높음), 40755(운동하는 남성 측면, 얼굴 노출), 27771(실내 로프트 나무 계단, 이후 얼굴 클로즈업), 22148(실내 대리석 계단, 보조기 찬 아이가 올라감), 25156(원경 3인칭, 4.5초 이후 얼굴), 28823(인파·강한 햇빛). 검색만으로 탈락: 29964(비즈니스맨 3명 얼굴), 770(얼굴·빨간 벽, f03 노트 참조), 14615(실내 상행), 8728(청소), 20017(해변 모래 계단 상행), 36583/398/702/18211(춤·흡연·얼굴·패션). 신발 색: 35987·15134 모두 검정 스트랩 스틸레토 힐(맨다리), 28823은 갈색 부츠/검정 구두 혼재, 25156은 밝은 청바지에 짙은 앵클부츠. 선택 근거: 브리프가 'f03과 같은 앵글이면 가장 좋음'이라 했고 f03이 35987(0.6~3.6초)이므로 같은 클립의 마지막 계단 구간(7.25~10.25초)을 골라 앵글·신발을 정확히 맞췄다. 중복이 부담스러우면 대안 1의 15134(2.5초)로 바꾸면 같은 신발·같은 계단의 다른 앵글이 된다. 후보 파일은 candidates/에 모두 보존(f17_35987, f17_28823은 f03 후보 파일을 복사한 동일 파일)."
 }
