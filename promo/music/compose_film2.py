@@ -4,7 +4,7 @@
 
 score:
 { "bpm": 84, "duration": 55.0, "key_root": "D",
-  "sections": [ {"start":0,"end":8,"pattern":"intro"}, ... ],   # intro | theme | movement | swell | resolve | silence
+  "sections": [ {"start":0,"end":8,"pattern":"intro"}, ... ],   # ambient | walk | intro | theme | movement | swell | resolve | silence
   "events":   [ {"t": 3.0, "type": "melody", "note": "F#5", "vel": 0.8, "dur": 1.6}, {"t":40,"type":"bell"}, {"t":30,"type":"swell","len":2.0}, {"t":45,"type":"hit_soft"} ] }
 진행은 I, V, vi, IV (장조). 마디마다 코드가 바뀐다.
 """
@@ -51,6 +51,22 @@ def render(score):
             def _in(t): return t < s1 - 1e-6
             if pat == "silence":
                 continue
+            if pat == "ambient":
+                # 패드와 공간감만. 비트 없음. 4마디마다 피아노 한 음
+                pad.add(S.warm_pad(ch["pad"], bar + 1.5, cutoff=520, a=2.0, r=3.0), t_bar, gain=0.24 * sg)
+                if b % 4 == 0:
+                    piano.add(S.piano(ch["arp"][2], 3.5, vel=0.4), t_bar + beat, gain=0.7 * sg)
+            if pat == "walk":
+                # 발소리 같은 부드러운 킥이 걷는 속도(약 96 BPM 기준 2박마다)로, 좌우 번갈아
+                pad.add(S.warm_pad(ch["pad"], bar + 1.5, cutoff=650, a=1.5, r=2.5), t_bar, gain=0.26 * sg)
+                step = 60.0 / 96.0
+                k = 0
+                tk = t_bar
+                while tk < min(t_bar + bar, s1) - 1e-6:
+                    perc.add(KK, tk, gain=0.32 * sg, pan=-0.35 if k % 2 == 0 else 0.35)
+                    tk += step; k += 1
+                if b % 2 == 1:
+                    piano.add(S.piano(ch["arp"][0], 3.0, vel=0.5), t_bar, gain=0.7 * sg)
             if pat == "intro":
                 pad.add(S.warm_pad(ch["pad"], bar + 1.5, cutoff=600, a=1.6, r=2.5), t_bar, gain=0.28 * sg)
                 if b % 2 == 0:

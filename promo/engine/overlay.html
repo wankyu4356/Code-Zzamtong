@@ -118,6 +118,7 @@
     const el = document.createElement("div");
     el.className = "anim text";
     el.textContent = s.text;
+    if (s.font) el.style.fontFamily = `"${s.font}", "Pretendard", "Noto Sans CJK KR", sans-serif`;
     Object.assign(el.style, {
       fontSize: s.size + "px", fontWeight: String(s.weight), color: s.color,
       letterSpacing: s.letter_spacing + "em", lineHeight: String(s.line_height),
