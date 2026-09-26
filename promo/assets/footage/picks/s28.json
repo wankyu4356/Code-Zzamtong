@@ -1,0 +1,32 @@
+{
+  "shot_id": "s28",
+  "no_good_match": false,
+  "chosen": {
+    "mixkit_id": "15134",
+    "title": "businesswoman walking down stairs",
+    "file": "/home/user/Code-Zzamtong/promo/assets/footage/s28.mp4",
+    "quality": "720",
+    "duration": 24.66,
+    "in_point": 1.4,
+    "fit_score": 6.5,
+    "faces": "none (legs only, low angle side view)",
+    "why": "Low-angle side shot of a woman's legs (calf to thigh, knees in frame) descending outdoor stone steps in natural daylight, city background. At 1.4s the front foot lands on the lower step with the rear knee bent, so 'knee + going down stairs' reads instantly; the next 0.7s covers weight transfer and the following step. No faces, no text/logos, 16:9. Downsides: only 720p available from Mixkit, heels/skirt give it a slight fashion-stock look, and the knee is part of a legs shot rather than a tight knee close-up."
+  },
+  "alternates": [
+    {
+      "mixkit_id": "28823",
+      "file": "/home/user/Code-Zzamtong/promo/assets/footage/candidates/s28_28823.mp4",
+      "duration": 26.06,
+      "in_point": 2.5,
+      "why": "Tight close-up of many legs/knees on stone steps (suits, then jeans) in hard sunlight; knees are very readable and there are no faces, but the crowd is walking UP, not down. Usable if direction does not matter; 720p."
+    },
+    {
+      "mixkit_id": "27771",
+      "file": "/home/user/Code-Zzamtong/promo/assets/footage/candidates/s28_27771.mp4",
+      "duration": 59.83,
+      "in_point": 1.3,
+      "why": "Barefoot woman in jeans descending open wooden stairs, shot from below; descending motion is correct and no face, but the strong orange indoor grade, barefoot look and upward camera angle make it feel less like urban daily life and the knee is not prominent. 720p."
+    }
+  ],
+  "notes": "Queries tried: 'walking down stairs' (19), 'legs stairs close up' (0), 'knee pain' (0), 'knee close up' (20, irrelevant: feet/bikes/sports), 'feet stairs' (3, escalators), 'walking downstairs' (3), plus 'stairs' (20). Mixkit has no true knee-only close-up on stairs; 49513 (heels running up stairs, rear view) was downloaded and rejected for going up and showing feet only. All four candidates were only available in 720p. Chosen 15134 in_point 1.4 (front foot landing on lower step, knee bent); alternative landing beat at 3.4-3.5s in the same clip if a different framing is wanted."
+}

@@ -1,0 +1,32 @@
+{
+  "shot_id": "s10",
+  "no_good_match": false,
+  "chosen": {
+    "mixkit_id": "39854",
+    "title": "exhausted man working in an office overtime",
+    "file": "/home/user/Code-Zzamtong/promo/assets/footage/s10.mp4",
+    "quality": "1080",
+    "duration": 12.012,
+    "in_point": 0.3,
+    "fit_score": 7,
+    "faces": "avoid",
+    "why": "Over-the-shoulder back view of a man at a desktop monitor: back rounded, head pushed forward toward the screen, hands on keyboard. 0.3-1.5s is a steady hunched typing pose so the word reads on the first frame; no face visible; 1080p 16:9; no logos or watermarks (screen shows only generic UI). Downsides: dark, blue-tinted night office rather than natural light (saturation will be pulled down in grading), slightly handheld."
+  },
+  "alternates": [
+    {
+      "mixkit_id": "24344",
+      "file": "/home/user/Code-Zzamtong/promo/assets/footage/candidates/s10_24344.mp4",
+      "duration": 14.68,
+      "in_point": 3.0,
+      "why": "3/4 side view of a man leaning into a desktop monitor in a night office; hunched posture reads but the face is visible and it is 720p only."
+    },
+    {
+      "mixkit_id": "24063",
+      "file": "/home/user/Code-Zzamtong/promo/assets/footage/candidates/s10_24063.mp4",
+      "duration": 25.64,
+      "in_point": 0.8,
+      "why": "Frontal wide shot; at 0.8-2.0s the worker leans forward into the monitor, then stretches. Weak fit: face-on, 720p, reads 'tired' more than 'turtle neck'."
+    }
+  ],
+  "notes": "Mixkit discover pages exist only for short tags, so the multi-word queries (office worker back view computer / hunched over computer / neck pain office / bad posture desk) returned nothing; 'tired office worker computer', 'neck pain' and 'working late' produced results. 'neck pain' results were clinic/physio clips with no monitor, so they were skipped. In-point 0.3 + 1.2 + 0.1 = 1.6 <= 12.01."
+}

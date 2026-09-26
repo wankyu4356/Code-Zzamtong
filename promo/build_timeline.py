@@ -17,7 +17,7 @@ GRADE = {"contrast": 1.05, "saturation": 0.9, "brightness": 0.0, "gamma": 1.0}
 # 글자 규격 (9장 크기 규칙)
 BIG = dict(weight=900, letter_spacing=-0.03, color="#fff", shadow=False)
 CAP = dict(size=28, weight=400, letter_spacing=0, color="rgba(255,255,255,0.6)", shadow=False, anim_in="none", anim_out="cut")
-QUOTE = dict(size=56, weight=500, letter_spacing=-0.01, line_height=1.35, max_width=1440, color="#fff", shadow=False)
+QUOTE = dict(size=60, weight=500, letter_spacing=-0.01, line_height=1.35, max_width=1440, color="#fff", shadow=False)
 
 
 def footage(shot_id):
@@ -84,13 +84,12 @@ def shot(sid, start, end, bg, texts=None, images=None, flashes=None):
 
 
 def quote(text, start, end, caption, y=None, first_slam=True):
-    """리뷰 인용: 본문 56px + 캡션 28px."""
+    """리뷰 인용: 본문 60px(세로 중앙) + 캡션 30px. 두 줄이면 캡션을 조금 더 내린다."""
     q = dict(QUOTE)
-    q.update(dict(text=text, start=start, end=end, anim_in="slam" if first_slam else "fade", hit_scale=1.12, in_frames=3, anim_out="cut", align="center"))
-    if y is not None:
-        q["y"] = y
+    q.update(dict(text=text, start=start, end=end, anim_in="slam" if first_slam else "fade", hit_scale=1.12, in_frames=3, anim_out="cut", align="center", y="center"))
+    lines = text.count("\n") + 1
     c = dict(CAP)
-    c.update(dict(text=caption, start=start, end=end, y=y + 130 if isinstance(y, (int, float)) else 700, anim_in="fade", in_frames=6))
+    c.update(dict(text=caption, start=start, end=end, size=30, y=640 + 42 * lines, anim_in="fade", in_frames=6))
     return [q, c]
 
 
@@ -110,7 +109,7 @@ shots.append(shot("s08", 6.0, 8.0, {"type": "black"}, [T("어디로 가야 하�
 shots.append(shot("s09", 8.0, 9.0, clip_bg("s09", amount=0.04), [T("수능 앞, 목.", 8.0, 9.0, 170, in_frames=3, shadow=True)]))
 shots.append(shot("s10", 9.0, 10.0, clip_bg("s10", amount=0.04), [T("모니터 앞, 거북목.", 9.0, 10.0, 170, in_frames=3, shadow=True)]))
 shots.append(shot("s11", 10.0, 11.0, clip_bg("s11", amount=0.04), [T("계단 앞, 무릎.", 10.0, 11.0, 170, in_frames=3, shadow=True)]))
-shots.append(shot("s12", 11.0, 12.0, photo_bg("doctor_portrait_16x9.jpg", brightness=-0.3), [T("10년, 일대일로.", 11.0, 12.0, 170, in_frames=3, shadow=True)]))
+shots.append(shot("s12", 11.0, 12.0, photo_bg("doctor_portrait_16x9.jpg", brightness=-0.3), [T("10년, 일대일로.", 11.0, 12.0, 170, in_frames=3, shadow=True, x="left", align="left")]))
 shots.append(shot("s13", 12.0, 13.0, photo_bg("reception_16x9.jpg", brightness=-0.3), [T("짧은 시간이라도,", 12.0, 13.0, 170, in_frames=3, shadow=True)]))
 shots.append(shot("s14", 13.0, 14.0, {"type": "black"}, [T("누구보다, 귀 기울여.", 13.0, 14.0, 170, in_frames=3)]))
 shots.append(shot("s15", 14.0, 15.0, {"type": "black"}, [T("몸은 원래,", 14.0, 15.0, 170, in_frames=3)]))
@@ -131,14 +130,14 @@ for sid, w in [("s26", "목"), ("s27", "어깨"), ("s28", "무릎"), ("s29", "�
 # 브레이크: 리뷰 한 줄 120px
 shots.append(shot("s30", 22.0, 24.0, {"type": "black"},
                   [T("진작 올걸 그랬어요!", 22.0, 24.0, 120, weight=700, anim_in="slam", hit_scale=1.12, in_frames=3),
-                   dict(CAP, text="네이버 방문자 리뷰 · vqfc**** · 2026.07.16 방문 · 영수증 인증", start=22.0, end=24.0, y=690)]))
+                   dict(CAP, text="네이버 방문자 리뷰 · vqfc**** · 2026.07.16 방문 · 영수증 인증", start=22.0, end=24.0, size=30, y=700)]))
 # 리뷰 그루브 (검은 화면, 인용 교체는 앞 인용 cut 뒤 새 인용 slam)
 shots.append(shot("s31", 24.0, 26.5, {"type": "black"},
-                  quote("딱 필요한 치료만 권유해 주시더라구요.", 24.0, 26.5, "네이버 방문자 리뷰 · ngyz**** · 2026.07.29 방문 · 영수증 인증", y=470)))
+                  quote("딱 필요한 치료만 권유해 주시더라구요.", 24.0, 26.5, "네이버 방문자 리뷰 · ngyz**** · 2026.07.29 방문 · 영수증 인증")))
 shots.append(shot("s32", 26.5, 29.5, {"type": "black"},
-                  quote("선생님이 원인 파악을 명확하게 해주셔서\n속이 다 시원했어요.", 26.5, 29.5, "네이버 방문자 리뷰 · mtzu**** · 2026.09.06 방문 · 영수증 인증", y=430)))
+                  quote("선생님이 원인 파악을 명확하게 해주셔서\n속이 다 시원했어요.", 26.5, 29.5, "네이버 방문자 리뷰 · mtzu**** · 2026.09.06 방문 · 영수증 인증")))
 shots.append(shot("s33", 29.5, 32.0, {"type": "black"},
-                  quote("의사선생님이 완전 친절하세요!", 29.5, 32.0, "네이버 방문자 리뷰 · 눅눅해져**** · 2026.02.08 방문 · 영수증 인증", y=470)))
+                  quote("의사선생님이 완전 친절하세요!", 29.5, 32.0, "네이버 방문자 리뷰 · 눅눅해져**** · 2026.02.08 방문 · 영수증 인증")))
 # 본질 세 줄
 shots.append(shot("s34", 32.0, 33.0, {"type": "black"}, [T("먼저 듣고,", 32.0, 33.0, 170, in_frames=3)]))
 shots.append(shot("s35", 33.0, 34.0, {"type": "black"}, [T("왜 아픈지 말하고,", 33.0, 34.0, 170, in_frames=3)]))
@@ -154,7 +153,7 @@ shots.append(shot("s44", 39.0, 40.0, photo_bg("building_16x9.jpg", brightness=-0
                   [T("일", 39.0, 40.0, 320, anim_in="slam", hit_scale=1.15, in_frames=3, shadow=True)],
                   flashes=[{"at": 39.0, "frames": 2, "color": "#fff", "opacity": 0.9}]))
 # 일요일 리뷰 (건물 사진 유지, 밝기 30%)
-q = quote("담에는 어디 아프면 꼭 여기 가려구요.", 40.0, 43.0, "네이버 방문자 리뷰 · Sept**** · 2025.02.09 일요일 방문 · 예약 인증 · 발췌", y=470)
+q = quote("담에는 어디 아프면 꼭 여기 가려구요.", 40.0, 43.0, "네이버 방문자 리뷰 · Sept**** · 2025.02.09 일요일 방문 · 예약 인증 · 발췌")
 q[0]["anim_out"] = "fade"; q[0]["out_frames"] = 8; q[1]["anim_out"] = "fade"; q[1]["out_frames"] = 8
 shots.append(shot("s45", 40.0, 43.0, photo_bg("building_16x9.jpg", brightness=-0.7, amount=0.04), q))
 # 엔딩

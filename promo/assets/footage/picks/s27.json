@@ -1,0 +1,32 @@
+{
+  "shot_id": "s27",
+  "no_good_match": false,
+  "chosen": {
+    "mixkit_id": "50759",
+    "title": "a young man stretches his arms on the balcony",
+    "file": "/home/user/Code-Zzamtong/promo/assets/footage/s27.mp4",
+    "quality": "1080",
+    "duration": 13.51,
+    "in_point": 3.4,
+    "fit_score": 6.5,
+    "faces": "frontal, but backlit and small in a wide shot; acceptable (faces=ok)",
+    "why": "Cross-body shoulder stretch on a rooftop in natural daylight: at 3.4s the right arm locks across the chest with the left hand gripping the elbow, so 'shoulder' reads on the first frame and the hold carries the 0.7s cut. 16:9 1080p, no text/logo/watermark, muted natural palette (sky/grey terrace) that will grade down easily. Demerits: wide full-body framing keeps the subject small, and it is a shoulder stretch rather than a literal shoulder roll."
+  },
+  "alternates": [
+    {
+      "mixkit_id": "40761",
+      "file": "/home/user/Code-Zzamtong/promo/assets/footage/candidates/s27_40761.mp4",
+      "duration": 11.42,
+      "in_point": 4.0,
+      "why": "Medium frontal shot of a cross-body shoulder stretch in a park, golden natural light; the most legible shoulder gesture of all candidates. Held back because the sports bra band carries clearly readable 'ACTIVE ACTIVE' brand text across the frame. Side-profile version of the same stretch at 0.0-2.5s also usable."
+    },
+    {
+      "mixkit_id": "31407",
+      "file": "/home/user/Code-Zzamtong/promo/assets/footage/candidates/s27_31407.mp4",
+      "duration": 8.47,
+      "in_point": 2.5,
+      "why": "Woman from behind at a bedroom window, hands clasped behind neck with elbows out (neck/shoulder loosening). No text, no face. Weaker read of 'shoulder' and a warm, slightly blown-out look; home rather than city setting."
+    }
+  ],
+  "notes": "All four supplied queries ('shoulder stretch', 'shoulder pain', 'rolling shoulders office', 'stretching shoulders') returned 0 results because mixkit.py builds a single Mixkit /discover/<slug>/ URL and multi-word slugs 404. Worked around with single-word queries 'stretching' (20 hits), 'shoulder' (only over-the-shoulder shots, useless) and 'neck' (20 hits). Downloaded 52120, 40761, 50759, 31407 (all 1080p). 52120 (woman on city street) turned out to be a wrist stretch, forward bends and side bends; the only shoulder-ish beat is her brushing hair back at ~22s, so rejected. No candidate shows a literal shoulder ROLL; the chosen clip is a cross-body shoulder stretch, which reads 'shoulder' faster than a subtle roll would at 0.7s. An un-downloaded lead if a literal roll is required: mixkit 14643 'man with neck pain' (back view, black tank, studio) from the 'neck' sheet, and 33744 'shirtless man with neck pain' (bare back/shoulders). Second usable in-point on the chosen clip: 11.4s (mirror-side stretch)."
+}

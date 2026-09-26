@@ -1,0 +1,32 @@
+{
+  "shot_id": "s11",
+  "no_good_match": false,
+  "chosen": {
+    "mixkit_id": "48790",
+    "title": "elderly person gripping the handle of their walking cane",
+    "file": "/home/user/Code-Zzamtong/promo/assets/footage/s11.mp4",
+    "quality": "720",
+    "duration": 8.04,
+    "in_point": 4.7,
+    "fit_score": 5.5,
+    "faces": "none (hands-only close-up)",
+    "why": "노인의 두 손이 지팡이 손잡이를 쥔 클로즈업. 4.7s에서 윗손이 손잡이를 다시 움켜쥐는 동작이 시작되고 4.8~5.9s에 꽉 쥔 채 멈춰 있어 '멈춰서 몸을 지탱한다'가 즉시 읽힌다. 얼굴 없음, 로고/글자 없음, 저채도 자연광 톤. 다만 계단·난간이 아니라 지팡이라 스펙의 '계단 아래 난간' 요소는 빠져 있다."
+  },
+  "alternates": [
+    {
+      "mixkit_id": "28823",
+      "file": "/home/user/Code-Zzamtong/promo/assets/footage/candidates/s11_28823.mp4",
+      "duration": 26.06,
+      "in_point": 3.5,
+      "why": "야외 석조 계단을 오르는 발·다리만 나오는 로우앵글(얼굴 없음). 계단 요소는 있으나 정장 차림의 젊은 사람들이 빠르게 걷는 장면이라 '할머님·멈춤'이 읽히지 않는다. 계단 컨텍스트가 꼭 필요할 때 인서트용."
+    },
+    {
+      "mixkit_id": "22223",
+      "file": "/home/user/Code-Zzamtong/promo/assets/footage/candidates/s11_22223.mp4",
+      "duration": 15.08,
+      "in_point": 3.5,
+      "why": "호텔 계단을 오르는 남성 다리 뒷모습(얼굴 없음). 계단은 있으나 실내 인공광, 정장 남성이라 톤과 인물이 맞지 않는다."
+    }
+  ],
+  "notes": "Mixkit에 '노인+계단/난간' 조합 클립은 검색되지 않았다(elderly woman stairs 3건 모두 젊은 여성, senior stairs handrail/old woman walking slowly/senior woman walking 0건). 48790은 계단 대신 지팡이로 '멈춰서 지탱함'을 대신 표현하는 차선책이며 720p만 제공된다. 계단 요소가 필수라면 스펙대로 검은 화면 처리를 권한다. 4번째 후보 48789(무릎 위에 얹은 노인 손)는 정적이고 '멈춤/지탱'이 읽히지 않아 제외했으나 candidates 폴더에 남겨 두었다."
+}
