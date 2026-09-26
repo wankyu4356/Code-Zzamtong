@@ -422,6 +422,14 @@
           tkey += `:w${wi}=${wop},${wdy}`;
         });
       }
+      if (typeof it.spec.y === "number" && typeof it.spec.y_to === "number" && typeof it.spec.move_at === "number") {
+        // 세로 위치 이동: move_at부터 move_frames 동안 y에서 y_to로 (ease-out)
+        const mf = toFrame(it.spec.move_at), mn = it.spec.move_frames || 12;
+        const p = f < mf ? 0 : clamp01((f - mf + 1) / mn);
+        const top = r4(it.spec.y + (it.spec.y_to - it.spec.y) * easeOut(p));
+        it.wrap.style.top = top + "px";
+        tkey += `:y${top}`;
+      }
       const a = animIn(it.spec.anim_in, f - it.sf, it.spec);
       const opacity = r4(a.opacity * animOut(it.spec.anim_out, it.ef - f, it.spec) * (it.maxOpacity ?? 1));
       // drift_scale: 요소가 보이는 동안 선형으로 커지는 느린 줌 (예: 0.03이면 1.00에서 1.03)

@@ -74,12 +74,29 @@ def bg_of(kind):
     raise ValueError(kind)
 
 
-def word_times(text, start, step=0.11):
-    n = len([w for w in text.replace("\n", " ").split(" ") if w])
-    return [round(start + i * step, 4) for i in range(n)]
+def word_times(text, start, step=0.25, line_delay=0.5):
+    """단어별 등장 시각. 줄이 바뀌면 line_delay 뒤에 다음 줄이 시작한다."""
+    out = []
+    t0 = start
+    for li, line in enumerate(text.split("\n")):
+        words = [w for w in line.split(" ") if w]
+        base = start + 0.05 + li * line_delay
+        for i, _ in enumerate(words):
+            out.append(round(base + i * step, 4))
+    return out
+
+
+def anim_for(sound):
+    if sound == "hit":
+        return dict(anim_in="hit", in_frames=3, hit_scale=1.08)
+    if sound == "silence":
+        return dict(anim_in="fade", in_frames=9)
+    return dict(anim_in="fade", in_frames=6)
 
 
 def build(script):
+    END = round(sum(float(sc["seconds"]) for sc in script["screens"]), 3)
+    src_label = script.get("quote_source", "네이버 방문자 리뷰")
     shots = []
     t = 0.0
     for sc in script["screens"]:
@@ -88,25 +105,45 @@ def build(script):
         a, b = t, t + secs
         a_f, b_f = round(round(a * FPS) / FPS, 6), round(round(b * FPS) / FPS, 6)
         bg = bg_of(sc["bg"])
-        texts = []
+        texts, images = [], []
         text = sc["text"].replace("\\n", "\n")
         motion = sc.get("motion", "cut")
-        if motion == "quote":
-            body, _, src = text.partition("\n")
-            body = body.strip().strip('"“”')
-            q = dict(QUOTE, text=f"“{body}”", start=a_f, end=b_f, color=tcolor(sc["bg"]), accent_color=accent(sc["bg"]))
-            q["size"] = 108 if len(body) <= 16 else (92 if len(body) <= 22 else (80 if len(body) <= 30 else 68))
+        role = sc.get("role")
+        if role == "brand":
+            # 브랜드 한 줄: 화면 중앙에서 시작해 다음 화면에서 위로 물러나며 끝까지 남는다
+            size = 220
+            y0 = int(540 - size * 1.14 / 2)
+            texts.append(dict(HEAD, text=text, start=a_f, end=END, size=size, color=INK, accent_color=ACCENT, y=y0, y_to=210, move_at=b_f, move_frames=14,
+                              anim_in="fade", in_frames=9))
+        elif role == "logo":
+            images.append({"src": os.path.join(HOSP, "logo_color.png"), "start": a_f, "end": END, "width": 720, "y": 520, "anim_in": "fade", "in_frames": 12, "anim_out": "none"})
+            texts.append(dict(SUB, text=text, start=a_f + 0.4, end=END, size=48, weight=500, color=INK, y=745, anim_in="fade", in_frames=10))
+        elif role == "info":
+            l1, _, l2 = text.partition("\n")
+            texts.append(dict(SUB, text=l1, start=a_f, end=END, size=48, weight=500, color=INK, y=850, anim_in="fade", in_frames=8))
+            texts.append(dict(SUB, text=l2, start=a_f + 0.15, end=END, size=64, weight=600, letter_spacing=0.02, color=INK, y=916, anim_in="fade", in_frames=8))
+        elif motion == "quote":
+            body = text.strip().strip('"“”')
+            lines = body.split("\n")
+            longest = max(len(x) for x in lines)
+            size = 108 if longest <= 12 else (96 if longest <= 15 else (84 if longest <= 19 else 72))
+            q = dict(QUOTE, text=f"“{body}”", start=a_f, end=b_f, size=size, color=tcolor(sc["bg"]), accent_color=accent(sc["bg"]), **anim_for(sc.get("sound")))
             texts.append(q)
-            texts.append(dict(SRC, text=(src.strip() or "네이버 방문자 리뷰"), start=a_f + 0.35, end=b_f, color=tcolor(sc["bg"], soft=True),
-                              y=int(540 + q["size"] * 1.28 * (1 if len(body) <= 22 else 2) / 2 + 64)))
+            texts.append(dict(SRC, text=src_label, start=a_f + 0.35, end=b_f, color=tcolor(sc["bg"], soft=True),
+                              y=int(540 + size * 1.28 * len(lines) / 2 + 56)))
         else:
-            h = dict(HEAD, text=text, start=a_f, end=b_f, size=head_size(text), color=tcolor(sc["bg"]), accent_color=accent(sc["bg"]))
+            h = dict(HEAD, text=text, start=a_f, end=b_f, size=head_size(text), color=tcolor(sc["bg"]), accent_color=accent(sc["bg"]), **anim_for(sc.get("sound")))
             if sc["bg"] == "photo_doctor":
-                h.update(x=140, align="left", max_width=1000)
-            if motion == "words":
-                h.update(anim_in="none", words=word_times(text, a_f + 0.05), word_frames=8)
+                h.update(x=140, align="left", max_width=1000, color=INK, shadow=False, size=min(h["size"], 150), y=int(540 - min(h["size"], 150) * 1.14))
+            if sc["bg"] == "photo_reception":
+                h.update(x=200, align="left", max_width=1400, size=min(h["size"], 128), y=520, shadow=True)
+            if motion in ("words", "stack"):
+                step = 0.5 if len(text.replace("\n", " ").split()) <= 2 else 0.25
+                h.update(anim_in="none", words=word_times(text, a_f, step=step, line_delay=0.5), word_frames=8)
             texts.append(h)
         shot = {"id": sid, "start": a_f, "end": b_f, "bg": bg, "texts": texts, "_sound": sc.get("sound", "beat"), "_motion": motion, "_note": sc.get("note", "")}
+        if images:
+            shot["images"] = images
         shots.append(shot)
         t = b_f
     return shots, t

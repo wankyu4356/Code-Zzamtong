@@ -1,0 +1,26 @@
+{
+ "title": "듣는 정형외과",
+ "bpm": 120,
+ "brand_line": "듣는 정형외과.",
+ "screens": [
+  {"no": 1,  "text": "허리든, 무릎이든.",                     "bg": "white",           "seconds": 2.0, "motion": "words", "sound": "beat"},
+  {"no": 2,  "text": "언제부터\n어떻게 아픈지.",              "bg": "white",           "seconds": 2.5, "motion": "stack", "sound": "beat"},
+  {"no": 3,  "text": "다 말씀하세요.",                        "bg": "white",           "seconds": 1.5, "motion": "cut",   "sound": "hit"},
+  {"no": 4,  "text": "다 *듣습니다.*",                        "bg": "white",           "seconds": 2.5, "motion": "cut",   "sound": "silence"},
+  {"no": 5,  "text": "서두르지 않고\n한 번에 한 분.",         "bg": "photo_doctor",    "seconds": 3.5, "motion": "stack", "sound": "hit"},
+  {"no": 6,  "text": "듣고 나서 진찰합니다.",                 "bg": "black",           "seconds": 2.0, "motion": "cut",   "sound": "beat"},
+  {"no": 7,  "text": "왜 아픈지\n보여드립니다.",              "bg": "black",           "seconds": 3.0, "motion": "stack", "sound": "beat"},
+  {"no": 8,  "text": "모형으로까지 설명해주셔서\n이해가 쏙쏙 됐어요.", "bg": "black",  "seconds": 3.5, "motion": "quote", "sound": "beat"},
+  {"no": 9,  "text": "치료는 그다음에 정합니다.",             "bg": "black",           "seconds": 2.0, "motion": "cut",   "sound": "beat"},
+  {"no": 10, "text": "필요한 치료부터 차근차근.",             "bg": "black",           "seconds": 2.0, "motion": "cut",   "sound": "hit"},
+  {"no": 11, "text": "필요한 치료만 딱 해주셔서\n안심하고 다녔습니다.", "bg": "black", "seconds": 4.0, "motion": "quote", "sound": "beat"},
+  {"no": 12, "text": "의사선생님이\n완전 친절하세요!",         "bg": "black",           "seconds": 3.0, "motion": "quote", "sound": "beat"},
+  {"no": 13, "text": "낙성대역 4번 출구\n걸어서 1분.",         "bg": "photo_reception", "seconds": 3.0, "motion": "stack", "sound": "beat"},
+  {"no": 14, "text": "토요일도 진료합니다.\n9시부터 오후 2시까지.", "bg": "photo_reception", "seconds": 3.5, "motion": "stack", "sound": "beat"},
+  {"no": 15, "text": "목이든, 어깨든.",                       "bg": "white",           "seconds": 2.0, "motion": "cut",   "sound": "swell"},
+  {"no": 16, "text": "*듣는* 정형외과.",                      "bg": "white",           "seconds": 3.0, "motion": "cut",   "sound": "silence", "role": "brand"},
+  {"no": 17, "text": "김철신정형외과의원",                    "bg": "white",           "seconds": 2.5, "motion": "cut",   "sound": "hit",     "role": "logo"},
+  {"no": 18, "text": "낙성대역 4번 출구 · 주차 무료\n02-872-3301", "bg": "white",       "seconds": 4.0, "motion": "cut",   "sound": "beat",    "role": "info"}
+ ],
+ "quote_source": "네이버 방문자 리뷰 · 영수증 인증 · 발췌"
+}
