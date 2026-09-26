@@ -136,6 +136,15 @@ def typing_card(text, start, end, nick, chip, date, type_end=None, hold_min=0.35
             "nick": nick, "chip": chip, "date": date, "anim_in": "rise", "in_frames": 6, "anim_out": anim_out, "out_frames": out_frames}
 
 
+REVIEWS = "chat" if "--reviews" in sys.argv and sys.argv[sys.argv.index("--reviews") + 1] == "chat" else "typing"
+
+
+def chat_scene(start, end, messages, anim_out="cut", out_frames=8, height=720):
+    """메신저 장면. messages: (text, nick, chip, date, typing_from, arrive_at)"""
+    return {"start": start, "end": end, "height": height, "anim_out": anim_out, "out_frames": out_frames,
+            "messages": [{"text": t, "nick": n, "chip": c, "date": d, "typing_from": tf, "arrive_at": aa} for t, n, c, d, tf, aa in messages]}
+
+
 F = 1 / 30
 shots = []
 # 후킹
@@ -172,17 +181,30 @@ for sid, w in [("s26", "목"), ("s27", "어깨"), ("s28", "무릎"), ("s29", "�
     t += 0.5
 # 브레이크: 리뷰 한 줄 120px
 s30 = shot("s30", 22.0, 24.0, {"type": "black"})
-s30["typing"] = [typing_card("진작 올걸 그랬어요!", 22.0, 24.0, "vqfc****", "네이버 방문자 리뷰 · 영수증 인증", "2026.07.16 방문", seed=30)]
+if REVIEWS == "chat":
+    s30["chat"] = [chat_scene(22.0, 24.0, [("진작 올걸 그랬어요!", "vqfc****", "영수증 인증", "2026.07.16", 22.0, 22.0)], height=420)]
+else:
+    s30["typing"] = [typing_card("진작 올걸 그랬어요!", 22.0, 24.0, "vqfc****", "네이버 방문자 리뷰 · 영수증 인증", "2026.07.16 방문", seed=30)]
 shots.append(s30)
 # 리뷰 그루브 (검은 화면, 인용 교체는 앞 인용 cut 뒤 새 인용 slam)
-for sid, a, b, text, nick, date, seed in [
-    ("s31", 24.0, 791 * F, "딱 필요한 치료만 권유해 주시더라구요.", "ngyz****", "2026.07.29 방문", 31),
-    ("s32", 791 * F, 896 * F, "선생님이 원인 파악을 명확하게 해주셔서 속이 다 시원했어요.", "mtzu****", "2026.09.06 방문", 32),
-    ("s33", 896 * F, 32.0, "의사선생님이 완전 친절하세요!", "눅눅해져****", "2026.02.08 방문", 33),
-]:
-    sh = shot(sid, a, b, {"type": "black"})
-    sh["typing"] = [typing_card(text, a, b, nick, "네이버 방문자 리뷰 · 영수증 인증", date, seed=seed)]
+if REVIEWS == "chat":
+    # 24~32초를 한 장면으로: 세 사람이 차례로 말풍선을 보낸다. 도착은 박자(24.5, 27.5, 30.5)에
+    sh = shot("s31", 24.0, 32.0, {"type": "black"})
+    sh["chat"] = [chat_scene(24.0, 32.0, [
+        ("딱 필요한 치료만 권유해 주시더라구요.", "ngyz****", "영수증 인증", "2026.07.29", 24.0, 24.5),
+        ("선생님이 원인 파악을 명확하게 해주셔서 속이 다 시원했어요.", "mtzu****", "영수증 인증", "2026.09.06", 26.5, 27.5),
+        ("의사선생님이 완전 친절하세요!", "눅눅해져****", "영수증 인증", "2026.02.08", 29.5, 30.5),
+    ], height=760)]
     shots.append(sh)
+else:
+    for sid, a, b, text, nick, date, seed in [
+        ("s31", 24.0, 791 * F, "딱 필요한 치료만 권유해 주시더라구요.", "ngyz****", "2026.07.29 방문", 31),
+        ("s32", 791 * F, 896 * F, "선생님이 원인 파악을 명확하게 해주셔서 속이 다 시원했어요.", "mtzu****", "2026.09.06 방문", 32),
+        ("s33", 896 * F, 32.0, "의사선생님이 완전 친절하세요!", "눅눅해져****", "2026.02.08 방문", 33),
+    ]:
+        sh = shot(sid, a, b, {"type": "black"})
+        sh["typing"] = [typing_card(text, a, b, nick, "네이버 방문자 리뷰 · 영수증 인증", date, seed=seed)]
+        shots.append(sh)
 # 본질 세 줄
 shots.append(shot("s34", 32.0, 33.0, {"type": "black"}, [T("먼저 듣고,", 32.0, 33.0, 170, in_frames=3)]))
 shots.append(shot("s35", 33.0, 34.0, {"type": "black"}, [T("왜 아픈지 말하고,", 33.0, 34.0, 170, in_frames=3)]))
@@ -199,7 +221,10 @@ shots.append(shot("s44", 39.0, 40.0, photo_bg("building_16x9.jpg", brightness=-0
                   flashes=[{"at": 39.0, "frames": 2, "color": "#fff", "opacity": 0.9}]))
 # 일요일 리뷰 (건물 사진 유지, 밝기 30%)
 s45 = shot("s45", 40.0, 43.0, photo_bg("building_16x9.jpg", brightness=-0.7, amount=0.04))
-s45["typing"] = [typing_card("담에는 어디 아프면 꼭 여기 가려구요.", 40.0, 43.0, "Sept****", "네이버 방문자 리뷰 · 예약 인증 · 발췌", "2025.02.09 일요일 방문", seed=45, anim_out="fade", out_frames=8)]
+if REVIEWS == "chat":
+    s45["chat"] = [chat_scene(40.0, 43.0, [("담에는 어디 아프면 꼭 여기 가려구요.", "Sept****", "예약 인증 · 일요일 방문 · 발췌", "2025.02.09", 40.0, 40.5)], anim_out="fade", out_frames=8, height=420)]
+else:
+    s45["typing"] = [typing_card("담에는 어디 아프면 꼭 여기 가려구요.", 40.0, 43.0, "Sept****", "네이버 방문자 리뷰 · 예약 인증 · 발췌", "2025.02.09 일요일 방문", seed=45, anim_out="fade", out_frames=8)]
 shots.append(s45)
 # 엔딩
 shots.append(shot("s46", 43.0, 45.5, {"type": "black"},
@@ -219,12 +244,13 @@ for s in shots:
     s["end"] = round(round(s["end"] * 30) / 30, 6)
 
 music_wav = os.path.join(HERE, "music", "render", "music_v1.wav")
-audio_wav = os.path.join(HERE, "music", "render", "audio_v2.wav")
+audio_wav = os.path.join(HERE, "music", "render", f"audio_v2_{REVIEWS}.wav")
 tl = {"fps": 30, "width": 1920, "height": 1080, "duration": 50.0, "audio": audio_wav, "shots": shots}
 if os.path.exists(music_wav):
     sfx.render(tl, music_wav, audio_wav)
-    print("audio with typing sfx:", audio_wav)
-out = sys.argv[1] if len(sys.argv) > 1 else os.path.join(HERE, "engine", "timeline_v1.json")
+    print("audio with sfx:", audio_wav)
+args = [a for a in sys.argv[1:] if not a.startswith("--") and a != REVIEWS]
+out = args[0] if args else os.path.join(HERE, "engine", f"timeline_v1{'_chat' if REVIEWS == 'chat' else ''}.json")
 json.dump(tl, open(out, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
 missing = [s["id"] for s in shots if s["bg"]["type"] == "black" and s["id"] in
            ("s01", "s09", "s10", "s11", "s18", "s19", "s20", "s21", "s22", "s23", "s24", "s25", "s26", "s27", "s28", "s29", "s38", "s39", "s40", "s41", "s42", "s43")]

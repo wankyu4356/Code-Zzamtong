@@ -41,7 +41,19 @@ def pop():
     return x * 0.8
 
 
-def render(tl, music_path, out_path, click_db=-21.0, pop_db=-16.0):
+def ding():
+    """메시지 도착: 두 음 짧게 (E6 -> B6), 부드러운 사인."""
+    out = np.zeros(int(SR * 0.32))
+    for i, (f0, at) in enumerate(((1318.5, 0.0), (1975.5, 0.075))):
+        n = int(SR * 0.22)
+        t = np.arange(n) / SR
+        tone = (np.sin(2 * np.pi * f0 * t) + 0.25 * np.sin(2 * np.pi * f0 * 2 * t)) * np.exp(-t * 16)
+        s = int(at * SR)
+        out[s:s + n] += tone * (0.7 if i == 0 else 0.55)
+    return out
+
+
+def render(tl, music_path, out_path, click_db=-21.0, pop_db=-16.0, ding_db=-15.0):
     music, sr = sf.read(music_path)
     assert sr == SR, sr
     if music.ndim == 1:
@@ -68,6 +80,9 @@ def render(tl, music_path, out_path, click_db=-21.0, pop_db=-16.0):
                 space = states[i].endswith(" ") and len(states[i]) > len(prev)
                 add(click(rng, space), t, g_click, pan=rng.uniform(-0.15, 0.15))
             add(pop(), float(ty["post_at"]), g_pop)
+        for ch in shot.get("chat", []):
+            for m in ch["messages"]:
+                add(ding(), float(m["arrive_at"]), 10 ** (ding_db / 20))
     mix = music + fx
     peak = float(np.abs(mix).max())
     if peak > 0.95:

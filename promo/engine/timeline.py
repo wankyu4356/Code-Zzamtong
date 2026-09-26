@@ -120,6 +120,8 @@ def validate(tl, base_dir):
             _validate_image(im, f"shot {sid} images[{j}]", base_dir, err)
         for j, ty in enumerate(s.get("typing") or []):
             _validate_typing(ty, f"shot {sid} typing[{j}]", err)
+        for j, ch in enumerate(s.get("chat") or []):
+            _validate_chat(ch, f"shot {sid} chat[{j}]", err)
         for j, fl in enumerate(s.get("flashes") or []):
             _validate_flash(fl, f"shot {sid} flashes[{j}]", err)
 
@@ -244,6 +246,19 @@ def _validate_typing(ty, where, err):
         err(f"{where}: keys must lie inside [start, end)")
     if not _is_num(ty.get("post_at")):
         err(f"{where}: post_at (seconds) is required")
+
+
+def _validate_chat(ch, where, err):
+    _validate_span(ch, where, err)
+    msgs = ch.get("messages")
+    if not (isinstance(msgs, list) and msgs):
+        err(f"{where}: messages must be a non-empty list")
+        return
+    for i, m in enumerate(msgs):
+        if not isinstance(m.get("text"), str) or not m["text"]:
+            err(f"{where}: messages[{i}].text must be a non-empty string")
+        if not (_is_num(m.get("typing_from")) and _is_num(m.get("arrive_at")) and m["typing_from"] <= m["arrive_at"]):
+            err(f"{where}: messages[{i}] needs typing_from <= arrive_at (seconds)")
 
 
 def _validate_flash(fl, where, err):

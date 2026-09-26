@@ -1,0 +1,1637 @@
+{
+ "fps": 30,
+ "width": 1920,
+ "height": 1080,
+ "duration": 50.0,
+ "audio": "/home/user/Code-Zzamtong/promo/music/render/audio_v2_chat.wav",
+ "shots": [
+  {
+   "id": "s01",
+   "start": 0.0,
+   "end": 1.0,
+   "bg": {
+    "type": "clip",
+    "src": "/home/user/Code-Zzamtong/promo/assets/footage/final/s01.mp4",
+    "in": 0.4,
+    "fit": "cover",
+    "zoom": "in",
+    "zoom_amount": 0.12,
+    "grade": {
+     "contrast": 1.05,
+     "saturation": 0.9,
+     "brightness": 0.0,
+     "gamma": 1.0
+    },
+    "vignette": true,
+    "grain": 0.08,
+    "punch": 1.0,
+    "anchor": [
+     0.5,
+     0.5
+    ]
+   }
+  },
+  {
+   "id": "s02",
+   "start": 1.0,
+   "end": 2.0,
+   "bg": {
+    "type": "black"
+   },
+   "texts": [
+    {
+     "weight": 900,
+     "letter_spacing": -0.03,
+     "color": "#fff",
+     "shadow": false,
+     "text": "아, 허리.",
+     "start": 1.0,
+     "end": 2.0,
+     "size": 170,
+     "anim_in": "hit",
+     "anim_out": "cut",
+     "max_width": 1600,
+     "in_frames": 3
+    }
+   ]
+  },
+  {
+   "id": "s03",
+   "start": 2.0,
+   "end": 3.0,
+   "bg": {
+    "type": "black"
+   },
+   "texts": [
+    {
+     "weight": 900,
+     "letter_spacing": -0.03,
+     "color": "#fff",
+     "shadow": false,
+     "text": "괜찮겠지.",
+     "start": 2.0,
+     "end": 3.0,
+     "size": 170,
+     "anim_in": "hit",
+     "anim_out": "cut",
+     "max_width": 1600,
+     "in_frames": 3
+    }
+   ]
+  },
+  {
+   "id": "s04",
+   "start": 3.0,
+   "end": 3.5,
+   "bg": {
+    "type": "black"
+   },
+   "texts": [
+    {
+     "weight": 900,
+     "letter_spacing": -0.03,
+     "color": "#fff",
+     "shadow": false,
+     "text": "하루.",
+     "start": 3.0,
+     "end": 3.5,
+     "size": 170,
+     "anim_in": "hit",
+     "anim_out": "cut",
+     "max_width": 1600,
+     "in_frames": 3
+    }
+   ]
+  },
+  {
+   "id": "s05",
+   "start": 3.5,
+   "end": 4.0,
+   "bg": {
+    "type": "black"
+   },
+   "texts": [
+    {
+     "weight": 900,
+     "letter_spacing": -0.03,
+     "color": "#fff",
+     "shadow": false,
+     "text": "이틀.",
+     "start": 3.5,
+     "end": 4.0,
+     "size": 170,
+     "anim_in": "hit",
+     "anim_out": "cut",
+     "max_width": 1600,
+     "in_frames": 3
+    }
+   ]
+  },
+  {
+   "id": "s06",
+   "start": 4.0,
+   "end": 5.0,
+   "bg": {
+    "type": "black"
+   },
+   "texts": [
+    {
+     "weight": 900,
+     "letter_spacing": -0.03,
+     "color": "#fff",
+     "shadow": false,
+     "text": "일주일.",
+     "start": 4.0,
+     "end": 5.0,
+     "size": 220,
+     "anim_in": "hit",
+     "anim_out": "cut",
+     "max_width": 1600,
+     "hit_scale": 1.15,
+     "in_frames": 4
+    }
+   ]
+  },
+  {
+   "id": "s07",
+   "start": 5.0,
+   "end": 6.0,
+   "bg": {
+    "type": "black"
+   },
+   "texts": [
+    {
+     "weight": 900,
+     "letter_spacing": -0.03,
+     "color": "#fff",
+     "shadow": false,
+     "text": "병원은 나중에.",
+     "start": 5.0,
+     "end": 6.0,
+     "size": 170,
+     "anim_in": "hit",
+     "anim_out": "cut",
+     "max_width": 1600,
+     "in_frames": 3
+    }
+   ]
+  },
+  {
+   "id": "s08",
+   "start": 6.0,
+   "end": 8.0,
+   "bg": {
+    "type": "black"
+   },
+   "texts": [
+    {
+     "weight": 900,
+     "letter_spacing": -0.03,
+     "color": "#fff",
+     "shadow": false,
+     "text": "어디로 가야 하나.",
+     "start": 6.0,
+     "end": 8.0,
+     "size": 170,
+     "anim_in": "hit",
+     "anim_out": "cut",
+     "max_width": 1600,
+     "in_frames": 3,
+     "drift_scale": 0.03
+    }
+   ]
+  },
+  {
+   "id": "s09",
+   "start": 8.0,
+   "end": 9.0,
+   "bg": {
+    "type": "black"
+   },
+   "texts": [
+    {
+     "weight": 900,
+     "letter_spacing": -0.03,
+     "color": "#fff",
+     "shadow": true,
+     "text": "수능 앞, 목.",
+     "start": 8.0,
+     "end": 9.0,
+     "size": 170,
+     "anim_in": "hit",
+     "anim_out": "cut",
+     "max_width": 1600,
+     "in_frames": 3
+    }
+   ]
+  },
+  {
+   "id": "s10",
+   "start": 9.0,
+   "end": 10.0,
+   "bg": {
+    "type": "clip",
+    "src": "/home/user/Code-Zzamtong/promo/assets/footage/final/s10.mp4",
+    "in": 0.4,
+    "fit": "cover",
+    "zoom": "in",
+    "zoom_amount": 0.04,
+    "grade": {
+     "contrast": 1.05,
+     "saturation": 0.9,
+     "brightness": 0.0,
+     "gamma": 1.0
+    },
+    "vignette": true,
+    "grain": 0.08,
+    "punch": 1.0,
+    "anchor": [
+     0.5,
+     0.5
+    ]
+   },
+   "texts": [
+    {
+     "weight": 900,
+     "letter_spacing": -0.03,
+     "color": "#fff",
+     "shadow": true,
+     "text": "모니터 앞, 거북목.",
+     "start": 9.0,
+     "end": 10.0,
+     "size": 170,
+     "anim_in": "hit",
+     "anim_out": "cut",
+     "max_width": 1600,
+     "in_frames": 3
+    }
+   ]
+  },
+  {
+   "id": "s11",
+   "start": 10.0,
+   "end": 11.0,
+   "bg": {
+    "type": "clip",
+    "src": "/home/user/Code-Zzamtong/promo/assets/footage/final/s11.mp4",
+    "in": 0.4,
+    "fit": "cover",
+    "zoom": "in",
+    "zoom_amount": 0.04,
+    "grade": {
+     "contrast": 1.05,
+     "saturation": 0.9,
+     "brightness": 0.0,
+     "gamma": 1.0
+    },
+    "vignette": true,
+    "grain": 0.08,
+    "punch": 1.0,
+    "anchor": [
+     0.5,
+     0.5
+    ]
+   },
+   "texts": [
+    {
+     "weight": 900,
+     "letter_spacing": -0.03,
+     "color": "#fff",
+     "shadow": true,
+     "text": "계단 앞, 무릎.",
+     "start": 10.0,
+     "end": 11.0,
+     "size": 170,
+     "anim_in": "hit",
+     "anim_out": "cut",
+     "max_width": 1600,
+     "in_frames": 3
+    }
+   ]
+  },
+  {
+   "id": "s12",
+   "start": 11.0,
+   "end": 12.0,
+   "bg": {
+    "type": "image",
+    "src": "/home/user/Code-Zzamtong/promo/assets/hospital/doctor_portrait_16x9.jpg",
+    "fit": "cover",
+    "zoom": "in",
+    "zoom_amount": 0.03,
+    "grade": {
+     "contrast": 1.05,
+     "saturation": 0.9,
+     "brightness": -0.3,
+     "gamma": 1.0
+    },
+    "vignette": true,
+    "grain": 0.06
+   },
+   "texts": [
+    {
+     "weight": 900,
+     "letter_spacing": -0.03,
+     "color": "#fff",
+     "shadow": true,
+     "text": "10년, 일대일로.",
+     "start": 11.0,
+     "end": 12.0,
+     "size": 170,
+     "anim_in": "hit",
+     "anim_out": "cut",
+     "max_width": 1600,
+     "in_frames": 3,
+     "x": "left",
+     "align": "left"
+    }
+   ]
+  },
+  {
+   "id": "s13",
+   "start": 12.0,
+   "end": 13.0,
+   "bg": {
+    "type": "image",
+    "src": "/home/user/Code-Zzamtong/promo/assets/hospital/reception_16x9.jpg",
+    "fit": "cover",
+    "zoom": "in",
+    "zoom_amount": 0.03,
+    "grade": {
+     "contrast": 1.05,
+     "saturation": 0.9,
+     "brightness": -0.3,
+     "gamma": 1.0
+    },
+    "vignette": true,
+    "grain": 0.06
+   },
+   "texts": [
+    {
+     "weight": 900,
+     "letter_spacing": -0.03,
+     "color": "#fff",
+     "shadow": true,
+     "text": "짧은 시간이라도,",
+     "start": 12.0,
+     "end": 13.0,
+     "size": 170,
+     "anim_in": "hit",
+     "anim_out": "cut",
+     "max_width": 1600,
+     "in_frames": 3
+    }
+   ]
+  },
+  {
+   "id": "s14",
+   "start": 13.0,
+   "end": 14.0,
+   "bg": {
+    "type": "black"
+   },
+   "texts": [
+    {
+     "weight": 900,
+     "letter_spacing": -0.03,
+     "color": "#fff",
+     "shadow": false,
+     "text": "누구보다, 귀 기울여.",
+     "start": 13.0,
+     "end": 14.0,
+     "size": 170,
+     "anim_in": "hit",
+     "anim_out": "cut",
+     "max_width": 1600,
+     "in_frames": 3
+    }
+   ]
+  },
+  {
+   "id": "s15",
+   "start": 14.0,
+   "end": 15.0,
+   "bg": {
+    "type": "black"
+   },
+   "texts": [
+    {
+     "weight": 900,
+     "letter_spacing": -0.03,
+     "color": "#fff",
+     "shadow": false,
+     "text": "몸은 원래,",
+     "start": 14.0,
+     "end": 15.0,
+     "size": 170,
+     "anim_in": "hit",
+     "anim_out": "cut",
+     "max_width": 1600,
+     "in_frames": 3
+    }
+   ]
+  },
+  {
+   "id": "s16",
+   "start": 15.0,
+   "end": 15.733333,
+   "bg": {
+    "type": "black"
+   },
+   "texts": [
+    {
+     "weight": 900,
+     "letter_spacing": -0.03,
+     "color": "#fff",
+     "shadow": false,
+     "text": "이렇게.",
+     "start": 15.0,
+     "end": 15.733333333333333,
+     "size": 170,
+     "anim_in": "hit",
+     "anim_out": "cut",
+     "max_width": 1600,
+     "in_frames": 3
+    }
+   ]
+  },
+  {
+   "id": "s17",
+   "start": 15.733333,
+   "end": 16.0,
+   "bg": {
+    "type": "black"
+   }
+  },
+  {
+   "id": "s18",
+   "start": 16.0,
+   "end": 16.5,
+   "bg": {
+    "type": "clip",
+    "src": "/home/user/Code-Zzamtong/promo/assets/footage/final/s18.mp4",
+    "in": 0.4,
+    "fit": "cover",
+    "zoom": "in",
+    "zoom_amount": 0.06,
+    "grade": {
+     "contrast": 1.05,
+     "saturation": 0.9,
+     "brightness": 0.0,
+     "gamma": 1.0
+    },
+    "vignette": true,
+    "grain": 0.08,
+    "punch": 1.0,
+    "anchor": [
+     0.5,
+     0.5
+    ]
+   },
+   "texts": [
+    {
+     "weight": 900,
+     "letter_spacing": -0.03,
+     "color": "#fff",
+     "shadow": true,
+     "text": "걷고",
+     "start": 16.0,
+     "end": 16.5,
+     "size": 220,
+     "anim_in": "slam",
+     "anim_out": "cut",
+     "max_width": 1600,
+     "hit_scale": 1.15,
+     "in_frames": 3
+    }
+   ],
+   "flashes": [
+    {
+     "at": 16.0,
+     "frames": 2,
+     "color": "#fff",
+     "opacity": 0.9
+    }
+   ]
+  },
+  {
+   "id": "s19",
+   "start": 16.5,
+   "end": 17.0,
+   "bg": {
+    "type": "clip",
+    "src": "/home/user/Code-Zzamtong/promo/assets/footage/final/s19.mp4",
+    "in": 0.4,
+    "fit": "cover",
+    "zoom": "in",
+    "zoom_amount": 0.06,
+    "grade": {
+     "contrast": 1.05,
+     "saturation": 0.9,
+     "brightness": 0.0,
+     "gamma": 1.0
+    },
+    "vignette": true,
+    "grain": 0.08,
+    "punch": 1.0,
+    "anchor": [
+     0.5,
+     0.5
+    ]
+   },
+   "texts": [
+    {
+     "weight": 900,
+     "letter_spacing": -0.03,
+     "color": "#fff",
+     "shadow": true,
+     "text": "뛰고",
+     "start": 16.5,
+     "end": 17.0,
+     "size": 220,
+     "anim_in": "slam",
+     "anim_out": "cut",
+     "max_width": 1600,
+     "hit_scale": 1.15,
+     "in_frames": 3
+    }
+   ]
+  },
+  {
+   "id": "s20",
+   "start": 17.0,
+   "end": 17.5,
+   "bg": {
+    "type": "clip",
+    "src": "/home/user/Code-Zzamtong/promo/assets/footage/final/s20.mp4",
+    "in": 0.4,
+    "fit": "cover",
+    "zoom": "in",
+    "zoom_amount": 0.06,
+    "grade": {
+     "contrast": 1.05,
+     "saturation": 0.9,
+     "brightness": 0.0,
+     "gamma": 1.0
+    },
+    "vignette": true,
+    "grain": 0.08,
+    "punch": 1.0,
+    "anchor": [
+     0.5,
+     0.5
+    ]
+   },
+   "texts": [
+    {
+     "weight": 900,
+     "letter_spacing": -0.03,
+     "color": "#fff",
+     "shadow": true,
+     "text": "들고",
+     "start": 17.0,
+     "end": 17.5,
+     "size": 220,
+     "anim_in": "slam",
+     "anim_out": "cut",
+     "max_width": 1600,
+     "hit_scale": 1.15,
+     "in_frames": 3
+    }
+   ]
+  },
+  {
+   "id": "s21",
+   "start": 17.5,
+   "end": 18.0,
+   "bg": {
+    "type": "clip",
+    "src": "/home/user/Code-Zzamtong/promo/assets/footage/final/s21.mp4",
+    "in": 0.4,
+    "fit": "cover",
+    "zoom": "in",
+    "zoom_amount": 0.06,
+    "grade": {
+     "contrast": 1.05,
+     "saturation": 0.9,
+     "brightness": 0.0,
+     "gamma": 1.0
+    },
+    "vignette": true,
+    "grain": 0.08,
+    "punch": 1.0,
+    "anchor": [
+     0.5,
+     0.5
+    ]
+   },
+   "texts": [
+    {
+     "weight": 900,
+     "letter_spacing": -0.03,
+     "color": "#fff",
+     "shadow": true,
+     "text": "안고",
+     "start": 17.5,
+     "end": 18.0,
+     "size": 220,
+     "anim_in": "slam",
+     "anim_out": "cut",
+     "max_width": 1600,
+     "hit_scale": 1.15,
+     "in_frames": 3
+    }
+   ]
+  },
+  {
+   "id": "s22",
+   "start": 18.0,
+   "end": 18.5,
+   "bg": {
+    "type": "clip",
+    "src": "/home/user/Code-Zzamtong/promo/assets/footage/final/s22.mp4",
+    "in": 0.4,
+    "fit": "cover",
+    "zoom": "in",
+    "zoom_amount": 0.06,
+    "grade": {
+     "contrast": 1.05,
+     "saturation": 0.9,
+     "brightness": 0.0,
+     "gamma": 1.0
+    },
+    "vignette": true,
+    "grain": 0.08,
+    "punch": 1.0,
+    "anchor": [
+     0.5,
+     0.5
+    ]
+   },
+   "texts": [
+    {
+     "weight": 900,
+     "letter_spacing": -0.03,
+     "color": "#fff",
+     "shadow": true,
+     "text": "오르고",
+     "start": 18.0,
+     "end": 18.5,
+     "size": 220,
+     "anim_in": "slam",
+     "anim_out": "cut",
+     "max_width": 1600,
+     "hit_scale": 1.15,
+     "in_frames": 3
+    }
+   ],
+   "flashes": [
+    {
+     "at": 18.0,
+     "frames": 2,
+     "color": "#fff",
+     "opacity": 0.9
+    }
+   ]
+  },
+  {
+   "id": "s23",
+   "start": 18.5,
+   "end": 19.0,
+   "bg": {
+    "type": "clip",
+    "src": "/home/user/Code-Zzamtong/promo/assets/footage/final/s23.mp4",
+    "in": 0.4,
+    "fit": "cover",
+    "zoom": "in",
+    "zoom_amount": 0.06,
+    "grade": {
+     "contrast": 1.05,
+     "saturation": 0.9,
+     "brightness": 0.0,
+     "gamma": 1.0
+    },
+    "vignette": true,
+    "grain": 0.08,
+    "punch": 1.0,
+    "anchor": [
+     0.5,
+     0.5
+    ]
+   },
+   "texts": [
+    {
+     "weight": 900,
+     "letter_spacing": -0.03,
+     "color": "#fff",
+     "shadow": true,
+     "text": "굽히고",
+     "start": 18.5,
+     "end": 19.0,
+     "size": 220,
+     "anim_in": "slam",
+     "anim_out": "cut",
+     "max_width": 1600,
+     "hit_scale": 1.15,
+     "in_frames": 3
+    }
+   ]
+  },
+  {
+   "id": "s24",
+   "start": 19.0,
+   "end": 19.5,
+   "bg": {
+    "type": "clip",
+    "src": "/home/user/Code-Zzamtong/promo/assets/footage/final/s24.mp4",
+    "in": 0.4,
+    "fit": "cover",
+    "zoom": "in",
+    "zoom_amount": 0.06,
+    "grade": {
+     "contrast": 1.05,
+     "saturation": 0.9,
+     "brightness": 0.0,
+     "gamma": 1.0
+    },
+    "vignette": true,
+    "grain": 0.08,
+    "punch": 1.0,
+    "anchor": [
+     0.5,
+     0.5
+    ]
+   },
+   "texts": [
+    {
+     "weight": 900,
+     "letter_spacing": -0.03,
+     "color": "#fff",
+     "shadow": true,
+     "text": "타고",
+     "start": 19.0,
+     "end": 19.5,
+     "size": 220,
+     "anim_in": "slam",
+     "anim_out": "cut",
+     "max_width": 1600,
+     "hit_scale": 1.15,
+     "in_frames": 3
+    }
+   ]
+  },
+  {
+   "id": "s25",
+   "start": 19.5,
+   "end": 20.0,
+   "bg": {
+    "type": "clip",
+    "src": "/home/user/Code-Zzamtong/promo/assets/footage/final/s25.mp4",
+    "in": 0.4,
+    "fit": "cover",
+    "zoom": "in",
+    "zoom_amount": 0.06,
+    "grade": {
+     "contrast": 1.05,
+     "saturation": 0.9,
+     "brightness": 0.0,
+     "gamma": 1.0
+    },
+    "vignette": true,
+    "grain": 0.08,
+    "punch": 1.35,
+    "anchor": [
+     0.32,
+     0.6
+    ]
+   },
+   "texts": [
+    {
+     "weight": 900,
+     "letter_spacing": -0.03,
+     "color": "#fff",
+     "shadow": true,
+     "text": "앉고",
+     "start": 19.5,
+     "end": 20.0,
+     "size": 220,
+     "anim_in": "slam",
+     "anim_out": "cut",
+     "max_width": 1600,
+     "hit_scale": 1.15,
+     "in_frames": 3
+    }
+   ]
+  },
+  {
+   "id": "s26",
+   "start": 20.0,
+   "end": 20.5,
+   "bg": {
+    "type": "clip",
+    "src": "/home/user/Code-Zzamtong/promo/assets/footage/final/s26.mp4",
+    "in": 0.4,
+    "fit": "cover",
+    "zoom": "in",
+    "zoom_amount": 0.06,
+    "grade": {
+     "contrast": 1.05,
+     "saturation": 0.9,
+     "brightness": -0.15,
+     "gamma": 1.0
+    },
+    "vignette": true,
+    "grain": 0.08,
+    "punch": 1.0,
+    "anchor": [
+     0.5,
+     0.5
+    ]
+   },
+   "texts": [
+    {
+     "weight": 900,
+     "letter_spacing": -0.03,
+     "color": "#fff",
+     "shadow": true,
+     "text": "목",
+     "start": 20.0,
+     "end": 20.5,
+     "size": 320,
+     "anim_in": "slam",
+     "anim_out": "cut",
+     "max_width": 1600,
+     "hit_scale": 1.15,
+     "in_frames": 3
+    }
+   ],
+   "flashes": [
+    {
+     "at": 20.0,
+     "frames": 2,
+     "color": "#fff",
+     "opacity": 0.9
+    }
+   ]
+  },
+  {
+   "id": "s27",
+   "start": 20.5,
+   "end": 21.0,
+   "bg": {
+    "type": "clip",
+    "src": "/home/user/Code-Zzamtong/promo/assets/footage/final/s27.mp4",
+    "in": 0.4,
+    "fit": "cover",
+    "zoom": "in",
+    "zoom_amount": 0.06,
+    "grade": {
+     "contrast": 1.05,
+     "saturation": 0.9,
+     "brightness": 0.0,
+     "gamma": 1.0
+    },
+    "vignette": true,
+    "grain": 0.08,
+    "punch": 1.25,
+    "anchor": [
+     0.5,
+     0.3
+    ]
+   },
+   "texts": [
+    {
+     "weight": 900,
+     "letter_spacing": -0.03,
+     "color": "#fff",
+     "shadow": true,
+     "text": "어깨",
+     "start": 20.5,
+     "end": 21.0,
+     "size": 320,
+     "anim_in": "slam",
+     "anim_out": "cut",
+     "max_width": 1600,
+     "hit_scale": 1.15,
+     "in_frames": 3
+    }
+   ],
+   "flashes": [
+    {
+     "at": 20.5,
+     "frames": 2,
+     "color": "#fff",
+     "opacity": 0.9
+    }
+   ]
+  },
+  {
+   "id": "s28",
+   "start": 21.0,
+   "end": 21.5,
+   "bg": {
+    "type": "clip",
+    "src": "/home/user/Code-Zzamtong/promo/assets/footage/final/s28.mp4",
+    "in": 0.4,
+    "fit": "cover",
+    "zoom": "in",
+    "zoom_amount": 0.06,
+    "grade": {
+     "contrast": 1.05,
+     "saturation": 0.9,
+     "brightness": 0.0,
+     "gamma": 1.0
+    },
+    "vignette": true,
+    "grain": 0.08,
+    "punch": 1.0,
+    "anchor": [
+     0.5,
+     0.5
+    ]
+   },
+   "texts": [
+    {
+     "weight": 900,
+     "letter_spacing": -0.03,
+     "color": "#fff",
+     "shadow": true,
+     "text": "무릎",
+     "start": 21.0,
+     "end": 21.5,
+     "size": 320,
+     "anim_in": "slam",
+     "anim_out": "cut",
+     "max_width": 1600,
+     "hit_scale": 1.15,
+     "in_frames": 3
+    }
+   ],
+   "flashes": [
+    {
+     "at": 21.0,
+     "frames": 2,
+     "color": "#fff",
+     "opacity": 0.9
+    }
+   ]
+  },
+  {
+   "id": "s29",
+   "start": 21.5,
+   "end": 22.0,
+   "bg": {
+    "type": "clip",
+    "src": "/home/user/Code-Zzamtong/promo/assets/footage/final/s29.mp4",
+    "in": 0.4,
+    "fit": "cover",
+    "zoom": "in",
+    "zoom_amount": 0.06,
+    "grade": {
+     "contrast": 1.05,
+     "saturation": 0.9,
+     "brightness": 0.0,
+     "gamma": 1.0
+    },
+    "vignette": true,
+    "grain": 0.08,
+    "punch": 1.0,
+    "anchor": [
+     0.5,
+     0.5
+    ]
+   },
+   "texts": [
+    {
+     "weight": 900,
+     "letter_spacing": -0.03,
+     "color": "#fff",
+     "shadow": true,
+     "text": "허리",
+     "start": 21.5,
+     "end": 22.0,
+     "size": 320,
+     "anim_in": "slam",
+     "anim_out": "cut",
+     "max_width": 1600,
+     "hit_scale": 1.15,
+     "in_frames": 3
+    }
+   ],
+   "flashes": [
+    {
+     "at": 21.5,
+     "frames": 2,
+     "color": "#fff",
+     "opacity": 0.9
+    }
+   ]
+  },
+  {
+   "id": "s30",
+   "start": 22.0,
+   "end": 24.0,
+   "bg": {
+    "type": "black"
+   },
+   "chat": [
+    {
+     "start": 22.0,
+     "end": 24.0,
+     "height": 420,
+     "anim_out": "cut",
+     "out_frames": 8,
+     "messages": [
+      {
+       "text": "진작 올걸 그랬어요!",
+       "nick": "vqfc****",
+       "chip": "영수증 인증",
+       "date": "2026.07.16",
+       "typing_from": 22.0,
+       "arrive_at": 22.0
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "s31",
+   "start": 24.0,
+   "end": 32.0,
+   "bg": {
+    "type": "black"
+   },
+   "chat": [
+    {
+     "start": 24.0,
+     "end": 32.0,
+     "height": 760,
+     "anim_out": "cut",
+     "out_frames": 8,
+     "messages": [
+      {
+       "text": "딱 필요한 치료만 권유해 주시더라구요.",
+       "nick": "ngyz****",
+       "chip": "영수증 인증",
+       "date": "2026.07.29",
+       "typing_from": 24.0,
+       "arrive_at": 24.5
+      },
+      {
+       "text": "선생님이 원인 파악을 명확하게 해주셔서 속이 다 시원했어요.",
+       "nick": "mtzu****",
+       "chip": "영수증 인증",
+       "date": "2026.09.06",
+       "typing_from": 26.5,
+       "arrive_at": 27.5
+      },
+      {
+       "text": "의사선생님이 완전 친절하세요!",
+       "nick": "눅눅해져****",
+       "chip": "영수증 인증",
+       "date": "2026.02.08",
+       "typing_from": 29.5,
+       "arrive_at": 30.5
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "s34",
+   "start": 32.0,
+   "end": 33.0,
+   "bg": {
+    "type": "black"
+   },
+   "texts": [
+    {
+     "weight": 900,
+     "letter_spacing": -0.03,
+     "color": "#fff",
+     "shadow": false,
+     "text": "먼저 듣고,",
+     "start": 32.0,
+     "end": 33.0,
+     "size": 170,
+     "anim_in": "hit",
+     "anim_out": "cut",
+     "max_width": 1600,
+     "in_frames": 3
+    }
+   ]
+  },
+  {
+   "id": "s35",
+   "start": 33.0,
+   "end": 34.0,
+   "bg": {
+    "type": "black"
+   },
+   "texts": [
+    {
+     "weight": 900,
+     "letter_spacing": -0.03,
+     "color": "#fff",
+     "shadow": false,
+     "text": "왜 아픈지 말하고,",
+     "start": 33.0,
+     "end": 34.0,
+     "size": 170,
+     "anim_in": "hit",
+     "anim_out": "cut",
+     "max_width": 1600,
+     "in_frames": 3
+    }
+   ]
+  },
+  {
+   "id": "s36",
+   "start": 34.0,
+   "end": 35.733333,
+   "bg": {
+    "type": "black"
+   },
+   "texts": [
+    {
+     "weight": 900,
+     "letter_spacing": -0.03,
+     "color": "#fff",
+     "shadow": false,
+     "text": "필요한 치료만.",
+     "start": 34.0,
+     "end": 35.733333333333334,
+     "size": 170,
+     "anim_in": "hit",
+     "anim_out": "cut",
+     "max_width": 1600,
+     "in_frames": 3
+    }
+   ]
+  },
+  {
+   "id": "s37",
+   "start": 35.733333,
+   "end": 36.0,
+   "bg": {
+    "type": "black"
+   }
+  },
+  {
+   "id": "s38",
+   "start": 36.0,
+   "end": 36.5,
+   "bg": {
+    "type": "clip",
+    "src": "/home/user/Code-Zzamtong/promo/assets/footage/final/s38.mp4",
+    "in": 0.4,
+    "fit": "cover",
+    "zoom": "in",
+    "zoom_amount": 0.06,
+    "grade": {
+     "contrast": 1.05,
+     "saturation": 0.9,
+     "brightness": 0.0,
+     "gamma": 1.0
+    },
+    "vignette": true,
+    "grain": 0.08,
+    "punch": 1.0,
+    "anchor": [
+     0.5,
+     0.5
+    ]
+   },
+   "texts": [
+    {
+     "weight": 900,
+     "letter_spacing": -0.03,
+     "color": "#fff",
+     "shadow": true,
+     "text": "월",
+     "start": 36.0,
+     "end": 36.5,
+     "size": 320,
+     "anim_in": "slam",
+     "anim_out": "cut",
+     "max_width": 1600,
+     "hit_scale": 1.15,
+     "in_frames": 3
+    }
+   ],
+   "flashes": [
+    {
+     "at": 36.0,
+     "frames": 2,
+     "color": "#fff",
+     "opacity": 0.9
+    }
+   ]
+  },
+  {
+   "id": "s39",
+   "start": 36.5,
+   "end": 37.0,
+   "bg": {
+    "type": "clip",
+    "src": "/home/user/Code-Zzamtong/promo/assets/footage/final/s39.mp4",
+    "in": 0.4,
+    "fit": "cover",
+    "zoom": "in",
+    "zoom_amount": 0.06,
+    "grade": {
+     "contrast": 1.05,
+     "saturation": 0.9,
+     "brightness": 0.0,
+     "gamma": 1.0
+    },
+    "vignette": true,
+    "grain": 0.08,
+    "punch": 1.0,
+    "anchor": [
+     0.5,
+     0.5
+    ]
+   },
+   "texts": [
+    {
+     "weight": 900,
+     "letter_spacing": -0.03,
+     "color": "#fff",
+     "shadow": true,
+     "text": "화",
+     "start": 36.5,
+     "end": 37.0,
+     "size": 320,
+     "anim_in": "slam",
+     "anim_out": "cut",
+     "max_width": 1600,
+     "hit_scale": 1.15,
+     "in_frames": 3
+    }
+   ]
+  },
+  {
+   "id": "s40",
+   "start": 37.0,
+   "end": 37.5,
+   "bg": {
+    "type": "clip",
+    "src": "/home/user/Code-Zzamtong/promo/assets/footage/final/s40.mp4",
+    "in": 0.4,
+    "fit": "cover",
+    "zoom": "in",
+    "zoom_amount": 0.06,
+    "grade": {
+     "contrast": 1.05,
+     "saturation": 0.9,
+     "brightness": 0.0,
+     "gamma": 1.0
+    },
+    "vignette": true,
+    "grain": 0.08,
+    "punch": 1.0,
+    "anchor": [
+     0.5,
+     0.5
+    ]
+   },
+   "texts": [
+    {
+     "weight": 900,
+     "letter_spacing": -0.03,
+     "color": "#fff",
+     "shadow": true,
+     "text": "수",
+     "start": 37.0,
+     "end": 37.5,
+     "size": 320,
+     "anim_in": "slam",
+     "anim_out": "cut",
+     "max_width": 1600,
+     "hit_scale": 1.15,
+     "in_frames": 3
+    }
+   ]
+  },
+  {
+   "id": "s41",
+   "start": 37.5,
+   "end": 38.0,
+   "bg": {
+    "type": "clip",
+    "src": "/home/user/Code-Zzamtong/promo/assets/footage/final/s41.mp4",
+    "in": 0.4,
+    "fit": "cover",
+    "zoom": "in",
+    "zoom_amount": 0.06,
+    "grade": {
+     "contrast": 1.05,
+     "saturation": 0.9,
+     "brightness": 0.0,
+     "gamma": 1.0
+    },
+    "vignette": true,
+    "grain": 0.08,
+    "punch": 1.0,
+    "anchor": [
+     0.5,
+     0.5
+    ]
+   },
+   "texts": [
+    {
+     "weight": 900,
+     "letter_spacing": -0.03,
+     "color": "#fff",
+     "shadow": true,
+     "text": "목",
+     "start": 37.5,
+     "end": 38.0,
+     "size": 320,
+     "anim_in": "slam",
+     "anim_out": "cut",
+     "max_width": 1600,
+     "hit_scale": 1.15,
+     "in_frames": 3
+    }
+   ]
+  },
+  {
+   "id": "s42",
+   "start": 38.0,
+   "end": 38.5,
+   "bg": {
+    "type": "clip",
+    "src": "/home/user/Code-Zzamtong/promo/assets/footage/final/s42.mp4",
+    "in": 0.4,
+    "fit": "cover",
+    "zoom": "in",
+    "zoom_amount": 0.06,
+    "grade": {
+     "contrast": 1.05,
+     "saturation": 0.9,
+     "brightness": 0.0,
+     "gamma": 1.0
+    },
+    "vignette": true,
+    "grain": 0.08,
+    "punch": 1.0,
+    "anchor": [
+     0.5,
+     0.5
+    ]
+   },
+   "texts": [
+    {
+     "weight": 900,
+     "letter_spacing": -0.03,
+     "color": "#fff",
+     "shadow": true,
+     "text": "금",
+     "start": 38.0,
+     "end": 38.5,
+     "size": 320,
+     "anim_in": "slam",
+     "anim_out": "cut",
+     "max_width": 1600,
+     "hit_scale": 1.15,
+     "in_frames": 3
+    }
+   ],
+   "flashes": [
+    {
+     "at": 38.0,
+     "frames": 2,
+     "color": "#fff",
+     "opacity": 0.9
+    }
+   ]
+  },
+  {
+   "id": "s43",
+   "start": 38.5,
+   "end": 39.0,
+   "bg": {
+    "type": "clip",
+    "src": "/home/user/Code-Zzamtong/promo/assets/footage/final/s43.mp4",
+    "in": 0.4,
+    "fit": "cover",
+    "zoom": "in",
+    "zoom_amount": 0.06,
+    "grade": {
+     "contrast": 1.05,
+     "saturation": 0.9,
+     "brightness": 0.0,
+     "gamma": 1.0
+    },
+    "vignette": true,
+    "grain": 0.08,
+    "punch": 1.0,
+    "anchor": [
+     0.5,
+     0.5
+    ]
+   },
+   "texts": [
+    {
+     "weight": 900,
+     "letter_spacing": -0.03,
+     "color": "#fff",
+     "shadow": true,
+     "text": "토",
+     "start": 38.5,
+     "end": 39.0,
+     "size": 320,
+     "anim_in": "slam",
+     "anim_out": "cut",
+     "max_width": 1600,
+     "hit_scale": 1.15,
+     "in_frames": 3
+    }
+   ]
+  },
+  {
+   "id": "s44",
+   "start": 39.0,
+   "end": 40.0,
+   "bg": {
+    "type": "image",
+    "src": "/home/user/Code-Zzamtong/promo/assets/hospital/building_16x9.jpg",
+    "fit": "cover",
+    "zoom": "in",
+    "zoom_amount": 0.04,
+    "grade": {
+     "contrast": 1.05,
+     "saturation": 0.9,
+     "brightness": -0.5,
+     "gamma": 1.0
+    },
+    "vignette": true,
+    "grain": 0.06
+   },
+   "texts": [
+    {
+     "weight": 900,
+     "letter_spacing": -0.03,
+     "color": "#fff",
+     "shadow": true,
+     "text": "일",
+     "start": 39.0,
+     "end": 40.0,
+     "size": 320,
+     "anim_in": "slam",
+     "anim_out": "cut",
+     "max_width": 1600,
+     "hit_scale": 1.15,
+     "in_frames": 3
+    }
+   ],
+   "flashes": [
+    {
+     "at": 39.0,
+     "frames": 2,
+     "color": "#fff",
+     "opacity": 0.9
+    }
+   ]
+  },
+  {
+   "id": "s45",
+   "start": 40.0,
+   "end": 43.0,
+   "bg": {
+    "type": "image",
+    "src": "/home/user/Code-Zzamtong/promo/assets/hospital/building_16x9.jpg",
+    "fit": "cover",
+    "zoom": "in",
+    "zoom_amount": 0.04,
+    "grade": {
+     "contrast": 1.05,
+     "saturation": 0.9,
+     "brightness": -0.7,
+     "gamma": 1.0
+    },
+    "vignette": true,
+    "grain": 0.06
+   },
+   "chat": [
+    {
+     "start": 40.0,
+     "end": 43.0,
+     "height": 420,
+     "anim_out": "fade",
+     "out_frames": 8,
+     "messages": [
+      {
+       "text": "담에는 어디 아프면 꼭 여기 가려구요.",
+       "nick": "Sept****",
+       "chip": "예약 인증 · 일요일 방문 · 발췌",
+       "date": "2025.02.09",
+       "typing_from": 40.0,
+       "arrive_at": 40.5
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "s46",
+   "start": 43.0,
+   "end": 45.5,
+   "bg": {
+    "type": "black"
+   },
+   "texts": [
+    {
+     "weight": 900,
+     "letter_spacing": -0.03,
+     "color": "#fff",
+     "shadow": false,
+     "text": "먼저 듣고,\n필요한 치료만.",
+     "start": 43.0,
+     "end": 45.5,
+     "size": 170,
+     "anim_in": "hit",
+     "anim_out": "fade",
+     "max_width": 1600,
+     "in_frames": 4,
+     "out_frames": 15,
+     "line_height": 1.15
+    }
+   ]
+  },
+  {
+   "id": "s47",
+   "start": 45.5,
+   "end": 47.0,
+   "bg": {
+    "type": "black"
+   },
+   "images": [
+    {
+     "src": "/home/user/Code-Zzamtong/promo/assets/hospital/logo_white.png",
+     "start": 45.5,
+     "end": 48.0,
+     "width": 900,
+     "anim_in": "fade",
+     "in_frames": 12,
+     "anim_out": "fade",
+     "out_frames": 15
+    }
+   ]
+  },
+  {
+   "id": "s48",
+   "start": 47.0,
+   "end": 50.0,
+   "bg": {
+    "type": "black"
+   },
+   "texts": [
+    {
+     "size": 30,
+     "weight": 400,
+     "letter_spacing": 0,
+     "color": "rgba(255,255,255,0.7)",
+     "shadow": false,
+     "anim_in": "fade",
+     "anim_out": "fade",
+     "text": "낙성대역 4번 출구 1분 · 주차 무료 · 02-872-3301",
+     "start": 47.0,
+     "end": 50.0,
+     "y": 880,
+     "in_frames": 8,
+     "out_frames": 18
+    },
+    {
+     "size": 30,
+     "weight": 400,
+     "letter_spacing": 0,
+     "color": "rgba(255,255,255,0.7)",
+     "shadow": false,
+     "anim_in": "fade",
+     "anim_out": "fade",
+     "text": "평일 9~19시 · 토 9~14시 · 일요일 진료는 네이버 예약",
+     "start": 47.0,
+     "end": 50.0,
+     "y": 930,
+     "in_frames": 8,
+     "out_frames": 18
+    }
+   ],
+   "images": [
+    {
+     "src": "/home/user/Code-Zzamtong/promo/assets/hospital/logo_color.png",
+     "start": 47.5,
+     "end": 50.0,
+     "width": 900,
+     "anim_in": "fade",
+     "in_frames": 15,
+     "anim_out": "fade",
+     "out_frames": 18
+    }
+   ]
+  }
+ ]
+}
