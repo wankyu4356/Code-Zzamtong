@@ -1,32 +1,124 @@
 {
- "bpm": 120, "duration": 49.5, "key_root": "C", "target_lufs": -14.0, "fade_out": 1.0,
+ "bpm": 120,
+ "duration": 49.5,
+ "key_root": "C",
+ "target_lufs": -14.0,
+ "fade_out": 1.0,
  "sections": [
-  {"start": 0.0,  "end": 6.0,  "pattern": "groove"},
-  {"start": 6.0,  "end": 8.5,  "pattern": "silence"},
-  {"start": 8.5,  "end": 28.5, "pattern": "groove"},
-  {"start": 28.5, "end": 40.0, "pattern": "lift"},
-  {"start": 40.0, "end": 43.0, "pattern": "silence"},
-  {"start": 43.0, "end": 49.5, "pattern": "tail"}
+  {
+   "start": 0.0,
+   "end": 6.0,
+   "pattern": "groove"
+  },
+  {
+   "start": 6.0,
+   "end": 8.5,
+   "pattern": "silence"
+  },
+  {
+   "start": 8.5,
+   "end": 28.5,
+   "pattern": "groove"
+  },
+  {
+   "start": 28.5,
+   "end": 40.0,
+   "pattern": "lift"
+  },
+  {
+   "start": 40.0,
+   "end": 43.0,
+   "pattern": "silence"
+  },
+  {
+   "start": 43.0,
+   "end": 49.5,
+   "pattern": "tail"
+  }
  ],
  "events": [
-  {"t": 2.0,  "type": "snap"},
-  {"t": 4.5,  "type": "hit"},
-  {"t": 6.0,  "type": "cut", "len": 2.5},
-  {"t": 6.0,  "type": "tick", "gain": 0.5},
-  {"t": 8.5,  "type": "hit"},
-  {"t": 12.0, "type": "snap"},
-  {"t": 14.0, "type": "snap"},
-  {"t": 17.0, "type": "snap"},
-  {"t": 20.5, "type": "snap"},
-  {"t": 22.5, "type": "hit"},
-  {"t": 24.5, "type": "snap"},
-  {"t": 28.5, "type": "snap"},
-  {"t": 31.5, "type": "snap"},
-  {"t": 34.5, "type": "snap"},
-  {"t": 40.0, "type": "riser", "len": 2.0},
-  {"t": 40.0, "type": "cut", "len": 3.0},
-  {"t": 40.0, "type": "tick", "gain": 0.5},
-  {"t": 43.0, "type": "chord"},
-  {"t": 45.5, "type": "pluck", "note": "C5", "gain": 0.6}
+  {
+   "t": 2.0,
+   "type": "snap"
+  },
+  {
+   "t": 4.5,
+   "type": "hit"
+  },
+  {
+   "t": 6.0,
+   "type": "cut",
+   "len": 2.5
+  },
+  {
+   "t": 6.0,
+   "type": "tick",
+   "gain": 0.5
+  },
+  {
+   "t": 8.5,
+   "type": "hit"
+  },
+  {
+   "t": 12.0,
+   "type": "snap"
+  },
+  {
+   "t": 14.0,
+   "type": "snap"
+  },
+  {
+   "t": 17.0,
+   "type": "snap"
+  },
+  {
+   "t": 20.5,
+   "type": "snap"
+  },
+  {
+   "t": 23.0,
+   "type": "hit"
+  },
+  {
+   "t": 25.0,
+   "type": "snap"
+  },
+  {
+   "t": 28.5,
+   "type": "snap"
+  },
+  {
+   "t": 31.5,
+   "type": "snap"
+  },
+  {
+   "t": 34.0,
+   "type": "snap"
+  },
+  {
+   "t": 40.0,
+   "type": "riser",
+   "len": 2.0
+  },
+  {
+   "t": 40.0,
+   "type": "cut",
+   "len": 3.0
+  },
+  {
+   "t": 40.0,
+   "type": "tick",
+   "gain": 0.5
+  },
+  {
+   "t": 43.0,
+   "type": "chord"
+  },
+  {
+   "t": 45.0,
+   "type": "pluck",
+   "note": "C5",
+   "gain": 0.6
+  }
  ]
 }
