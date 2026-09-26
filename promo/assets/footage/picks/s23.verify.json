@@ -1,0 +1,14 @@
+{
+  "shot_id": "s23",
+  "approve": true,
+  "use": "chosen",
+  "in_point": 6.6,
+  "reason": "4851 at 6.6s: standing runner has just stopped (6.0s) and the forearms are already extended downward with hands at knee height, so 'bending down' reads on the first frame. Over the 0.7s window the hands reach the shoe (6.8s), the hair and sleeves fall into frame as the torso folds (7.0-7.2s), and lace-grabbing starts by 7.3s -- a continuous descent with no static frame. Low-angle framing hides the face throughout; no text, logos or watermark. Only caveat is the heavy orange sunset grade and lens flare, which grading can tame. Alternates checked: 36142 (hands drop onto a blue shoe at 0.2-0.5s but the subject is already kneeling; 720p, blown-out background) and 37003 (already crouched and tying from frame 0; 720p) show tying, not bending, so neither beats the chosen clip.",
+  "strips": [
+    "/tmp/claude-0/-home-user-Code-Zzamtong/6777a2d0-3b1c-5e78-87d6-3446c2a48b8a/scratchpad/stock/s23_verify_1.jpg",
+    "/tmp/claude-0/-home-user-Code-Zzamtong/6777a2d0-3b1c-5e78-87d6-3446c2a48b8a/scratchpad/stock/s23_verify_2.jpg",
+    "/tmp/claude-0/-home-user-Code-Zzamtong/6777a2d0-3b1c-5e78-87d6-3446c2a48b8a/scratchpad/stock/s23_verify_3.jpg",
+    "/tmp/claude-0/-home-user-Code-Zzamtong/6777a2d0-3b1c-5e78-87d6-3446c2a48b8a/scratchpad/stock/s23_verify_4.jpg",
+    "/tmp/claude-0/-home-user-Code-Zzamtong/6777a2d0-3b1c-5e78-87d6-3446c2a48b8a/scratchpad/stock/s23_verify_5.jpg"
+  ]
+}

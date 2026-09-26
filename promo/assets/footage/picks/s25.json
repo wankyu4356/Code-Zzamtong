@@ -1,32 +1,17 @@
 {
-  "shot_id": "s25",
-  "no_good_match": false,
-  "chosen": {
-    "mixkit_id": "12141",
-    "title": "patient arriving at dental office",
-    "file": "/home/user/Code-Zzamtong/promo/assets/footage/s25.mp4",
-    "quality": "1080",
-    "duration": 19.04,
-    "in_point": 9.5,
-    "fit_score": 5,
-    "faces": "partial - woman in 3/4 profile looking down, dentist masked with face shield; no frontal face",
-    "why": "Only downloaded candidate with an actual sitting-down motion. Woman in yellow shirt walks in from behind (5-8s), turns and lowers into the chair; her body stops descending at ~9.5s (contact), 9.6-10.5s she is settled. Chair is a dental chair in a clinic, not an office chair, and the angle is 3/4 side rather than pure back view. Natural white light, unsaturated, no text/logo. Reads as 'sits' in 0.7s; setting is clinic, which may suit a hospital promo but deviates from the brief."
-  },
-  "alternates": [
-    {
-      "mixkit_id": "39840",
-      "file": "/home/user/Code-Zzamtong/promo/assets/footage/candidates/s25_39840.mp4",
-      "duration": 11.18,
-      "in_point": 0.0,
-      "why": "Best-matching setting: back view of a man already seated in a black office chair at a desk, natural office light, no logos. No sit-down action anywhere in the 11s - static 'sitting' only, so it reads 'at desk' rather than 'sits down'."
-    },
-    {
-      "mixkit_id": "44072",
-      "file": "/home/user/Code-Zzamtong/promo/assets/footage/candidates/s25_44072.mp4",
-      "duration": 17.1,
-      "in_point": 0.0,
-      "why": "Side/back view of a man seated at a desk, no sit-down action; heavy red/magenta lighting so tone is off even after desaturation. Fallback only."
-    }
-  ],
-  "notes": "Mixkit title search returned no clip of a person sitting down into an office chair (6 sheets: 'sitting down office chair', 'man sits at desk', 'woman sits down chair', 'sitting down at desk', 'sits down', 'office chair'). Four candidates downloaded: 39840, 44072, 29993 (all already seated throughout, no sit motion; 29993 also has a laptop screen full of text) and 12141 (has a real sit-down at ~9.5s but in a dental clinic). Chose 12141 for the action with a low fit score; if the editor prefers setting over action, use 39840 from 0.0s. Consider re-searching with other wording ('takes a seat', 'arrives at office', 'starts work') if the office-chair back view is essential."
+ "shot_id": "s25",
+ "no_good_match": false,
+ "chosen": {
+  "mixkit_id": "50727",
+  "title": "a young student woman gets on her knees to look at books",
+  "file": "/home/user/Code-Zzamtong/promo/assets/footage/candidates/s25_50727.mp4",
+  "quality": "1080",
+  "duration": 10.635625,
+  "in_point": 1.6,
+  "fit_score": 7.5,
+  "faces": "side",
+  "why": "1.3~2.0초에 서 있던 자세에서 무릎을 굽혀 쪼그려 앉는 동작이 이어진다. 1.6초 첫 프레임에 이미 무릎이 굽어 '앉고'가 읽히고 2.0초에 엉덩이가 내려앉는 정점이 온다. 옆모습, 글자·워터마크 없음, 1080p. 와이드샷이라 펀치인 1.35로 인물을 키운다."
+ },
+ "alternates": [],
+ "notes": "검수에서 기각된 치과 클립(12141) 대신 수동 재선정. 사무실 의자는 Mixkit에 앉는 순간이 담긴 클립이 없어 도서관 쪼그려 앉기로 대체."
 }

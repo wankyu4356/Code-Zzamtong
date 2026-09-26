@@ -20,8 +20,15 @@ CAP = dict(size=28, weight=400, letter_spacing=0, color="rgba(255,255,255,0.6)",
 QUOTE = dict(size=60, weight=500, letter_spacing=-0.01, line_height=1.35, max_width=1440, color="#fff", shadow=False)
 
 
+MANIFEST = os.path.join(FOOT, "final", "manifest.json")
+_manifest = json.load(open(MANIFEST, encoding="utf-8")) if os.path.exists(MANIFEST) else {}
+
+
 def footage(shot_id):
-    """검수 결과를 우선해 (파일, 인점)을 돌려준다. 없으면 None."""
+    """final/manifest.json(트림본)이 있으면 그것을, 없으면 picks의 원본과 검수 인점을 돌려준다. 없으면 None."""
+    m = _manifest.get(shot_id)
+    if m and os.path.exists(m["file"]):
+        return m["file"], float(m["in_point"])
     pick_p = os.path.join(FOOT, "picks", f"{shot_id}.json")
     ver_p = os.path.join(FOOT, "picks", f"{shot_id}.verify.json")
     if not os.path.exists(pick_p):
@@ -46,14 +53,24 @@ def footage(shot_id):
     return file, inp
 
 
+# 샷별 미세 조정: 펀치인(정적 확대), 크롭 기준점, 밝기
+OVERRIDES = {
+    "s25": {"punch": 1.35, "anchor": [0.32, 0.6]},   # 도서관 와이드샷, 인물이 왼쪽
+    "s26": {"brightness": -0.15},                     # 피부와 흰 티가 밝아 흰 글자 대비 확보
+    "s27": {"punch": 1.25, "anchor": [0.5, 0.3]},     # 실루엣이 상단 중앙에 작게 있음
+}
+
+
 def clip_bg(shot_id, zoom="in", amount=0.05, brightness=0.0, vignette=True):
     f = footage(shot_id)
     if not f:
         return {"type": "black"}
     file, inp = f
+    o = OVERRIDES.get(shot_id, {})
     g = dict(GRADE)
-    g["brightness"] = brightness
-    return {"type": "clip", "src": file, "in": inp, "fit": "cover", "zoom": zoom, "zoom_amount": amount, "grade": g, "vignette": vignette, "grain": 0.08}
+    g["brightness"] = o.get("brightness", brightness)
+    return {"type": "clip", "src": file, "in": inp, "fit": "cover", "zoom": zoom, "zoom_amount": amount, "grade": g, "vignette": vignette, "grain": 0.08,
+            "punch": o.get("punch", 1.0), "anchor": o.get("anchor", [0.5, 0.5])}
 
 
 def photo_bg(name, brightness=-0.3, zoom="in", amount=0.03):

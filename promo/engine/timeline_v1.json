@@ -11,8 +11,8 @@
    "end": 1.0,
    "bg": {
     "type": "clip",
-    "src": "/home/user/Code-Zzamtong/promo/assets/footage/s01.mp4",
-    "in": 4.4,
+    "src": "/home/user/Code-Zzamtong/promo/assets/footage/final/s01.mp4",
+    "in": 0.4,
     "fit": "cover",
     "zoom": "in",
     "zoom_amount": 0.12,
@@ -23,7 +23,12 @@
      "gamma": 1.0
     },
     "vignette": true,
-    "grain": 0.08
+    "grain": 0.08,
+    "punch": 1.0,
+    "anchor": [
+     0.5,
+     0.5
+    ]
    }
   },
   {
@@ -201,20 +206,7 @@
    "start": 8.0,
    "end": 9.0,
    "bg": {
-    "type": "clip",
-    "src": "/home/user/Code-Zzamtong/promo/assets/footage/s09.mp4",
-    "in": 0.5,
-    "fit": "cover",
-    "zoom": "in",
-    "zoom_amount": 0.04,
-    "grade": {
-     "contrast": 1.05,
-     "saturation": 0.9,
-     "brightness": 0.0,
-     "gamma": 1.0
-    },
-    "vignette": true,
-    "grain": 0.08
+    "type": "black"
    },
    "texts": [
     {
@@ -239,8 +231,8 @@
    "end": 10.0,
    "bg": {
     "type": "clip",
-    "src": "/home/user/Code-Zzamtong/promo/assets/footage/s10.mp4",
-    "in": 0.3,
+    "src": "/home/user/Code-Zzamtong/promo/assets/footage/final/s10.mp4",
+    "in": 0.4,
     "fit": "cover",
     "zoom": "in",
     "zoom_amount": 0.04,
@@ -251,7 +243,12 @@
      "gamma": 1.0
     },
     "vignette": true,
-    "grain": 0.08
+    "grain": 0.08,
+    "punch": 1.0,
+    "anchor": [
+     0.5,
+     0.5
+    ]
    },
    "texts": [
     {
@@ -275,7 +272,25 @@
    "start": 10.0,
    "end": 11.0,
    "bg": {
-    "type": "black"
+    "type": "clip",
+    "src": "/home/user/Code-Zzamtong/promo/assets/footage/final/s11.mp4",
+    "in": 0.4,
+    "fit": "cover",
+    "zoom": "in",
+    "zoom_amount": 0.04,
+    "grade": {
+     "contrast": 1.05,
+     "saturation": 0.9,
+     "brightness": 0.0,
+     "gamma": 1.0
+    },
+    "vignette": true,
+    "grain": 0.08,
+    "punch": 1.0,
+    "anchor": [
+     0.5,
+     0.5
+    ]
    },
    "texts": [
     {
@@ -453,7 +468,25 @@
    "start": 16.0,
    "end": 16.5,
    "bg": {
-    "type": "black"
+    "type": "clip",
+    "src": "/home/user/Code-Zzamtong/promo/assets/footage/final/s18.mp4",
+    "in": 0.4,
+    "fit": "cover",
+    "zoom": "in",
+    "zoom_amount": 0.06,
+    "grade": {
+     "contrast": 1.05,
+     "saturation": 0.9,
+     "brightness": 0.0,
+     "gamma": 1.0
+    },
+    "vignette": true,
+    "grain": 0.08,
+    "punch": 1.0,
+    "anchor": [
+     0.5,
+     0.5
+    ]
    },
    "texts": [
     {
@@ -486,7 +519,25 @@
    "start": 16.5,
    "end": 17.0,
    "bg": {
-    "type": "black"
+    "type": "clip",
+    "src": "/home/user/Code-Zzamtong/promo/assets/footage/final/s19.mp4",
+    "in": 0.4,
+    "fit": "cover",
+    "zoom": "in",
+    "zoom_amount": 0.06,
+    "grade": {
+     "contrast": 1.05,
+     "saturation": 0.9,
+     "brightness": 0.0,
+     "gamma": 1.0
+    },
+    "vignette": true,
+    "grain": 0.08,
+    "punch": 1.0,
+    "anchor": [
+     0.5,
+     0.5
+    ]
    },
    "texts": [
     {
@@ -511,7 +562,25 @@
    "start": 17.0,
    "end": 17.5,
    "bg": {
-    "type": "black"
+    "type": "clip",
+    "src": "/home/user/Code-Zzamtong/promo/assets/footage/final/s20.mp4",
+    "in": 0.4,
+    "fit": "cover",
+    "zoom": "in",
+    "zoom_amount": 0.06,
+    "grade": {
+     "contrast": 1.05,
+     "saturation": 0.9,
+     "brightness": 0.0,
+     "gamma": 1.0
+    },
+    "vignette": true,
+    "grain": 0.08,
+    "punch": 1.0,
+    "anchor": [
+     0.5,
+     0.5
+    ]
    },
    "texts": [
     {
@@ -536,7 +605,25 @@
    "start": 17.5,
    "end": 18.0,
    "bg": {
-    "type": "black"
+    "type": "clip",
+    "src": "/home/user/Code-Zzamtong/promo/assets/footage/final/s21.mp4",
+    "in": 0.4,
+    "fit": "cover",
+    "zoom": "in",
+    "zoom_amount": 0.06,
+    "grade": {
+     "contrast": 1.05,
+     "saturation": 0.9,
+     "brightness": 0.0,
+     "gamma": 1.0
+    },
+    "vignette": true,
+    "grain": 0.08,
+    "punch": 1.0,
+    "anchor": [
+     0.5,
+     0.5
+    ]
    },
    "texts": [
     {
@@ -561,7 +648,25 @@
    "start": 18.0,
    "end": 18.5,
    "bg": {
-    "type": "black"
+    "type": "clip",
+    "src": "/home/user/Code-Zzamtong/promo/assets/footage/final/s22.mp4",
+    "in": 0.4,
+    "fit": "cover",
+    "zoom": "in",
+    "zoom_amount": 0.06,
+    "grade": {
+     "contrast": 1.05,
+     "saturation": 0.9,
+     "brightness": 0.0,
+     "gamma": 1.0
+    },
+    "vignette": true,
+    "grain": 0.08,
+    "punch": 1.0,
+    "anchor": [
+     0.5,
+     0.5
+    ]
    },
    "texts": [
     {
@@ -594,7 +699,25 @@
    "start": 18.5,
    "end": 19.0,
    "bg": {
-    "type": "black"
+    "type": "clip",
+    "src": "/home/user/Code-Zzamtong/promo/assets/footage/final/s23.mp4",
+    "in": 0.4,
+    "fit": "cover",
+    "zoom": "in",
+    "zoom_amount": 0.06,
+    "grade": {
+     "contrast": 1.05,
+     "saturation": 0.9,
+     "brightness": 0.0,
+     "gamma": 1.0
+    },
+    "vignette": true,
+    "grain": 0.08,
+    "punch": 1.0,
+    "anchor": [
+     0.5,
+     0.5
+    ]
    },
    "texts": [
     {
@@ -619,7 +742,25 @@
    "start": 19.0,
    "end": 19.5,
    "bg": {
-    "type": "black"
+    "type": "clip",
+    "src": "/home/user/Code-Zzamtong/promo/assets/footage/final/s24.mp4",
+    "in": 0.4,
+    "fit": "cover",
+    "zoom": "in",
+    "zoom_amount": 0.06,
+    "grade": {
+     "contrast": 1.05,
+     "saturation": 0.9,
+     "brightness": 0.0,
+     "gamma": 1.0
+    },
+    "vignette": true,
+    "grain": 0.08,
+    "punch": 1.0,
+    "anchor": [
+     0.5,
+     0.5
+    ]
    },
    "texts": [
     {
@@ -644,7 +785,25 @@
    "start": 19.5,
    "end": 20.0,
    "bg": {
-    "type": "black"
+    "type": "clip",
+    "src": "/home/user/Code-Zzamtong/promo/assets/footage/final/s25.mp4",
+    "in": 0.4,
+    "fit": "cover",
+    "zoom": "in",
+    "zoom_amount": 0.06,
+    "grade": {
+     "contrast": 1.05,
+     "saturation": 0.9,
+     "brightness": 0.0,
+     "gamma": 1.0
+    },
+    "vignette": true,
+    "grain": 0.08,
+    "punch": 1.35,
+    "anchor": [
+     0.32,
+     0.6
+    ]
    },
    "texts": [
     {
@@ -670,19 +829,24 @@
    "end": 20.5,
    "bg": {
     "type": "clip",
-    "src": "/home/user/Code-Zzamtong/promo/assets/footage/s26.mp4",
-    "in": 4.6,
+    "src": "/home/user/Code-Zzamtong/promo/assets/footage/final/s26.mp4",
+    "in": 0.4,
     "fit": "cover",
     "zoom": "in",
     "zoom_amount": 0.06,
     "grade": {
      "contrast": 1.05,
      "saturation": 0.9,
-     "brightness": 0.0,
+     "brightness": -0.15,
      "gamma": 1.0
     },
     "vignette": true,
-    "grain": 0.08
+    "grain": 0.08,
+    "punch": 1.0,
+    "anchor": [
+     0.5,
+     0.5
+    ]
    },
    "texts": [
     {
@@ -716,8 +880,8 @@
    "end": 21.0,
    "bg": {
     "type": "clip",
-    "src": "/home/user/Code-Zzamtong/promo/assets/footage/s27.mp4",
-    "in": 3.4,
+    "src": "/home/user/Code-Zzamtong/promo/assets/footage/final/s27.mp4",
+    "in": 0.4,
     "fit": "cover",
     "zoom": "in",
     "zoom_amount": 0.06,
@@ -728,7 +892,12 @@
      "gamma": 1.0
     },
     "vignette": true,
-    "grain": 0.08
+    "grain": 0.08,
+    "punch": 1.25,
+    "anchor": [
+     0.5,
+     0.3
+    ]
    },
    "texts": [
     {
@@ -762,8 +931,8 @@
    "end": 21.5,
    "bg": {
     "type": "clip",
-    "src": "/home/user/Code-Zzamtong/promo/assets/footage/s28.mp4",
-    "in": 1.4,
+    "src": "/home/user/Code-Zzamtong/promo/assets/footage/final/s28.mp4",
+    "in": 0.4,
     "fit": "cover",
     "zoom": "in",
     "zoom_amount": 0.06,
@@ -774,7 +943,12 @@
      "gamma": 1.0
     },
     "vignette": true,
-    "grain": 0.08
+    "grain": 0.08,
+    "punch": 1.0,
+    "anchor": [
+     0.5,
+     0.5
+    ]
    },
    "texts": [
     {
@@ -807,7 +981,25 @@
    "start": 21.5,
    "end": 22.0,
    "bg": {
-    "type": "black"
+    "type": "clip",
+    "src": "/home/user/Code-Zzamtong/promo/assets/footage/final/s29.mp4",
+    "in": 0.4,
+    "fit": "cover",
+    "zoom": "in",
+    "zoom_amount": 0.06,
+    "grade": {
+     "contrast": 1.05,
+     "saturation": 0.9,
+     "brightness": 0.0,
+     "gamma": 1.0
+    },
+    "vignette": true,
+    "grain": 0.08,
+    "punch": 1.0,
+    "anchor": [
+     0.5,
+     0.5
+    ]
    },
    "texts": [
     {
@@ -1084,7 +1276,25 @@
    "start": 36.0,
    "end": 36.5,
    "bg": {
-    "type": "black"
+    "type": "clip",
+    "src": "/home/user/Code-Zzamtong/promo/assets/footage/final/s38.mp4",
+    "in": 0.4,
+    "fit": "cover",
+    "zoom": "in",
+    "zoom_amount": 0.06,
+    "grade": {
+     "contrast": 1.05,
+     "saturation": 0.9,
+     "brightness": 0.0,
+     "gamma": 1.0
+    },
+    "vignette": true,
+    "grain": 0.08,
+    "punch": 1.0,
+    "anchor": [
+     0.5,
+     0.5
+    ]
    },
    "texts": [
     {
@@ -1117,7 +1327,25 @@
    "start": 36.5,
    "end": 37.0,
    "bg": {
-    "type": "black"
+    "type": "clip",
+    "src": "/home/user/Code-Zzamtong/promo/assets/footage/final/s39.mp4",
+    "in": 0.4,
+    "fit": "cover",
+    "zoom": "in",
+    "zoom_amount": 0.06,
+    "grade": {
+     "contrast": 1.05,
+     "saturation": 0.9,
+     "brightness": 0.0,
+     "gamma": 1.0
+    },
+    "vignette": true,
+    "grain": 0.08,
+    "punch": 1.0,
+    "anchor": [
+     0.5,
+     0.5
+    ]
    },
    "texts": [
     {
@@ -1142,7 +1370,25 @@
    "start": 37.0,
    "end": 37.5,
    "bg": {
-    "type": "black"
+    "type": "clip",
+    "src": "/home/user/Code-Zzamtong/promo/assets/footage/final/s40.mp4",
+    "in": 0.4,
+    "fit": "cover",
+    "zoom": "in",
+    "zoom_amount": 0.06,
+    "grade": {
+     "contrast": 1.05,
+     "saturation": 0.9,
+     "brightness": 0.0,
+     "gamma": 1.0
+    },
+    "vignette": true,
+    "grain": 0.08,
+    "punch": 1.0,
+    "anchor": [
+     0.5,
+     0.5
+    ]
    },
    "texts": [
     {
@@ -1167,7 +1413,25 @@
    "start": 37.5,
    "end": 38.0,
    "bg": {
-    "type": "black"
+    "type": "clip",
+    "src": "/home/user/Code-Zzamtong/promo/assets/footage/final/s41.mp4",
+    "in": 0.4,
+    "fit": "cover",
+    "zoom": "in",
+    "zoom_amount": 0.06,
+    "grade": {
+     "contrast": 1.05,
+     "saturation": 0.9,
+     "brightness": 0.0,
+     "gamma": 1.0
+    },
+    "vignette": true,
+    "grain": 0.08,
+    "punch": 1.0,
+    "anchor": [
+     0.5,
+     0.5
+    ]
    },
    "texts": [
     {
@@ -1192,7 +1456,25 @@
    "start": 38.0,
    "end": 38.5,
    "bg": {
-    "type": "black"
+    "type": "clip",
+    "src": "/home/user/Code-Zzamtong/promo/assets/footage/final/s42.mp4",
+    "in": 0.4,
+    "fit": "cover",
+    "zoom": "in",
+    "zoom_amount": 0.06,
+    "grade": {
+     "contrast": 1.05,
+     "saturation": 0.9,
+     "brightness": 0.0,
+     "gamma": 1.0
+    },
+    "vignette": true,
+    "grain": 0.08,
+    "punch": 1.0,
+    "anchor": [
+     0.5,
+     0.5
+    ]
    },
    "texts": [
     {
@@ -1225,7 +1507,25 @@
    "start": 38.5,
    "end": 39.0,
    "bg": {
-    "type": "black"
+    "type": "clip",
+    "src": "/home/user/Code-Zzamtong/promo/assets/footage/final/s43.mp4",
+    "in": 0.4,
+    "fit": "cover",
+    "zoom": "in",
+    "zoom_amount": 0.06,
+    "grade": {
+     "contrast": 1.05,
+     "saturation": 0.9,
+     "brightness": 0.0,
+     "gamma": 1.0
+    },
+    "vignette": true,
+    "grain": 0.08,
+    "punch": 1.0,
+    "anchor": [
+     0.5,
+     0.5
+    ]
    },
    "texts": [
     {
