@@ -40,6 +40,8 @@
   };
   const CARD_DEFAULTS = { stars: 5, source: "", anim_in: "rise", anim_out: "cut", x: "center", y: "center", width: 1100 };
   const FLASH_DEFAULTS = { frames: 2, color: "#fff", opacity: 0.9 };
+  const IMAGE_DEFAULTS = { width: 900, x: "center", y: "center", anim_in: "fade", anim_out: "cut", opacity: 1 };
+  const pendingImages = [];
   const STAR = "M12 2.6l2.9 6.2 6.8.8-5 4.6 1.3 6.7-6-3.3-6 3.3 1.3-6.7-5-4.6 6.8-.8z";
 
   let fps = 30, items = [];
@@ -108,6 +110,18 @@
     return { spec: s, el, sf: toFrame(s.start), ef: toFrame(s.end) };
   }
 
+  function makeImage(im) {
+    const s = Object.assign({}, IMAGE_DEFAULTS, im);
+    const el = document.createElement("img");
+    el.className = "anim image";
+    el.src = s.src.startsWith("data:") || s.src.startsWith("file://") ? s.src : "file://" + encodeURI(s.src);
+    el.style.width = s.width + "px";
+    el.style.height = "auto";
+    el.style.display = "block";
+    pendingImages.push(el.decode().catch(() => {}));
+    return { spec: s, el, sf: toFrame(s.start), ef: toFrame(s.end), maxOpacity: s.opacity };
+  }
+
   function makeFlash(f) {
     const s = Object.assign({}, FLASH_DEFAULTS, f);
     const el = document.createElement("div");
@@ -141,13 +155,16 @@
     stage.style.height = tl.height + "px";
     document.body.style.width = tl.width + "px";
     document.body.style.height = tl.height + "px";
-    const texts = [], cards = [], flashes = [];
+    const texts = [], cards = [], images = [], flashes = [];
+    pendingImages.length = 0;
     for (const shot of tl.shots) {
+      for (const im of shot.images || []) images.push(makeImage(im));
       for (const t of shot.texts || []) texts.push(makeText(t));
       for (const c of shot.cards || []) cards.push(makeCard(c));
       for (const f of shot.flashes || []) flashes.push(makeFlash(f));
     }
-    for (const it of [...texts, ...cards]) { it.wrap = place(it.spec, it.el); stage.appendChild(it.wrap); items.push(it); }
+    window.__imagesReady = Promise.all(pendingImages).then(() => true);
+    for (const it of [...images, ...texts, ...cards]) { it.wrap = place(it.spec, it.el); stage.appendChild(it.wrap); items.push(it); }
     for (const it of flashes) { it.wrap = it.el; stage.appendChild(it.el); items.push(it); }
     for (const it of items) it.wrap.style.display = "none";
     return items.length;
@@ -162,7 +179,7 @@
       if (!visible) return;
       if (it.flash) { key.push(i + ":flash"); return; }
       const a = animIn(it.spec.anim_in, f - it.sf);
-      const opacity = r4(a.opacity * animOut(it.spec.anim_out, it.ef - f));
+      const opacity = r4(a.opacity * animOut(it.spec.anim_out, it.ef - f) * (it.maxOpacity ?? 1));
       const transform = `translateY(${r4(a.dy)}px) scale(${r4(a.scale)})`;
       const filter = a.blur > 0.005 ? `blur(${r4(a.blur)}px)` : "none";
       it.el.style.opacity = String(opacity);

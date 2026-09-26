@@ -5,7 +5,7 @@ load(path) returns the parsed JSON with these fields attached:
     shot["frames"]                   end_f - start_f
     tl["total_frames"]
 "src" and "audio" paths are resolved to absolute paths relative to the JSON file.
-bg defaults are filled in. Text/card/flash defaults live in overlay.html.
+bg defaults are filled in. Text/card/image/flash defaults live in overlay.html.
 """
 import json
 import math
@@ -116,6 +116,8 @@ def validate(tl, base_dir):
             _validate_text(t, f"shot {sid} texts[{j}]", err)
         for j, c in enumerate(s.get("cards") or []):
             _validate_card(c, f"shot {sid} cards[{j}]", err)
+        for j, im in enumerate(s.get("images") or []):
+            _validate_image(im, f"shot {sid} images[{j}]", base_dir, err)
         for j, fl in enumerate(s.get("flashes") or []):
             _validate_flash(fl, f"shot {sid} flashes[{j}]", err)
 
@@ -200,6 +202,22 @@ def _validate_card(c, where, err):
     if not (isinstance(stars, int) and 0 <= stars <= 5):
         err(f"{where}: stars must be an integer 0..5")
     _validate_span(c, where, err)
+
+
+def _validate_image(im, where, base_dir, err):
+    src = im.get("src")
+    if not isinstance(src, str):
+        err(f"{where}: src is required")
+    else:
+        im["src"] = _resolve(src, base_dir)
+        if not os.path.isfile(im["src"]):
+            err(f"{where}: src not found: {im['src']}")
+    _validate_span(im, where, err)
+    if "width" in im and not (_is_num(im["width"]) and im["width"] > 0):
+        err(f"{where}: width must be a number > 0")
+    op = im.get("opacity", 1)
+    if not (_is_num(op) and 0 <= op <= 1):
+        err(f"{where}: opacity must be between 0 and 1")
 
 
 def _validate_flash(fl, where, err):

@@ -56,6 +56,7 @@ async function main() {
   await page.goto("file://" + path.join(HERE, "overlay.html"));
   const n = await page.evaluate((t) => window.setTimeline(t), tl);
   await page.evaluate(() => document.fonts.ready.then(() => true));
+  await page.evaluate(() => window.__imagesReady);
   console.log(`overlay: ${n} elements, frames ${from}..${to} (${to - from + 1}) -> ${args.out}`);
 
   let lastKey = null, lastFile = null, shots = 0, copies = 0;

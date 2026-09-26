@@ -88,6 +88,20 @@
 | anim_in | "hit" \| "slam" \| "fade" \| "rise" \| "none" | hit | |
 | anim_out | "cut" \| "fade" \| "none" | cut | |
 
+## images (로고 등 이미지 레이어)
+
+| 키 | 타입 | 기본값 | 설명 |
+|---|---|---|---|
+| src | string | 필수 | PNG(투명 배경 권장) 경로. 절대 경로 또는 timeline.json 기준 상대 경로 |
+| start, end | number | 필수 | 절대 초 |
+| width | number | 900 | 표시 너비(px). 높이는 비율대로 |
+| x, y | "center" \| "left" \| "right" \| "top" \| "bottom" \| px | center | 위치. 텍스트와 같은 규칙 |
+| anim_in | hit \| slam \| fade \| rise \| none | fade | 등장 |
+| anim_out | cut \| fade \| none | cut | 퇴장 |
+| opacity | 0~1 | 1 | 최대 불투명도 |
+
+흰색 로고에서 원본 색 로고로 바꾸려면 같은 위치에 두 개를 이어 붙인다 (앞 것은 anim_out cut, 뒤 것은 anim_in none 또는 fade).
+
 ## cards[]
 
 | 키 | 타입 | 기본값 | 설명 |
