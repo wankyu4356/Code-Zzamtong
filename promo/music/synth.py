@@ -218,6 +218,14 @@ def sine_bell(freq, dur=1.2):
     return x * np.exp(-t * 3.2) * 0.5
 
 
+def roomtone(dur=1.0):
+    """룸톤. 아주 낮은 저역 노이즈. 완전 무음 대신 공간이 있다는 느낌만."""
+    n = int(SR * dur)
+    x = _noise(n)
+    x = _onepole_lp(_onepole_lp(x, 420), 420)
+    return x * 0.012
+
+
 def tick(dur=0.03):
     """아주 작은 클릭. 검은 화면 글자 등장용."""
     n = int(SR * dur)

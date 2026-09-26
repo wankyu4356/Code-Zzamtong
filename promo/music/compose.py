@@ -166,6 +166,8 @@ def render(score):
             fx.add(S.sine_bell(prog[0]["arp"][0] * 2), t, gain=g * 0.5)
         elif ty == "sub_hit":
             bass.add(S.sub_note(prog[0]["sub"] / 2, 1.2), t, gain=g * 0.6)
+        elif ty == "roomtone":
+            fx.add(S.fade(S.roomtone(float(ev.get("len", 1.0))), 0.05, 0.02), t, gain=g)
         elif ty == "hat_roll":
             # len초 동안 32분음표 햇이 점점 커진다
             L = float(ev.get("len", 0.5))
