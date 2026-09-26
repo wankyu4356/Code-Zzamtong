@@ -4,29 +4,36 @@
   "chosen": {
     "mixkit_id": "9339",
     "title": "artist drawing a human brain",
-    "file": "/home/user/Code-Zzamtong/promo/assets/footage2/f12.mp4",
+    "file": "/home/user/Code-Zzamtong/promo/assets/footage2/candidates/f12_9339.mp4",
     "quality": "720",
     "duration": 53.45,
-    "in_point": 17.0,
-    "fit_score": 0.72,
+    "in_point": 11.4,
+    "fit_score": 6,
     "faces": "none",
-    "why": "Hand, paper, pen only; steady top-down close-up of a hand hatching a hand-drawn brain diagram with a ballpoint pen (matches 'doctor drawing diagram'). Continuous small stroke motion across 17.0-20.4s. No text, logo or watermark. Downsides: flat neutral/cool white light rather than warm desk light (needs a warm grade), and the pen is a fairly saturated blue."
+    "why": "흰 종이 위에 파란 볼펜으로 뇌 단면도를 그리는 탑뷰 고정 클로즈업. 손·종이·펜만, 얼굴·글자·로고 없음, 720p 16:9라 크롭 불필요. 11.4~14.4초: 11.4~12.2 그림 오른쪽 가장자리에 잔선 해칭, 12.4~12.8 손이 자연스럽게 아래 뇌간 쪽으로 내려오고, 이후 14.4까지 짧은 선을 계속 긋는다. 첫 프레임부터 '그리는 중'으로 읽히고, 17초 이후·40초 이후보다 그림이 덜 채워져 있어 '설명하는 단순한 선'에 더 가깝다(연구 단계 17.0 창은 손이 거의 멈춰 있어 버림). 리스크: 빛이 평평한 중성~차가운 라이트박스 흰색이고 파란 펜 채도가 높으며 뇌 그림이 다소 일러스트처럼 보임 → 색온도 +15~20 웜, 채도 -25~-35(펜을 슬레이트 블루로), 약한 비네트·블랙 리프트 필수. final_picks.json 메모대로 오른쪽으로 펀치인하면 그림 형태가 덜 보인다."
   },
   "alternates": [
+    {
+      "mixkit_id": "50110",
+      "file": "/home/user/Code-Zzamtong/promo/assets/footage2/candidates/f12_50110.mp4",
+      "duration": 9.38,
+      "in_point": 2.0,
+      "why": "톤·동작은 폴더에서 최고: 따뜻한 책상 빛, 크림 니트 소매, 검은 펜이 모눈 노트 위에 기하 도형 선을 긋고(펜 접촉 2.0초) 다른 손은 종이를 누른다. 1080p. 그러나 텍스트 규칙에 걸린다: 0~1.8초 상단 스웨트셔츠에 인쇄 문구('THE CREATIVE COLLECTIVE'), 2.6초부터 왼쪽 아래로 교재가 들어와 3.0초에는 스페인어 인쇄문('Coordenadas elípticas confocales', 'para problemas de potenciales…')과 수식이 풀해상도에서 또렷이 읽힌다. 깨끗한 3초 창이 없으므로 왼쪽 1/3과 아래를 잘라내는 강한 펀치인(≈1.4배)을 감수할 때만 대안."
+    },
     {
       "mixkit_id": "36721",
       "file": "/home/user/Code-Zzamtong/promo/assets/footage2/candidates/f12_36721.mp4",
       "duration": 13.28,
       "in_point": 2.0,
-      "why": "Best tonal match: warm window light, shallow depth of field, film-like low saturation, hand with pencil, sleeve visible. But it is a canvas on an easel rather than paper on a desk and the drawing motion is very subtle (lines barely visible)."
+      "why": "색감은 가장 좋음(창가 따뜻한 역광, 얕은 심도, 저채도, 청회색 소매의 손과 연필). 그러나 책상 종이가 아니라 이젤 위 캔버스이고 13초 동안 선이 거의 그어지지 않으며 손이 소프트 포커스. 디졸브용 질감 레이어 정도로만. 720p."
     },
     {
-      "mixkit_id": "30232",
-      "file": "/home/user/Code-Zzamtong/promo/assets/footage2/candidates/f12_30232.mp4",
-      "duration": 16.64,
-      "in_point": 1.0,
-      "why": "Extreme close-up of a pencil sketching hair on paper, warm skin tones and visible drawing motion, but handheld, jittery and frequently out of focus; last resort only."
+      "mixkit_id": "14782",
+      "file": "/home/user/Code-Zzamtong/promo/assets/footage2/candidates/f12_14782.mp4",
+      "duration": 10.04,
+      "in_point": 3.5,
+      "why": "흰 종이 위 자를 따라 펜촉이 직선을 긋는 매크로(3.5~7.0초 이동). '단순한 선'은 정확하지만 손가락 끝만 보이고 자에 붉은 반사가 강해 채도가 튀며 추상적. 720p."
     }
   ],
-  "notes": "Seven searches run; 'sketch pencil paper' and 'doctor drawing diagram' returned nothing, 'drawing with pen on paper' returned only a digital-tablet clip (48519, rejected: tablet + watch). 101389 (woman sketching in notepad) had no downloadable file. 24580 (writing in a paper notebook) was rejected because printed planner text and the written word are legible. Calligraphy set (5069x-5071x) rejected for saturated green cutting mats and legible words. Recommend warming 9339 by ~+15 temperature and lowering saturation to tame the blue pen; center crop unnecessary (16:9 source)."
+  "notes": "브리프 쿼리(히트 수): hand writing pen paper(23, 대부분 5069x~5071x 캘리그래피), drawing with pen(6), pen paper close up(13), writing notes desk(0), sketching pen paper(0). 자체 쿼리: writing(24), hand writing(24), drawing(15), taking notes(24), writing notebook(24), pen(24), doctor writing(18), sketch(5), writing on paper(24), writing pen(24), drawing diagram(0), notes pen paper(5), drawing lines(13), ballpoint pen(0), doodle(11), handwriting(18), white paper(17), blank paper(1), sheet of paper pen(2), writing close up(24), doctor explaining(2), consultation(7), ruler pen(1), note taking close up(4). 99888/99890/99909(최신 ID 손글씨 클로즈업)는 다운로드 파일이 없어 확인 불가. 내려받아 스트립·풀해상도 프레임으로 확인 후 탈락: 50110(위 텍스트 사유, 처음엔 채택했다가 3.0/4.0/5.0초 풀해상도 크롭에서 스페인어 교재 문장이 읽히는 것을 확인하고 대안으로 내림), 50113(같은 세트, 3초부터 얼굴), 50111(탑뷰 와이드, 얼굴·책상 전체), 24580(다이어리 인쇄 날짜와 'BUSINESS' 영문이 읽힘), 30232(핸드헬드 매크로, 초점 흔들림, 인물 스케치), 39844(아이맥·키보드 책상 오버숄더, 뒤통수, 차가운 톤), 39855(세로 1080x1920), 49557(양피지 편지, 영문 전체 판독, 어두운 고전 무드), 29975(청진기와 전경 프레임 사이로 찍은 손, 종이가 거의 안 보임), 17469(흰 가운·청진기·클립보드 들고 서서 씀, 파란 창), 47056(세미나 무릎 위 노트, 보라 펜, 뒤에 사람들), 24538(도면 위 인쇄선·컬러 표시), 34153(야외 붉은 테이블, 손이 종이를 가림), 28042(얼굴 정면 계속). 시트에서 제외: 48519(태블릿+시계), 45148(인쇄 노트+필기체 단어), 캘리그래피 세트(초록 커팅매트·영문 단어), 28362/17416('Signature' 계약서), 16556(자·컬러 도면). 9339의 손은 밝은 피부, 짧은 손톱, 소매 없음(맨손목) → 설명하는 '의사의 손'이라 리드(노인 남성)와 일치할 필요 없음. picks/f12.verify.json(검수자)도 9339 in 11.4를 웜 그레이드 조건부로 승인했고 final_picks.json과 일치. 모든 파일은 candidates/에 그대로 둠."
 }

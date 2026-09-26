@@ -2,31 +2,38 @@
   "shot_id": "f02",
   "no_good_match": false,
   "chosen": {
-    "mixkit_id": "22066",
-    "title": "opening curtains to bright sunshine",
-    "file": "/home/user/Code-Zzamtong/promo/assets/footage2/candidates/f02_22066.mp4",
+    "mixkit_id": "21669",
+    "title": "old man opening the window curtains",
+    "file": "/home/user/Code-Zzamtong/promo/assets/footage2/candidates/f02_21669.mp4",
     "quality": "720",
-    "duration": 25.15,
-    "in_point": 5.6,
-    "fit_score": 0.55,
-    "faces": "none (back view only; face never turns to camera within 5.6-8.8s)",
-    "why": "Static 16:9 shot from behind a woman in a white tee who parts dark brown curtains; 5.6s first sliver of light, 6.0-8.0s curtains swing open and warm blown-out daylight floods the frame over her hands and shoulders. Low-saturation brown/white palette, natural light, no logos or text, gentle continuous motion that fills a 3.2s cut. Not POV and no blanket, so it reads as 'someone opens the curtains' rather than 'my hand opens the curtains'."
+    "duration": 10.8,
+    "in_point": 1.75,
+    "fit_score": 6.5,
+    "faces": "none",
+    "why": "고정 카메라, 뒷모습 미디엄샷. 1.75초에 두 손이 베이지·회색 리넨 커튼 가운데를 잡고 2.0~3.5초 동안 커튼을 벌리기 시작, 3.75~4.75초에 양팔을 좌우로 활짝 벌려 커튼이 열리며 창밖(나무, 흐린 하늘)의 부드러운 자연광이 프레임 전체로 들어온다. 창 안쪽에 얇은 흰 속커튼이 있어 빛이 확산되고 하이라이트가 날아가지 않는다. 팔레트는 베이지 커튼·흰 속커튼·검정 체크 셔츠로 채도가 매우 낮고, 왼쪽에 집 램프 갓이 보여 호텔이 아닌 집 느낌. 1.75~4.75초 구간은 뒤통수(회색 머리)만 보이고 얼굴은 없다(5.0초부터 오른쪽으로 고개를 돌려 5.25초 이후 옆얼굴이 나오므로 4.8초 이전에 반드시 컷). 리스크: 1인칭 POV가 아니라 뒷모습이며 사람이 프레임을 크게 차지한다. 빛이 따뜻하기보다 중립·흐림이라 따뜻한 그레이딩이 필요하고, 720p(1280x720, 25fps)뿐이다. 3.75~4.75초 구간에서 오른쪽 절반(오른손+커튼 가장자리)만 크롭하면 손과 커튼 위주의 POV에 가까운 프레임을 얻을 수 있다."
   },
   "alternates": [
+    {
+      "mixkit_id": "22066",
+      "file": "/home/user/Code-Zzamtong/promo/assets/footage2/candidates/f02_22066.mp4",
+      "duration": 25.15,
+      "in_point": 5.75,
+      "why": "흰 티셔츠 여성의 뒷모습이 어두운 갈색 암막 커튼을 여는 고정샷. 5.75초 어둠, 6.0~6.5초 커튼 틈으로 첫 빛줄기, 6.75~7.75초 커튼이 열리며 따뜻한 아침빛이 쏟아지고 8.0초 이후 창이 완전히 하얗게 날아간다. '빛이 쏟아지는' 드라마는 가장 좋지만 커튼이 짙은 갈색 암막이라 호텔 느낌이 있고, 8.2초 이후 하이라이트가 클리핑된다. 5.75~8.75초 구간 얼굴 없음(끝까지 뒷모습). 젊은 여성으로 보여 f04(남성 청바지·단화)와 인물 일관성이 약하다. 720p."
+    },
+    {
+      "mixkit_id": "49001",
+      "file": "/home/user/Code-Zzamtong/promo/assets/footage2/candidates/f02_49001.mp4",
+      "duration": 13.76,
+      "in_point": 1.0,
+      "why": "손과 흰 블라인드, 빛만 있는 진짜 POV 클로즈업. 0.5초에 왼쪽 아래에서 손이 들어와 1.5~2.5초 블라인드 살을 만지고 3.0~4.0초에 살을 눌러 내리면 틈으로 창밖 빛이 들어온다(1.0~4.0초 사용). 얼굴·몸 없음, 흰색·회색 저채도, 720p. 단 커튼이 아니라 블라인드이고 살 하나를 눌러 내다보는 '엿보기' 제스처라 '커튼을 걷는다'와 뉘앙스가 다르며 원제도 spying이라 불안한 인상으로 읽힐 위험이 있다. 손·빛만 필요할 때의 대안."
+    },
     {
       "mixkit_id": "3977",
       "file": "/home/user/Code-Zzamtong/promo/assets/footage2/candidates/f02_3977.mp4",
       "duration": 11.01,
       "in_point": 0.0,
-      "why": "Heavily defocused warm sun glowing through a sheer curtain, 1080p, no people at all. Very film-like and low-saturation but almost no movement and no hand; usable only as a soft light-texture insert or a dissolve layer, not as the curtain-opening action."
-    },
-    {
-      "mixkit_id": "22240",
-      "file": "/home/user/Code-Zzamtong/promo/assets/footage2/candidates/f02_22240.mp4",
-      "duration": 34.0,
-      "in_point": 0.4,
-      "why": "Silhouette from behind throws open hotel curtains onto a grey city skyline (0.4-3.0s). Faceless and calm, but cold overcast light and an urban view clash with the warm morning tone; distant fallback only."
+      "why": "커튼 너머로 번지는 따뜻한 태양의 완전 아웃포커스 1080p 텍스처. 사람도 손도 동작도 없어 커튼 여는 액션은 못 하고, 디졸브 레이어나 빛 텍스처 인서트로만 쓸 수 있다."
     }
   ],
-  "notes": "Multi-word queries (morning light curtains / hand curtain sunlight / waking up morning light bed) returned zero results on Mixkit; single-word 'curtains', 'sunlight window' and 'morning bed' sheets were reviewed instead. No true POV hand-on-curtain clip exists in the free library; 22101 was pitch black, 23505 has garish striped curtains, 21669/23500/23310 show faces or hotel interiors. 22066 is a legitimate faceless curtain-opening beat with warm light, but if the POV/hand-on-blanket framing is essential, the cream paper card is the cleaner substitute. Highlights are clipped after ~8.2s (window blows out to pure white), so a slight exposure pull-down or a fade may help match the film look. Chosen clip copied to /home/user/Code-Zzamtong/promo/assets/footage2/f02.mp4."
+  "notes": "지정 쿼리: opening curtains 7건, hand opening curtains morning 0건, curtains sunlight 2건, morning window light 0건, opening curtain window 2건. 추가 쿼리: curtains 24건, curtain 24건(동일 결과), window light 24건(전부 무관), sunlight through window 24건(정면 인물·운동 클립 위주), sheer curtain 0건, bedroom morning 24건(전부 정면 얼굴), hand window 21건(여기서 49001 발견), blinds 24건, light through curtains 3건, morning sunlight 8건, sun through window 11건. Mixkit에는 '내 손이 커튼을 걷는' 진짜 POV 컷이 없다. 내려받아 확인한 후보: 22066(뒷모습, 따뜻하지만 암막·호텔톤), 22101(0~7.5초 완전 암흑, 이후 정장 실루엣이 도시 스카이라인 커튼을 엶, 노트북·사무실 느낌, 탈락), 22240(정장 실루엣, 회색 스카이라인, 호텔·차가운 톤, 탈락), 3977(텍스처만), 21669(선택), 23500(줄무늬 커튼 앞 짧은 원피스 여성 실루엣, 발코니, 휴양지 느낌, 탈락), 49001(블라인드+손, 대안). 시트에서 본 탈락: 23505(원색 줄무늬 커튼·아이), 23310(호텔 욕조 와이드), 9133(정면 얼굴·빨간 커튼), 31401(옆얼굴). 21669는 인물이 회색 머리 남성(체크 셔츠)이라 f04의 남성 청바지 인물과는 어울리지만 나이가 드러난다. 손 색: 밝은 피부톤. 22066은 젊은 여성으로 보이므로 둘 중 하나로 통일할 때 다른 컷(f09·f12·f14 손 클립)의 손 성별과 맞춰 고를 것. 모든 파일 candidates/에 보존."
 }

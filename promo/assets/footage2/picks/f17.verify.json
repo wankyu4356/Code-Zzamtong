@@ -1,0 +1,41 @@
+{
+  "shot_id": "f17",
+  "approve": false,
+  "use": "none",
+  "in_point": 1.4,
+  "reviewed": {
+    "chosen_35987": {
+      "file": "/home/user/Code-Zzamtong/promo/assets/footage2/f17.mp4",
+      "windows_checked": ["1.4-4.9 @0.2s"],
+      "faces": "none",
+      "text_logo_watermark": "none",
+      "motion": "steady continuous descent through the whole 1.4-4.8 window, one step roughly every 0.8s, no pause; scene reads at the first frame (feet on outdoor stone steps, daylight)",
+      "problems": [
+        "strappy multi-buckle black stiletto pumps, bare legs, black handbag/coat hem in the top of frame every second - fashion/corporate stock wardrobe, the exact 'stock ad' look the brief penalises; cannot be cropped or graded out",
+        "breaks character continuity: approved f04 establishes the walker in dark jeans and brown suede shoes; f17 would cut to a different person in heels for one 3.2s shot and kill the '내 발' illusion",
+        "same clip was already rejected for f03 (its pair) on these grounds, and f03 fell back to a cream paper card; approving it here would be inconsistent",
+        "low side-profile tracking shot of someone else's feet, not a POV of one's own feet",
+        "background is a monumental neoclassical facade under a fairly saturated blue sky - postcard plaza rather than a quiet morning; centre crop softens it but the sky remains"
+      ],
+      "if_overridden": "best window is 1.4-4.6 (in_point 1.4); stay inside 0-10s, she reaches the landing at ~11s"
+    },
+    "alt_4893": {
+      "file": "/home/user/Code-Zzamtong/promo/assets/footage2/candidates/f17_4893.mp4",
+      "windows_checked": ["0.6-4.1 @0.2s"],
+      "problems": ["flat sidewalk, no stairs at all - fails the scene", "frontal knee-down shot walking toward camera, not POV", "saturated orange/yellow storefront and graffiti behind, high-key bright look", "mint-white chunky sneakers and dark green trousers do not match the f04 character either"]
+    },
+    "candidate_28823": {
+      "file": "/home/user/Code-Zzamtong/promo/assets/footage2/candidates/f17_28823.mp4",
+      "windows_checked": ["4.5-8.0 @0.25s", "6.5-11.0 @0.25s"],
+      "note": "closest wardrobe match in the folder (dark leggings, brown ankle boots descending stone steps) but unusable",
+      "problems": ["the boot walker is alone in frame only ~7.0-8.25s (about 1.25s), then other commuters' feet enter top-right, the static frame empties at 8.5-9.0 and a crowd arrives from 9s - cannot fill 3.2s", "saturated blue jeans in frame until ~6.75s", "harsh midday sun with hard shadows on pink-tinted stone", "static camera, side view, not POV"]
+    },
+    "candidate_15134": {"file": "/home/user/Code-Zzamtong/promo/assets/footage2/candidates/f17_15134.mp4", "windows_checked": ["0-24.5 @1.5s"], "problems": ["same stiletto woman as 35987 (floral dress, black bag); mostly ascending 0-13s; same wardrobe problem throughout"]},
+    "candidate_22148": {"file": "/home/user/Code-Zzamtong/promo/assets/footage2/candidates/f17_22148.mp4", "windows_checked": ["0-39.5 @2.5s"], "problems": ["indoor marble stairs with gold railings, not outdoor", "knee braces on both legs, red X logo on sneakers", "fisheye action-cam look"]},
+    "candidate_25156": {"file": "/home/user/Code-Zzamtong/promo/assets/footage2/candidates/f17_25156.mp4", "windows_checked": ["0-10.4 @0.7s"], "problems": ["wide shot, woman's face visible the whole clip, walks toward camera"]},
+    "candidate_27771": {"file": "/home/user/Code-Zzamtong/promo/assets/footage2/candidates/f17_27771.mp4", "windows_checked": ["0-59 @3.5s"], "problems": ["indoor loft, face visible from ~10s, headphones/laptop scene - unrelated"]},
+    "candidate_40758": {"file": "/home/user/Code-Zzamtong/promo/assets/footage2/candidates/f17_40758.mp4", "windows_checked": ["0-7.6 @0.5s"], "problems": ["athlete running UP stadium steps", "saturated yellow seats fill the frame", "man's back and head visible from 5s"]}
+  },
+  "decision": "Reject. 35987 passes every hard rule (no face, no text, feet only, outdoor steps, daylight, continuous descent for 3.2s) but its stiletto-and-handbag wardrobe is unmistakable fashion-stock and contradicts the walker already established in f04 (dark jeans, brown suede shoes); the f03 verifier rejected this identical clip for the same reason and f17 is its pair. Nothing else in the candidates folder is stairs + faceless + single walker for 3.2s. Use the same card fallback as f03, or drop the f17 stairs beat and let f04's sidewalk walk carry the outdoor movement.",
+  "fallback": "cream paper card (match f03), or cut the beat"
+}

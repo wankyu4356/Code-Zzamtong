@@ -11,8 +11,8 @@
    "end": 4.0,
    "bg": {
     "type": "clip",
-    "src": "/home/user/Code-Zzamtong/promo/assets/footage2/candidates/f02_22066.mp4",
-    "in": 5.6,
+    "src": "/home/user/Code-Zzamtong/promo/assets/footage2/final/f02.mp4",
+    "in": 0.4,
     "speed": 1.0,
     "fit": "cover",
     "zoom": "in",
@@ -22,7 +22,7 @@
      "saturation": 0.84,
      "brightness": 0.0,
      "gamma": 1.02,
-     "temperature": 5900
+     "temperature": 5600
     },
     "vignette": true,
     "grain": 0.05,
@@ -36,16 +36,16 @@
    "texts": [
     {
      "font": "Noto Serif CJK KR",
-     "size": 38,
+     "size": 44,
      "weight": 400,
      "letter_spacing": 0.0,
      "line_height": 1.45,
      "color": "rgba(250,246,238,0.96)",
      "shadow": true,
      "x": 168,
-     "y": 896,
+     "y": 884,
      "align": "left",
-     "max_width": 1560,
+     "max_width": 1600,
      "anim_in": "fade",
      "in_frames": 12,
      "anim_out": "cut",
@@ -61,12 +61,12 @@
    "end": 7.0,
    "bg": {
     "type": "clip",
-    "src": "/home/user/Code-Zzamtong/promo/assets/footage2/f03.mp4",
-    "in": 0.6,
-    "speed": 1.0,
+    "src": "/home/user/Code-Zzamtong/promo/assets/footage2/final/f03.mp4",
+    "in": 0.0,
+    "speed": 0.45,
     "fit": "cover",
-    "zoom": "none",
-    "zoom_amount": 0.03,
+    "zoom": "in",
+    "zoom_amount": 0.015,
     "grade": {
      "contrast": 0.96,
      "saturation": 0.84,
@@ -85,16 +85,16 @@
    "texts": [
     {
      "font": "Noto Serif CJK KR",
-     "size": 38,
+     "size": 44,
      "weight": 400,
      "letter_spacing": 0.0,
      "line_height": 1.45,
      "color": "rgba(250,246,238,0.96)",
      "shadow": true,
      "x": 168,
-     "y": 896,
+     "y": 884,
      "align": "left",
-     "max_width": 1560,
+     "max_width": 1600,
      "anim_in": "fade",
      "in_frames": 12,
      "anim_out": "cut",
@@ -110,8 +110,8 @@
    "end": 10.0,
    "bg": {
     "type": "clip",
-    "src": "/home/user/Code-Zzamtong/promo/assets/footage2/f04.mp4",
-    "in": 2.8,
+    "src": "/home/user/Code-Zzamtong/promo/assets/footage2/final/f04.mp4",
+    "in": 0.4,
     "speed": 1.0,
     "fit": "cover",
     "zoom": "none",
@@ -121,7 +121,7 @@
      "saturation": 0.84,
      "brightness": 0.0,
      "gamma": 1.02,
-     "temperature": 5900
+     "temperature": 5300
     },
     "vignette": true,
     "grain": 0.05,
@@ -134,16 +134,16 @@
    "texts": [
     {
      "font": "Noto Serif CJK KR",
-     "size": 38,
+     "size": 44,
      "weight": 400,
      "letter_spacing": 0.0,
      "line_height": 1.45,
      "color": "rgba(250,246,238,0.96)",
      "shadow": true,
      "x": 168,
-     "y": 896,
+     "y": 884,
      "align": "left",
-     "max_width": 1560,
+     "max_width": 1600,
      "anim_in": "fade",
      "in_frames": 12,
      "anim_out": "cut",
@@ -159,8 +159,8 @@
    "end": 12.5,
    "bg": {
     "type": "clip",
-    "src": "/home/user/Code-Zzamtong/promo/assets/footage2/f05.mp4",
-    "in": 1.0,
+    "src": "/home/user/Code-Zzamtong/promo/assets/footage2/final/f05.mp4",
+    "in": 0.4,
     "speed": 1.0,
     "fit": "cover",
     "zoom": "none",
@@ -174,16 +174,16 @@
     },
     "vignette": true,
     "grain": 0.05,
-    "punch": 1.0,
+    "punch": 1.45,
     "anchor": [
      0.5,
-     0.5
+     0.85
     ]
    },
    "texts": [
     {
      "font": "Noto Serif CJK KR",
-     "size": 30,
+     "size": 34,
      "weight": 300,
      "letter_spacing": 0.02,
      "line_height": 1.4,
@@ -215,16 +215,16 @@
    "texts": [
     {
      "font": "Noto Serif CJK KR",
-     "size": 38,
+     "size": 44,
      "weight": 400,
      "letter_spacing": 0.0,
      "line_height": 1.45,
      "color": "#3A312B",
      "shadow": false,
      "x": 168,
-     "y": 896,
+     "y": 884,
      "align": "left",
-     "max_width": 1560,
+     "max_width": 1600,
      "anim_in": "fade",
      "in_frames": 12,
      "anim_out": "cut",
@@ -262,16 +262,16 @@
    "texts": [
     {
      "font": "Noto Serif CJK KR",
-     "size": 38,
+     "size": 44,
      "weight": 400,
      "letter_spacing": 0.0,
      "line_height": 1.45,
-     "color": "rgba(250,246,238,0.96)",
-     "shadow": true,
+     "color": "#3A312B",
+     "shadow": false,
      "x": 168,
-     "y": 896,
+     "y": 884,
      "align": "left",
-     "max_width": 1560,
+     "max_width": 1600,
      "anim_in": "fade",
      "in_frames": 12,
      "anim_out": "cut",
@@ -286,23 +286,41 @@
    "start": 18.5,
    "end": 21.5,
    "bg": {
-    "type": "color",
-    "color": "#F4EFE6",
-    "grain": 0.025
+    "type": "clip",
+    "src": "/home/user/Code-Zzamtong/promo/assets/footage2/final/f09.mp4",
+    "in": 0.4,
+    "speed": 1.0,
+    "fit": "cover",
+    "zoom": "in",
+    "zoom_amount": 0.03,
+    "grade": {
+     "contrast": 0.96,
+     "saturation": 0.84,
+     "brightness": 0.0,
+     "gamma": 1.02,
+     "temperature": 5900
+    },
+    "vignette": true,
+    "grain": 0.05,
+    "punch": 1.1,
+    "anchor": [
+     0.5,
+     0.5
+    ]
    },
    "texts": [
     {
      "font": "Noto Serif CJK KR",
-     "size": 38,
+     "size": 44,
      "weight": 400,
      "letter_spacing": 0.0,
      "line_height": 1.45,
-     "color": "#3A312B",
-     "shadow": false,
+     "color": "rgba(250,246,238,0.96)",
+     "shadow": true,
      "x": 168,
-     "y": 896,
+     "y": 884,
      "align": "left",
-     "max_width": 1560,
+     "max_width": 1600,
      "anim_in": "fade",
      "in_frames": 12,
      "anim_out": "cut",
@@ -340,16 +358,16 @@
    "texts": [
     {
      "font": "Noto Serif CJK KR",
-     "size": 38,
+     "size": 44,
      "weight": 400,
      "letter_spacing": 0.0,
      "line_height": 1.45,
-     "color": "rgba(250,246,238,0.96)",
-     "shadow": true,
+     "color": "#3A312B",
+     "shadow": false,
      "x": 168,
-     "y": 896,
+     "y": 884,
      "align": "left",
-     "max_width": 1560,
+     "max_width": 1600,
      "anim_in": "fade",
      "in_frames": 12,
      "anim_out": "fade",
@@ -360,16 +378,16 @@
     },
     {
      "font": "Noto Serif CJK KR",
-     "size": 38,
+     "size": 44,
      "weight": 400,
      "letter_spacing": 0.0,
      "line_height": 1.45,
-     "color": "rgba(250,246,238,0.96)",
-     "shadow": true,
+     "color": "#3A312B",
+     "shadow": false,
      "x": 168,
-     "y": 896,
+     "y": 884,
      "align": "left",
-     "max_width": 1560,
+     "max_width": 1600,
      "anim_in": "fade",
      "in_frames": 12,
      "anim_out": "cut",
@@ -385,40 +403,40 @@
    "end": 30.0,
    "bg": {
     "type": "clip",
-    "src": "/home/user/Code-Zzamtong/promo/assets/footage2/f12.mp4",
-    "in": 17.0,
+    "src": "/home/user/Code-Zzamtong/promo/assets/footage2/final/f12.mp4",
+    "in": 0.4,
     "speed": 1.0,
     "fit": "cover",
     "zoom": "none",
     "zoom_amount": 0.03,
     "grade": {
      "contrast": 0.96,
-     "saturation": 0.84,
+     "saturation": 0.6,
      "brightness": 0.0,
      "gamma": 1.02,
-     "temperature": 5900
+     "temperature": 5400
     },
     "vignette": true,
     "grain": 0.05,
-    "punch": 1.0,
+    "punch": 1.25,
     "anchor": [
-     0.5,
-     0.5
+     0.72,
+     0.55
     ]
    },
    "texts": [
     {
      "font": "Noto Serif CJK KR",
-     "size": 38,
+     "size": 44,
      "weight": 400,
      "letter_spacing": 0.0,
      "line_height": 1.45,
-     "color": "rgba(250,246,238,0.96)",
-     "shadow": true,
+     "color": "#3A312B",
+     "shadow": false,
      "x": 168,
-     "y": 896,
+     "y": 884,
      "align": "left",
-     "max_width": 1560,
+     "max_width": 1600,
      "anim_in": "fade",
      "in_frames": 12,
      "anim_out": "cut",
@@ -440,7 +458,7 @@
    "texts": [
     {
      "font": "Noto Serif CJK KR",
-     "size": 42,
+     "size": 46,
      "weight": 400,
      "letter_spacing": 0.0,
      "line_height": 1.7,
@@ -460,7 +478,7 @@
     },
     {
      "font": "Noto Sans CJK KR",
-     "size": 22,
+     "size": 24,
      "weight": 300,
      "letter_spacing": 0.06,
      "line_height": 1.2,
@@ -476,7 +494,7 @@
      "text": "네이버 리뷰",
      "start": 30.25,
      "end": 34.5,
-     "y": 655
+     "y": 664
     }
    ]
   },
@@ -486,8 +504,8 @@
    "end": 37.3,
    "bg": {
     "type": "clip",
-    "src": "/home/user/Code-Zzamtong/promo/assets/footage2/f14.mp4",
-    "in": 4.2,
+    "src": "/home/user/Code-Zzamtong/promo/assets/footage2/final/f14.mp4",
+    "in": 0.4,
     "speed": 1.0,
     "fit": "cover",
     "zoom": "in",
@@ -497,7 +515,7 @@
      "saturation": 0.84,
      "brightness": 0.0,
      "gamma": 1.02,
-     "temperature": 5900
+     "temperature": 5500
     },
     "vignette": true,
     "grain": 0.05,
@@ -510,16 +528,16 @@
    "texts": [
     {
      "font": "Noto Serif CJK KR",
-     "size": 38,
+     "size": 44,
      "weight": 400,
      "letter_spacing": 0.0,
      "line_height": 1.45,
      "color": "rgba(250,246,238,0.96)",
      "shadow": true,
      "x": 168,
-     "y": 896,
+     "y": 884,
      "align": "left",
-     "max_width": 1560,
+     "max_width": 1600,
      "anim_in": "fade",
      "in_frames": 12,
      "anim_out": "cut",
@@ -541,7 +559,7 @@
    "texts": [
     {
      "font": "Noto Serif CJK KR",
-     "size": 42,
+     "size": 46,
      "weight": 400,
      "letter_spacing": 0.0,
      "line_height": 1.7,
@@ -561,7 +579,7 @@
     },
     {
      "font": "Noto Sans CJK KR",
-     "size": 22,
+     "size": 24,
      "weight": 300,
      "letter_spacing": 0.06,
      "line_height": 1.2,
@@ -577,7 +595,7 @@
      "text": "네이버 리뷰",
      "start": 37.55,
      "end": 39.8,
-     "y": 619
+     "y": 625
     }
    ]
   },
@@ -587,8 +605,8 @@
    "end": 42.3,
    "bg": {
     "type": "clip",
-    "src": "/home/user/Code-Zzamtong/promo/assets/footage2/f16.mp4",
-    "in": 1.6,
+    "src": "/home/user/Code-Zzamtong/promo/assets/footage2/final/f16.mp4",
+    "in": 0.4,
     "speed": 1.0,
     "fit": "cover",
     "zoom": "none",
@@ -602,7 +620,7 @@
     },
     "vignette": true,
     "grain": 0.05,
-    "punch": 1.0,
+    "punch": 1.4,
     "anchor": [
      0.5,
      0.5
@@ -617,12 +635,12 @@
    "end": 45.3,
    "bg": {
     "type": "clip",
-    "src": "/home/user/Code-Zzamtong/promo/assets/footage2/f17.mp4",
-    "in": 1.4,
-    "speed": 1.0,
+    "src": "/home/user/Code-Zzamtong/promo/assets/footage2/final/f17.mp4",
+    "in": 0.0,
+    "speed": 0.45,
     "fit": "cover",
-    "zoom": "none",
-    "zoom_amount": 0.03,
+    "zoom": "in",
+    "zoom_amount": 0.08,
     "grade": {
      "contrast": 0.96,
      "saturation": 0.84,
@@ -643,16 +661,16 @@
    "texts": [
     {
      "font": "Noto Serif CJK KR",
-     "size": 38,
+     "size": 44,
      "weight": 400,
      "letter_spacing": 0.0,
      "line_height": 1.45,
      "color": "rgba(250,246,238,0.96)",
      "shadow": true,
      "x": 168,
-     "y": 896,
+     "y": 884,
      "align": "left",
-     "max_width": 1560,
+     "max_width": 1600,
      "anim_in": "fade",
      "in_frames": 12,
      "anim_out": "cut",
@@ -668,15 +686,15 @@
    "end": 47.8,
    "bg": {
     "type": "clip",
-    "src": "/home/user/Code-Zzamtong/promo/assets/footage2/f18.mp4",
-    "in": 8.4,
+    "src": "/home/user/Code-Zzamtong/promo/assets/footage2/final/f18.mp4",
+    "in": 0.4,
     "speed": 1.0,
     "fit": "cover",
     "zoom": "none",
     "zoom_amount": 0.03,
     "grade": {
      "contrast": 0.96,
-     "saturation": 0.84,
+     "saturation": 0.78,
      "brightness": 0.0,
      "gamma": 1.02,
      "temperature": 5900
@@ -692,16 +710,16 @@
    "texts": [
     {
      "font": "Noto Serif CJK KR",
-     "size": 38,
+     "size": 44,
      "weight": 400,
      "letter_spacing": 0.0,
      "line_height": 1.45,
      "color": "rgba(250,246,238,0.96)",
      "shadow": true,
      "x": 168,
-     "y": 896,
+     "y": 884,
      "align": "left",
-     "max_width": 1560,
+     "max_width": 1600,
      "anim_in": "fade",
      "in_frames": 12,
      "anim_out": "cut",
@@ -711,7 +729,7 @@
     },
     {
      "font": "Noto Sans CJK KR",
-     "size": 22,
+     "size": 24,
      "weight": 300,
      "letter_spacing": 0.06,
      "line_height": 1.2,
@@ -727,7 +745,7 @@
      "text": "네이버 리뷰",
      "start": 45.8,
      "end": 47.8,
-     "y": 956
+     "y": 950
     }
    ]
   },
@@ -745,7 +763,7 @@
    "texts": [
     {
      "font": "Noto Serif CJK KR",
-     "size": 56,
+     "size": 60,
      "weight": 500,
      "letter_spacing": -0.005,
      "line_height": 1.7,
@@ -765,7 +783,7 @@
     },
     {
      "font": "Noto Sans CJK KR",
-     "size": 28,
+     "size": 30,
      "weight": 300,
      "letter_spacing": 0.06,
      "line_height": 1.2,
@@ -781,11 +799,11 @@
      "text": "낙성대역 4번 출구 100m · 주차 무료 · 02-872-3301",
      "start": 50.9,
      "end": 55.5,
-     "y": 760
+     "y": 764
     },
     {
      "font": "Noto Sans CJK KR",
-     "size": 28,
+     "size": 30,
      "weight": 300,
      "letter_spacing": 0.06,
      "line_height": 1.2,
@@ -801,7 +819,7 @@
      "text": "평일 9~19시 · 토 9~14시 · 일요일 진료는 네이버 예약",
      "start": 50.9,
      "end": 55.5,
-     "y": 806
+     "y": 812
     }
    ],
    "images": [

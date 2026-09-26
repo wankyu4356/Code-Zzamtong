@@ -2,31 +2,38 @@
   "shot_id": "f14",
   "no_good_match": false,
   "chosen": {
-    "mixkit_id": "2563",
-    "title": "person touching yellow leaves",
-    "file": "/home/user/Code-Zzamtong/promo/assets/footage2/f14.mp4",
-    "quality": "1080",
-    "duration": 30.1,
-    "in_point": 4.2,
-    "fit_score": 6.5,
+    "mixkit_id": "49001",
+    "title": "a mans hand opening the blinds to spy on his neighbour",
+    "file": "/home/user/Code-Zzamtong/promo/assets/footage2/candidates/f14_49001.mp4",
+    "quality": "720",
+    "duration": 13.76,
+    "in_point": 3.0,
+    "fit_score": 5,
     "faces": "none",
-    "why": "Warm backlit haze pours over a hand; fingers gently touch a leaf edge (4.2-5.4s) then lift and extend (5.6-6.2s), giving the slow finger movement the shot needs. Low-saturation film look, natural light, no face. Deviation: outdoor autumn leaves, not a window sill; blur top-right in 0-4s avoided by the 4.2s in-point."
+    "why": "실내 창가. 흰 블라인드에 손이 닿아 3.5~3.9초에 손가락이 슬랫 한 장을 천천히 내리면 창밖 낮빛이 틈으로 새어 들어와 손등과 손가락 끝에 걸리고, 이후 5.5초까지 손이 그대로 머문다(4.5초부터는 완전 정지 홀드, final_picks.json은 in 4.5를 사용). 손·블라인드·창틀만 있고 얼굴·글자 없음, 흰색·회색·살구색의 매우 낮은 채도, 카메라 고정, 720p 25fps 실시간. f02 확정 컷(집 안에서 커튼을 여는 노인)과 같은 '집 창가' 공간으로 이어지고 f02 대안 목록에도 있던 클립이라 콜백으로 읽힌다. 리스크: 햇빛이 아니라 흐린 날 확산광이라 손에 '떨어지는 빛'이 약하고 손이 반그늘(웜 그레이드 +20, 창 쪽 하이라이트 살짝 올려 보완 필요), 제목처럼 '엿보는' 제스처로 읽힐 수 있어 컷을 짧게 잡고 손이 내려오는 순간(3.0~5.5)으로 시작하는 편이 안전, 손이 중년 남성 손이라 f09(노인 손)보다 젊어 보임."
   },
   "alternates": [
     {
-      "mixkit_id": "32582",
-      "file": "/home/user/Code-Zzamtong/promo/assets/footage2/candidates/f14_32582.mp4",
-      "duration": 20.6,
-      "in_point": 12.8,
-      "why": "True POV: arm reaches into sun through trees and fingers slowly spread open (12.8-15.7s). Motion matches best, but colour is cool blue/green summer sky rather than warm morning; would need a warm grade."
+      "mixkit_id": "2563",
+      "file": "/home/user/Code-Zzamtong/promo/assets/footage2/candidates/f14_2563.mp4",
+      "duration": 30.1,
+      "in_point": 25.9,
+      "why": "따뜻한 저녁 역광 속에서 펼친 손이 노란 잎 위를 천천히 떠돌며 손가락을 굽혔다 편다(25.9~28.6초, 검수자가 0.1초 단위로 확인한 창: 25.8 이전에 오른쪽 위로 스치는 초점 나간 흰 머리 형체가 사라지고 29.1에 다시 들어옴). 손등에 플레어가 걸려 '빛을 받는 손'이라는 정서는 가장 정확하고 1080p, 손이 프레임 가장자리에서 들어와 POV로 읽힘. 그러나 야외 가을 나무라 실내 창가 연속성이 깨지고 노란 잎이 가장 채도 높은 요소(-15 디새추레이션 필요), 왼쪽 위에 가는 막대가 보임. 실내 연속성보다 빛의 정서를 우선하면 이쪽."
     },
     {
       "mixkit_id": "14600",
       "file": "/home/user/Code-Zzamtong/promo/assets/footage2/candidates/f14_14600.mp4",
-      "duration": 16.9,
-      "in_point": 0.6,
-      "why": "Warmest palette, film-like sunset over a field; fingers spread at 1.0-2.0s. Downsides: dark out-of-focus hat/back-of-head fills left third, evening not morning, and after 2.5s it becomes a stock 'pinch the sun' gesture."
+      "duration": 16.92,
+      "in_point": 12.5,
+      "why": "들판 일몰 앞에 들어올린 손이 12.5~15.0초에 손가락을 폈다 오므리며 손가락 사이로 해가 새어 나온다. 따뜻한 골든아워, 저채도, 얼굴 없음. 동작은 브리프에 가장 가깝지만 왼쪽 아래에 모자 쓴 여성의 뒤통수 실루엣이 크게 들어와 오버숄더로 읽히고, 렌즈 플레어 강함, 핸드헬드, 720p, 2.5초 뒤에는 해를 집는 스톡 제스처로 바뀜."
+    },
+    {
+      "mixkit_id": "46762",
+      "file": "/home/user/Code-Zzamtong/promo/assets/footage2/candidates/f14_46762.mp4",
+      "duration": 17.08,
+      "in_point": 2.5,
+      "why": "일몰 앞 손 실루엣이 2.5~5.0초에 손바닥을 펴고 손가락 사이로 해가 비친다. 얼굴 없음, 고정 카메라. 그러나 손이 완전히 검은 실루엣이라 피부에 빛이 닿는 장면이 아니고 하늘이 노랑·주황 고채도라 브리프의 저채도 실내 톤과 정반대. 720p."
     }
   ],
-  "notes": "Mixkit has no real 'window light on hand/knee' clip: 7 queries (sunlight on hand, hand sun rays window, hand reaching light, light through window, hand close up warm light, hand sun, sunlight hands) returned mostly silhouettes, city lights, gift wrapping and beach couples. 2563 is the closest in tone; if the editor wants strict indoor continuity, the cream-paper card is a fair substitute. 25920 downloaded and rejected: harsh black silhouette, partial profile at frame edge."
+  "notes": "브리프 쿼리(히트 수): sunlight on hand(4), hand in sunlight window(0), hand light window(3), hand reaching sunlight(0), warm light hand close up(8, 전부 크리스마스 포장). 자체 쿼리: hand sunlight(4), sunlight window(24), hand light(24), light through window(24), hand shadow(22), hand close up(24), sun rays hand(0), fingers light(7), hand sun(10), golden hour hand(3), sunbeam(9), window light(24), morning sunlight(8), sun through window(11), open palm(1), palm hand(1), fingers(24), hand opening(23), sunlight skin(2), light rays(11), curtain light(2), sunny window(24), hand(24), lens flare hand(0), hand window(21), touching window(2), hand on glass(24), sunset hand(24), backlit(8), warm light(24), golden light(24), reaching hand(24), hand bed morning(7), waking up hand(24), hand blanket(3), light and shadow(24), sunlight(24), hand raised sun(0), sunlight through curtain(1), light beam(13), hand in the light(24), sun ray(20), dust sunlight(0), light through blinds(1), window shadow(13), sunlight bedroom(2), bed sunlight(3), hand slow motion(24), sunlit(24), hand touching light(2), sun rays room(0), soft light hand(8), sun between fingers(0), hand sky(22), palm sunlight(2), sunshine hand(2), morning sun hand(1), hand rays(1), hand curtain(4), hand up sun(10). Mixkit에서 '손+햇빛'은 전부 야외(일몰·들판·나무) 아니면 실루엣이고, 실내 창가 햇빛이 손에 떨어지는 클로즈업은 없다. 창가 인물 클립(13201, 12921, 42741, 8800, 24679, 33307 등)은 모두 얼굴이 나옴. 따라서 '실내 창가'를 지키는 49001과 '따뜻한 빛'을 지키는 2563 중 하나를 골라야 했고, f02(집 안 커튼)와의 공간 연속성과 final_picks.json의 결정(49001 in 4.5)에 맞춰 49001을 채택, 2563(검수자 승인 창 25.9)을 1순위 대안으로 둠. 참고: 이 파일을 처음 쓸 때 이전 연구자의 f14.json(2563 in 4.2, 검수자가 25.9로 이동)을 덮어썼으며 그 내용은 picks/f14.verify.json에 요약돼 있음. 내려받아 확인 후 탈락: 25920(나무 사이 역광, 손이 검은 실루엣, 차가운 톤), 32582(초록 나무 사이로 맨팔 POV, 60fps, 초록 고채도, 뻔한 포즈), 40938(흰 벽 그림자 손놀이, 무채색), 23895(전기 히터 붉은 빛), 3924(세로), 942(요가 여성 얼굴), 32578(일몰 앞 남성 전신 실루엣), 13299(창가 바닥 여성 실루엣 와이드). f02 후보 커튼 클립(22066, 22101, 22240, 3977)도 전신 뒷모습 와이드라 손 클로즈업 구간이 없어 f14 전용 불가. 49001은 f02 대안(in 1.0)에도 올라 있으므로 두 컷에 동시에 쓰지 말 것. 피부 메모: 49001은 중간 톤의 성인 남성 손(털 약간), 소매 없음. 모든 파일은 candidates/에 그대로 둠(footage2/f14.mp4는 이전 연구자가 복사한 2563이며 손대지 않음)."
 }

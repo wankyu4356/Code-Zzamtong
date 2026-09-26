@@ -4,29 +4,29 @@
   "chosen": {
     "mixkit_id": "23410",
     "title": "man walking on the concrete sidewalk",
-    "file": "/home/user/Code-Zzamtong/promo/assets/footage2/f04.mp4",
+    "file": "/home/user/Code-Zzamtong/promo/assets/footage2/candidates/f04_23410.mp4",
     "quality": "720",
     "duration": 28.12,
-    "in_point": 2.8,
+    "in_point": 2.0,
     "fit_score": 8.5,
     "faces": "none",
-    "why": "Low rear-following shot of feet on concrete pavement in hard sunlight with a long shadow stretching toward camera; only shoes, jeans hems and shadow are visible. Continuous steady walking motion for the whole clip, desaturated slightly cool film-like grade, no text or watermark. 2.8s has both feet planted with shadow fully in frame."
+    "why": "발 높이에서 뒤를 따라가는 로우 트래킹샷. 짙은 남색 청바지 밑단과 밝은 베이지(연한 황갈색) 스웨이드 단화만 보이고 강한 햇빛이 뒤에서 들어와 발 앞으로 긴 그림자가 회색 아스팔트 보도 위에 뻗는다. 2.0초에 두 발이 모두 땅에 닿아 그림자가 또렷하고, 2.0~5.0초 동안 일정한 보폭으로 오른발·왼발이 번갈아 나가며 걷기가 끊기지 않는다. 배경은 흐린 철제 난간과 도시 보도, 글자·간판 없음. 살짝 푸른 기가 도는 저채도 필름룩. 얼굴 없음(전 구간 무릎 아래). 리스크: 720p(1280x720, 25fps)뿐이라 1080p 타임라인에서 업스케일 필요, 푸른 캐스트는 따뜻한 그레이딩으로 맞출 것. 걷는 방향이 카메라에서 멀어지는 쪽이라 POV라기보다 '따라가는 시점'이다."
   },
   "alternates": [
     {
       "mixkit_id": "98",
       "file": "/home/user/Code-Zzamtong/promo/assets/footage2/candidates/f04_98.mp4",
       "duration": 10.55,
-      "in_point": 1.0,
-      "why": "Feet crossing a zebra crosswalk in hard light with a visible shadow, low saturation, no face; reads as 'crossing a road' rather than sidewalk and has bollards/traffic in background."
+      "in_point": 0.5,
+      "why": "1080p. 올리브그린 스웨이드 운동화(생고무 밑창)와 짙은 청바지가 횡단보도 흰 줄 위를 카메라 쪽으로 걸어오며, 강한 햇빛에 그림자가 옆으로 길게 진다. 0.5~3.5초 얼굴 없음, 저채도. 다만 보도가 아니라 횡단보도이고 배경에 검흰 볼라드와 차량 바퀴가 흐리게 보여 '길을 건넌다'로 읽힌다. 신발 색이 23410과 달라 같은 컷 안에서 섞어 쓰면 안 된다."
     },
     {
       "mixkit_id": "21289",
       "file": "/home/user/Code-Zzamtong/promo/assets/footage2/candidates/f04_21289.mp4",
       "duration": 6.07,
       "in_point": 0.5,
-      "why": "Top-down feet walking on grey concrete slabs, quiet and desaturated, but flat overcast light with almost no shadow, so it misses the 'strong sun' brief."
+      "why": "위에서 내려다본 진짜 POV에 가까운 앵글, 갈색 가죽 단화와 짙은 바지가 회색 콘크리트 판 위를 걷는다. 조용하고 저채도이지만 흐린 날이라 그림자가 거의 없어 '햇빛 강한 아침·긴 그림자'가 빠진다. 6초 길이, 720p, 0.5~3.5초 사용."
     }
   ],
-  "notes": "Searches: walking feet shadow (0 results), walking feet sidewalk (1), feet walking (20), shadow walking (2), walking legs (20), walking shoes (9), footsteps street (2). Downloaded 23410, 21289, 4893, 98. 4893 (sunny tiled sidewalk) rejected as alternate: torso visible, colorful background (orange sign, mint sneakers) and higher saturation feels more stock-ad. 23410 is 720p only but 16:9 landscape and clean; slight blue cast may want a warm grade to match the film-look palette."
+  "notes": "지정 쿼리: walking feet sidewalk 1건, pov walking 0건, feet walking shadow 0건, walking shoes pavement 0건, person walking legs city 3건. 추가 쿼리: feet walking 24건, walking legs 20건, walking shoes 9건, shadow walking 2건(숲 아이들·사막 그림자), footsteps 2건, sneakers walking 3건, walking street shoes 2건, walking pavement 1건, pedestrian feet 2건, walking asphalt 1건, legs walking street 6건, man walking street 24건. 내려받아 확인한 후보: 23410(선택), 98(대안), 21289(대안), 4893(상체까지 보이고 민트색 운동화·주황 간판·초록 잔디로 채도 높고 광고 스톡 느낌, 탈락), 8312(숲길을 걷는 두 아이, 탈락), 39940·39942(제목과 달리 드론 항공 도로·사막 샷, 탈락), 4889(헤드폰·배낭 남자의 전신 뒷모습, 원색 배경, 탈락), 3528(자동차 바퀴 옆에 서 있는 검정 운동화 정지샷, 걷지 않음, 탈락). 신발·의상 기록: 23410 = 밝은 베이지 스웨이드 단화 + 짙은 남색 청바지(남성). 98 = 올리브그린 스웨이드 운동화(생고무 밑창) + 짙은 청바지. 21289 = 갈색 가죽 단화 + 검정 바지. f03·f17에서 발이 나오는 컷은 가능하면 베이지 단화+짙은 청바지에 맞출 것(현재 f03·f17 선택 35987은 검정 하이힐이라 불일치)."
 }

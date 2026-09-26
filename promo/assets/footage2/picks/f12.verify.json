@@ -1,0 +1,42 @@
+{
+  "shot_id": "f12",
+  "approve": true,
+  "use": "chosen",
+  "mixkit_id": "9339",
+  "file": "/home/user/Code-Zzamtong/promo/assets/footage2/f12.mp4",
+  "in_point": 11.4,
+  "out_point": 14.6,
+  "need_sec": 3.2,
+  "fit_score": 0.6,
+  "checked_ranges": {
+    "chosen_9339": "17.0-20.4 @0.2 (researcher window), 0.0-3.4 @0.2, 11.0-14.6 @0.2, 27.0-30.4 @0.2, 40.4-44.0 @0.2, 0-51 @3.0 overview; per-window motion energy measured at 5fps over the whole clip",
+    "alt_36721": "2.0-5.4 @0.2, 0-13 @1.0",
+    "alt_30232": "1.0-4.4 @0.2, 0-16 @1.0",
+    "extra_candidates_in_folder": "14782, 17469, 24538, 29975, 39844, 39855, 47056, 49557, 50110, 50113 each 0-10 @1.0; 50110 also 0-6.6 @0.2 plus full-res frames at 0.0/1.5/3.2/4.0"
+  },
+  "findings": {
+    "content": "Hand, paper, ballpoint only. Steady locked-off top-down close-up, 16:9 720p source, no crop needed. No face, no text, no logo, no watermark anywhere in 0-53s. No acting toward camera.",
+    "in_point_change": "Researcher's 17.0-20.4 is the most static stretch of the clip (hand parked at the brain stem, only a pen-tip wiggle; motion energy 48 vs clip max 79). Moved to 11.4-14.6: hatching strokes at the right edge of the drawing 11.4-12.2, a soft natural reposition of the hand down to the stem 12.4-12.8, then continuous hatching through 14.6. Reads as drawing from the first frame and the drawing is less filled-in here than at 17s or 40s, which is closer to the brief's 'simple explanatory lines'. 40.6-43.8 has even more motion but the sketch is fully hatched (more 'artwork').",
+    "first_frame": "11.4s: hand at right, pen tip on paper, brain outline centre-left. Scene reads instantly.",
+    "motion": "Continuous through 11.4-14.6 with no freeze; one gentle hand travel at ~12.5s, otherwise small stroke motion. Adequate for a 3.2s hold.",
+    "faces": "none",
+    "text_logo_watermark": "none",
+    "tone": "Main weakness. Flat neutral-to-cool lightbox white, no desk or environment, saturated blue pen; it is the opposite of warm film-like desk light and the brain sketch is more 'artist illustration' than 'explanatory line'. Approved only on condition of a grade: warm the white balance (~+15 to +20), pull global saturation down so the pen sits slate-blue, add a light vignette/lifted blacks to match the film look of the neighbouring shots. Without that grade this cut will pop out of the sequence."
+  },
+  "alternates_verdict": {
+    "36721": "Rejected as primary. Best colour match (warm window light, denim sleeve, shallow DOF) but it is a canvas on an easel, not paper on a desk, the pencil barely moves in 13s and the hand is soft-focused. Violates the brief's 'must not look like an artwork' more than the chosen clip. Could serve as a dissolve/texture layer only.",
+    "30232": "Rejected. Handheld macro on a pencil portrait: jittery, repeatedly out of focus, whip-pan at ~8s, saturated blue pencil, subject is fine-art hair shading.",
+    "50110": "Best tonal and brief match in the folder (warm desk lamp, beige palette, black fineliner drawing straight geometric lines on grid paper) but fails the text rule: printed sweatshirt text 'THE CREATIVE COLLECTIVE' in frame 0-1.8s, and a textbook with legible printed Spanish math text enters bottom-left from ~2.6s and is fully readable by 3.2-4.0s. No 3.2s window is clean without a heavy punch-in.",
+    "50113": "Rejected: same scene, face visible from 3.0s; only 0-2.5s usable.",
+    "29975": "Rejected: white coat and stethoscope fill the frame, dark blinds/vignette either side, murky exposure; not 'hand, paper, pen only'.",
+    "14782": "Rejected: macro of ruler and pen on a saturated red backdrop.",
+    "17469": "Rejected: cold blue clinic, doctor's torso with clipboard, third-person.",
+    "24538": "Rejected: blueprint drafting, two hands, dense printed drawing text, saturated line colours.",
+    "39844": "Rejected: over-shoulder desk with iMac, sticky notes, keyboard.",
+    "39855": "Rejected: vertical, motion-blurred, dark, nothing readable.",
+    "47056": "Rejected: conference notepad on lap, other people's bodies, purple pen.",
+    "49557": "Rejected: fully legible handwritten letter, dark period look."
+  },
+  "grade_notes": "WB +15..20 warm, saturation -25..-35 (target: pen slate/grey-blue, paper cream), slight vignette, lift blacks to film curve. No crop. Cut 11.4-14.6.",
+  "decision": "Approve 9339 with a mandatory warm/desaturating grade and the in-point moved to 11.4s. Nothing in the library beats it on the hard rules (no face, no text, hand+paper+pen only, steady, real motion); its only failures are tonal and correctable."
+}

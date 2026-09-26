@@ -4,13 +4,13 @@
   "chosen": {
     "mixkit_id": "35987",
     "title": "feet in high heels of a woman walking down steps",
-    "file": "/home/user/Code-Zzamtong/promo/assets/footage2/f03.mp4",
+    "file": "/home/user/Code-Zzamtong/promo/assets/footage2/candidates/f03_35987.mp4",
     "quality": "720",
     "duration": 15.35,
-    "in_point": 0.6,
-    "fit_score": 0.62,
+    "in_point": 5.5,
+    "fit_score": 5.5,
     "faces": "none",
-    "why": "Feet and stone steps only, low warm sunlight, muted grey/beige stone; one foot lands (~1.6s) and the next comes down and lands (~3.5s) inside the 0.6-3.8 window, so the cut carries a step-pause-step rhythm. No text or logos. Downsides: low side angle rather than top-down POV, and stiletto heels read slightly fashion-stock; background building is soft and cropable."
+    "why": "낮은 측면 앵글의 발 클로즈업. 5.5~6.0초 두 발이 한 계단 위에 멈춰 있고(발 하나는 뒤꿈치를 든 채 정지), 6.25~6.75초 한 발이 다음 계단으로 내려가 착지, 7.0~7.5초 다시 두 발 정지, 7.75~8.25초 다음 발이 내려오며 8.5초에 멈춘다. '내려가다 잠깐 멈추는' 리듬이 3초 안에 두 번 들어간다. 낮은 태양의 따뜻한 사이드라이트, 회갈색 석조 계단, 저채도. 프레임에 발·종아리·치마 자락 끝만 있고 얼굴 없음. 카메라는 발을 따라 천천히 트래킹. 리스크: 검정 스트랩 하이힐이라 브리프의 '평범한 운동화·단화'에 어긋나고 패션 스톡 느낌이 있어 f04(남성 청바지·베이지 단화)와 인물이 이어지지 않는다. 배경에 유럽풍 건물 지붕이 흐리게 보이며(상단 크롭 권장) 720p뿐이다. f17 픽도 같은 클립(1.4~4.4초)을 쓰고 있으므로 이 컷은 겹치지 않는 5.5~8.5초로 잡았다. 계단 소재·빛이 같아 f03과 f17이 같은 계단으로 읽히는 장점은 있으나 같은 클립을 두 번 쓰는 셈이다."
   },
   "alternates": [
     {
@@ -18,15 +18,22 @@
       "file": "/home/user/Code-Zzamtong/promo/assets/footage2/candidates/f03_22223.mp4",
       "duration": 15.08,
       "in_point": 2.0,
-      "why": "Legs in dark trousers on glass hotel stairs, faceless, steady rhythm; but the person walks UP and the space is cold high-key white, off the warm film tone."
+      "why": "검정 바지·검정 단화의 다리를 뒤에서 낮게 따라가는 샷, 얼굴 없음, 신발은 평범하다. 그러나 흰 유리 호텔 계단을 '올라가는' 방향이고 차갑고 하이키한 인테리어라 톤이 맞지 않는다. 12.5초 이후 로비 스크린·화면 글자가 보이므로 2.0~5.0초만 사용. 720p."
     },
     {
-      "mixkit_id": "28823",
-      "file": "/home/user/Code-Zzamtong/promo/assets/footage2/candidates/f03_28823.mp4",
-      "duration": 26.06,
-      "in_point": 4.5,
-      "why": "Feet on pink stone steps, faceless; from 4.5s a single person in jeans and boots descends. Harsh midday sun, several people in frame, saturated blue jeans - usable only in a pinch."
+      "mixkit_id": "3094",
+      "file": "/home/user/Code-Zzamtong/promo/assets/footage2/candidates/f03_3094.mp4",
+      "duration": 10.22,
+      "in_point": 0.0,
+      "why": "발 없이 어두운 검정 계단과 오른쪽의 큰 창만 있는 고정샷, 1080p. 사람이 전혀 없어 '계단 앞에서 멈춤'을 소리나 편집 리듬으로만 암시해야 하는 대체 컷(계단만). 어둡고 차가운 톤이라 채도·노출 보정 필요."
+    },
+    {
+      "mixkit_id": "193",
+      "file": "/home/user/Code-Zzamtong/promo/assets/footage2/candidates/f03_193.mp4",
+      "duration": 21.3,
+      "in_point": 0.0,
+      "why": "위에서 내려다본 베이지 석조 계단, 따뜻한 빛, 1080p — 앵글 자체는 브리프와 가장 가깝다. 다만 0~2.0초만 비어 있고 2.0초부터 빨간 림의 자전거와 사람이 들어오므로 3초를 못 채운다(2초 인서트나 슬로 처리 시에만 가능)."
     }
   ],
-  "notes": "Mixkit has no true top-down POV of one's own feet on stairs. Searched: walking down stairs feet, feet on stairs, stairs shoes close up, legs going down stairs (0 hits), stairs, staircase, walking feet. Rejected: 770 (woman's face visible, red wall), 49513 (running up, heels), escalator clips 31451/31418/31421 (escalator, teal jeans). Recommend centre crop and a desaturate/warm grade on 35987 to hide the heel glamour; if the heels feel wrong for the character, fall back to the cream paper card."
+  "notes": "지정 쿼리: feet walking down stairs 2건(에스컬레이터), pov stairs 0건, walking down stairs 19건, legs stairs 3건(에스컬레이터), steps feet 7건. 추가 쿼리: stairs 24건, staircase 24건(고문실·무관 다수), walking downstairs 3건, descending stairs 0건, feet stairs 3건, shoes stairs 1건, going down stairs 7건, walking up stairs 18건, steps 24건(댄스 위주), stone steps 1건, concrete stairs 0건, legs walking down 20건(무관), stairs close up 15건, sneakers 24건(운동화 끈 묶기 위주), shoes close up 11건, walking down 24건, step down 24건, foot 24건, climbing stairs 4건, stairway 1건, down the stairs 24건, up the stairs 24건, porch steps 1건, entrance steps 0건. Mixkit에는 위에서 내려다본 내 발+계단 POV가 없고, 운동화·단화로 계단을 '내려가는' 발 클로즈업도 없다. 내려받아 확인한 후보: 22223(올라감·차가운 톤), 28823(군중 발, 분홍 돌계단, 강한 정오 빛, 청바지 파랑 튐, 탈락), 35987(선택), 770(정면 얼굴·빨간 벽, 탈락), 27771(맨발로 로프트 나무계단을 빠르게 내려온 뒤 10초부터 정면 얼굴, 탈락), 193(자전거), 3094(계단만), 25219(배낭 여성이 관광지 돌계단을 올라가는 와이드, 탈락). 시트에서 탈락: 15134(같은 장소·하이힐), 49513(하이힐 뛰어 올라감), 14615·25269(유리 건물 와이드), 8728(청소), 31451·31418·31421(에스컬레이터). 신발 색: 35987 검정 스트랩 하이힐(맨다리), 22223 검정 단화+검정 바지. f04 선택(23410)은 베이지 단화+짙은 청바지라 어느 쪽도 색이 맞지 않으므로, 하이힐이 캐릭터에 맞지 않으면 3094(계단만) 또는 f04 클립의 발이 멈추는 순간을 계단 대신 '보도 앞에서 멈춤'으로 바꿔 쓰는 편이 인물 일관성에는 낫다."
 }

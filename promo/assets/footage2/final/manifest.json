@@ -1,0 +1,92 @@
+{
+ "f02": {
+  "file": "/home/user/Code-Zzamtong/promo/assets/footage2/final/f02.mp4",
+  "in_point": 0.4,
+  "mixkit_id": "21669",
+  "source": "f02_21669.mp4",
+  "source_in_point": 1.0,
+  "speed": 1.0,
+  "note": "커튼을 여는 노인 뒷모습. 1.5초부터 손이 커튼을 잡고 4.5초에 열린다. 5.25초부터 옆얼굴이 보이므로 5.0초 안에서 끝낸다"
+ },
+ "f03": {
+  "file": "/home/user/Code-Zzamtong/promo/assets/footage2/final/f03.mp4",
+  "in_point": 0.0,
+  "mixkit_id": "193",
+  "source": "f03_193.mp4",
+  "source_in_point": 0.0,
+  "speed": 0.45,
+  "note": "위에서 내려다본 빈 계단(POV). 1.45초부터 자전거 바퀴가 들어오므로 0~1.35초만 0.45배속으로 늘려 쓴다. 발 없이 '계단 앞에서 멈춤'을 시선으로만"
+ },
+ "f04": {
+  "file": "/home/user/Code-Zzamtong/promo/assets/footage2/final/f04.mp4",
+  "in_point": 0.4,
+  "mixkit_id": "23410",
+  "source": "f04_23410.mp4",
+  "source_in_point": 2.4,
+  "speed": 1.0,
+  "note": "보도 위 발과 긴 그림자. 청바지, 베이지 스웨이드 신발. 푸른 기운은 색온도로 보정"
+ },
+ "f05": {
+  "file": "/home/user/Code-Zzamtong/promo/assets/footage2/final/f05.mp4",
+  "in_point": 0.4,
+  "mixkit_id": "15519",
+  "source": "f05_15519.mp4",
+  "source_in_point": 3.0,
+  "speed": 1.0,
+  "note": "에스컬레이터 위 내 발 POV. 신발이 f04와 달라 아래쪽으로 펀치인해 계단 위주로 보인다"
+ },
+ "f09": {
+  "file": "/home/user/Code-Zzamtong/promo/assets/footage2/final/f09.mp4",
+  "in_point": 0.4,
+  "mixkit_id": "48789",
+  "source": "f09_48789.mp4",
+  "source_in_point": 2.0,
+  "speed": 1.0,
+  "note": "무릎 위에 얹은 노인의 두 손. 정지에 가까워 느린 줌으로 숨을 준다. f02의 인물과 나이가 맞는다"
+ },
+ "f12": {
+  "file": "/home/user/Code-Zzamtong/promo/assets/footage2/final/f12.mp4",
+  "in_point": 0.4,
+  "mixkit_id": "9339",
+  "source": "f12_9339.mp4",
+  "source_in_point": 11.4,
+  "speed": 1.0,
+  "note": "펜으로 종이에 선을 긋는 손. 뇌 그림이라 오른쪽으로 펀치인해 그림 형태를 덜 보이게 하고 채도를 내린다"
+ },
+ "f14": {
+  "file": "/home/user/Code-Zzamtong/promo/assets/footage2/final/f14.mp4",
+  "in_point": 0.4,
+  "mixkit_id": "49001",
+  "source": "f14_49001.mp4",
+  "source_in_point": 3.2,
+  "speed": 1.0,
+  "note": "블라인드 사이로 들어오는 창가 빛과 손가락. 3.5~3.9초에 살을 당기며 빛이 번진다"
+ },
+ "f16": {
+  "file": "/home/user/Code-Zzamtong/promo/assets/footage2/final/f16.mp4",
+  "in_point": 0.4,
+  "mixkit_id": "1123",
+  "source": "f16_1123.mp4",
+  "source_in_point": 1.6,
+  "speed": 1.0,
+  "note": "어두운 실내에서 문이 열리며 하얗게 날아간다. 문 쪽으로 1.4배 펀치인, 4.3초 전에 끝"
+ },
+ "f17": {
+  "file": "/home/user/Code-Zzamtong/promo/assets/footage2/final/f17.mp4",
+  "in_point": 0.0,
+  "mixkit_id": "193",
+  "source": "f03_193.mp4",
+  "source_in_point": 0.0,
+  "speed": 0.45,
+  "note": "f03과 같은 계단. 이번엔 8% 푸시인으로 내려가는 느낌"
+ },
+ "f18": {
+  "file": "/home/user/Code-Zzamtong/promo/assets/footage2/final/f18.mp4",
+  "in_point": 0.4,
+  "mixkit_id": "35361",
+  "source": "f18_35361.mp4",
+  "source_in_point": 3.0,
+  "speed": 1.0,
+  "note": "역광 숲길을 걸어가는 뒷모습. f02의 체크 셔츠와 이어지는 체크 코트"
+ }
+}

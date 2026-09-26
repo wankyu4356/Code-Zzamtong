@@ -1,21 +1,32 @@
 {
   "shot_id": "f09",
-  "no_good_match": true,
+  "no_good_match": false,
+  "chosen": {
+    "mixkit_id": "48789",
+    "title": "elderly woman resting her hands in her lap",
+    "file": "/home/user/Code-Zzamtong/promo/assets/footage2/candidates/f09_48789.mp4",
+    "quality": "720",
+    "duration": 16.35,
+    "in_point": 0.0,
+    "fit_score": 6,
+    "faces": "none",
+    "why": "무릎 위 갈색 니트 담요 위에 얹은 노인의 두 손 클로즈업. 프레임에 손·손목·담요만 있고 얼굴·글자·장신구 없음. 부드러운 실내 자연광, 갈색·베이지 단색의 매우 낮은 채도, 카메라 완전 고정. 0.0~1.0초에 검지·엄지가 살짝 자리를 고쳐 잡는 유일한 미세 움직임이 있어 in 0.0으로 잡으면 2.5초 컷 안에 '가만히 있다가 손가락이 조금 움직이는' 숨이 들어간다(2.0 이후는 완전 정지라 느린 푸시인을 얹으면 됨). f02 확정 컷(21669, 커튼을 여는 백발 남성 뒷모습)과 인물 나이가 맞아 POV 연속성이 유지된다. 리스크: 720p(1280x720 29.97fps)라 1080p 타임라인에서 150% 확대 필요, 정맥·주름이 두드러져 그레이딩에서 대비를 조금 눌러 주는 편이 좋음, 제목은 elderly woman이지만 매니큐어·반지가 없어 성별이 드러나지 않음."
+  },
   "alternates": [
     {
-      "mixkit_id": "48789",
-      "file": "/home/user/Code-Zzamtong/promo/assets/footage2/candidates/f09_48789.mp4",
-      "duration": 16.35,
-      "in_point": 0.0,
-      "why": "Elderly woman's two hands resting on a brown knit blanket in her lap. Tone is the closest in the library: warm, low-saturation, soft natural light, no face, no text, 16:9 720p. But the hands are clearly aged (heavily veined, wrinkled) and clash with the young-woman POV established in f02/f03, and the clip is almost a still - the only finger movement is a slight thumb/finger shift in 0.0-1.0s, then static for the remaining 15s. Best override if the editor accepts older hands; in_point 0.0 keeps the one micro-movement inside the 2.7s cut."
+      "mixkit_id": "45995",
+      "file": "/home/user/Code-Zzamtong/promo/assets/footage2/candidates/f09_45995.mp4",
+      "duration": 12.12,
+      "in_point": 3.0,
+      "why": "데님 재킷·민트 티셔츠의 젊은 여성이 앉아 두 손을 깍지 낀 채 몸 앞에 얹은 샷. 턱 아래 크롭이라 얼굴 없음, 3.0~5.5초에 엄지가 미세하게 움직여 기다림이 살아 있음. 그러나 손이 무릎이 아니라 휠체어 팔걸이(검은 튜브) 위이고 배경이 야외 초록 보케, 연핑크 매니큐어. f02 인물(노인 남성)과 나이·성별이 어긋나므로 리드가 젊은 인물로 바뀔 때만. 720p."
     },
     {
       "mixkit_id": "34091",
       "file": "/home/user/Code-Zzamtong/promo/assets/footage2/candidates/f09_34091.mp4",
       "duration": 17.12,
       "in_point": 1.6,
-      "why": "Man in a dark suit with cufflinks drumming his fingers on a white table (finger-tap ripples at ~2.6s and ~3.8s, so two taps fall inside 1.6-4.3s). The nervous-waiting gesture is exactly right and there is no face, but everything else is wrong for the film tone: hands on a desk rather than knees, high-key white surface, corporate stock styling. Would need heavy warm grading and still reads as an office."
+      "why": "검은 정장·커프스 링크 남성이 흰 테이블 위에서 손가락을 두드리며 기다리는 샷(2.6초·3.8초 부근 두 번, 1.6~4.1초 안에 들어옴). 초조한 제스처는 정확하고 얼굴 없음이지만 무릎이 아니라 책상, 하이키 흰 배경, 기업 스톡 느낌이라 톤이 어긋난다. 720p."
     }
   ],
-  "notes": "Searched 7 sheets: hands on knees, nervous hands, hands lap, fidgeting, waiting, hands close up sitting, anxious hands. Mixkit's free library has no faceless close-up of a seated person's hands fidgeting on their own knees or lap; 'nervous hands' and 'anxious hands' both return only 3 unrelated clips (wedding hands 8754, horror portraits). Downloaded and stripped 4: 48789 (elderly hands in lap, static), 34091 (suit finger-tapping on desk), 8754 (interracial couple's hands on a table, comfort gesture, two people), 4571 (two women signing on a sofa, busy two-person motion). Rejected from sheets: 12837 nervous man on park bench (face visible, wide), 47408 pregnant belly, 1323/4656 couples holding coffee/album. Neither surviving candidate meets the bar without either a character mismatch (aged hands) or a tone mismatch (corporate desk), so per the brief the cream paper card is the cleaner choice for this slot. If footage is still preferred, 48789 at in 0.0 is the least jarring for the film look. No file copied to footage2/f09.mp4."
+  "notes": "브리프 쿼리(히트 수): hands on knees(8, 광대·군인·커플 등 무관), hands resting knees sitting(0), nervous hands sitting(0), waiting room hands(7, 노트북·계산기·아이 공부), hands lap sitting(0). 자체 쿼리: fidgeting(24, 전부 복싱·격투), hands clasped(15), anxious(24, 흉가 시리즈), nervous(24, 동일), waiting(24), hands sitting(24), hands knees(8), person sitting sofa hands(2), hands close up(24), wringing hands(24, 글쓰기 위주), patient waiting(5), folded hands(9), hands resting(15), hands lap(8), sitting jeans(7), hospital waiting room(2), legs sitting bench(0), woman sitting hands(24), man sitting hands(24), knees(24), knee(24), hands thighs(0), sitting nervous(3), rubbing hands(4), hands together(24), interlocked fingers(0), sitting chair(24), waiting chair(3), hands bench(2), hands(24), clasped(15), tapping fingers(4), drumming fingers(0), lap(24), seated(24), sitting on the couch(24), sofa(24), hands jeans(4), waiting hospital(5), sitting(24), woman sitting(24), legs crossed(1), patient hands(7), hands hospital(7), clinic(8), playing with fingers(16), nervous fingers(0), waiting patiently(8), sitting legs(10). Mixkit 무료 라이브러리에는 '젊은 성인이 자기 무릎 위에 손을 얹고 기다리는 얼굴 없는 클로즈업'이 없다. 이전 패스에서는 48789가 젊은 여성 POV와 충돌한다고 보아 no_good_match였으나, f02 확정 컷이 21669(백발 남성이 커튼 여는 뒷모습)로 정해져 리드가 노년으로 바뀌었으므로 48789를 채택으로 올림(final_picks.json도 48789 in 2.0을 사용 중, in 0.0과 2.0 모두 가능하며 0.0은 미세 움직임 포함, 2.0은 완전 정지). 내려받아 확인 후 탈락: 4571(두 여성 수어 대화, 두 사람·큰 손동작), 8754(커플 두 사람의 손, 테이블, 손목 문신), 13789(책장 넘기는 손, 빨간 매니큐어), 4534(여성 얼굴 정면), 21668(병원 대기실 와이드, 남녀 얼굴, 파란 벽·의자 고채도), 27887(흰 사무실 의자 여성, 하이힐, 옆얼굴), 11466(정면 얼굴, 스마트폰). 시트에서 제외: 12837(공원 벤치 남자 얼굴), 47985·4899·47987·47990(얼굴 보이는 대기 장면), 21557(노인 환자 옆얼굴, 뒤에 간호사, 와이드), 47408(임산부 배), 48790(노인 지팡이 손, 두 번째 인물 없음이나 지팡이가 강한 노쇠 기호), 4700/4701(얼굴을 감싼 손). 피부·의상 메모: 48789는 밝은 피부의 노인 손, 갈색 담요 외 의상 정보 없음 → f02의 검정 체크 셔츠와 충돌 없음. 모든 파일은 candidates/에 그대로 둠(footage2/f09.mp4로 복사하지 않음)."
 }
