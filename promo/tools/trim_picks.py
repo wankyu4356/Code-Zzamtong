@@ -2,14 +2,15 @@
 선별·검증된 클립을 실제 쓰는 구간만 남겨 작게 만든다.
   입력: assets/footage/picks/<id>.json (+ <id>.verify.json), assets/footage/shots.json
   출력: assets/footage/final/<id>.mp4 (인점 0.4초 앞부터 need_sec+1.0초 뒤까지), final/manifest.json
-사용: python3 tools/trim_picks.py
+사용: python3 tools/trim_picks.py [assets/footage2]   (기본 assets/footage)
 """
 import json
 import os
 import subprocess
 
 HERE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-FOOT = os.path.join(HERE, "assets", "footage")
+import sys
+FOOT = os.path.join(HERE, sys.argv[1]) if len(sys.argv) > 1 else os.path.join(HERE, "assets", "footage")
 FINAL = os.path.join(FOOT, "final")
 os.makedirs(FINAL, exist_ok=True)
 PRE, POST = 0.4, 1.0

@@ -1,0 +1,24 @@
+{
+  "shot_id": "f04",
+  "approve": true,
+  "use": "chosen",
+  "in_point": 2.8,
+  "checked": {
+    "chosen": {
+      "mixkit_id": "23410",
+      "file": "/home/user/Code-Zzamtong/promo/assets/footage2/f04.mp4",
+      "range_viewed": "2.8-6.2s step 0.2 (+ full-clip overview 0-28s step 2.0)",
+      "first_frame_reads": true,
+      "motion_continuous": true,
+      "faces": "none",
+      "text_logo_watermark": "none",
+      "acting": "natural steady walk, no posing"
+    },
+    "alternates": {
+      "98": "viewed 1.0-4.2s: zebra crossing, bollards and traffic in background, busier; reads as road crossing not sidewalk",
+      "21289": "viewed 0.5-3.7s: flat overcast light, no shadow at all; misses the 'strong sun + shadow' brief"
+    }
+  },
+  "reason": "Low rear-following shot of shoes, jean hems and a long hard-sun shadow on concrete pavement, exactly the brief (feet, legs, shadow only). Frames 2.8-6.2s show continuous steady walking, both feet and the shadow readable from the first frame, no face, no text/logo/watermark, no stock-ad acting. Low saturation with a cool blue cast; needs a warm grade to sit with the film-look morning palette. 720p landscape source is acceptable. Both alternates are weaker: 98 is a busy crosswalk with bollards/traffic, 21289 has no shadow.",
+  "notes": "Grade warmer (pull blue out of shadows/asphalt) to match the warm-morning tone; blurred railing in background is unobtrusive."
+}

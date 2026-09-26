@@ -1,0 +1,32 @@
+{
+  "shot_id": "f04",
+  "no_good_match": false,
+  "chosen": {
+    "mixkit_id": "23410",
+    "title": "man walking on the concrete sidewalk",
+    "file": "/home/user/Code-Zzamtong/promo/assets/footage2/f04.mp4",
+    "quality": "720",
+    "duration": 28.12,
+    "in_point": 2.8,
+    "fit_score": 8.5,
+    "faces": "none",
+    "why": "Low rear-following shot of feet on concrete pavement in hard sunlight with a long shadow stretching toward camera; only shoes, jeans hems and shadow are visible. Continuous steady walking motion for the whole clip, desaturated slightly cool film-like grade, no text or watermark. 2.8s has both feet planted with shadow fully in frame."
+  },
+  "alternates": [
+    {
+      "mixkit_id": "98",
+      "file": "/home/user/Code-Zzamtong/promo/assets/footage2/candidates/f04_98.mp4",
+      "duration": 10.55,
+      "in_point": 1.0,
+      "why": "Feet crossing a zebra crosswalk in hard light with a visible shadow, low saturation, no face; reads as 'crossing a road' rather than sidewalk and has bollards/traffic in background."
+    },
+    {
+      "mixkit_id": "21289",
+      "file": "/home/user/Code-Zzamtong/promo/assets/footage2/candidates/f04_21289.mp4",
+      "duration": 6.07,
+      "in_point": 0.5,
+      "why": "Top-down feet walking on grey concrete slabs, quiet and desaturated, but flat overcast light with almost no shadow, so it misses the 'strong sun' brief."
+    }
+  ],
+  "notes": "Searches: walking feet shadow (0 results), walking feet sidewalk (1), feet walking (20), shadow walking (2), walking legs (20), walking shoes (9), footsteps street (2). Downloaded 23410, 21289, 4893, 98. 4893 (sunny tiled sidewalk) rejected as alternate: torso visible, colorful background (orange sign, mint sneakers) and higher saturation feels more stock-ad. 23410 is 720p only but 16:9 landscape and clean; slight blue cast may want a warm grade to match the film-look palette."
+}

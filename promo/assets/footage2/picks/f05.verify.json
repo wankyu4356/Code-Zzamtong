@@ -1,0 +1,24 @@
+{
+  "shot_id": "f05",
+  "approve": true,
+  "use": "chosen",
+  "mixkit_id": "25219",
+  "file": "/home/user/Code-Zzamtong/promo/assets/footage2/f05.mp4",
+  "in_point": 1.0,
+  "need_sec": 2.7,
+  "checked_window": "1.0-4.0s @0.2s",
+  "source": "1280x720 25fps 17.84s landscape",
+  "findings": {
+    "scene_reads_on_first_frame": true,
+    "motion_continuous": true,
+    "faces": "none - back view only, hair covers head throughout",
+    "text_logo_watermark": "none - backpack has one small dark leather patch, unreadable at 720p; no watermark",
+    "acting": "natural, unhurried walk, no camera awareness",
+    "color": "warm low-saturation stone, soft natural light, bright arch overexposed to white which sells the light-from-above beat"
+  },
+  "alternates_reviewed": {
+    "1629": "rejected - dense midday crowd, striped/pink/green/blue shirts, harsh sun, side profiles; too busy and stocky for the quiet-morning tone",
+    "15519": "rejected - boots on escalator, flat gray, no light-from-above or exit context, motion nearly static in frame"
+  },
+  "reason": "Not a subway but the brief allows any underground-to-daylight stairs. Solo figure from behind climbing worn stone steps toward a bright arched opening; steady handheld follow, quiet, warm and film-like. First frame reads instantly, figure climbs continuously through 3.7s, no faces or legible text. Best tonal match among candidates."
+}

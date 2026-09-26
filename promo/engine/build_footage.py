@@ -91,9 +91,12 @@ def fade_filters(bg, n):
 def look_filters(bg):
     out = []
     g = bg["grade"]
-    if any(abs(g[k] - GRADE_DEFAULTS[k]) > 1e-9 for k in GRADE_DEFAULTS):
+    if any(abs(g[k] - GRADE_DEFAULTS[k]) > 1e-9 for k in ("contrast", "saturation", "brightness", "gamma")):
         out.append("eq=contrast=%g:saturation=%g:brightness=%g:gamma=%g"
                    % (g["contrast"], g["saturation"], g["brightness"], g["gamma"]))
+    if abs(g.get("temperature", 6500) - 6500) > 1e-9:
+        # 색온도(K). 6500이 중립, 낮을수록 따뜻하게
+        out.append("colortemperature=temperature=%d:mix=1" % int(g["temperature"]))
     if bg.get("vignette"):
         out.append("vignette")
     if bg.get("grain", 0) > 0:
@@ -110,8 +113,12 @@ def segment_command(shot, tl, out_path):
 
     if t in ("black", "white", "color"):
         color = {"black": "black", "white": "white"}.get(t) or color_to_ffmpeg(bg["color"])
+        vf = []
+        if bg.get("grain", 0) > 0:                      # 종이 질감처럼 아주 약한 노이즈
+            vf.append(f"noise=alls={int(round(bg['grain'] * 100))}:allf=t+u")
+        vf += fade_filters(bg, n)
         return head + ["-f", "lavfi", "-i", f"color=c={color}:s={W}x{H}:r={fps}",
-                       "-vf", "format=yuv420p"] + tail
+                       "-vf", ",".join(vf + ["format=yuv420p"])] + tail
 
     info = probe(bg["src"])
     vf = cover_zoom_filters(info["width"], info["height"], W, H,

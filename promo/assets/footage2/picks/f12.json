@@ -1,0 +1,32 @@
+{
+  "shot_id": "f12",
+  "no_good_match": false,
+  "chosen": {
+    "mixkit_id": "9339",
+    "title": "artist drawing a human brain",
+    "file": "/home/user/Code-Zzamtong/promo/assets/footage2/f12.mp4",
+    "quality": "720",
+    "duration": 53.45,
+    "in_point": 17.0,
+    "fit_score": 0.72,
+    "faces": "none",
+    "why": "Hand, paper, pen only; steady top-down close-up of a hand hatching a hand-drawn brain diagram with a ballpoint pen (matches 'doctor drawing diagram'). Continuous small stroke motion across 17.0-20.4s. No text, logo or watermark. Downsides: flat neutral/cool white light rather than warm desk light (needs a warm grade), and the pen is a fairly saturated blue."
+  },
+  "alternates": [
+    {
+      "mixkit_id": "36721",
+      "file": "/home/user/Code-Zzamtong/promo/assets/footage2/candidates/f12_36721.mp4",
+      "duration": 13.28,
+      "in_point": 2.0,
+      "why": "Best tonal match: warm window light, shallow depth of field, film-like low saturation, hand with pencil, sleeve visible. But it is a canvas on an easel rather than paper on a desk and the drawing motion is very subtle (lines barely visible)."
+    },
+    {
+      "mixkit_id": "30232",
+      "file": "/home/user/Code-Zzamtong/promo/assets/footage2/candidates/f12_30232.mp4",
+      "duration": 16.64,
+      "in_point": 1.0,
+      "why": "Extreme close-up of a pencil sketching hair on paper, warm skin tones and visible drawing motion, but handheld, jittery and frequently out of focus; last resort only."
+    }
+  ],
+  "notes": "Seven searches run; 'sketch pencil paper' and 'doctor drawing diagram' returned nothing, 'drawing with pen on paper' returned only a digital-tablet clip (48519, rejected: tablet + watch). 101389 (woman sketching in notepad) had no downloadable file. 24580 (writing in a paper notebook) was rejected because printed planner text and the written word are legible. Calligraphy set (5069x-5071x) rejected for saturated green cutting mats and legible words. Recommend warming 9339 by ~+15 temperature and lowering saturation to tame the blue pen; center crop unnecessary (16:9 source)."
+}

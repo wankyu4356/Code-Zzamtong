@@ -1,0 +1,32 @@
+{
+  "shot_id": "f03",
+  "no_good_match": false,
+  "chosen": {
+    "mixkit_id": "35987",
+    "title": "feet in high heels of a woman walking down steps",
+    "file": "/home/user/Code-Zzamtong/promo/assets/footage2/f03.mp4",
+    "quality": "720",
+    "duration": 15.35,
+    "in_point": 0.6,
+    "fit_score": 0.62,
+    "faces": "none",
+    "why": "Feet and stone steps only, low warm sunlight, muted grey/beige stone; one foot lands (~1.6s) and the next comes down and lands (~3.5s) inside the 0.6-3.8 window, so the cut carries a step-pause-step rhythm. No text or logos. Downsides: low side angle rather than top-down POV, and stiletto heels read slightly fashion-stock; background building is soft and cropable."
+  },
+  "alternates": [
+    {
+      "mixkit_id": "22223",
+      "file": "/home/user/Code-Zzamtong/promo/assets/footage2/candidates/f03_22223.mp4",
+      "duration": 15.08,
+      "in_point": 2.0,
+      "why": "Legs in dark trousers on glass hotel stairs, faceless, steady rhythm; but the person walks UP and the space is cold high-key white, off the warm film tone."
+    },
+    {
+      "mixkit_id": "28823",
+      "file": "/home/user/Code-Zzamtong/promo/assets/footage2/candidates/f03_28823.mp4",
+      "duration": 26.06,
+      "in_point": 4.5,
+      "why": "Feet on pink stone steps, faceless; from 4.5s a single person in jeans and boots descends. Harsh midday sun, several people in frame, saturated blue jeans - usable only in a pinch."
+    }
+  ],
+  "notes": "Mixkit has no true top-down POV of one's own feet on stairs. Searched: walking down stairs feet, feet on stairs, stairs shoes close up, legs going down stairs (0 hits), stairs, staircase, walking feet. Rejected: 770 (woman's face visible, red wall), 49513 (running up, heels), escalator clips 31451/31418/31421 (escalator, teal jeans). Recommend centre crop and a desaturate/warm grade on 35987 to hide the heel glamour; if the heels feel wrong for the character, fall back to the cream paper card."
+}

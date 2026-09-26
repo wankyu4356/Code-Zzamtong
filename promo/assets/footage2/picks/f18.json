@@ -1,0 +1,32 @@
+{
+  "shot_id": "f18",
+  "no_good_match": false,
+  "chosen": {
+    "mixkit_id": "517",
+    "title": "person and dog walk among trees",
+    "file": "/home/user/Code-Zzamtong/promo/assets/footage2/f18.mp4",
+    "quality": "1080",
+    "duration": 21.98,
+    "in_point": 8.4,
+    "fit_score": 0.72,
+    "faces": "none (back view only)",
+    "why": "Back view of a person walking away through trees with low-sun flare flickering through the canopy; faded, low-saturation film-like grade matches the tone. Section 8.4-11.1s carries a lens flare that sweeps in around 9.8-10.6s, giving the 'sunlight flickering through leaves' beat. Forest path rather than a paved tree-lined sidewalk, and a dog walks alongside, but no text/logo, no face, no stock-ad acting."
+  },
+  "alternates": [
+    {
+      "mixkit_id": "33503",
+      "file": "/home/user/Code-Zzamtong/promo/assets/footage2/candidates/f18_33503.mp4",
+      "duration": 32.3,
+      "in_point": 2.0,
+      "why": "Back view of a woman walking away down a sunlit autumn forest path; steady and long, but strongly saturated yellow foliage and only 720p; would need desaturation."
+    },
+    {
+      "mixkit_id": "4893",
+      "file": "/home/user/Code-Zzamtong/promo/assets/footage2/candidates/f18_4893.mp4",
+      "duration": 5.37,
+      "in_point": 1.0,
+      "why": "Legs/feet only walking toward camera on a paved sidewalk with soft warm light; no face, but urban buildings instead of trees and some orange/graffiti color accents."
+    }
+  ],
+  "notes": "Sheets tried: 'walking under trees sunlight' (0 results), 'walking park', 'walking trees', 'feet walking autumn' (0), 'walking autumn', 'feet walking', 'sun trees'. No clip of a paved tree-lined sidewalk with back view/feet and sun flicker was found; 517 is the closest in mood (film-like, low saturation, sun through trees, back view). 104 was downloaded but rejected: dark exposure and the subject turns her face to camera at ~6.5s. If a literal sidewalk is required, cream-paper fallback is acceptable."
+}

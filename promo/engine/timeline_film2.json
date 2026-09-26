@@ -1,0 +1,822 @@
+{
+ "fps": 30,
+ "width": 1920,
+ "height": 1080,
+ "duration": 55.5,
+ "audio": "/home/user/Code-Zzamtong/promo/music/render/film2_audio.wav",
+ "shots": [
+  {
+   "id": "f02",
+   "start": 0.0,
+   "end": 4.0,
+   "bg": {
+    "type": "clip",
+    "src": "/home/user/Code-Zzamtong/promo/assets/footage2/candidates/f02_22066.mp4",
+    "in": 5.6,
+    "speed": 1.0,
+    "fit": "cover",
+    "zoom": "in",
+    "zoom_amount": 0.03,
+    "grade": {
+     "contrast": 0.96,
+     "saturation": 0.84,
+     "brightness": 0.0,
+     "gamma": 1.02,
+     "temperature": 5900
+    },
+    "vignette": true,
+    "grain": 0.05,
+    "punch": 1.0,
+    "anchor": [
+     0.5,
+     0.5
+    ],
+    "fade_in": 15
+   },
+   "texts": [
+    {
+     "font": "Noto Serif CJK KR",
+     "size": 38,
+     "weight": 400,
+     "letter_spacing": 0.0,
+     "line_height": 1.45,
+     "color": "rgba(250,246,238,0.96)",
+     "shadow": true,
+     "x": 168,
+     "y": 896,
+     "align": "left",
+     "max_width": 1560,
+     "anim_in": "fade",
+     "in_frames": 12,
+     "anim_out": "cut",
+     "text": "토요일 아침. 무릎이 또 말을 한다.",
+     "start": 0.9,
+     "end": 4.0
+    }
+   ]
+  },
+  {
+   "id": "f03",
+   "start": 4.0,
+   "end": 7.0,
+   "bg": {
+    "type": "clip",
+    "src": "/home/user/Code-Zzamtong/promo/assets/footage2/f03.mp4",
+    "in": 0.6,
+    "speed": 1.0,
+    "fit": "cover",
+    "zoom": "none",
+    "zoom_amount": 0.03,
+    "grade": {
+     "contrast": 0.96,
+     "saturation": 0.84,
+     "brightness": 0.0,
+     "gamma": 1.02,
+     "temperature": 5900
+    },
+    "vignette": true,
+    "grain": 0.05,
+    "punch": 1.0,
+    "anchor": [
+     0.5,
+     0.5
+    ]
+   },
+   "texts": [
+    {
+     "font": "Noto Serif CJK KR",
+     "size": 38,
+     "weight": 400,
+     "letter_spacing": 0.0,
+     "line_height": 1.45,
+     "color": "rgba(250,246,238,0.96)",
+     "shadow": true,
+     "x": 168,
+     "y": 896,
+     "align": "left",
+     "max_width": 1560,
+     "anim_in": "fade",
+     "in_frames": 12,
+     "anim_out": "cut",
+     "text": "계단 앞에서 잠깐 멈추는 게 버릇이 됐다.",
+     "start": 4.3,
+     "end": 7.0
+    }
+   ]
+  },
+  {
+   "id": "f04",
+   "start": 7.0,
+   "end": 10.0,
+   "bg": {
+    "type": "clip",
+    "src": "/home/user/Code-Zzamtong/promo/assets/footage2/f04.mp4",
+    "in": 2.8,
+    "speed": 1.0,
+    "fit": "cover",
+    "zoom": "none",
+    "zoom_amount": 0.03,
+    "grade": {
+     "contrast": 0.96,
+     "saturation": 0.84,
+     "brightness": 0.0,
+     "gamma": 1.02,
+     "temperature": 5900
+    },
+    "vignette": true,
+    "grain": 0.05,
+    "punch": 1.0,
+    "anchor": [
+     0.5,
+     0.5
+    ]
+   },
+   "texts": [
+    {
+     "font": "Noto Serif CJK KR",
+     "size": 38,
+     "weight": 400,
+     "letter_spacing": 0.0,
+     "line_height": 1.45,
+     "color": "rgba(250,246,238,0.96)",
+     "shadow": true,
+     "x": 168,
+     "y": 896,
+     "align": "left",
+     "max_width": 1560,
+     "anim_in": "fade",
+     "in_frames": 12,
+     "anim_out": "cut",
+     "text": "어디로 가야 할지 몰라 검색만 오래 했다.",
+     "start": 7.2,
+     "end": 10.0
+    }
+   ]
+  },
+  {
+   "id": "f05",
+   "start": 10.0,
+   "end": 12.5,
+   "bg": {
+    "type": "clip",
+    "src": "/home/user/Code-Zzamtong/promo/assets/footage2/f05.mp4",
+    "in": 1.0,
+    "speed": 1.0,
+    "fit": "cover",
+    "zoom": "none",
+    "zoom_amount": 0.03,
+    "grade": {
+     "contrast": 0.96,
+     "saturation": 0.84,
+     "brightness": 0.0,
+     "gamma": 1.02,
+     "temperature": 5900
+    },
+    "vignette": true,
+    "grain": 0.05,
+    "punch": 1.0,
+    "anchor": [
+     0.5,
+     0.5
+    ]
+   },
+   "texts": [
+    {
+     "font": "Noto Serif CJK KR",
+     "size": 30,
+     "weight": 300,
+     "letter_spacing": 0.02,
+     "line_height": 1.4,
+     "color": "rgba(250,246,238,0.96)",
+     "shadow": true,
+     "x": 168,
+     "y": 912,
+     "align": "left",
+     "max_width": 1200,
+     "anim_in": "fade",
+     "in_frames": 9,
+     "anim_out": "fade",
+     "out_frames": 9,
+     "text": "낙성대역 4번 출구",
+     "start": 10.3,
+     "end": 12.5
+    }
+   ]
+  },
+  {
+   "id": "f07",
+   "start": 12.5,
+   "end": 15.5,
+   "bg": {
+    "type": "color",
+    "color": "#F4EFE6",
+    "grain": 0.025
+   },
+   "texts": [
+    {
+     "font": "Noto Serif CJK KR",
+     "size": 38,
+     "weight": 400,
+     "letter_spacing": 0.0,
+     "line_height": 1.45,
+     "color": "#3A312B",
+     "shadow": false,
+     "x": 168,
+     "y": 896,
+     "align": "left",
+     "max_width": 1560,
+     "anim_in": "fade",
+     "in_frames": 12,
+     "anim_out": "cut",
+     "text": "학생도, 직장인도, 할머님도 이 문을 연다고 했다.",
+     "start": 12.7,
+     "end": 15.5
+    }
+   ]
+  },
+  {
+   "id": "p08",
+   "start": 15.5,
+   "end": 18.5,
+   "bg": {
+    "type": "image",
+    "src": "/home/user/Code-Zzamtong/promo/assets/hospital/reception_16x9.jpg",
+    "fit": "cover",
+    "zoom": "in",
+    "zoom_amount": 0.05,
+    "grade": {
+     "contrast": 0.98,
+     "saturation": 0.92,
+     "brightness": 0.0,
+     "gamma": 1.0,
+     "temperature": 6300
+    },
+    "vignette": true,
+    "grain": 0.04,
+    "punch": 1.0,
+    "anchor": [
+     0.5,
+     0.5
+    ]
+   },
+   "texts": [
+    {
+     "font": "Noto Serif CJK KR",
+     "size": 38,
+     "weight": 400,
+     "letter_spacing": 0.0,
+     "line_height": 1.45,
+     "color": "rgba(250,246,238,0.96)",
+     "shadow": true,
+     "x": 168,
+     "y": 896,
+     "align": "left",
+     "max_width": 1560,
+     "anim_in": "fade",
+     "in_frames": 12,
+     "anim_out": "cut",
+     "text": "생각보다 조용했다. 오래 기다리지 않았다.",
+     "start": 15.8,
+     "end": 18.5
+    }
+   ]
+  },
+  {
+   "id": "f09",
+   "start": 18.5,
+   "end": 21.5,
+   "bg": {
+    "type": "color",
+    "color": "#F4EFE6",
+    "grain": 0.025
+   },
+   "texts": [
+    {
+     "font": "Noto Serif CJK KR",
+     "size": 38,
+     "weight": 400,
+     "letter_spacing": 0.0,
+     "line_height": 1.45,
+     "color": "#3A312B",
+     "shadow": false,
+     "x": 168,
+     "y": 896,
+     "align": "left",
+     "max_width": 1560,
+     "anim_in": "fade",
+     "in_frames": 12,
+     "anim_out": "cut",
+     "text": "어떻게 말할지 미리 연습했다.",
+     "start": 18.7,
+     "end": 21.5
+    }
+   ]
+  },
+  {
+   "id": "p10",
+   "start": 21.5,
+   "end": 27.0,
+   "bg": {
+    "type": "image",
+    "src": "/home/user/Code-Zzamtong/promo/assets/hospital/doctor_portrait_16x9.jpg",
+    "fit": "cover",
+    "zoom": "in",
+    "zoom_amount": 0.08,
+    "grade": {
+     "contrast": 0.98,
+     "saturation": 0.92,
+     "brightness": 0.0,
+     "gamma": 1.0,
+     "temperature": 6300
+    },
+    "vignette": true,
+    "grain": 0.04,
+    "punch": 1.0,
+    "anchor": [
+     0.6,
+     0.5
+    ]
+   },
+   "texts": [
+    {
+     "font": "Noto Serif CJK KR",
+     "size": 38,
+     "weight": 400,
+     "letter_spacing": 0.0,
+     "line_height": 1.45,
+     "color": "rgba(250,246,238,0.96)",
+     "shadow": true,
+     "x": 168,
+     "y": 896,
+     "align": "left",
+     "max_width": 1560,
+     "anim_in": "fade",
+     "in_frames": 12,
+     "anim_out": "fade",
+     "text": "그런데 먼저 물었다. 언제부터, 어떻게 아팠는지.",
+     "start": 21.8,
+     "end": 24.6,
+     "out_frames": 9
+    },
+    {
+     "font": "Noto Serif CJK KR",
+     "size": 38,
+     "weight": 400,
+     "letter_spacing": 0.0,
+     "line_height": 1.45,
+     "color": "rgba(250,246,238,0.96)",
+     "shadow": true,
+     "x": 168,
+     "y": 896,
+     "align": "left",
+     "max_width": 1560,
+     "anim_in": "fade",
+     "in_frames": 12,
+     "anim_out": "cut",
+     "text": "내 말이 끝날 때까지 기다렸다.",
+     "start": 24.8,
+     "end": 27.0
+    }
+   ]
+  },
+  {
+   "id": "f12",
+   "start": 27.0,
+   "end": 30.0,
+   "bg": {
+    "type": "clip",
+    "src": "/home/user/Code-Zzamtong/promo/assets/footage2/f12.mp4",
+    "in": 17.0,
+    "speed": 1.0,
+    "fit": "cover",
+    "zoom": "none",
+    "zoom_amount": 0.03,
+    "grade": {
+     "contrast": 0.96,
+     "saturation": 0.84,
+     "brightness": 0.0,
+     "gamma": 1.02,
+     "temperature": 5900
+    },
+    "vignette": true,
+    "grain": 0.05,
+    "punch": 1.0,
+    "anchor": [
+     0.5,
+     0.5
+    ]
+   },
+   "texts": [
+    {
+     "font": "Noto Serif CJK KR",
+     "size": 38,
+     "weight": 400,
+     "letter_spacing": 0.0,
+     "line_height": 1.45,
+     "color": "rgba(250,246,238,0.96)",
+     "shadow": true,
+     "x": 168,
+     "y": 896,
+     "align": "left",
+     "max_width": 1560,
+     "anim_in": "fade",
+     "in_frames": 12,
+     "anim_out": "cut",
+     "text": "종이에 그려가며, 왜 아픈지 설명해줬다.",
+     "start": 27.2,
+     "end": 30.0
+    }
+   ]
+  },
+  {
+   "id": "q13",
+   "start": 30.0,
+   "end": 34.5,
+   "bg": {
+    "type": "color",
+    "color": "#F4EFE6",
+    "grain": 0.025
+   },
+   "texts": [
+    {
+     "font": "Noto Serif CJK KR",
+     "size": 42,
+     "weight": 400,
+     "letter_spacing": 0.0,
+     "line_height": 1.7,
+     "color": "#3A312B",
+     "shadow": false,
+     "x": "center",
+     "y": "center",
+     "align": "center",
+     "max_width": 1400,
+     "anim_in": "rise",
+     "in_frames": 15,
+     "anim_out": "fade",
+     "out_frames": 10,
+     "text": "왜 아팠는지 확실히 알겠더라고요.\n모형으로까지 설명해주셔서 이해가 쏙쏙 됐어요.",
+     "start": 30.0,
+     "end": 34.5
+    },
+    {
+     "font": "Noto Sans CJK KR",
+     "size": 22,
+     "weight": 300,
+     "letter_spacing": 0.06,
+     "line_height": 1.2,
+     "color": "rgba(58,49,43,0.66)",
+     "shadow": false,
+     "x": "center",
+     "align": "center",
+     "max_width": 1400,
+     "anim_in": "fade",
+     "in_frames": 12,
+     "anim_out": "fade",
+     "out_frames": 10,
+     "text": "네이버 리뷰",
+     "start": 30.25,
+     "end": 34.5,
+     "y": 655
+    }
+   ]
+  },
+  {
+   "id": "f14",
+   "start": 34.5,
+   "end": 37.3,
+   "bg": {
+    "type": "clip",
+    "src": "/home/user/Code-Zzamtong/promo/assets/footage2/f14.mp4",
+    "in": 4.2,
+    "speed": 1.0,
+    "fit": "cover",
+    "zoom": "in",
+    "zoom_amount": 0.03,
+    "grade": {
+     "contrast": 0.96,
+     "saturation": 0.84,
+     "brightness": 0.0,
+     "gamma": 1.02,
+     "temperature": 5900
+    },
+    "vignette": true,
+    "grain": 0.05,
+    "punch": 1.0,
+    "anchor": [
+     0.5,
+     0.5
+    ]
+   },
+   "texts": [
+    {
+     "font": "Noto Serif CJK KR",
+     "size": 38,
+     "weight": 400,
+     "letter_spacing": 0.0,
+     "line_height": 1.45,
+     "color": "rgba(250,246,238,0.96)",
+     "shadow": true,
+     "x": 168,
+     "y": 896,
+     "align": "left",
+     "max_width": 1560,
+     "anim_in": "fade",
+     "in_frames": 12,
+     "anim_out": "cut",
+     "text": "필요한 것만 하자고 했다. 그게 다였다.",
+     "start": 34.7,
+     "end": 37.3
+    }
+   ]
+  },
+  {
+   "id": "q15",
+   "start": 37.3,
+   "end": 39.8,
+   "bg": {
+    "type": "color",
+    "color": "#F4EFE6",
+    "grain": 0.025
+   },
+   "texts": [
+    {
+     "font": "Noto Serif CJK KR",
+     "size": 42,
+     "weight": 400,
+     "letter_spacing": 0.0,
+     "line_height": 1.7,
+     "color": "#3A312B",
+     "shadow": false,
+     "x": "center",
+     "y": "center",
+     "align": "center",
+     "max_width": 1400,
+     "anim_in": "rise",
+     "in_frames": 15,
+     "anim_out": "fade",
+     "out_frames": 10,
+     "text": "딱 필요한 치료만 권유해 주시더라구요.",
+     "start": 37.3,
+     "end": 39.8
+    },
+    {
+     "font": "Noto Sans CJK KR",
+     "size": 22,
+     "weight": 300,
+     "letter_spacing": 0.06,
+     "line_height": 1.2,
+     "color": "rgba(58,49,43,0.66)",
+     "shadow": false,
+     "x": "center",
+     "align": "center",
+     "max_width": 1400,
+     "anim_in": "fade",
+     "in_frames": 12,
+     "anim_out": "fade",
+     "out_frames": 10,
+     "text": "네이버 리뷰",
+     "start": 37.55,
+     "end": 39.8,
+     "y": 619
+    }
+   ]
+  },
+  {
+   "id": "f16",
+   "start": 39.8,
+   "end": 42.3,
+   "bg": {
+    "type": "clip",
+    "src": "/home/user/Code-Zzamtong/promo/assets/footage2/f16.mp4",
+    "in": 1.6,
+    "speed": 1.0,
+    "fit": "cover",
+    "zoom": "none",
+    "zoom_amount": 0.03,
+    "grade": {
+     "contrast": 0.96,
+     "saturation": 0.84,
+     "brightness": 0.0,
+     "gamma": 1.02,
+     "temperature": 5900
+    },
+    "vignette": true,
+    "grain": 0.05,
+    "punch": 1.0,
+    "anchor": [
+     0.5,
+     0.5
+    ],
+    "fade_out": 14,
+    "fade_color": "white"
+   }
+  },
+  {
+   "id": "f17",
+   "start": 42.3,
+   "end": 45.3,
+   "bg": {
+    "type": "clip",
+    "src": "/home/user/Code-Zzamtong/promo/assets/footage2/f17.mp4",
+    "in": 1.4,
+    "speed": 1.0,
+    "fit": "cover",
+    "zoom": "none",
+    "zoom_amount": 0.03,
+    "grade": {
+     "contrast": 0.96,
+     "saturation": 0.84,
+     "brightness": 0.0,
+     "gamma": 1.02,
+     "temperature": 5900
+    },
+    "vignette": true,
+    "grain": 0.05,
+    "punch": 1.0,
+    "anchor": [
+     0.5,
+     0.5
+    ],
+    "fade_in": 8,
+    "fade_color": "white"
+   },
+   "texts": [
+    {
+     "font": "Noto Serif CJK KR",
+     "size": 38,
+     "weight": 400,
+     "letter_spacing": 0.0,
+     "line_height": 1.45,
+     "color": "rgba(250,246,238,0.96)",
+     "shadow": true,
+     "x": 168,
+     "y": 896,
+     "align": "left",
+     "max_width": 1560,
+     "anim_in": "fade",
+     "in_frames": 12,
+     "anim_out": "cut",
+     "text": "같은 계단인데, 이번엔 이유를 알고 내려간다.",
+     "start": 42.6,
+     "end": 45.3
+    }
+   ]
+  },
+  {
+   "id": "f18",
+   "start": 45.3,
+   "end": 47.8,
+   "bg": {
+    "type": "clip",
+    "src": "/home/user/Code-Zzamtong/promo/assets/footage2/f18.mp4",
+    "in": 8.4,
+    "speed": 1.0,
+    "fit": "cover",
+    "zoom": "none",
+    "zoom_amount": 0.03,
+    "grade": {
+     "contrast": 0.96,
+     "saturation": 0.84,
+     "brightness": 0.0,
+     "gamma": 1.02,
+     "temperature": 5900
+    },
+    "vignette": true,
+    "grain": 0.05,
+    "punch": 1.0,
+    "anchor": [
+     0.5,
+     0.5
+    ]
+   },
+   "texts": [
+    {
+     "font": "Noto Serif CJK KR",
+     "size": 38,
+     "weight": 400,
+     "letter_spacing": 0.0,
+     "line_height": 1.45,
+     "color": "rgba(250,246,238,0.96)",
+     "shadow": true,
+     "x": 168,
+     "y": 896,
+     "align": "left",
+     "max_width": 1560,
+     "anim_in": "fade",
+     "in_frames": 12,
+     "anim_out": "cut",
+     "text": "진작 올걸 그랬어요!",
+     "start": 45.5,
+     "end": 47.8
+    },
+    {
+     "font": "Noto Sans CJK KR",
+     "size": 22,
+     "weight": 300,
+     "letter_spacing": 0.06,
+     "line_height": 1.2,
+     "color": "rgba(250,246,238,0.7)",
+     "shadow": true,
+     "x": 168,
+     "align": "left",
+     "max_width": 1400,
+     "anim_in": "fade",
+     "in_frames": 12,
+     "anim_out": "fade",
+     "out_frames": 10,
+     "text": "네이버 리뷰",
+     "start": 45.8,
+     "end": 47.8,
+     "y": 956
+    }
+   ]
+  },
+  {
+   "id": "e19",
+   "start": 47.8,
+   "end": 55.5,
+   "bg": {
+    "type": "color",
+    "color": "#F4EFE6",
+    "grain": 0.025,
+    "fade_out": 24,
+    "fade_color": "white"
+   },
+   "texts": [
+    {
+     "font": "Noto Serif CJK KR",
+     "size": 56,
+     "weight": 500,
+     "letter_spacing": -0.005,
+     "line_height": 1.7,
+     "color": "#3A312B",
+     "shadow": false,
+     "x": "center",
+     "y": 418,
+     "align": "center",
+     "max_width": 1400,
+     "anim_in": "rise",
+     "in_frames": 18,
+     "anim_out": "fade",
+     "out_frames": 24,
+     "text": "짧은 시간이라도, 끝까지 듣습니다.",
+     "start": 47.8,
+     "end": 55.5
+    },
+    {
+     "font": "Noto Sans CJK KR",
+     "size": 28,
+     "weight": 300,
+     "letter_spacing": 0.06,
+     "line_height": 1.2,
+     "color": "rgba(58,49,43,0.66)",
+     "shadow": false,
+     "x": "center",
+     "align": "center",
+     "max_width": 1400,
+     "anim_in": "fade",
+     "in_frames": 12,
+     "anim_out": "fade",
+     "out_frames": 24,
+     "text": "낙성대역 4번 출구 100m · 주차 무료 · 02-872-3301",
+     "start": 50.9,
+     "end": 55.5,
+     "y": 760
+    },
+    {
+     "font": "Noto Sans CJK KR",
+     "size": 28,
+     "weight": 300,
+     "letter_spacing": 0.06,
+     "line_height": 1.2,
+     "color": "rgba(58,49,43,0.66)",
+     "shadow": false,
+     "x": "center",
+     "align": "center",
+     "max_width": 1400,
+     "anim_in": "fade",
+     "in_frames": 12,
+     "anim_out": "fade",
+     "out_frames": 24,
+     "text": "평일 9~19시 · 토 9~14시 · 일요일 진료는 네이버 예약",
+     "start": 50.9,
+     "end": 55.5,
+     "y": 806
+    }
+   ],
+   "images": [
+    {
+     "src": "/home/user/Code-Zzamtong/promo/assets/hospital/logo_color.png",
+     "start": 49.5,
+     "end": 55.5,
+     "width": 520,
+     "y": 548,
+     "anim_in": "fade",
+     "in_frames": 18,
+     "anim_out": "fade",
+     "out_frames": 24
+    }
+   ]
+  }
+ ]
+}

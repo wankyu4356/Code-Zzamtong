@@ -1,0 +1,31 @@
+{
+  "shot_id": "f07",
+  "no_good_match": true,
+  "chosen": null,
+  "alternates": [
+    {
+      "mixkit_id": "21812",
+      "file": "/home/user/Code-Zzamtong/promo/assets/footage2/candidates/f07_21812.mp4",
+      "duration": 16.04,
+      "in_point": 0.0,
+      "why": "White door, chrome lever handle, keys in lock; soft natural light, low saturation. 0.0-1.6 static, 1.8-2.0 handle turns, 2.2 door cracks open. No hand visible, opens toward camera (reverse of POV push), saturated yellow/blue dress enters frame at 2.4s. Wooden door, not glass. Usable only if a 'door opens toward me' reading is acceptable; cut must end by 2.3s."
+    },
+    {
+      "mixkit_id": "12117",
+      "file": "/home/user/Code-Zzamtong/promo/assets/footage2/candidates/f07_12117.mp4",
+      "duration": 16.016,
+      "in_point": 6.0,
+      "why": "Back view of woman at a teal panelled door, hand on handle 6.0-6.4s, no face in 6.0-8.2. Third-person not POV, cool/moody tone rather than warm morning, wall keypad enters frame at 6.6s, door does not visibly open in this window; a smiling face appears at 10.6s so later windows are unusable."
+    }
+  ],
+  "rejected": [
+    {"mixkit_id": "21821", "reason": "dark hotel door, hand punches a keypad with orange LED glow; not warm morning"},
+    {"mixkit_id": "8733", "reason": "front door opens and child runs in facing camera; faces, stock-style"}
+  ],
+  "searches": [
+    "opening door handle (0)", "hand door handle (0)", "pushing glass door (0)",
+    "door (20)", "door handle (2)", "opening door (14)", "open door (20)",
+    "glass door (5)", "entrance (20)", "door knob (1)"
+  ],
+  "notes": "Mixkit search hits tag pages only, so multi-word queries mostly return nothing. No clip shows a POV hand pushing a glass door handle. 314 (two business people exit a glass building) has a glass door but faces and a logo on the glass. Recommend the cream-paper card for this slot; 21812 at 0.0s is the fallback if a door beat is still wanted."
+}

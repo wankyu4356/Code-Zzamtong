@@ -2,3 +2,6 @@ assets/footage/candidates/
 music/render/
 assets/footage/s*.mp4
 render/
+assets/footage2/candidates/
+assets/footage2/f*.mp4
+engine/build*/

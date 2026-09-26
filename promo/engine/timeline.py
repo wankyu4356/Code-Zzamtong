@@ -16,7 +16,7 @@ ZOOMS = ("in", "out", "none")
 ANIM_IN = ("hit", "slam", "fade", "rise", "none")
 ANIM_OUT = ("cut", "fade", "none")
 CARD_TYPES = ("review",)
-GRADE_DEFAULTS = {"contrast": 1.0, "saturation": 1.0, "brightness": 0.0, "gamma": 1.0}
+GRADE_DEFAULTS = {"contrast": 1.0, "saturation": 1.0, "brightness": 0.0, "gamma": 1.0, "temperature": 6500}
 
 
 class TimelineError(Exception):

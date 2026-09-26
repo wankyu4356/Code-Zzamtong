@@ -1,0 +1,32 @@
+{
+  "shot_id": "f05",
+  "no_good_match": false,
+  "chosen": {
+    "mixkit_id": "25219",
+    "title": "woman with a backpack walking up the stairs",
+    "file": "/home/user/Code-Zzamtong/promo/assets/footage2/f05.mp4",
+    "quality": "720",
+    "duration": 17.84,
+    "in_point": 1.0,
+    "fit_score": 0.8,
+    "faces": "none (back view only)",
+    "why": "Solo figure seen from behind climbing worn stone steps out of a dim covered passage toward a bright arched opening above; warm low-saturation stone tones, steady handheld follow, quiet and unhurried. Not a subway but reads clearly as underground-to-daylight stairs, matching the tone better than any actual metro clip found. Backpack shows only a small blank leather tag, no legible text."
+  },
+  "alternates": [
+    {
+      "mixkit_id": "1629",
+      "file": "/home/user/Code-Zzamtong/promo/assets/footage2/candidates/f05_1629.mp4",
+      "duration": 11.71,
+      "in_point": 0.0,
+      "why": "Most literal match: crowd climbing real subway exit stairs toward daylight, backs to camera, muted film-like grade. But dense midday crowd, some colorful shirts and occasional side profiles; busier than the quiet-morning tone."
+    },
+    {
+      "mixkit_id": "15519",
+      "file": "/home/user/Code-Zzamtong/promo/assets/footage2/candidates/f05_15519.mp4",
+      "duration": 23.52,
+      "in_point": 1.0,
+      "why": "Feet-only shot of boots riding an escalator upward, neutral gray with warm leather, no faces, clean. Lacks the light-from-above and exit context, motion is subtle."
+    }
+  ],
+  "notes": "Searched: subway stairs, subway entrance, metro exit stairs, people leaving subway, escalator, stairs, walking up stairs. Mixkit has very few true subway-exit clips: 4372 is a night-time long-exposure timelapse (blurred ghosting, night lights) and 4154 is a fast daytime timelapse; both too frantic/stocky. 27463 (boy on escalator) has a saturated green jacket. Chosen clip is landscape 1280x720 at 25fps; in_point 1.0 + 2.7 + 0.2 = 3.9s <= 17.84s. Any window 0-10s works if a different position on the stairs is preferred (figure gets smaller and arch light dominates later)."
+}

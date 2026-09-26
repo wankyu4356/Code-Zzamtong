@@ -1,0 +1,25 @@
+{
+  "shot_id": "f17",
+  "no_good_match": false,
+  "chosen": {
+    "mixkit_id": "35987",
+    "title": "feet in high heels of a woman walking down steps",
+    "file": "/home/user/Code-Zzamtong/promo/assets/footage2/f17.mp4",
+    "quality": "720",
+    "duration": 15.35,
+    "in_point": 1.4,
+    "fit_score": 7,
+    "faces": "none",
+    "why": "Outdoor stone steps in bright daylight, low side angle on feet only, continuous descent 0-10s with steady step rhythm; low-saturation stone/sky palette. Only miss: high heels read slightly dressier than a soft morning POV."
+  },
+  "alternates": [
+    {
+      "mixkit_id": "4893",
+      "file": "/home/user/Code-Zzamtong/promo/assets/footage2/candidates/f17_4893.mp4",
+      "duration": 5.37,
+      "in_point": 0.6,
+      "why": "Frontal knee-down walking shot, sneakers, bright daylight sidewalk, no face; not stairs (flat street) so only a fallback if stairs are dropped."
+    }
+  ],
+  "notes": "Searched: walking down stairs feet, stairs, walking down steps, feet walking, legs stairs, staircase, going down stairs. Mixkit has almost no feet-only outdoor stair descents. Rejected: 770 (face visible, indoor black stair), 40755 (athletic man, face, stadium), 1297/22223/28823 (faces or ascending). 35987 source is 720p (Mixkit max for this clip). Its descent pauses on a landing at ~11-12.5s, so keep the cut inside 0-10s; 1.4-4.6s window recommended."
+}

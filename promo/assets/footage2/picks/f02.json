@@ -1,0 +1,32 @@
+{
+  "shot_id": "f02",
+  "no_good_match": false,
+  "chosen": {
+    "mixkit_id": "22066",
+    "title": "opening curtains to bright sunshine",
+    "file": "/home/user/Code-Zzamtong/promo/assets/footage2/candidates/f02_22066.mp4",
+    "quality": "720",
+    "duration": 25.15,
+    "in_point": 5.6,
+    "fit_score": 0.55,
+    "faces": "none (back view only; face never turns to camera within 5.6-8.8s)",
+    "why": "Static 16:9 shot from behind a woman in a white tee who parts dark brown curtains; 5.6s first sliver of light, 6.0-8.0s curtains swing open and warm blown-out daylight floods the frame over her hands and shoulders. Low-saturation brown/white palette, natural light, no logos or text, gentle continuous motion that fills a 3.2s cut. Not POV and no blanket, so it reads as 'someone opens the curtains' rather than 'my hand opens the curtains'."
+  },
+  "alternates": [
+    {
+      "mixkit_id": "3977",
+      "file": "/home/user/Code-Zzamtong/promo/assets/footage2/candidates/f02_3977.mp4",
+      "duration": 11.01,
+      "in_point": 0.0,
+      "why": "Heavily defocused warm sun glowing through a sheer curtain, 1080p, no people at all. Very film-like and low-saturation but almost no movement and no hand; usable only as a soft light-texture insert or a dissolve layer, not as the curtain-opening action."
+    },
+    {
+      "mixkit_id": "22240",
+      "file": "/home/user/Code-Zzamtong/promo/assets/footage2/candidates/f02_22240.mp4",
+      "duration": 34.0,
+      "in_point": 0.4,
+      "why": "Silhouette from behind throws open hotel curtains onto a grey city skyline (0.4-3.0s). Faceless and calm, but cold overcast light and an urban view clash with the warm morning tone; distant fallback only."
+    }
+  ],
+  "notes": "Multi-word queries (morning light curtains / hand curtain sunlight / waking up morning light bed) returned zero results on Mixkit; single-word 'curtains', 'sunlight window' and 'morning bed' sheets were reviewed instead. No true POV hand-on-curtain clip exists in the free library; 22101 was pitch black, 23505 has garish striped curtains, 21669/23500/23310 show faces or hotel interiors. 22066 is a legitimate faceless curtain-opening beat with warm light, but if the POV/hand-on-blanket framing is essential, the cream paper card is the cleaner substitute. Highlights are clipped after ~8.2s (window blows out to pure white), so a slight exposure pull-down or a fade may help match the film look. Chosen clip copied to /home/user/Code-Zzamtong/promo/assets/footage2/f02.mp4."
+}

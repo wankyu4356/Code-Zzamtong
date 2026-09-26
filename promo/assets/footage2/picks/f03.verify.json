@@ -1,0 +1,37 @@
+{
+  "shot_id": "f03",
+  "approve": false,
+  "use": "none",
+  "in_point": 0.6,
+  "reviewed": {
+    "chosen_35987": {
+      "file": "/home/user/Code-Zzamtong/promo/assets/footage2/f03.mp4",
+      "windows_checked": ["0.6-4.1 @0.2s", "0-15.2 @1.0s"],
+      "faces": "none",
+      "text_logo_watermark": "none",
+      "motion": "continuous stride, foot lands ~1.5s / ~2.3s / ~3.3s; no hesitation or pause anywhere in the clip; from ~11s she is on the flat landing",
+      "problems": [
+        "camera is at step height, side profile - never a top-down POV of one's own feet, so it reads as watching a stranger, not '내 발'",
+        "strappy multi-buckle stilettos, bare legs, black handbag/coat hem = fashion/corporate stock look; it breaks continuity with an intimate home-morning character and cannot be cropped or graded out",
+        "hard direct sun, blue sky and a monumental neoclassical building behind - high contrast exterior, not soft film-like morning light",
+        "no 'one foot lowers and stops' beat; it is a steady walk"
+      ]
+    },
+    "alt_22223": {
+      "file": "/home/user/Code-Zzamtong/promo/assets/footage2/candidates/f03_22223.mp4",
+      "windows_checked": ["2.0-5.5 @0.25s"],
+      "problems": ["person walks UP, opposite to the shot", "cold high-key white glass hotel stairs with fluorescent light - opposite of warm film tone"]
+    },
+    "alt_28823": {
+      "file": "/home/user/Code-Zzamtong/promo/assets/footage2/candidates/f03_28823.mp4",
+      "windows_checked": ["4.5-8.0 @0.25s", "8-26 @1.5s"],
+      "problems": ["harsh midday sun with hard shadows on pink stone", "saturated blue jeans in frame 4.5-6.7s and again from ~17s", "commuter crowd - several pairs of legs in almost every frame after 8s", "side angle, not POV"]
+    },
+    "rejected_770": {
+      "file": "/home/user/Code-Zzamtong/promo/assets/footage2/candidates/f03_770.mp4",
+      "problems": ["woman's face visible from 1s onward", "red wall, wide architectural shot"]
+    }
+  },
+  "decision": "None of the four clips delivers a top-down POV of one's own feet on stairs in soft warm light. The chosen 35987 is technically clean (no face/text) but its stiletto-glamour wardrobe, side-profile angle and hard exterior sun would break the quiet home-morning POV continuity; the alternates are worse. Use the cream paper card fallback for f03 as the researcher proposed.",
+  "fallback": "cream paper card"
+}

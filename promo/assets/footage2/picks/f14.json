@@ -1,0 +1,32 @@
+{
+  "shot_id": "f14",
+  "no_good_match": false,
+  "chosen": {
+    "mixkit_id": "2563",
+    "title": "person touching yellow leaves",
+    "file": "/home/user/Code-Zzamtong/promo/assets/footage2/f14.mp4",
+    "quality": "1080",
+    "duration": 30.1,
+    "in_point": 4.2,
+    "fit_score": 6.5,
+    "faces": "none",
+    "why": "Warm backlit haze pours over a hand; fingers gently touch a leaf edge (4.2-5.4s) then lift and extend (5.6-6.2s), giving the slow finger movement the shot needs. Low-saturation film look, natural light, no face. Deviation: outdoor autumn leaves, not a window sill; blur top-right in 0-4s avoided by the 4.2s in-point."
+  },
+  "alternates": [
+    {
+      "mixkit_id": "32582",
+      "file": "/home/user/Code-Zzamtong/promo/assets/footage2/candidates/f14_32582.mp4",
+      "duration": 20.6,
+      "in_point": 12.8,
+      "why": "True POV: arm reaches into sun through trees and fingers slowly spread open (12.8-15.7s). Motion matches best, but colour is cool blue/green summer sky rather than warm morning; would need a warm grade."
+    },
+    {
+      "mixkit_id": "14600",
+      "file": "/home/user/Code-Zzamtong/promo/assets/footage2/candidates/f14_14600.mp4",
+      "duration": 16.9,
+      "in_point": 0.6,
+      "why": "Warmest palette, film-like sunset over a field; fingers spread at 1.0-2.0s. Downsides: dark out-of-focus hat/back-of-head fills left third, evening not morning, and after 2.5s it becomes a stock 'pinch the sun' gesture."
+    }
+  ],
+  "notes": "Mixkit has no real 'window light on hand/knee' clip: 7 queries (sunlight on hand, hand sun rays window, hand reaching light, light through window, hand close up warm light, hand sun, sunlight hands) returned mostly silhouettes, city lights, gift wrapping and beach couples. 2563 is the closest in tone; if the editor wants strict indoor continuity, the cream-paper card is a fair substitute. 25920 downloaded and rejected: harsh black silhouette, partial profile at frame edge."
+}

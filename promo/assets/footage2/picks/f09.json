@@ -1,0 +1,21 @@
+{
+  "shot_id": "f09",
+  "no_good_match": true,
+  "alternates": [
+    {
+      "mixkit_id": "48789",
+      "file": "/home/user/Code-Zzamtong/promo/assets/footage2/candidates/f09_48789.mp4",
+      "duration": 16.35,
+      "in_point": 0.0,
+      "why": "Elderly woman's two hands resting on a brown knit blanket in her lap. Tone is the closest in the library: warm, low-saturation, soft natural light, no face, no text, 16:9 720p. But the hands are clearly aged (heavily veined, wrinkled) and clash with the young-woman POV established in f02/f03, and the clip is almost a still - the only finger movement is a slight thumb/finger shift in 0.0-1.0s, then static for the remaining 15s. Best override if the editor accepts older hands; in_point 0.0 keeps the one micro-movement inside the 2.7s cut."
+    },
+    {
+      "mixkit_id": "34091",
+      "file": "/home/user/Code-Zzamtong/promo/assets/footage2/candidates/f09_34091.mp4",
+      "duration": 17.12,
+      "in_point": 1.6,
+      "why": "Man in a dark suit with cufflinks drumming his fingers on a white table (finger-tap ripples at ~2.6s and ~3.8s, so two taps fall inside 1.6-4.3s). The nervous-waiting gesture is exactly right and there is no face, but everything else is wrong for the film tone: hands on a desk rather than knees, high-key white surface, corporate stock styling. Would need heavy warm grading and still reads as an office."
+    }
+  ],
+  "notes": "Searched 7 sheets: hands on knees, nervous hands, hands lap, fidgeting, waiting, hands close up sitting, anxious hands. Mixkit's free library has no faceless close-up of a seated person's hands fidgeting on their own knees or lap; 'nervous hands' and 'anxious hands' both return only 3 unrelated clips (wedding hands 8754, horror portraits). Downloaded and stripped 4: 48789 (elderly hands in lap, static), 34091 (suit finger-tapping on desk), 8754 (interracial couple's hands on a table, comfort gesture, two people), 4571 (two women signing on a sofa, busy two-person motion). Rejected from sheets: 12837 nervous man on park bench (face visible, wide), 47408 pregnant belly, 1323/4656 couples holding coffee/album. Neither surviving candidate meets the bar without either a character mismatch (aged hands) or a tone mismatch (corporate desk), so per the brief the cream paper card is the cleaner choice for this slot. If footage is still preferred, 48789 at in 0.0 is the least jarring for the film look. No file copied to footage2/f09.mp4."
+}

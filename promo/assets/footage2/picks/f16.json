@@ -1,0 +1,32 @@
+{
+ "shot_id": "f16",
+ "no_good_match": false,
+ "chosen": {
+  "mixkit_id": "1123",
+  "title": "woman taking in the ocean view from her hotel room",
+  "file": "/home/user/Code-Zzamtong/promo/assets/footage2/f16.mp4",
+  "quality": "1080 (1920x1080)",
+  "duration": 16.39,
+  "in_point": 1.6,
+  "fit_score": 8.5,
+  "faces": "none - back-view silhouette only; face never visible",
+  "why": "Dark interior, back view. A thin slit of light at 1.6s, the figure pushes the double door open at ~2.0-2.2s and the frame floods to near-white by 3.0s, then holds as a silhouette with arms on the door frames until 4.3s. Exactly the 'light pours through the door gap and blows the frame out' beat; low saturation, natural light, no text/logo. Cut 1.6-4.3s; do not extend past ~4.4s (subject is in a t-shirt and underwear, which becomes readable once lit, and a palm leaf enters the top of frame)."
+ },
+ "alternates": [
+  {
+   "mixkit_id": "21812",
+   "file": "/home/user/Code-Zzamtong/promo/assets/footage2/candidates/f16_21812.mp4",
+   "duration": 16.04,
+   "in_point": 0.0,
+   "why": "POV-ish white door with a hanging key; handle turns ~2.0s and the door cracks open ~2.3s. But it opens onto a bedroom (no light bloom) and a saturated yellow/blue dress fills the gap from ~2.5s, so only 0-2.7s is usable. 720p."
+  },
+  {
+   "mixkit_id": "27591",
+   "file": "/home/user/Code-Zzamtong/promo/assets/footage2/candidates/f16_27591.mp4",
+   "duration": 19.08,
+   "in_point": 2.3,
+   "why": "Muted grey exterior; front door opens at ~2.5s and a woman steps out at ~3s. Camera is outside (not POV/back view), her face is frontal 3.0-4.5s, and there is no light bloom. Fallback only if a literal 'leaving the house' shot is preferred. 720p."
+  }
+ ],
+ "notes": "Searches: 'opening door to bright light' and 'door sunlight' returned 0 results; 'leaving home' returned nothing relevant. Useful hits came from 'opening door', 'door', 'walking out door', 'front door'. Rejected: 256 (elevator, smiling face at tablet, stock-ad feel), 21813 (frontal face), 314/8733 (not downloaded; corporate glass-door exit and family entering with faces). Chosen clip is a hotel balcony onto the sea rather than a street, but between 1.6-4.3s the view is mostly blown-out sky/sea, so the read is 'dark room -> door -> white light'. Use a 16:9 frame as is; consider a slight push-in or a 1-2% brightness lift at the tail to strengthen the white-out."
+}
