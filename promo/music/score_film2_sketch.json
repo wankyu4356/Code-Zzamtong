@@ -1,0 +1,9 @@
+{ "bpm": 84, "duration": 40.0, "key_root": "D",
+  "sections": [
+    {"start": 0, "end": 5.714, "pattern": "intro"},
+    {"start": 5.714, "end": 17.143, "pattern": "theme"},
+    {"start": 17.143, "end": 28.571, "pattern": "movement"},
+    {"start": 28.571, "end": 34.286, "pattern": "swell"},
+    {"start": 34.286, "end": 40.0, "pattern": "resolve"}
+  ],
+  "events": [ {"t": 0.0, "type": "roomtone", "len": 2.0, "gain": 3.0}, {"t": 26.5, "type": "swell", "len": 2.0}, {"t": 34.286, "type": "bell", "note": "A5"} ] }

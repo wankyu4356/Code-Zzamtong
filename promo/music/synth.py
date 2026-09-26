@@ -226,6 +226,51 @@ def roomtone(dur=1.0):
     return x * 0.012
 
 
+def piano(freq, dur=2.4, vel=1.0, soft=True):
+    """펠트 피아노 느낌. 배음 몇 개가 서로 다른 속도로 사그라들고, 해머 노이즈가 아주 짧게."""
+    n = int(SR * dur)
+    t = np.arange(n) / SR
+    partials = [(1.0, 1.0, 3.0), (2.0, 0.42, 5.0), (3.0, 0.2, 7.5), (4.0, 0.09, 10.0), (5.0, 0.05, 13.0)]
+    x = np.zeros(n)
+    for k, a, d in partials:
+        detune = 1 + 0.0004 * (k - 1) ** 2      # 인하모니시티 흉내
+        x += a * np.sin(2 * np.pi * freq * k * detune * t) * np.exp(-t * d / (1.0 + 0.15 * (5 - k)))
+    x *= np.minimum(1, t / 0.004)
+    hammer = _noise(n) * np.exp(-t * 900) * (0.05 if soft else 0.12)
+    hammer = _onepole_lp(hammer, 2500 if soft else 5000)
+    x = x + hammer
+    if soft:
+        x = _onepole_lp(x, 2200 + 1800 * vel)
+    return x * 0.45 * vel
+
+
+def warm_pad(freqs, dur, cutoff=900.0, a=1.2, r=2.0):
+    """따뜻한 패드: 사인 두 겹 + 아주 약한 톱니, 느린 필터."""
+    n = int(SR * dur)
+    t = np.arange(n) / SR
+    x = np.zeros(n)
+    for f in freqs:
+        x += np.sin(2 * np.pi * f * t) + 0.5 * np.sin(2 * np.pi * f * 2.003 * t) + 0.12 * _saw(f * 0.999, n)
+    x /= len(freqs)
+    x = _svf(x, cutoff, q=0.6)
+    return x * _adsr(n, a, 0.5, 0.9, r, dur - r)
+
+
+def shaker(dur=0.09):
+    n = int(SR * dur)
+    t = np.arange(n) / SR
+    x = _noise(n)
+    x = x - _onepole_lp(x, 4500)
+    return x * np.exp(-t * 70) * 0.35
+
+
+def soft_kick(dur=0.35):
+    n = int(SR * dur)
+    t = np.arange(n) / SR
+    f = 46 + 90 * np.exp(-t * 28)
+    return np.sin(2 * np.pi * np.cumsum(f) / SR) * np.exp(-t * 9) * 0.9
+
+
 def tick(dur=0.03):
     """아주 작은 클릭. 검은 화면 글자 등장용."""
     n = int(SR * dur)

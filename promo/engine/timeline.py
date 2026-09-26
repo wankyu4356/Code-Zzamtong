@@ -162,6 +162,13 @@ def _validate_bg(s, base_dir, err):
     bg.setdefault("grain", 0.0)
     bg.setdefault("punch", 1.0)
     bg.setdefault("anchor", [0.5, 0.5])
+    for k in ("fade_in", "fade_out"):
+        bg.setdefault(k, 0)
+        if not (isinstance(bg[k], int) and bg[k] >= 0):
+            err(f"shot {sid}: bg.{k} must be a non-negative integer (frames)")
+    bg.setdefault("fade_color", "black")
+    if bg["fade_color"] not in ("black", "white"):
+        err(f"shot {sid}: bg.fade_color must be black or white")
     if not (_is_num(bg["punch"]) and bg["punch"] >= 1.0):
         err(f"shot {sid}: bg.punch must be a number >= 1")
     an = bg["anchor"]

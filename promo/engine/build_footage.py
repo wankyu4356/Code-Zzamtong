@@ -76,6 +76,18 @@ def cover_zoom_filters(src_w, src_h, W, H, zoom, amount, n, punch=1.0, anchor=(0
             "setsar=1"]
 
 
+def fade_filters(bg, n):
+    """bg.fade_in / bg.fade_out: 프레임 수. bg.fade_color: black(기본) 또는 white."""
+    out = []
+    color = bg.get("fade_color", "black")
+    fi, fo = int(bg.get("fade_in", 0) or 0), int(bg.get("fade_out", 0) or 0)
+    if fi > 0:
+        out.append(f"fade=t=in:st=0:n={fi}:color={color}")
+    if fo > 0:
+        out.append(f"fade=t=out:s={max(0, n - fo)}:n={fo}:color={color}")
+    return out
+
+
 def look_filters(bg):
     out = []
     g = bg["grade"]
@@ -104,7 +116,7 @@ def segment_command(shot, tl, out_path):
     info = probe(bg["src"])
     vf = cover_zoom_filters(info["width"], info["height"], W, H,
                             bg["zoom"], float(bg["zoom_amount"]), n,
-                            float(bg.get("punch", 1.0)), tuple(bg.get("anchor", [0.5, 0.5]))) + look_filters(bg)
+                            float(bg.get("punch", 1.0)), tuple(bg.get("anchor", [0.5, 0.5]))) + look_filters(bg) + fade_filters(bg, n)
     if t == "image":
         return head + ["-loop", "1", "-framerate", str(fps), "-i", bg["src"],
                        "-vf", ",".join(vf + ["format=yuv420p"])] + tail
