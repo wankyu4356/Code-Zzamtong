@@ -53,7 +53,30 @@ def ding():
     return out
 
 
-def render(tl, music_path, out_path, click_db=-21.0, pop_db=-16.0, ding_db=-15.0):
+def print_step(rng, dur=0.085):
+    """감열 프린터 한 줄: 모터 버즈(짧은 톱니 하모닉) + 헤드 노이즈."""
+    n = int(SR * dur)
+    t = np.arange(n) / SR
+    f0 = rng.uniform(118, 128)
+    buzz = sum(np.sin(2 * np.pi * f0 * (k + 1) * t) / (k + 1) for k in range(8))
+    nz = rng.standard_normal(n)
+    nz = nz - _lp(nz, 2600)
+    env = np.minimum(1, t / 0.006) * np.exp(-np.maximum(0, t - dur + 0.02) * 120)
+    return (buzz * 0.35 + nz * 0.5) * env
+
+
+def tear(rng, dur=0.22):
+    """종이 뜯김: 거친 노이즈가 짧게 내려간다."""
+    n = int(SR * dur)
+    t = np.arange(n) / SR
+    nz = rng.standard_normal(n)
+    hp = nz - _lp(nz, 700)
+    grit = np.sign(np.sin(2 * np.pi * 38 * t * (1 + 2 * t))) * 0.5 + 0.5
+    env = np.exp(-t * 14) * np.minimum(1, t / 0.004)
+    return hp * (0.55 + 0.45 * grit) * env
+
+
+def render(tl, music_path, out_path, click_db=-21.0, pop_db=-16.0, ding_db=-15.0, print_db=-19.0, tear_db=-14.0):
     music, sr = sf.read(music_path)
     assert sr == SR, sr
     if music.ndim == 1:
@@ -83,6 +106,10 @@ def render(tl, music_path, out_path, click_db=-21.0, pop_db=-16.0, ding_db=-15.0
         for ch in shot.get("chat", []):
             for m in ch["messages"]:
                 add(ding(), float(m["arrive_at"]), 10 ** (ding_db / 20))
+        for rc in shot.get("receipts", []):
+            for t in rc["line_times"]:
+                add(print_step(rng), float(t), 10 ** (print_db / 20), pan=0.05)
+            add(tear(rng), float(rc["tear_at"]), 10 ** (tear_db / 20), pan=-0.1)
     mix = music + fx
     peak = float(np.abs(mix).max())
     if peak > 0.95:

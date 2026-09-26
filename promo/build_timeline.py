@@ -136,7 +136,23 @@ def typing_card(text, start, end, nick, chip, date, type_end=None, hold_min=0.35
             "nick": nick, "chip": chip, "date": date, "anim_in": "rise", "in_frames": 6, "anim_out": anim_out, "out_frames": out_frames}
 
 
-REVIEWS = "chat" if "--reviews" in sys.argv and sys.argv[sys.argv.index("--reviews") + 1] == "chat" else "typing"
+REVIEWS = sys.argv[sys.argv.index("--reviews") + 1] if "--reviews" in sys.argv else "typing"
+assert REVIEWS in ("typing", "chat", "receipt"), REVIEWS
+
+
+def receipt(text, start, end, nick, date, chip="영수증 인증", print_from=None, print_secs=None, seed=7, anim_out="cut", out_frames=8):
+    """영수증 프린터. 줄 수를 어림해 한 줄씩 나오는 시각을 만든다."""
+    body_lines = max(1, -(-len(text) // 16))          # 58px 굵은 글자, 폭 888px 기준 한 줄 약 16자
+    n_lines = 9 + body_lines                           # 머리 5줄, 본문, 꼬리(바코드·상호) 4줄
+    print_from = start + 0.1 if print_from is None else print_from
+    print_secs = (end - start) * 0.62 if print_secs is None else print_secs
+    rng = random.Random(seed)
+    step = print_secs / n_lines
+    times = [round(print_from + i * step + rng.uniform(-0.15, 0.15) * step, 4) for i in range(n_lines)]
+    times = [times[0]] + [max(times[i], times[i - 1] + 0.02) for i in range(1, n_lines)]
+    tear_at = round(times[-1] + 0.42, 3)
+    return {"text": text, "start": start, "end": end, "nick": nick, "date": date, "chip": chip,
+            "line_times": times, "tear_at": tear_at, "anim_out": anim_out, "out_frames": out_frames}
 
 
 def chat_scene(start, end, messages, anim_out="cut", out_frames=8, height=720):
@@ -181,13 +197,24 @@ for sid, w in [("s26", "목"), ("s27", "어깨"), ("s28", "무릎"), ("s29", "�
     t += 0.5
 # 브레이크: 리뷰 한 줄 120px
 s30 = shot("s30", 22.0, 24.0, {"type": "black"})
-if REVIEWS == "chat":
+if REVIEWS == "receipt":
+    s30["receipts"] = [receipt("진작 올걸 그랬어요!", 22.0, 24.0, "vqfc****", "2026.07.16", print_from=22.0, print_secs=1.1, seed=30)]
+elif REVIEWS == "chat":
     s30["chat"] = [chat_scene(22.0, 24.0, [("진작 올걸 그랬어요!", "vqfc****", "영수증 인증", "2026.07.16", 22.0, 22.0)], height=420)]
 else:
     s30["typing"] = [typing_card("진작 올걸 그랬어요!", 22.0, 24.0, "vqfc****", "네이버 방문자 리뷰 · 영수증 인증", "2026.07.16 방문", seed=30)]
 shots.append(s30)
 # 리뷰 그루브 (검은 화면, 인용 교체는 앞 인용 cut 뒤 새 인용 slam)
-if REVIEWS == "chat":
+if REVIEWS == "receipt":
+    for sid, a, e, text, nick, date, seed in [
+        ("s31", 24.0, 791 * F, "딱 필요한 치료만 권유해 주시더라구요.", "ngyz****", "2026.07.29", 31),
+        ("s32", 791 * F, 896 * F, "선생님이 원인 파악을 명확하게 해주셔서 속이 다 시원했어요.", "mtzu****", "2026.09.06", 32),
+        ("s33", 896 * F, 32.0, "의사선생님이 완전 친절하세요!", "눅눅해져****", "2026.02.08", 33),
+    ]:
+        sh = shot(sid, a, e, {"type": "black"})
+        sh["receipts"] = [receipt(text, a, e, nick, date, seed=seed)]
+        shots.append(sh)
+elif REVIEWS == "chat":
     # 24~32초를 한 장면으로: 세 사람이 차례로 말풍선을 보낸다. 도착은 박자(24.5, 27.5, 30.5)에
     sh = shot("s31", 24.0, 32.0, {"type": "black"})
     sh["chat"] = [chat_scene(24.0, 32.0, [
@@ -221,7 +248,9 @@ shots.append(shot("s44", 39.0, 40.0, photo_bg("building_16x9.jpg", brightness=-0
                   flashes=[{"at": 39.0, "frames": 2, "color": "#fff", "opacity": 0.9}]))
 # 일요일 리뷰 (건물 사진 유지, 밝기 30%)
 s45 = shot("s45", 40.0, 43.0, photo_bg("building_16x9.jpg", brightness=-0.7, amount=0.04))
-if REVIEWS == "chat":
+if REVIEWS == "receipt":
+    s45["receipts"] = [receipt("담에는 어디 아프면 꼭 여기 가려구요.", 40.0, 43.0, "Sept****", "2025.02.09 (일)", chip="예약 인증 · 발췌", print_secs=1.7, seed=45, anim_out="fade", out_frames=8)]
+elif REVIEWS == "chat":
     s45["chat"] = [chat_scene(40.0, 43.0, [("담에는 어디 아프면 꼭 여기 가려구요.", "Sept****", "예약 인증 · 일요일 방문 · 발췌", "2025.02.09", 40.0, 40.5)], anim_out="fade", out_frames=8, height=420)]
 else:
     s45["typing"] = [typing_card("담에는 어디 아프면 꼭 여기 가려구요.", 40.0, 43.0, "Sept****", "네이버 방문자 리뷰 · 예약 인증 · 발췌", "2025.02.09 일요일 방문", seed=45, anim_out="fade", out_frames=8)]
@@ -250,7 +279,7 @@ if os.path.exists(music_wav):
     sfx.render(tl, music_wav, audio_wav)
     print("audio with sfx:", audio_wav)
 args = [a for a in sys.argv[1:] if not a.startswith("--") and a != REVIEWS]
-out = args[0] if args else os.path.join(HERE, "engine", f"timeline_v1{'_chat' if REVIEWS == 'chat' else ''}.json")
+out = args[0] if args else os.path.join(HERE, "engine", f"timeline_v1{'' if REVIEWS == 'typing' else '_' + REVIEWS}.json")
 json.dump(tl, open(out, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
 missing = [s["id"] for s in shots if s["bg"]["type"] == "black" and s["id"] in
            ("s01", "s09", "s10", "s11", "s18", "s19", "s20", "s21", "s22", "s23", "s24", "s25", "s26", "s27", "s28", "s29", "s38", "s39", "s40", "s41", "s42", "s43")]
