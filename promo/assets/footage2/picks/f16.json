@@ -10,9 +10,16 @@
     "in_point": 3.8,
     "fit_score": 6.0,
     "faces": "none",
-    "why": "어두운 파형 강판 터널 안에서 카메라가 출구의 빛을 향해 걸어 나가고, 3.8초에는 터널 벽과 밝은 출구가 보이다가 4.5초부터 노출이 급격히 날아가 5.9초 이후 6.3초까지 화면 전체가 순백으로 날아간다. 2.5초 창(3.8~6.3)이 '문틈으로 빛이 밀려들어 하얗게 날아가는' 느낌을 정확히 만든다. 얼굴·글자 없음. 따뜻한 앰버 톤, 핸드헬드 전진 카메라, 실시간. 위험: 문이 아니라 원형 배수 터널이라 배경이 추상적이며, 1280x720 30fps라 업스케일 필요. 컷 끝이 완전한 흰색이라 다음 컷으로 화이트 디졸브하기 좋다."
+    "why": "어두운 파형 강판 터널 안에서 카메라가 출구의 빛을 향해 걸어 나간다. 3.8초에는 터널 벽과 밝은 출구가 보이다가 4.5초부터 노출이 급격히 날아가 5.9초 이후 6.3초까지 화면 전체가 순백이 된다. 2.5초 창(3.8~6.3)이 '출구로 빛이 밀려들어 하얗게 날아가는' 느낌을 정확히 만들고, 끝이 완전한 흰색이라 다음 컷으로 화이트 디졸브하기 좋다. 얼굴·글자 없음, 따뜻한 앰버 톤, 핸드헬드 전진, 실시간. 위험: 문이 아니라 원형 배수 터널이라 배경이 추상적이며(병원 맥락이 아니라 순수한 '빛으로 나감'의 이미지), 1280x720 30fps라 업스케일 필요."
   },
   "alternates": [
+    {
+      "mixkit_id": "1123",
+      "file": "/home/user/Code-Zzamtong/promo/assets/footage2/candidates/f16_1123.mp4",
+      "duration": 16.39,
+      "in_point": 1.6,
+      "why": "이전 라운드 f16.verify.json이 승인했던 컷. 어두운 방에서 뒷모습 실루엣이 2.0~3.0초에 셔터 문을 양쪽으로 밀어 열면 문틀 안이 하얗게 날아가고 3.0~4.1초에 팔을 벌리고 서 있다. 1920x1080, 얼굴은 끝까지 뒷머리뿐. 창은 1.6~4.1로 고정하고 4.3초 이후로 절대 늘리지 말 것. 위험: 3.0초부터 바다 수평선·야자잎·발코니 난간이 읽혀 열대 호텔 발코니로 보이고(브리프의 '호텔 룩 피함'에 저촉), 여성이 크롭톱과 속옷 차림이라 4.0초부터 다리·엉덩이가 드러난다. 날아가는 부분이 문틀 안(가로 1/4)에 한정되어 화면 전체가 하얘지지는 않는다. 쓴다면 문틀 중심으로 1.3~1.5배 푸시인과 3.4초 이후 하이라이트 블룸을 권한다."
+    },
     {
       "mixkit_id": "29455",
       "file": "/home/user/Code-Zzamtong/promo/assets/footage2/candidates/f16_29455.mp4",
@@ -26,14 +33,7 @@
       "duration": 10.84,
       "in_point": 2.5,
       "why": "2.5~5.0초에 남자가 뒷모습으로 유리 건물 계단을 올라가며 머리 위 태양 플레어 속으로 들어간다. '빛 속으로 걸어간다'는 느낌은 강하나 문이 없고 보라·파랑 플레어가 무겁다. 720p."
-    },
-    {
-      "mixkit_id": "4745",
-      "file": "/home/user/Code-Zzamtong/promo/assets/footage2/candidates/f16_4745.mp4",
-      "duration": 12.0,
-      "in_point": 7.0,
-      "why": "흰 병원 복도에서 의사가 문을 밀고 밝은 방으로 들어간다(7.0~9.5초). 병원 문+밝은 방이라는 상황은 맞지만 3인칭이고 마스크 쓴 옆얼굴이 잠깐 보여 faces 규칙에 걸린다. 1080p."
     }
   ],
-  "notes": "지정 검색(건수): walking out door light(1, 무관), opening door bright light(0), exit door sunlight(0), walking into light(24, 전부 야경·도시로 무관), door opening outside(0). 추가: light at the end of the tunnel(4), end of the tunnel(5), tunnel exit(2), walking through tunnel(5), out of the darkness(24), dark to light(24), blinding light(24), white out(24), overexposed(1), walking out of a building(24), leaving building(6), exit building(3), through the door(24), out the door(24), walking out the door(6), walk out the door(9), hospital corridor(4), hospital hallway(3), white corridor(7), corridor(24), hallway(24), automatic door(1), sun through door(1), doorway light(0), bright exit(0), light through the door(5, 무관). 내려받아 탈락: 3120(차량 시점으로 도로 터널을 빠져나감, 바닥에 'MAX' 글자가 읽힘), 256(엘리베이터에서 나오는 여성 얼굴), 46446(정면 얼굴 셋), 27591(집 현관, 얼굴), 34002·35182(사막 문 3D 실루엣, 주황색), 16293(문틈의 아이 얼굴), 28923(항공 촬영), 27773(주택 자동 대문), 9898(광산 터널 정지 컷), 33396(초록 톤 복도, 정면 얼굴), 4747(방호복 실루엣, 파란 톤), 6057(대학 목재 정문, 얼굴), 12117(집 문으로 들어감), 1607(육교 통로, 밖으로 나가지 않음). 문을 밀고 나가며 화면이 하얗게 날아가는 컷은 없어서 '어두운 통로에서 빛으로 걸어 나가며 화이트아웃'되는 47520을 택했고, 유리문을 나가는 실사 대안으로 29455를 붙였다. 후보 파일은 모두 candidates/에 둠."
+  "notes": "지정 검색(건수): walking out door light(1, 무관), opening door bright light(0), exit door sunlight(0), walking into light(24, 전부 야경·도시로 무관), door opening outside(0). 추가: light at the end of the tunnel(4), end of the tunnel(5), tunnel exit(2), walking through tunnel(5), out of the darkness(24), dark to light(24), blinding light(24), white out(24), overexposed(1), walking out of a building(24), leaving building(6), exit building(3), through the door(24), out the door(24), walking out the door(6), walk out the door(9), hospital corridor(4), hospital hallway(3), white corridor(7), corridor(24), hallway(24), automatic door(1), sun through door(1), doorway light(0), bright exit(0), light through the door(5, 무관). 내려받아 탈락: 3120(차량 시점으로 도로 터널을 빠져나감, 바닥에 'MAX' 글자가 읽힘), 256(엘리베이터에서 나오는 여성 얼굴), 46446(정면 얼굴 셋), 27591(집 현관, 얼굴), 34002·35182(사막 문 3D 실루엣, 주황색), 16293(문틈의 아이 얼굴), 28923(항공 촬영), 27773(주택 자동 대문), 9898(광산 터널 정지 컷), 33396(초록 톤 복도, 정면 얼굴), 4747(방호복 실루엣, 파란 톤), 4745(의사가 병원 문을 밀고 밝은 방으로 들어가지만 마스크 쓴 옆얼굴이 보임), 6057(대학 목재 정문, 얼굴), 12117(집 문으로 들어감), 1607(육교 통로, 밖으로 나가지 않음). 병원 문을 밀고 나가며 화면이 하얗게 날아가는 컷은 없어서 화이트아웃이 완전한 47520을 택했고, 실제 문이 열리는 1123과 유리문을 나가는 29455를 대안으로 붙였다. 1123은 호텔 발코니·속옷 차림 문제가 있어 브리프 규칙상 대안으로만 두었으나, 편집자가 '문이 열리는' 실사를 우선한다면 위 창과 푸시인 조건으로 쓸 수 있다. 후보 파일은 모두 candidates/에 둠."
 }
