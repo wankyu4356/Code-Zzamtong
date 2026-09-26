@@ -77,7 +77,8 @@
       maxWidth: s.max_width + "px", textAlign: s.align,
       textShadow: s.shadow ? "0 2px 24px rgba(0,0,0,.55)" : "none",
     });
-    // Chromium adds letter-spacing after the last glyph too; compensate so centered lines sit centered.
+    // Chromium applies letter-spacing after the last glyph too, so a centered line's advance box
+    // sits |ls|/2 off center. Pad the right side by |ls| to center the advance box exactly.
     if (s.align === "center" && s.letter_spacing < 0) el.style.paddingRight = (-s.letter_spacing) + "em";
     return { spec: s, el, sf: toFrame(s.start), ef: toFrame(s.end) };
   }
