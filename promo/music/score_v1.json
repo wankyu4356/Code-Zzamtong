@@ -1,51 +1,279 @@
 {
-  "bpm": 120, "duration": 50.0, "key_root": "D",
-  "sections": [
-    {"start": 0,  "end": 1,  "pattern": "silence"},
-    {"start": 1,  "end": 8,  "pattern": "pulse"},
-    {"start": 8,  "end": 16, "pattern": "build"},
-    {"start": 16, "end": 22, "pattern": "drop"},
-    {"start": 22, "end": 24, "pattern": "break"},
-    {"start": 24, "end": 32, "pattern": "groove"},
-    {"start": 32, "end": 34, "pattern": "pulse"},
-    {"start": 34, "end": 36, "pattern": "build"},
-    {"start": 36, "end": 40, "pattern": "drop", "gain": 0.9},
-    {"start": 40, "end": 43, "pattern": "groove", "gain": 0.7},
-    {"start": 43, "end": 50, "pattern": "outro"}
-  ],
-  "events": [
-    {"t": 0.5, "type": "sub_hit", "gain": 0.8},
-    {"t": 1.0, "type": "impact_short", "gain": 0.9},
-    {"t": 2.0, "type": "impact_short", "gain": 0.8},
-    {"t": 3.0, "type": "impact_short", "gain": 0.8},
-    {"t": 3.5, "type": "impact_short", "gain": 0.8},
-    {"t": 4.0, "type": "impact", "gain": 1.0},
-    {"t": 5.0, "type": "impact_short", "gain": 0.85},
-    {"t": 6.0, "type": "impact", "gain": 1.0},
-    {"t": 8.0, "type": "tick"}, {"t": 9.0, "type": "tick"}, {"t": 10.0, "type": "tick"}, {"t": 11.0, "type": "tick"},
-    {"t": 12.0, "type": "tick"}, {"t": 13.0, "type": "tick"}, {"t": 14.0, "type": "tick"}, {"t": 15.0, "type": "tick"},
-    {"t": 14.0, "type": "riser", "len": 1.733, "gain": 1.0},
-    {"t": 15.733, "type": "cut", "len": 0.267},
-    {"t": 16.0, "type": "impact", "gain": 1.0},
-    {"t": 20.0, "type": "impact_short", "gain": 0.9},
-    {"t": 21.75, "type": "hat_roll", "len": 0.25, "gain": 1.0},
-    {"t": 22.0, "type": "impact", "gain": 1.0},
-    {"t": 22.0, "type": "downlifter", "gain": 1.0},
-    {"t": 24.0, "type": "tick"}, {"t": 26.5, "type": "tick"}, {"t": 29.0, "type": "tick"},
-    {"t": 31.5, "type": "hat_roll", "len": 0.5, "gain": 0.8},
-    {"t": 32.0, "type": "impact_short", "gain": 0.9},
-    {"t": 33.0, "type": "impact_short", "gain": 0.9},
-    {"t": 34.0, "type": "impact_short", "gain": 0.9},
-    {"t": 34.0, "type": "riser", "len": 1.733, "gain": 1.0},
-    {"t": 35.733, "type": "cut", "len": 0.267},
-    {"t": 36.0, "type": "impact", "gain": 0.95},
-    {"t": 39.0, "type": "impact_short", "gain": 0.9},
-    {"t": 39.5, "type": "hat_roll", "len": 0.5, "gain": 1.0},
-    {"t": 40.0, "type": "tick"},
-    {"t": 42.0, "type": "riser", "len": 1.0, "gain": 0.9},
-    {"t": 42.5, "type": "hat_roll", "len": 0.5, "gain": 0.9},
-    {"t": 43.0, "type": "impact", "gain": 1.0},
-    {"t": 43.0, "type": "bell", "gain": 1.0},
-    {"t": 45.5, "type": "tick"}, {"t": 47.0, "type": "tick"}, {"t": 48.0, "type": "tick"}
-  ]
+ "bpm": 120,
+ "duration": 50.0,
+ "key_root": "D",
+ "sections": [
+  {
+   "start": 0,
+   "end": 1,
+   "pattern": "silence"
+  },
+  {
+   "start": 1,
+   "end": 8,
+   "pattern": "pulse"
+  },
+  {
+   "start": 8,
+   "end": 16,
+   "pattern": "build"
+  },
+  {
+   "start": 16,
+   "end": 22,
+   "pattern": "drop"
+  },
+  {
+   "start": 22,
+   "end": 24,
+   "pattern": "break"
+  },
+  {
+   "start": 24,
+   "end": 32,
+   "pattern": "groove"
+  },
+  {
+   "start": 32,
+   "end": 34,
+   "pattern": "pulse"
+  },
+  {
+   "start": 34,
+   "end": 36,
+   "pattern": "build"
+  },
+  {
+   "start": 36,
+   "end": 40,
+   "pattern": "drop",
+   "gain": 0.9
+  },
+  {
+   "start": 40,
+   "end": 43,
+   "pattern": "groove",
+   "gain": 0.7
+  },
+  {
+   "start": 43,
+   "end": 50,
+   "pattern": "outro"
+  }
+ ],
+ "events": [
+  {
+   "t": 0.0,
+   "type": "roomtone",
+   "len": 1.0,
+   "gain": 4.0
+  },
+  {
+   "t": 0.5,
+   "type": "sub_hit",
+   "gain": 0.8
+  },
+  {
+   "t": 1.0,
+   "type": "impact_short",
+   "gain": 0.9
+  },
+  {
+   "t": 2.0,
+   "type": "impact_short",
+   "gain": 0.8
+  },
+  {
+   "t": 3.0,
+   "type": "impact_short",
+   "gain": 0.8
+  },
+  {
+   "t": 3.5,
+   "type": "impact_short",
+   "gain": 0.8
+  },
+  {
+   "t": 4.0,
+   "type": "impact",
+   "gain": 1.0
+  },
+  {
+   "t": 5.0,
+   "type": "impact_short",
+   "gain": 0.85
+  },
+  {
+   "t": 6.0,
+   "type": "impact",
+   "gain": 1.0
+  },
+  {
+   "t": 8.0,
+   "type": "tick"
+  },
+  {
+   "t": 9.0,
+   "type": "tick"
+  },
+  {
+   "t": 10.0,
+   "type": "tick"
+  },
+  {
+   "t": 11.0,
+   "type": "tick"
+  },
+  {
+   "t": 12.0,
+   "type": "tick"
+  },
+  {
+   "t": 13.0,
+   "type": "tick"
+  },
+  {
+   "t": 14.0,
+   "type": "riser",
+   "len": 1.733,
+   "gain": 1.0
+  },
+  {
+   "t": 14.0,
+   "type": "tick"
+  },
+  {
+   "t": 15.0,
+   "type": "tick"
+  },
+  {
+   "t": 15.733,
+   "type": "cut",
+   "len": 0.267
+  },
+  {
+   "t": 16.0,
+   "type": "impact",
+   "gain": 1.0
+  },
+  {
+   "t": 20.0,
+   "type": "impact_short",
+   "gain": 0.9
+  },
+  {
+   "t": 21.5,
+   "type": "hat_roll",
+   "len": 0.5,
+   "gain": 1.0
+  },
+  {
+   "t": 22.0,
+   "type": "downlifter",
+   "gain": 1.0
+  },
+  {
+   "t": 22.0,
+   "type": "impact",
+   "gain": 1.0
+  },
+  {
+   "t": 24.0,
+   "type": "tick"
+  },
+  {
+   "t": 26.5,
+   "type": "tick"
+  },
+  {
+   "t": 29.5,
+   "type": "tick"
+  },
+  {
+   "t": 31.5,
+   "type": "hat_roll",
+   "len": 0.5,
+   "gain": 0.8
+  },
+  {
+   "t": 32.0,
+   "type": "impact_short",
+   "gain": 0.9
+  },
+  {
+   "t": 33.0,
+   "type": "impact_short",
+   "gain": 0.9
+  },
+  {
+   "t": 34.0,
+   "type": "impact_short",
+   "gain": 0.9
+  },
+  {
+   "t": 34.0,
+   "type": "riser",
+   "len": 1.733,
+   "gain": 1.0
+  },
+  {
+   "t": 35.733,
+   "type": "cut",
+   "len": 0.267
+  },
+  {
+   "t": 36.0,
+   "type": "impact",
+   "gain": 0.95
+  },
+  {
+   "t": 39.0,
+   "type": "impact_short",
+   "gain": 0.9
+  },
+  {
+   "t": 39.5,
+   "type": "hat_roll",
+   "len": 0.5,
+   "gain": 1.0
+  },
+  {
+   "t": 40.0,
+   "type": "tick"
+  },
+  {
+   "t": 42.0,
+   "type": "riser",
+   "len": 1.0,
+   "gain": 0.9
+  },
+  {
+   "t": 42.5,
+   "type": "hat_roll",
+   "len": 0.5,
+   "gain": 0.9
+  },
+  {
+   "t": 43.0,
+   "type": "bell",
+   "gain": 1.0
+  },
+  {
+   "t": 43.0,
+   "type": "impact",
+   "gain": 1.0
+  },
+  {
+   "t": 45.5,
+   "type": "tick"
+  },
+  {
+   "t": 47.0,
+   "type": "tick"
+  },
+  {
+   "t": 48.0,
+   "type": "tick"
+  }
+ ]
 }

@@ -176,7 +176,11 @@ def build(md, audio_b64=None, audio_mime="audio/mpeg"):
     strip = ""
     cur_seg = None
     for r in shots:
-        no, tm, beat, text, visual, source, sound, motion = (r + [""] * 8)[:8]
+        if len(r) >= 9:
+            no, tm, beat, text, size, visual, source, sound, motion = r[:9]
+        else:
+            no, tm, beat, text, visual, source, sound, motion = (r + [""] * 8)[:8]
+            size = ""
         a, b = parse_time(tm)
         seg = next((s for s in segs if a is not None and s["a"] <= a < s["b"]), None)
         if seg and seg is not cur_seg:
@@ -188,7 +192,7 @@ def build(md, audio_b64=None, audio_mime="audio/mpeg"):
         strip += f"""<article class='shot'>
   {frame_html(text, visual, source)}
   <div class='meta'>
-    <div class='row1'><span class='no'>#{html.escape(no)}</span><span class='tc'>{html.escape(tm.split(',')[0])}</span><span class='dur'>{dur}</span><span class='beat'>{html.escape(beat)}</span></div>
+    <div class='row1'><span class='no'>#{html.escape(no)}</span><span class='tc'>{html.escape(tm.split(',')[0])}</span><span class='dur'>{dur}</span><span class='beat'>{html.escape(beat)}</span>{"<span class='size'>" + html.escape(size) + "</span>" if size and size != "없음" else ""}</div>
     <p class='vis'>{md_inline(visual)}</p>
     <dl>
       <dt>소스</dt><dd>{md_inline(source)}</dd>
@@ -270,6 +274,7 @@ code {{ font-family:"IBM Plex Mono", monospace; font-size: 0.9em; background: va
 .meta .no {{ font-family:"IBM Plex Mono", monospace; font-weight:500; color: var(--accent); }}
 .meta .dur {{ font-size: 12px; color: var(--muted); }}
 .meta .beat {{ font-size: 12px; color: var(--muted); }}
+.meta .size {{ font-size: 11px; color: var(--accent); border:1px solid var(--line); border-radius: 4px; padding: 0 6px; }}
 .meta .vis {{ margin: 0 0 6px; font-size: 14.5px; max-width: none; }}
 .meta dl {{ margin:0; display:grid; grid-template-columns: 40px 1fr; gap: 2px 10px; font-size: 13px; }}
 .meta dt {{ color: var(--muted); }} .meta dd {{ margin:0; }}

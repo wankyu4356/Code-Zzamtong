@@ -81,8 +81,9 @@ def render(score):
                 continue
 
             if pat == "pulse":
-                # 마디 첫 박에 서브 한 번, 아주 낮게. 긴장감만
-                bass.add(S.sub_note(ch["sub"] / 2, beat * 1.5), t_bar, gain=0.35 * sg)
+                # 마디 첫 박에 서브 한 번, 아주 낮게. 긴장감만. 마지막 마디는 짧게 끊어 다음 구간 앞에 빈다
+                sub_len = beat * 1.0 if b == nbars - 1 else beat * 1.5
+                bass.add(S.sub_note(ch["sub"] / 2, sub_len), t_bar, gain=0.35 * sg)
                 for k in range(4):
                     tk = t_bar + k * beat + beat * 0.5
                     if _in(tk):
