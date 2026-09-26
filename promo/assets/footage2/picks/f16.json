@@ -1,32 +1,39 @@
 {
- "shot_id": "f16",
- "no_good_match": false,
- "chosen": {
-  "mixkit_id": "1123",
-  "title": "woman taking in the ocean view from her hotel room",
-  "file": "/home/user/Code-Zzamtong/promo/assets/footage2/f16.mp4",
-  "quality": "1080 (1920x1080)",
-  "duration": 16.39,
-  "in_point": 1.6,
-  "fit_score": 8.5,
-  "faces": "none - back-view silhouette only; face never visible",
-  "why": "Dark interior, back view. A thin slit of light at 1.6s, the figure pushes the double door open at ~2.0-2.2s and the frame floods to near-white by 3.0s, then holds as a silhouette with arms on the door frames until 4.3s. Exactly the 'light pours through the door gap and blows the frame out' beat; low saturation, natural light, no text/logo. Cut 1.6-4.3s; do not extend past ~4.4s (subject is in a t-shirt and underwear, which becomes readable once lit, and a palm leaf enters the top of frame)."
- },
- "alternates": [
-  {
-   "mixkit_id": "21812",
-   "file": "/home/user/Code-Zzamtong/promo/assets/footage2/candidates/f16_21812.mp4",
-   "duration": 16.04,
-   "in_point": 0.0,
-   "why": "POV-ish white door with a hanging key; handle turns ~2.0s and the door cracks open ~2.3s. But it opens onto a bedroom (no light bloom) and a saturated yellow/blue dress fills the gap from ~2.5s, so only 0-2.7s is usable. 720p."
+  "shot_id": "f16",
+  "no_good_match": false,
+  "chosen": {
+    "mixkit_id": "47520",
+    "title": "following the white light at the end of the tunnel",
+    "file": "/home/user/Code-Zzamtong/promo/assets/footage2/candidates/f16_47520.mp4",
+    "quality": "720",
+    "duration": 6.37,
+    "in_point": 3.8,
+    "fit_score": 6.0,
+    "faces": "none",
+    "why": "어두운 파형 강판 터널 안에서 카메라가 출구의 빛을 향해 걸어 나가고, 3.8초에는 터널 벽과 밝은 출구가 보이다가 4.5초부터 노출이 급격히 날아가 5.9초 이후 6.3초까지 화면 전체가 순백으로 날아간다. 2.5초 창(3.8~6.3)이 '문틈으로 빛이 밀려들어 하얗게 날아가는' 느낌을 정확히 만든다. 얼굴·글자 없음. 따뜻한 앰버 톤, 핸드헬드 전진 카메라, 실시간. 위험: 문이 아니라 원형 배수 터널이라 배경이 추상적이며, 1280x720 30fps라 업스케일 필요. 컷 끝이 완전한 흰색이라 다음 컷으로 화이트 디졸브하기 좋다."
   },
-  {
-   "mixkit_id": "27591",
-   "file": "/home/user/Code-Zzamtong/promo/assets/footage2/candidates/f16_27591.mp4",
-   "duration": 19.08,
-   "in_point": 2.3,
-   "why": "Muted grey exterior; front door opens at ~2.5s and a woman steps out at ~3s. Camera is outside (not POV/back view), her face is frontal 3.0-4.5s, and there is no light bloom. Fallback only if a literal 'leaving the house' shot is preferred. 720p."
-  }
- ],
- "notes": "Searches: 'opening door to bright light' and 'door sunlight' returned 0 results; 'leaving home' returned nothing relevant. Useful hits came from 'opening door', 'door', 'walking out door', 'front door'. Rejected: 256 (elevator, smiling face at tablet, stock-ad feel), 21813 (frontal face), 314/8733 (not downloaded; corporate glass-door exit and family entering with faces). Chosen clip is a hotel balcony onto the sea rather than a street, but between 1.6-4.3s the view is mostly blown-out sky/sea, so the read is 'dark room -> door -> white light'. Use a 16:9 frame as is; consider a slight push-in or a 1-2% brightness lift at the tail to strengthen the white-out."
+  "alternates": [
+    {
+      "mixkit_id": "29455",
+      "file": "/home/user/Code-Zzamtong/promo/assets/footage2/candidates/f16_29455.mp4",
+      "duration": 38.64,
+      "in_point": 11.75,
+      "why": "바닥 높이 고정 카메라로 본 자동 유리문. 11.75~14.25초에 서류가방을 든 두 사람이 등을 보인 채 유리문을 지나 밝은 홀로 걸어 나간다. 머리가 프레임 밖이라 얼굴 없음, 중성 회색 톤, 유리문이라 병원 출입구로 읽힌다. 다만 문 너머가 야외가 아니라 공항 홀이고 노출이 날아가지 않는다. 720p."
+    },
+    {
+      "mixkit_id": "25269",
+      "file": "/home/user/Code-Zzamtong/promo/assets/footage2/candidates/f07_25269.mp4",
+      "duration": 10.84,
+      "in_point": 2.5,
+      "why": "2.5~5.0초에 남자가 뒷모습으로 유리 건물 계단을 올라가며 머리 위 태양 플레어 속으로 들어간다. '빛 속으로 걸어간다'는 느낌은 강하나 문이 없고 보라·파랑 플레어가 무겁다. 720p."
+    },
+    {
+      "mixkit_id": "4745",
+      "file": "/home/user/Code-Zzamtong/promo/assets/footage2/candidates/f16_4745.mp4",
+      "duration": 12.0,
+      "in_point": 7.0,
+      "why": "흰 병원 복도에서 의사가 문을 밀고 밝은 방으로 들어간다(7.0~9.5초). 병원 문+밝은 방이라는 상황은 맞지만 3인칭이고 마스크 쓴 옆얼굴이 잠깐 보여 faces 규칙에 걸린다. 1080p."
+    }
+  ],
+  "notes": "지정 검색(건수): walking out door light(1, 무관), opening door bright light(0), exit door sunlight(0), walking into light(24, 전부 야경·도시로 무관), door opening outside(0). 추가: light at the end of the tunnel(4), end of the tunnel(5), tunnel exit(2), walking through tunnel(5), out of the darkness(24), dark to light(24), blinding light(24), white out(24), overexposed(1), walking out of a building(24), leaving building(6), exit building(3), through the door(24), out the door(24), walking out the door(6), walk out the door(9), hospital corridor(4), hospital hallway(3), white corridor(7), corridor(24), hallway(24), automatic door(1), sun through door(1), doorway light(0), bright exit(0), light through the door(5, 무관). 내려받아 탈락: 3120(차량 시점으로 도로 터널을 빠져나감, 바닥에 'MAX' 글자가 읽힘), 256(엘리베이터에서 나오는 여성 얼굴), 46446(정면 얼굴 셋), 27591(집 현관, 얼굴), 34002·35182(사막 문 3D 실루엣, 주황색), 16293(문틈의 아이 얼굴), 28923(항공 촬영), 27773(주택 자동 대문), 9898(광산 터널 정지 컷), 33396(초록 톤 복도, 정면 얼굴), 4747(방호복 실루엣, 파란 톤), 6057(대학 목재 정문, 얼굴), 12117(집 문으로 들어감), 1607(육교 통로, 밖으로 나가지 않음). 문을 밀고 나가며 화면이 하얗게 날아가는 컷은 없어서 '어두운 통로에서 빛으로 걸어 나가며 화이트아웃'되는 47520을 택했고, 유리문을 나가는 실사 대안으로 29455를 붙였다. 후보 파일은 모두 candidates/에 둠."
 }

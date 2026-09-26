@@ -2,31 +2,38 @@
   "shot_id": "f05",
   "no_good_match": false,
   "chosen": {
-    "mixkit_id": "25219",
-    "title": "woman with a backpack walking up the stairs",
-    "file": "/home/user/Code-Zzamtong/promo/assets/footage2/f05.mp4",
-    "quality": "720",
-    "duration": 17.84,
+    "mixkit_id": "1629",
+    "title": "people getting out of the subway station",
+    "file": "/home/user/Code-Zzamtong/promo/assets/footage2/candidates/f05_1629.mp4",
+    "quality": "1080",
+    "duration": 11.71,
     "in_point": 1.0,
-    "fit_score": 0.8,
-    "faces": "none (back view only)",
-    "why": "Solo figure seen from behind climbing worn stone steps out of a dim covered passage toward a bright arched opening above; warm low-saturation stone tones, steady handheld follow, quiet and unhurried. Not a subway but reads clearly as underground-to-daylight stairs, matching the tone better than any actual metro clip found. Backpack shows only a small blank leather tag, no legible text."
+    "fit_score": 6.0,
+    "faces": "none",
+    "why": "실제 지하철 출구 계단을 카메라가 인파 속에서 뒤따라 올라가는 컷. 1.0~3.5초 구간은 앞사람들의 등과 가방, 계단, 그리고 위에서 쏟아지는 한낮 햇빛만 보이고 얼굴은 전혀 없다(0.0초의 왼쪽 여성 옆얼굴, 3.6초 이후의 옆모습이 걸리므로 1.0~3.5 창을 벗어나지 않을 것). 1920x1080 24fps, 실시간, 핸드헬드로 함께 올라가는 느낌이라 POV에 가깝다. 표지판·글자 없음. 위험: 인파가 많고 정오의 강한 직사광이라 '조용한' 톤과는 거리가 있고, 분홍·초록 셔츠와 파란 배낭 등 채도가 있는 옷이 있어 그레이딩에서 채도를 낮춰야 한다. 초록색 철제 난간이 외국(멕시코시티) 느낌을 약간 준다."
   },
   "alternates": [
     {
-      "mixkit_id": "1629",
-      "file": "/home/user/Code-Zzamtong/promo/assets/footage2/candidates/f05_1629.mp4",
-      "duration": 11.71,
-      "in_point": 0.0,
-      "why": "Most literal match: crowd climbing real subway exit stairs toward daylight, backs to camera, muted film-like grade. But dense midday crowd, some colorful shirts and occasional side profiles; busier than the quiet-morning tone."
+      "mixkit_id": "14723",
+      "file": "/home/user/Code-Zzamtong/promo/assets/footage2/candidates/f05_14723.mp4",
+      "duration": 55.68,
+      "in_point": 1.6,
+      "why": "승인된 대체안(평범한 야외 계단 오르기). 유리 건물 앞 데크 계단을 한 남자가 혼자 올라가는데 1.6~4.1초에는 다리·재킷 등만 보이고 얼굴은 6.5초 이후에도 뒷머리뿐. 흐린 중성 일광, 저채도 청회색, 고정 카메라, 실시간이라 조용한 톤에는 가장 잘 맞는다. 단 지하철이 아니고 '빛으로 올라가는' 느낌이 약하며 1280x720 25fps."
     },
     {
-      "mixkit_id": "15519",
-      "file": "/home/user/Code-Zzamtong/promo/assets/footage2/candidates/f05_15519.mp4",
-      "duration": 23.52,
+      "mixkit_id": "25219",
+      "file": "/home/user/Code-Zzamtong/promo/assets/footage2/candidates/f05_25219.mp4",
+      "duration": 17.84,
       "in_point": 1.0,
-      "why": "Feet-only shot of boots riding an escalator upward, neutral gray with warm leather, no faces, clean. Lacks the light-from-above and exit context, motion is subtle."
+      "why": "배낭 멘 여성의 뒷모습이 좁은 돌계단을 올라가고 위쪽 아치로 밝은 일광이 들어온다. 전 구간 얼굴 없음, 베이지 돌 톤의 저채도, 부드러운 팔로우 카메라. 다만 중세풍 유럽 골목이라 한국 지하철 맥락과는 멀고 1280x720."
+    },
+    {
+      "mixkit_id": "25269",
+      "file": "/home/user/Code-Zzamtong/promo/assets/footage2/candidates/f07_25269.mp4",
+      "duration": 10.84,
+      "in_point": 2.5,
+      "why": "14723과 같은 장소를 역광으로 찍은 컷. 2.5~5.0초에 남자가 뒷모습으로 계단을 올라가며 머리 위에서 태양 플레어가 내리쬐어 '위에서 빛이 내려온다'는 느낌은 가장 강하다. 그러나 보라·파랑 렌즈 플레어가 강해 색이 무겁고 스톡 느낌이 난다. 720p."
     }
   ],
-  "notes": "Searched: subway stairs, subway entrance, metro exit stairs, people leaving subway, escalator, stairs, walking up stairs. Mixkit has very few true subway-exit clips: 4372 is a night-time long-exposure timelapse (blurred ghosting, night lights) and 4154 is a fast daytime timelapse; both too frantic/stocky. 27463 (boy on escalator) has a saturated green jacket. Chosen clip is landscape 1280x720 at 25fps; in_point 1.0 + 2.7 + 0.2 = 3.9s <= 17.84s. Any window 0-10s works if a different position on the stairs is preferred (figure gets smaller and arch light dominates later)."
+  "notes": "검색(건수): subway stairs(5), subway exit(1), underground stairs light(0), walking up stairs(18), metro station stairs(1). 추가: stairs(24), staircase(24), steps(24), subway(24), metro(24), underground(19), subway station(24), escalator(24), climbing stairs(4), upstairs(8), underpass(3), going up the stairs(7), person walking up stairs(6), urban stairs(18), city steps(12), stairs light(24, 대부분 CG), subway exit stairs(1), metro exit(1), station stairs(2), footbridge(5), stone steps(1), outdoor staircase(2), stairs sunlight(2), concrete stairs(0), tube station(0). Mixkit에는 '빈 지하철 계단+빛' 컷이 없고, 실제 지하철 출구 계단은 1629 하나뿐이다. 내려받아 탈락: 4372(야간 출구 에스컬레이터, 장노출 블러, 노란 조명), 27463(초록 점퍼 소년 뒷모습, 에스컬레이터), 32317·15519(에스컬레이터 발), 3094(어두운 실내 계단 정지 컷, 동작 없음), 20017(모래언덕 나무 계단, 인물이 너무 작고 하늘 채도 높음), 22148(대리석 호텔 계단, 보조기 찬 아이 다리), 28823(분홍 돌계단 위 여러 발, 채도 높음), 1607(따뜻한 빛의 육교 통로, 계단 아님). 최종은 유일한 진짜 지하철 출구인 1629를 택했으나 인파·강한 햇빛 때문에 조용한 톤이 우선이면 14723(1.6초)을 쓰는 것을 권한다. 후보 파일은 모두 candidates/에 그대로 둠."
 }

@@ -1,31 +1,39 @@
 {
   "shot_id": "f07",
-  "no_good_match": true,
-  "chosen": null,
+  "no_good_match": false,
+  "chosen": {
+    "mixkit_id": "21821",
+    "title": "opening a hotel door with a keypad",
+    "file": "/home/user/Code-Zzamtong/promo/assets/footage2/candidates/f07_21821.mp4",
+    "quality": "720",
+    "duration": 19.42,
+    "in_point": 9.6,
+    "fit_score": 5.0,
+    "faces": "none",
+    "why": "손과 문만 보이는 클로즈업. 9.6~10.0초에 손이 레버 손잡이를 잡고, 10.1~10.2초에 눌러 내리며, 10.3~11.4초에 문이 밀려 열리고 카메라가 따라 들어가 11.5초부터 문틈 너머가 보인다. 2초 창(9.6~11.6) 안에 '잡고-누르고-미는' 동작이 온전히 들어간다. 얼굴 없음. 디지털 도어락(숫자 키패드)이 달린 무광 짙은 회색 문이라 한국 사무실·병원 출입문처럼 읽힐 여지가 있다. 위험: 조도가 낮고 갈색 톤의 실내(호텔 복도)라 밝은 일광 톤과 어긋나며 유리문이 아니다. 9.5초 이전에는 키패드가 주황색으로 빛나므로 창을 앞으로 당기지 말 것. 키패드의 숫자는 아주 작게만 보인다. 1280x720 24fps, 실시간, 고정 카메라."
+  },
   "alternates": [
     {
-      "mixkit_id": "21812",
-      "file": "/home/user/Code-Zzamtong/promo/assets/footage2/candidates/f07_21812.mp4",
-      "duration": 16.04,
+      "mixkit_id": "33712",
+      "file": "/home/user/Code-Zzamtong/promo/assets/footage2/candidates/f07_33712.mp4",
+      "duration": 10.0,
       "in_point": 0.0,
-      "why": "White door, chrome lever handle, keys in lock; soft natural light, low saturation. 0.0-1.6 static, 1.8-2.0 handle turns, 2.2 door cracks open. No hand visible, opens toward camera (reverse of POV push), saturated yellow/blue dress enters frame at 2.4s. Wooden door, not glass. Usable only if a 'door opens toward me' reading is acceptable; cut must end by 2.3s."
+      "why": "흰 문에 은색 레버 손잡이, 회청색 벽의 클로즈업이라 병원·사무실 문의 룩은 가장 가깝다. 하지만 1.0초부터 들어오는 손이 솜 패드로 손잡이를 닦는 동작이라 '밀기'가 아니다. 0~2초 창은 정지된 손잡이 뒤 손이 다가오는 정도로만 쓸 수 있다. 720p. (33575는 같은 내용의 파일.)"
     },
     {
       "mixkit_id": "12117",
-      "file": "/home/user/Code-Zzamtong/promo/assets/footage2/candidates/f07_12117.mp4",
-      "duration": 16.016,
-      "in_point": 6.0,
-      "why": "Back view of woman at a teal panelled door, hand on handle 6.0-6.4s, no face in 6.0-8.2. Third-person not POV, cool/moody tone rather than warm morning, wall keypad enters frame at 6.6s, door does not visibly open in this window; a smiling face appears at 10.6s so later windows are unusable."
+      "file": "/home/user/Code-Zzamtong/promo/assets/footage2/candidates/f16_12117.mp4",
+      "duration": 16.02,
+      "in_point": 4.5,
+      "why": "곱슬머리 여성의 뒷머리 너머로 4.5~6.5초에 손이 청록색 문 손잡이를 잡고 누른다. 얼굴 없음(10.5초부터 상대방 얼굴이 나오므로 사용 금지). 집 현관문(패널 문)이고 POV가 아닌 어깨 너머 샷이라 약함. 1080p."
+    },
+    {
+      "mixkit_id": "4745",
+      "file": "/home/user/Code-Zzamtong/promo/assets/footage2/candidates/f16_4745.mp4",
+      "duration": 12.0,
+      "in_point": 6.5,
+      "why": "흰 병원 복도에서 의사가 6.5~7.0초에 문손잡이를 잡고 7.0~8.0초에 밀어 열고 들어간다. 병원 문 자체는 가장 맞지만 3인칭 와이드샷이고 마스크·캡을 쓴 옆얼굴(눈)이 보여 faces 규칙에 걸린다. 1080p."
     }
   ],
-  "rejected": [
-    {"mixkit_id": "21821", "reason": "dark hotel door, hand punches a keypad with orange LED glow; not warm morning"},
-    {"mixkit_id": "8733", "reason": "front door opens and child runs in facing camera; faces, stock-style"}
-  ],
-  "searches": [
-    "opening door handle (0)", "hand door handle (0)", "pushing glass door (0)",
-    "door (20)", "door handle (2)", "opening door (14)", "open door (20)",
-    "glass door (5)", "entrance (20)", "door knob (1)"
-  ],
-  "notes": "Mixkit search hits tag pages only, so multi-word queries mostly return nothing. No clip shows a POV hand pushing a glass door handle. 314 (two business people exit a glass building) has a glass door but faces and a logo on the glass. Recommend the cream-paper card for this slot; 21812 at 0.0s is the fallback if a door beat is still wanted."
+  "notes": "지정 검색은 전부 0건: opening door handle, hand door handle, pushing door, hand opening glass door, door handle close up. 추가 검색: door(24), doors(24), open door(24), opening door(14), door opening(14), opens the door(24), door handle(2), door handles(2), handle(16), handle door(2), glass door(5), glass doors(5), doorway(2), entrance(24), exit(9), front door(8), hand door(7), hands door(7), hand on door(7), door knob(1), doorknob(1), knock(4), door lock(4), key in door(3), hotel door(4), wooden door(13), metal door(4), white door(1), interior door(1), sanitizing(15), disinfecting(19), elevator button(2), clinic(8), dentist office(12), doctor office(17), medical office(8), arrives at office(4), office door(0), office entrance(0), push the door(0), pull door(0), door pov(2), pov opening door(0), hand pushing(3), hand pulling(4), reaching for the door(0), hand opens door(1). Mixkit에는 '1인칭으로 유리문·사무실 문 손잡이를 잡고 미는' 컷이 없다. 내려받아 탈락: 314(유리문+금속 손잡이는 좋으나 유리 너머로 얼굴이 보이고 문에 'M' 글자, 전구 조명의 상업공간 느낌), 21812(손잡이가 돌아가며 문이 열리지만 손은 반대편이라 안 보이고 노랑·파랑 원피스와 호텔 침대가 보임), 33583(손잡이에 스프레이 뿌리는 손), 12854(엘리베이터 버튼 누르는 손, 문 아님), 12141(치과, 얼굴), 6057·23699·787·8746(얼굴). 선택한 21821은 동작은 맞지만 어둡고 유리문이 아니므로, 가능하면 병원 실제 유리문에서 손 인서트를 직접 촬영하는 것이 낫다. 후보 파일은 모두 candidates/에 둠."
 }
