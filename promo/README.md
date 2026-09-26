@@ -36,3 +36,19 @@
 - 리뷰 5건은 화면에 붙여 넣는 대신 실제로 입력하는 장면으로 처리했다. `engine/hangul.py`가 두벌식 키 순서와 입력기 중간 조합(지, 진, 짅, 진자)을 만들고, 키마다 클릭 효과음이 붙으며 마지막에 등록 버튼이 눌린다. 리뷰 슬롯은 글자 수에 비례해 24.0~26.37, 26.37~29.87, 29.87~32.0으로 다시 나눴다
 - 리뷰 구간은 두 가지 버전으로 렌더한다. A안 `timeline_v1.json`(리뷰 작성 카드에 실제 타이핑), B안 `timeline_v1_chat.json`(메신저 말풍선. 입력 중 점 세 개, 말풍선 도착과 알림음, 앞 말풍선이 위로 밀림). `python3 build_timeline.py --reviews chat`이 B안을 만든다
 - C안 `timeline_v1_receipt.json`: 리뷰가 영수증처럼 프린터에서 한 줄씩 인쇄되어 나오고 뜯겨 떨어진다(네이버 영수증 인증을 그대로 사물로 옮긴 것). `--reviews receipt`
+
+## 두 번째 영상 (2026-09-26): 토요일, 내 무릎의 하루
+
+첫 번째 영상과 뿌리부터 다른 안. 구성안은 `film2/storyboard_film2.md`, 콘셉트 심사 기록은 `film2/concepts_judged.json`.
+
+- 1인칭 하루. 글자 대신 영상이 앞에 서고, 속마음은 화면 아래 세리프 자막(Noto Serif CJK KR 44px)으로만 적는다. 검은 화면은 첫 0.5초뿐, 리뷰와 브랜드 문장은 크림색 종이 화면 위에 놓는다
+- 소리는 비트 없이 공간별 룸톤, 발소리, 엘리베이터 버튼, 펜, 종이, 새소리, 펠트 피아노 몇 음과 패드, 벨 하나. `music/film2_audio.py`가 `music/score_film2.json`을 읽어 만들고 -17.5 LUFS로 맞춘다 (pedalboard Limiter는 메이크업 게인이 붙어 자체 피크 리미터로 대체)
+- 실사 11컷은 Mixkit에서 골랐다. 선별 기록은 `assets/footage2/picks/`, 편집자 확정은 `assets/footage2/final_picks.json`, 쓰는 구간만 자른 클립은 `assets/footage2/final/` (`tools/trim_final.py`)
+- `build_film2.py`가 타임라인을 만든다. 샷별 펀치인·색온도·속도는 `OVERRIDES`, 자막 색은 배경 밝기를 재서 크림색/잉크색을 고른다
+- 구성안과 달라진 점
+  - 건물 외관 사진은 다른 병원 간판이 화면을 차지해 밝은 3초 컷으로 쓰지 않았다
+  - 유리문 손잡이 POV가 Mixkit에 없어 엘리베이터 버튼을 누르는 손(5~6층으로 올라간다)으로 바꿨다
+  - 계단 두 컷은 운동화 차림의 발 POV가 없어(하이힐뿐) 위에서 내려다본 빈 계단 POV를 느리게 늘려 썼다. 같은 계단이 아침과 오후에 두 번 나오는 구조는 그대로
+  - 지하철 출구는 에스컬레이터 발판 위 내 발 POV로, 창가 햇빛은 블라인드 사이로 드는 빛과 손가락으로
+  - 펜 클립은 해부 스케치라 펜 끝과 빗금만 보이게 크게 잘랐다
+- 렌더: `python3 engine/run.py engine/timeline_film2.json --build engine/build_film2c` (경로는 절대 경로 권장. concat 목록이 상대 경로면 ffmpeg가 목록 파일 위치 기준으로 읽어 실패한다)

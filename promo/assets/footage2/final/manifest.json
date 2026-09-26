@@ -88,5 +88,14 @@
   "source_in_point": 3.0,
   "speed": 1.0,
   "note": "역광 숲길을 걸어가는 뒷모습. f02의 체크 셔츠와 이어지는 체크 코트"
+ },
+ "f07": {
+  "file": "/home/user/Code-Zzamtong/promo/assets/footage2/final/f07.mp4",
+  "in_point": 0.4,
+  "mixkit_id": "12854",
+  "source": "f07_12854.mp4",
+  "source_in_point": 13.4,
+  "speed": 1.0,
+  "note": "엘리베이터 호출 버튼을 누르는 손(손목시계). 유리문 손잡이 POV가 Mixkit에 없어 '5~6층으로 올라간다'는 도착 비트로 대체"
  }
 }

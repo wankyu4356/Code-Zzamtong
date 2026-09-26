@@ -19,7 +19,7 @@ import sys
 
 import numpy as np
 import soundfile as sf
-from pedalboard import Compressor, HighpassFilter, Limiter, Pedalboard, Reverb
+from pedalboard import Compressor, HighpassFilter, Pedalboard, Reverb
 
 import synth as S
 
@@ -219,6 +219,11 @@ def render(score):
             for _ in range(int(ev.get("n", 2))):
                 fx.add(key_click(), tk, gain=0.35 * g, pan=0.25)
                 tk += _rng.uniform(0.09, 0.16)
+        elif ty == "beep":
+            n = int(SR * 0.09); tt = np.arange(n) / SR
+            fx.add(np.sin(2 * np.pi * 1180 * tt) * np.sin(np.pi * tt / 0.09) ** 0.5, t, gain=0.09 * g, pan=0.2)
+        elif ty == "ding":
+            tone.add(S.sine_bell(S.hz(ev.get("note", "E6")), 1.6), t, gain=0.16 * g, pan=0.1)
         elif ty == "step":
             fx.add(footstep(ev.get("surface", "stairs")), t, gain=0.22 * g, pan=float(ev.get("pan", -0.2)))
         else:
@@ -227,10 +232,29 @@ def render(score):
     room = Pedalboard([Reverb(room_size=0.55, damping=0.55, wet_level=0.18, dry_level=0.82)])
     hall = Pedalboard([Reverb(room_size=0.88, damping=0.4, wet_level=0.42, dry_level=0.58, width=1.0)])
     mix = beds.stereo(dur) * 1.0 + room(fx.stereo(dur), SR) * 0.9 + hall(tone.stereo(dur), SR) * 0.7 + hall(pads.stereo(dur), SR) * 0.8
-    master = Pedalboard([HighpassFilter(cutoff_frequency_hz=30), Compressor(threshold_db=-26, ratio=1.4, attack_ms=30, release_ms=300), Limiter(threshold_db=-3.0, release_ms=200)])
+    master = Pedalboard([HighpassFilter(cutoff_frequency_hz=30), Compressor(threshold_db=-26, ratio=1.4, attack_ms=30, release_ms=300)])
     out = master(mix.astype(np.float32), SR)
     m = score.get("master", {})
     return S.fade(out, 0.0, float(m.get("fade_out", 1.0)))
+
+
+def peak_limit(x, ceiling=0.95, lookahead_ms=2.0, release_ms=120.0):
+    """단순 피크 리미터. 메이크업 게인 없이 천장을 넘는 피크만 누른다. x: (n, ch) float."""
+    n = len(x)
+    la = max(1, int(SR * lookahead_ms / 1000))
+    peak = np.abs(x).max(axis=1)
+    # 룩어헤드: 앞으로 la 샘플 안의 최대값
+    pad = np.concatenate([peak, np.zeros(la)])
+    env = np.max(np.lib.stride_tricks.sliding_window_view(pad, la + 1), axis=1)[:n]
+    need = np.minimum(1.0, ceiling / np.maximum(env, 1e-9))
+    rel = np.exp(-1.0 / (SR * release_ms / 1000))
+    g = np.ones(n)
+    cur = 1.0
+    for i in range(n):
+        target = need[i]
+        cur = target if target < cur else (cur * rel + target * (1 - rel))
+        g[i] = cur
+    return x * g[:, None]
 
 
 def lufs(path):
@@ -249,10 +273,7 @@ if __name__ == "__main__":
     cur = lufs(sys.argv[2])
     if cur is not None:
         gain = 10 ** ((target - cur) / 20)
-        out = out * gain
-        peak = float(np.abs(out).max())
-        if peak > 0.94:
-            out *= 0.94 / peak
+        out = peak_limit(out * gain, ceiling=0.95).astype(np.float32)
         sf.write(sys.argv[2], out, SR, subtype="PCM_24")
         print(f"wrote {sys.argv[2]} {len(out)/SR:.2f}s  loudness {cur:.1f} -> {lufs(sys.argv[2]):.1f} LUFS  peak {np.abs(out).max():.3f}")
     else:

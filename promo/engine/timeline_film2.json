@@ -63,7 +63,7 @@
     "type": "clip",
     "src": "/home/user/Code-Zzamtong/promo/assets/footage2/final/f03.mp4",
     "in": 0.0,
-    "speed": 0.45,
+    "speed": 0.38,
     "fit": "cover",
     "zoom": "in",
     "zoom_amount": 0.015,
@@ -89,8 +89,8 @@
      "weight": 400,
      "letter_spacing": 0.0,
      "line_height": 1.45,
-     "color": "rgba(250,246,238,0.96)",
-     "shadow": true,
+     "color": "#3A312B",
+     "shadow": false,
      "x": 168,
      "y": 884,
      "align": "left",
@@ -167,7 +167,7 @@
     "zoom_amount": 0.03,
     "grade": {
      "contrast": 0.96,
-     "saturation": 0.84,
+     "saturation": 0.6,
      "brightness": 0.0,
      "gamma": 1.02,
      "temperature": 5900
@@ -177,7 +177,7 @@
     "punch": 1.45,
     "anchor": [
      0.5,
-     0.85
+     1.0
     ]
    },
    "texts": [
@@ -208,9 +208,27 @@
    "start": 12.5,
    "end": 15.5,
    "bg": {
-    "type": "color",
-    "color": "#F4EFE6",
-    "grain": 0.025
+    "type": "clip",
+    "src": "/home/user/Code-Zzamtong/promo/assets/footage2/final/f07.mp4",
+    "in": 0.4,
+    "speed": 1.0,
+    "fit": "cover",
+    "zoom": "none",
+    "zoom_amount": 0.03,
+    "grade": {
+     "contrast": 0.96,
+     "saturation": 0.84,
+     "brightness": 0.0,
+     "gamma": 1.02,
+     "temperature": 5900
+    },
+    "vignette": true,
+    "grain": 0.05,
+    "punch": 1.0,
+    "anchor": [
+     0.5,
+     0.5
+    ]
    },
    "texts": [
     {
@@ -219,8 +237,8 @@
      "weight": 400,
      "letter_spacing": 0.0,
      "line_height": 1.45,
-     "color": "#3A312B",
-     "shadow": false,
+     "color": "rgba(250,246,238,0.96)",
+     "shadow": true,
      "x": 168,
      "y": 884,
      "align": "left",
@@ -228,7 +246,7 @@
      "anim_in": "fade",
      "in_frames": 12,
      "anim_out": "cut",
-     "text": "학생도, 직장인도, 할머님도 이 문을 연다고 했다.",
+     "text": "학생도, 직장인도, 할머님도 온다고 했다.",
      "start": 12.7,
      "end": 15.5
     }
@@ -418,10 +436,10 @@
     },
     "vignette": true,
     "grain": 0.05,
-    "punch": 1.25,
+    "punch": 1.6,
     "anchor": [
-     0.72,
-     0.55
+     0.9,
+     0.72
     ]
    },
    "texts": [
@@ -532,8 +550,8 @@
      "weight": 400,
      "letter_spacing": 0.0,
      "line_height": 1.45,
-     "color": "rgba(250,246,238,0.96)",
-     "shadow": true,
+     "color": "#3A312B",
+     "shadow": false,
      "x": 168,
      "y": 884,
      "align": "left",
@@ -637,7 +655,7 @@
     "type": "clip",
     "src": "/home/user/Code-Zzamtong/promo/assets/footage2/final/f17.mp4",
     "in": 0.0,
-    "speed": 0.45,
+    "speed": 0.38,
     "fit": "cover",
     "zoom": "in",
     "zoom_amount": 0.08,
@@ -665,8 +683,8 @@
      "weight": 400,
      "letter_spacing": 0.0,
      "line_height": 1.45,
-     "color": "rgba(250,246,238,0.96)",
-     "shadow": true,
+     "color": "#3A312B",
+     "shadow": false,
      "x": 168,
      "y": 884,
      "align": "left",

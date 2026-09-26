@@ -29,9 +29,11 @@ GRADE_PHOTO = {"contrast": 0.98, "saturation": 0.92, "brightness": 0.0, "gamma":
 OVERRIDES = {
     "f02": {"grade": {"temperature": 5600}},                                    # 흐린 날 중립광을 아침빛으로
     "f04": {"grade": {"temperature": 5300}},                                    # 푸른 기운 보정
-    "f05": {"punch": 1.45, "anchor": [0.5, 0.85]},                              # 에스컬레이터 발판 위주로 (신발 차이를 덜 보이게)
+    "f03": {"speed": 0.38},                                                    # 1.45초부터 자전거가 들어오므로 1.14초만 늘려 쓴다
+    "f05": {"punch": 1.45, "anchor": [0.5, 1.0], "grade": {"saturation": 0.6}},  # 에스컬레이터 발판 위주로, 주황 신발 채도 내림
+    "f17": {"speed": 0.38},
     "f09": {"punch": 1.1},
-    "f12": {"punch": 1.25, "anchor": [0.72, 0.55], "grade": {"saturation": 0.6, "temperature": 5400}},  # 펜 끝 위주, 파란 펜 채도 내림
+    "f12": {"punch": 1.6, "anchor": [0.9, 0.72], "grade": {"saturation": 0.6, "temperature": 5400}},  # 펜 끝과 빗금 위주로 크게 잘라 그림 형태를 덜 보이게, 파란 펜 채도 내림
     "f14": {"grade": {"temperature": 5500}},
     "f16": {"punch": 1.4, "anchor": [0.5, 0.5]},                                # 문 쪽으로 펀치인
     "f18": {"grade": {"saturation": 0.78}},
@@ -144,7 +146,7 @@ def region_luma(src, t=None):
     return ImageStat.Stat(im).mean[0]
 
 
-def ink_if_bright(bg, texts, threshold=140):
+def ink_if_bright(bg, texts, threshold=125):
     """배경이 밝으면 자막을 잉크색(그림자 없음)으로 바꾼다. 어두우면 크림색 유지."""
     if not texts or bg["type"] not in ("clip", "image"):
         return
@@ -177,12 +179,13 @@ def clip_shot(sid, start, end, texts=None, fallback_ink=True, **bgkw):
 shots = []
 # 1. 집을 나서다 ---------------------------------------------------------------
 shots.append(clip_shot("f02", 0.0, 4.0, [voice("토요일 아침. 무릎이 또 말을 한다.", 0.9, 4.0)], fade_in=15, amount=0.03))
-shots.append(clip_shot("f03", 4.0, 7.0, [voice("계단 앞에서 잠깐 멈추는 게 버릇이 됐다.", 4.3, 7.0)], zoom="in", amount=0.015))
+shots.append(clip_shot("f03", 4.0, 7.0, [voice("계단 앞에서 잠깐 멈추는 게 버릇이 됐다.", 4.3, 7.0, color=INK, shadow=False)], zoom="in", amount=0.015))   # 밝은 돌계단 위라 잉크색
 shots.append(clip_shot("f04", 7.0, 10.0, [voice("어디로 가야 할지 몰라 검색만 오래 했다.", 7.2, 10.0)], zoom="none"))
 shots.append(clip_shot("f05", 10.0, 12.5, [dict(PLACE, text="낙성대역 4번 출구", start=10.3, end=12.5)], zoom="none"))
 # 2. 문을 열다 -----------------------------------------------------------------
 # 건물 외관 사진은 다른 병원 간판이 화면을 차지해 밝은 3초 컷으로는 쓰지 않는다 (4번 출구 쪽 가로 사진이 오면 f07 앞에 넣는다)
-shots.append(clip_shot("f07", 12.5, 15.5, [voice("학생도, 직장인도, 할머님도 이 문을 연다고 했다.", 12.7, 15.5)], zoom="none"))
+# f07: 유리문 손잡이 POV가 없어 엘리베이터 버튼을 누르는 손으로 '올라간다'를 보여준다
+shots.append(clip_shot("f07", 12.5, 15.5, [voice("학생도, 직장인도, 할머님도 온다고 했다.", 12.7, 15.5)], zoom="none"))
 _p08_t = [voice("생각보다 조용했다. 오래 기다리지 않았다.", 15.8, 18.5)]
 _p08_bg = photo_bg("reception_16x9.jpg", amount=0.05)
 ink_if_bright(_p08_bg, _p08_t)
@@ -196,11 +199,11 @@ ink_if_bright(_p10_bg, _p10_t)
 shots.append(shot("p10", 21.5, 27.0, _p10_bg, _p10_t))
 shots.append(clip_shot("f12", 27.0, 30.0, [voice("종이에 그려가며, 왜 아픈지 설명해줬다.", 27.2, 30.0)], zoom="none"))
 shots.append(quote_page("q13", 30.0, 34.5, "왜 아팠는지 확실히 알겠더라고요.\n모형으로까지 설명해주셔서 이해가 쏙쏙 됐어요.", 2))
-shots.append(clip_shot("f14", 34.5, 37.3, [voice("필요한 것만 하자고 했다. 그게 다였다.", 34.7, 37.3)], amount=0.03))
+shots.append(clip_shot("f14", 34.5, 37.3, [voice("필요한 것만 하자고 했다. 그게 다였다.", 34.7, 37.3, color=INK, shadow=False)], amount=0.03))   # 흰 블라인드 위라 잉크색
 shots.append(quote_page("q15", 37.3, 39.8, "딱 필요한 치료만 권유해 주시더라구요.", 1))
 # 4. 다시 계단 -----------------------------------------------------------------
 shots.append(clip_shot("f16", 39.8, 42.3, None, zoom="none", fade_out=14, fade_color="white"))
-shots.append(clip_shot("f17", 42.3, 45.3, [voice("같은 계단인데, 이번엔 이유를 알고 내려간다.", 42.6, 45.3)], zoom="in", amount=0.08, fade_in=8, fade_color="white"))
+shots.append(clip_shot("f17", 42.3, 45.3, [voice("같은 계단인데, 이번엔 이유를 알고 내려간다.", 42.6, 45.3, color=INK, shadow=False)], zoom="in", amount=0.08, fade_in=8, fade_color="white"))
 shots.append(clip_shot("f18", 45.3, 47.8, [voice("진작 올걸 그랬어요!", 45.5, 47.8),
                                           dict(LABEL, text="네이버 리뷰", start=45.8, end=47.8, x=168, y=950, align="left", color="rgba(250,246,238,0.7)", shadow=True)],
                        zoom="none"))
