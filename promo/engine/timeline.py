@@ -188,7 +188,7 @@ def _validate_text(t, where, err):
     if not isinstance(t.get("text"), str) or not t["text"]:
         err(f"{where}: text must be a non-empty string")
     _validate_span(t, where, err)
-    for k in ("size", "weight", "letter_spacing", "line_height", "max_width"):
+    for k in ("size", "weight", "letter_spacing", "line_height", "max_width", "in_frames", "out_frames", "hit_scale", "drift_scale"):
         if k in t and not _is_num(t[k]):
             err(f"{where}: {k} must be a number")
 

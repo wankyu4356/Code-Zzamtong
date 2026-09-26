@@ -88,6 +88,8 @@
 | anim_in | "hit" \| "slam" \| "fade" \| "rise" \| "none" | hit | |
 | anim_out | "cut" \| "fade" \| "none" | cut | |
 
+텍스트와 이미지 공통 선택 키: `in_frames`(등장 프레임 수 덮어쓰기), `out_frames`(퇴장 페이드 프레임 수, 기본 5), `hit_scale`(hit·slam 시작 배율, 기본 1.10·1.7), `drift_scale`(보이는 동안 선형으로 커지는 느린 줌, 예 0.03).
+
 ## images (로고 등 이미지 레이어)
 
 | 키 | 타입 | 기본값 | 설명 |

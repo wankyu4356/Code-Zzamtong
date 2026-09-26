@@ -133,17 +133,21 @@
   }
 
   // Frame-local animation state. lf = frames since start, rem = frames until end (>= 1).
-  function animIn(kind, lf) {
+  // spec.in_frames / spec.out_frames override the default frame counts; spec.hit_scale overrides the start scale of hit/slam.
+  function animIn(kind, lf, spec) {
+    const n = spec && spec.in_frames;
+    const hs = spec && spec.hit_scale;
     switch (kind) {
-      case "hit": { const e = easeOut(ramp(lf, 4)); return { scale: 1.10 - 0.10 * e, dy: 0, opacity: 1, blur: 1 - e }; }
-      case "slam": { const e = easeOut(ramp(lf, 3)); return { scale: 1.7 - 0.7 * e, dy: 0, opacity: fadeIn(lf, 2), blur: 0 }; }
-      case "fade": { const p = ramp(lf, 8); return { scale: 1, dy: 12 * (1 - p), opacity: fadeIn(lf, 8), blur: 0 }; }
-      case "rise": { const e = easeOut(ramp(lf, 6)); return { scale: 1, dy: 40 * (1 - e), opacity: fadeIn(lf, 6), blur: 0 }; }
+      case "hit": { const e = easeOut(ramp(lf, n || 4)); const s0 = hs || 1.10; return { scale: s0 - (s0 - 1) * e, dy: 0, opacity: 1, blur: 1 - e }; }
+      case "slam": { const e = easeOut(ramp(lf, n || 3)); const s0 = hs || 1.7; return { scale: s0 - (s0 - 1) * e, dy: 0, opacity: fadeIn(lf, 2), blur: 0 }; }
+      case "fade": { const p = ramp(lf, n || 8); return { scale: 1, dy: 12 * (1 - p), opacity: fadeIn(lf, n || 8), blur: 0 }; }
+      case "rise": { const e = easeOut(ramp(lf, n || 6)); return { scale: 1, dy: 40 * (1 - e), opacity: fadeIn(lf, n || 6), blur: 0 }; }
       default: return { scale: 1, dy: 0, opacity: 1, blur: 0 };
     }
   }
-  function animOut(kind, rem) {
-    return kind === "fade" ? clamp01(rem / 5) : 1;
+  function animOut(kind, rem, spec) {
+    const n = (spec && spec.out_frames) || 5;
+    return kind === "fade" ? clamp01(rem / n) : 1;
   }
 
   window.setTimeline = function (tl) {
@@ -178,9 +182,11 @@
       it.wrap.style.display = visible ? (it.flash ? "block" : "flex") : "none";
       if (!visible) return;
       if (it.flash) { key.push(i + ":flash"); return; }
-      const a = animIn(it.spec.anim_in, f - it.sf);
-      const opacity = r4(a.opacity * animOut(it.spec.anim_out, it.ef - f) * (it.maxOpacity ?? 1));
-      const transform = `translateY(${r4(a.dy)}px) scale(${r4(a.scale)})`;
+      const a = animIn(it.spec.anim_in, f - it.sf, it.spec);
+      const opacity = r4(a.opacity * animOut(it.spec.anim_out, it.ef - f, it.spec) * (it.maxOpacity ?? 1));
+      // drift_scale: 요소가 보이는 동안 선형으로 커지는 느린 줌 (예: 0.03이면 1.00에서 1.03)
+      const drift = it.spec.drift_scale ? it.spec.drift_scale * ((f - it.sf) / Math.max(1, it.ef - it.sf - 1)) : 0;
+      const transform = `translateY(${r4(a.dy)}px) scale(${r4(a.scale + drift)})`;
       const filter = a.blur > 0.005 ? `blur(${r4(a.blur)}px)` : "none";
       it.el.style.opacity = String(opacity);
       it.el.style.transform = transform;
