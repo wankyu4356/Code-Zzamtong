@@ -1,0 +1,32 @@
+{
+  "shot_id": "s26",
+  "no_good_match": false,
+  "chosen": {
+    "mixkit_id": "5065",
+    "title": "girl stretching her neck before practicing yoga",
+    "file": "/home/user/Code-Zzamtong/promo/assets/footage/s26.mp4",
+    "quality": "1080",
+    "duration": 10.0,
+    "in_point": 4.6,
+    "fit_score": 9,
+    "faces": "ok",
+    "why": "Tight close-up of a woman pulling her head sideways with her hand, neck fully lengthened; warm natural light, soft bokeh background, eyes closed (no camera-facing smile), no text/logo. At 4.6s the hand has just landed on the head and the side stretch is at its apex, so 'neck' reads instantly. 16:9 1080p."
+  },
+  "alternates": [
+    {
+      "mixkit_id": "32630",
+      "file": "/home/user/Code-Zzamtong/promo/assets/footage/candidates/s26_32630.mp4",
+      "duration": 19.19,
+      "in_point": 2.5,
+      "why": "Young woman doing a side neck stretch with hand behind her back; sofa/plants home interior. Readable, but dark moody lighting and a wider framing make the neck less prominent than 5065."
+    },
+    {
+      "mixkit_id": "33026",
+      "file": "/home/user/Code-Zzamtong/promo/assets/footage/candidates/s26_33026.mp4",
+      "duration": 8.84,
+      "in_point": 4.5,
+      "why": "Older woman gripping a sore neck with head tilted; clean close-up, but reads as pain rather than a stretch, plain white studio backdrop feels staged, and only 720p was available."
+    }
+  ],
+  "notes": "Searched: neck stretch, neck pain, stretching neck office (0 results), woman touching neck (0 results), neck, stretching office. Downloaded 5065, 32630, 32629, 33026. 32629 rejected: front view mostly looking down, side stretch barely visible. First-side peak of 5065 also usable at in_point 0.0 if the editor wants a left-tilt instead."
+}

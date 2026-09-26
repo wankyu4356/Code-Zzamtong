@@ -1,0 +1,32 @@
+{
+  "shot_id": "s01",
+  "no_good_match": false,
+  "chosen": {
+    "mixkit_id": "49010",
+    "title": "young woman sitting up in bed with back pain",
+    "file": "/home/user/Code-Zzamtong/promo/assets/footage/s01.mp4",
+    "quality": "720",
+    "duration": 11.84,
+    "in_point": 4.4,
+    "fit_score": 8.5,
+    "faces": "none",
+    "why": "침대 끝에 앉아 손이 허리에 닿아 있는 상태가 0프레임부터 끝까지 유지된다. 어깨 아래로 크롭되어 얼굴이 전혀 안 나오고 손·허리·이불(흰 침구, 헤드보드)만 보인다. 자연광, 회색/흰색/줄무늬의 저채도 톤이라 그레이딩 부담이 없다. 4.4초 부근에서 손가락을 펴고 허리를 누르는 동작의 정점이 오고 4.4~5.6초 동안 손가락이 미세하게 주무르는 움직임이 있어 컷이 살아 있다. 카메라는 천천히 푸시인. 감점: 1080p가 없어 720p(1280x720, 25fps)만 받아짐. 1080p 타임라인이면 약 150% 확대가 필요하다."
+  },
+  "alternates": [
+    {
+      "mixkit_id": "47605",
+      "file": "/home/user/Code-Zzamtong/promo/assets/footage/candidates/s01_47605.mp4",
+      "duration": 15.84,
+      "in_point": 2.5,
+      "why": "뒷모습 클로즈업으로 얼굴 없음. 0~1초에 손이 허리로 올라가고 2.5초부터 양손으로 허리를 누르는 정점. 다만 서 있는 자세이고 배경이 벽돌벽(붉은 색이 다소 튐)이라 '아침 침대'라는 맥락은 없다. 720p."
+    },
+    {
+      "mixkit_id": "47607",
+      "file": "/home/user/Code-Zzamtong/promo/assets/footage/candidates/s01_47607.mp4",
+      "duration": 18.56,
+      "in_point": 0.0,
+      "why": "앉은 자세로 0프레임부터 손이 허리에 있어 동작은 맞지만 소파(노란색, 채도 높음)이고 옆얼굴이 프레임 상단에 보인다. faces=avoid 조건에 약하고 침대가 아니라 예비용. 720p."
+    }
+  ],
+  "notes": "검색 시트: lower back pain(5건), back pain bed(1건), back pain(20건), sitting up in bed(20건), getting out of bed(7건). 'waking up back pain', 'morning bed stretch back'은 0건. Mixkit에서 '침대+허리 통증' 조합은 49010이 유일했고 브리프와 거의 일치한다. 49010은 1080p 파일이 없어 720p로 내려받았으므로 1080p 출력에서는 업스케일이 필요하다(정지에 가까운 클로즈업이라 확대 열화는 크지 않을 것으로 예상). 29966(woman getting out of bed)도 내려받아 확인했으나 정면 얼굴+수면안대+민트색 침구이고 허리 동작이 없어 탈락. 모든 후보 파일은 candidates/에 그대로 둠."
+}

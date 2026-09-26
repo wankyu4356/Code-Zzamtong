@@ -1,0 +1,32 @@
+{
+  "shot_id": "s09",
+  "no_good_match": false,
+  "chosen": {
+    "mixkit_id": "14643",
+    "title": "man with neck pain",
+    "file": "/home/user/Code-Zzamtong/promo/assets/footage/s09.mp4",
+    "quality": "720",
+    "duration": 7.12,
+    "in_point": 0.5,
+    "fit_score": 6,
+    "faces": "avoided (back of head only, no face visible)",
+    "why": "Back view, hand comes up and lands on the back of the neck at exactly 0.5s and grips - the word '목' reads instantly at the in-point. No face, no text/logo, neutral warm indoor light, stable framing from 0.5s on. Weakness: setting is a gym (blurred mirror wall) and the subject wears a black tank top with a muscular back, so the 'student at desk' context is not readable; the shot carries only the gesture."
+  },
+  "alternates": [
+    {
+      "mixkit_id": "33025",
+      "file": "/home/user/Code-Zzamtong/promo/assets/footage/candidates/s09_33025.mp4",
+      "duration": 14.64,
+      "in_point": 2.2,
+      "why": "Back view, white sweater, hand touches the nape at 2.0s and grips from 2.2s. Face avoided and gesture clear, but the hand is visibly aged (wrinkled) and the backdrop is a sterile white studio, so it reads 'older woman' rather than student. Use if the gym read of 14643 is too strong."
+    },
+    {
+      "mixkit_id": "23982",
+      "file": "/home/user/Code-Zzamtong/promo/assets/footage/candidates/s09_23982.mp4",
+      "duration": 15.12,
+      "in_point": 6.6,
+      "why": "Only candidate with a real desk/laptop context: tired man at desk tilts his neck (4.5-5.5s) then clasps both hands behind his neck and leans back at 6.5-7s. But it is frontal with a bearded adult face fully visible (violates faces=avoid) and reads office worker, not student."
+    }
+  ],
+  "notes": "Searches: 'student neck pain' (0 results), 'studying tired' (2), 'neck pain' (7), 'tired student late night' (0), 'student stretching desk' (1), 'tired student' (5); plus title-only scans of 'stretching at desk', 'neck stretch', 'back pain desk', 'studying at desk', 'student writing desk', 'working late desk' which surfaced 23982. Mixkit has no clip of a student at a desk grabbing the back of the neck from behind/side; every desk/student clip (9190, 13316, 6255, 36104, 50116) is either frontal-face or hands-only with no neck gesture. 13316 (boy at desk) was downloaded and checked 0-15.5s: he only rubs his eyes, never the neck - dropped. All four downloads were 720p only (no 1080p on Mixkit for these ids). If the gym context of 14643 is judged too off for '수능 앞', the brief allows a black frame for this 1.2s cut."
+}
