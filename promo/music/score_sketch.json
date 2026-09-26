@@ -1,0 +1,27 @@
+{
+  "bpm": 120, "duration": 46.0, "key_root": "D",
+  "sections": [
+    {"start": 0,  "end": 8,  "pattern": "pulse"},
+    {"start": 8,  "end": 16, "pattern": "build"},
+    {"start": 16, "end": 24, "pattern": "drop"},
+    {"start": 24, "end": 36, "pattern": "groove"},
+    {"start": 36, "end": 40, "pattern": "drop"},
+    {"start": 40, "end": 46, "pattern": "outro"}
+  ],
+  "events": [
+    {"t": 0.0, "type": "impact_short", "gain": 0.9},
+    {"t": 2.0, "type": "impact_short", "gain": 0.8},
+    {"t": 3.0, "type": "impact_short", "gain": 0.8},
+    {"t": 4.0, "type": "impact_short", "gain": 0.85},
+    {"t": 5.0, "type": "impact_short", "gain": 0.85},
+    {"t": 6.0, "type": "impact", "gain": 1.0},
+    {"t": 14.0, "type": "riser", "len": 2.0, "gain": 1.0},
+    {"t": 15.75, "type": "cut", "len": 0.25},
+    {"t": 16.0, "type": "impact", "gain": 1.0},
+    {"t": 34.0, "type": "riser", "len": 2.0, "gain": 0.8},
+    {"t": 36.0, "type": "impact", "gain": 0.9},
+    {"t": 39.75, "type": "cut", "len": 0.25},
+    {"t": 40.0, "type": "impact", "gain": 1.0},
+    {"t": 40.0, "type": "bell", "gain": 1.0}
+  ]
+}
