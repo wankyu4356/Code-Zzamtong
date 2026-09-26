@@ -208,9 +208,17 @@ def _validate_text(t, where, err):
     if not isinstance(t.get("text"), str) or not t["text"]:
         err(f"{where}: text must be a non-empty string")
     _validate_span(t, where, err)
-    for k in ("size", "weight", "letter_spacing", "line_height", "max_width", "in_frames", "out_frames", "hit_scale", "drift_scale"):
+    for k in ("size", "weight", "letter_spacing", "line_height", "max_width", "in_frames", "out_frames", "hit_scale", "drift_scale", "word_frames"):
         if k in t and not _is_num(t[k]):
             err(f"{where}: {k} must be a number")
+    if "words" in t:
+        w = t["words"]
+        if not (isinstance(w, list) and w and all(_is_num(v) for v in w)):
+            err(f"{where}: words must be a non-empty list of seconds (one per word)")
+        elif any(w[i] > w[i + 1] for i in range(len(w) - 1)):
+            err(f"{where}: words must be non-decreasing")
+    if "accent_color" in t and not isinstance(t["accent_color"], str):
+        err(f"{where}: accent_color must be a string")
 
 
 def _validate_card(c, where, err):

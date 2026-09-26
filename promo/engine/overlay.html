@@ -117,7 +117,25 @@
     const s = Object.assign({}, TEXT_DEFAULTS, t);
     const el = document.createElement("div");
     el.className = "anim text";
-    el.textContent = s.text;
+    // words: 단어별 등장 시각(초) 배열. *단어*는 강조색(accent_color). 둘 중 하나라도 있으면 단어를 span으로 나눈다.
+    const wordsF = Array.isArray(s.words) && s.words.length ? s.words.map(t => toFrame(t)) : null;
+    const spans = [];
+    if (wordsF || /\*[^*]+\*/.test(s.text)) {
+      s.text.split("\n").forEach((line, li) => {
+        if (li > 0) el.appendChild(document.createElement("br"));
+        line.split(/(\s+)/).forEach(part => {
+          if (!part) return;
+          if (/^\s+$/.test(part)) { el.appendChild(document.createTextNode(part)); return; }
+          const sp = document.createElement("span");
+          sp.style.display = "inline-block";
+          let txt = part;
+          if (/^\*[^*]+\*[,.!?…]*$/.test(part)) { txt = part.replace(/\*/g, ""); sp.style.color = s.accent_color || "#003070"; }
+          sp.textContent = txt;
+          el.appendChild(sp);
+          spans.push(sp);
+        });
+      });
+    } else el.textContent = s.text;
     if (s.font) el.style.fontFamily = `"${s.font}", "Pretendard", "Noto Sans CJK KR", sans-serif`;
     Object.assign(el.style, {
       fontSize: s.size + "px", fontWeight: String(s.weight), color: s.color,
@@ -128,7 +146,7 @@
     // Chromium applies letter-spacing after the last glyph too, so a centered line's advance box
     // sits |ls|/2 off center. Pad the right side by |ls| to center the advance box exactly.
     if (s.align === "center" && s.letter_spacing < 0) el.style.paddingRight = (-s.letter_spacing) + "em";
-    return { spec: s, el, sf: toFrame(s.start), ef: toFrame(s.end) };
+    return { spec: s, el, sf: toFrame(s.start), ef: toFrame(s.end), spans: wordsF ? spans : null, wordsF };
   }
 
   function makeCard(c) {
@@ -391,6 +409,18 @@
         const pop = posted ? Math.max(0, 1 - (f - it.postF) / 6) : 0;
         it.btn.style.transform = `scale(${r4(1 + 0.1 * Math.sin(Math.PI * pop))})`;
         tkey = `:t${n}:${caretOn ? 1 : 0}:${posted ? 1 : 0}:${r4(pop)}`;
+      }
+      if (it.spans && it.wordsF) {
+        // 단어별 등장: 각 단어가 자기 시각부터 word_frames 동안 아래에서 떠오르며 나타난다
+        const n = it.spec.word_frames || 8;
+        it.spans.forEach((sp, wi) => {
+          const lf = f - it.wordsF[Math.min(wi, it.wordsF.length - 1)];
+          const p = lf < 0 ? 0 : clamp01((lf + 1) / n);
+          const wop = r4(p), wdy = r4(16 * (1 - easeOut(p)));
+          sp.style.opacity = String(wop);
+          sp.style.transform = `translateY(${wdy}px)`;
+          tkey += `:w${wi}=${wop},${wdy}`;
+        });
       }
       const a = animIn(it.spec.anim_in, f - it.sf, it.spec);
       const opacity = r4(a.opacity * animOut(it.spec.anim_out, it.ef - f, it.spec) * (it.maxOpacity ?? 1));
