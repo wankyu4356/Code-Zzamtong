@@ -6,7 +6,13 @@ storyboard_v1.md의 샷 리스트를 engine/timeline.json으로 만든다.
 """
 import json
 import os
+import random
 import sys
+
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "engine"))
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "music"))
+import hangul  # noqa: E402
+import sfx  # noqa: E402
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 A = os.path.join(HERE, "assets")
@@ -100,14 +106,34 @@ def shot(sid, start, end, bg, texts=None, images=None, flashes=None):
     return s
 
 
-def quote(text, start, end, caption, y=None, first_slam=True):
-    """리뷰 인용: 본문 60px(세로 중앙) + 캡션 30px. 두 줄이면 캡션을 조금 더 내린다."""
-    q = dict(QUOTE)
-    q.update(dict(text=text, start=start, end=end, anim_in="slam" if first_slam else "fade", hit_scale=1.12, in_frames=3, anim_out="cut", align="center", y="center"))
-    lines = text.count("\n") + 1
-    c = dict(CAP)
-    c.update(dict(text=caption, start=start, end=end, size=30, y=640 + 42 * lines, anim_in="fade", in_frames=6))
-    return [q, c]
+def typing_card(text, start, end, nick, chip, date, type_end=None, hold_min=0.35, seed=1, anim_out="cut", out_frames=8):
+    """리뷰를 실제로 입력하는 카드. 키 입력 시각과 화면 상태를 미리 계산한다."""
+    keys = hangul.keystrokes(text)
+    states = hangul.states(text)
+    n = len(keys)
+    type_start = start + 0.12                       # 카드가 뜬 직후 시작
+    type_end = type_end or (end - hold_min - 0.3)   # 마지막 키 뒤 등록까지 0.3, 등록 뒤 hold_min
+    # 띄어쓰기·문장부호 뒤에 잠깐 쉬고, 나머지는 균등 + 작은 흔들림
+    rng = random.Random(seed)
+    pauses = [0.0] * n
+    for i, k in enumerate(keys[:-1]):
+        if k == " ":
+            pauses[i] = 0.07
+        elif k in ",.!?":
+            pauses[i] = 0.11
+    span = type_end - type_start - sum(pauses)
+    base = span / max(n - 1, 1)
+    times = [type_start]
+    for i in range(1, n):
+        times.append(times[-1] + base + pauses[i - 1] + rng.uniform(-0.25, 0.25) * base)
+    # 단조 증가 보정과 범위 고정
+    for i in range(1, n):
+        times[i] = max(times[i], times[i - 1] + 0.012)
+    scale = (type_end - type_start) / max(times[-1] - type_start, 1e-6)
+    times = [type_start + (t - type_start) * scale for t in times]
+    times = [round(t, 4) for t in times]
+    return {"text": text, "start": start, "end": end, "keys": times, "states": states, "post_at": round(type_end + 0.3, 3),
+            "nick": nick, "chip": chip, "date": date, "anim_in": "rise", "in_frames": 6, "anim_out": anim_out, "out_frames": out_frames}
 
 
 F = 1 / 30
@@ -145,16 +171,18 @@ for sid, w in [("s26", "목"), ("s27", "어깨"), ("s28", "무릎"), ("s29", "�
                       flashes=[{"at": t, "frames": 2, "color": "#fff", "opacity": 0.9}]))
     t += 0.5
 # 브레이크: 리뷰 한 줄 120px
-shots.append(shot("s30", 22.0, 24.0, {"type": "black"},
-                  [T("진작 올걸 그랬어요!", 22.0, 24.0, 120, weight=700, anim_in="slam", hit_scale=1.12, in_frames=3),
-                   dict(CAP, text="네이버 방문자 리뷰 · vqfc**** · 2026.07.16 방문 · 영수증 인증", start=22.0, end=24.0, size=30, y=700)]))
+s30 = shot("s30", 22.0, 24.0, {"type": "black"})
+s30["typing"] = [typing_card("진작 올걸 그랬어요!", 22.0, 24.0, "vqfc****", "네이버 방문자 리뷰 · 영수증 인증", "2026.07.16 방문", seed=30)]
+shots.append(s30)
 # 리뷰 그루브 (검은 화면, 인용 교체는 앞 인용 cut 뒤 새 인용 slam)
-shots.append(shot("s31", 24.0, 26.5, {"type": "black"},
-                  quote("딱 필요한 치료만 권유해 주시더라구요.", 24.0, 26.5, "네이버 방문자 리뷰 · ngyz**** · 2026.07.29 방문 · 영수증 인증")))
-shots.append(shot("s32", 26.5, 29.5, {"type": "black"},
-                  quote("선생님이 원인 파악을 명확하게 해주셔서\n속이 다 시원했어요.", 26.5, 29.5, "네이버 방문자 리뷰 · mtzu**** · 2026.09.06 방문 · 영수증 인증")))
-shots.append(shot("s33", 29.5, 32.0, {"type": "black"},
-                  quote("의사선생님이 완전 친절하세요!", 29.5, 32.0, "네이버 방문자 리뷰 · 눅눅해져**** · 2026.02.08 방문 · 영수증 인증")))
+for sid, a, b, text, nick, date, seed in [
+    ("s31", 24.0, 791 * F, "딱 필요한 치료만 권유해 주시더라구요.", "ngyz****", "2026.07.29 방문", 31),
+    ("s32", 791 * F, 896 * F, "선생님이 원인 파악을 명확하게 해주셔서 속이 다 시원했어요.", "mtzu****", "2026.09.06 방문", 32),
+    ("s33", 896 * F, 32.0, "의사선생님이 완전 친절하세요!", "눅눅해져****", "2026.02.08 방문", 33),
+]:
+    sh = shot(sid, a, b, {"type": "black"})
+    sh["typing"] = [typing_card(text, a, b, nick, "네이버 방문자 리뷰 · 영수증 인증", date, seed=seed)]
+    shots.append(sh)
 # 본질 세 줄
 shots.append(shot("s34", 32.0, 33.0, {"type": "black"}, [T("먼저 듣고,", 32.0, 33.0, 170, in_frames=3)]))
 shots.append(shot("s35", 33.0, 34.0, {"type": "black"}, [T("왜 아픈지 말하고,", 33.0, 34.0, 170, in_frames=3)]))
@@ -170,9 +198,9 @@ shots.append(shot("s44", 39.0, 40.0, photo_bg("building_16x9.jpg", brightness=-0
                   [T("일", 39.0, 40.0, 320, anim_in="slam", hit_scale=1.15, in_frames=3, shadow=True)],
                   flashes=[{"at": 39.0, "frames": 2, "color": "#fff", "opacity": 0.9}]))
 # 일요일 리뷰 (건물 사진 유지, 밝기 30%)
-q = quote("담에는 어디 아프면 꼭 여기 가려구요.", 40.0, 43.0, "네이버 방문자 리뷰 · Sept**** · 2025.02.09 일요일 방문 · 예약 인증 · 발췌")
-q[0]["anim_out"] = "fade"; q[0]["out_frames"] = 8; q[1]["anim_out"] = "fade"; q[1]["out_frames"] = 8
-shots.append(shot("s45", 40.0, 43.0, photo_bg("building_16x9.jpg", brightness=-0.7, amount=0.04), q))
+s45 = shot("s45", 40.0, 43.0, photo_bg("building_16x9.jpg", brightness=-0.7, amount=0.04))
+s45["typing"] = [typing_card("담에는 어디 아프면 꼭 여기 가려구요.", 40.0, 43.0, "Sept****", "네이버 방문자 리뷰 · 예약 인증 · 발췌", "2025.02.09 일요일 방문", seed=45, anim_out="fade", out_frames=8)]
+shots.append(s45)
 # 엔딩
 shots.append(shot("s46", 43.0, 45.5, {"type": "black"},
                   [T("먼저 듣고,\n필요한 치료만.", 43.0, 45.5, 170, in_frames=4, anim_out="fade", out_frames=15, line_height=1.15)]))
@@ -190,9 +218,12 @@ for s in shots:
     s["start"] = round(round(s["start"] * 30) / 30, 6)
     s["end"] = round(round(s["end"] * 30) / 30, 6)
 
-tl = {"fps": 30, "width": 1920, "height": 1080, "duration": 50.0,
-      "audio": os.path.join(HERE, "music", "render", "music_v1.wav"),
-      "shots": shots}
+music_wav = os.path.join(HERE, "music", "render", "music_v1.wav")
+audio_wav = os.path.join(HERE, "music", "render", "audio_v2.wav")
+tl = {"fps": 30, "width": 1920, "height": 1080, "duration": 50.0, "audio": audio_wav, "shots": shots}
+if os.path.exists(music_wav):
+    sfx.render(tl, music_wav, audio_wav)
+    print("audio with typing sfx:", audio_wav)
 out = sys.argv[1] if len(sys.argv) > 1 else os.path.join(HERE, "engine", "timeline_v1.json")
 json.dump(tl, open(out, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
 missing = [s["id"] for s in shots if s["bg"]["type"] == "black" and s["id"] in

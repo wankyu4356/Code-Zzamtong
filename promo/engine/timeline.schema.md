@@ -106,6 +106,18 @@
 
 흰색 로고에서 원본 색 로고로 바꾸려면 같은 위치에 두 개를 이어 붙인다 (앞 것은 anim_out cut, 뒤 것은 anim_in none 또는 fade).
 
+## typing[] (리뷰를 실제로 치는 장면)
+
+| 키 | 타입 | 설명 |
+|---|---|---|
+| text | string | 최종 문장 |
+| start, end | number | 카드가 보이는 절대 초 |
+| keys | number[] | 키 하나가 눌리는 절대 초. `engine/hangul.py`가 두벌식 키 순서를 만든다 |
+| states | string[] | 키마다 화면에 보이는 문자열 (자모 조합 중간 상태 포함) |
+| post_at | number | 등록 버튼이 눌리는 절대 초. 이후 커서가 사라지고 버튼이 파랗게 된다 |
+| nick, chip, date | string | 카드 머리의 닉네임, 출처 칩, 날짜 |
+| width, x, y, anim_in, anim_out, in_frames, out_frames | | 텍스트와 같은 규칙 (기본 1240px, 중앙, rise) |
+
 ## cards[]
 
 | 키 | 타입 | 기본값 | 설명 |

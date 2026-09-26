@@ -118,6 +118,8 @@ def validate(tl, base_dir):
             _validate_card(c, f"shot {sid} cards[{j}]", err)
         for j, im in enumerate(s.get("images") or []):
             _validate_image(im, f"shot {sid} images[{j}]", base_dir, err)
+        for j, ty in enumerate(s.get("typing") or []):
+            _validate_typing(ty, f"shot {sid} typing[{j}]", err)
         for j, fl in enumerate(s.get("flashes") or []):
             _validate_flash(fl, f"shot {sid} flashes[{j}]", err)
 
@@ -225,6 +227,23 @@ def _validate_image(im, where, base_dir, err):
     op = im.get("opacity", 1)
     if not (_is_num(op) and 0 <= op <= 1):
         err(f"{where}: opacity must be between 0 and 1")
+
+
+def _validate_typing(ty, where, err):
+    if not isinstance(ty.get("text"), str) or not ty["text"]:
+        err(f"{where}: text must be a non-empty string")
+    _validate_span(ty, where, err)
+    keys, states = ty.get("keys"), ty.get("states")
+    if not (isinstance(keys, list) and keys and all(_is_num(k) for k in keys)):
+        err(f"{where}: keys must be a non-empty list of seconds")
+    elif not (isinstance(states, list) and len(states) == len(keys)):
+        err(f"{where}: states must have one string per key")
+    elif any(keys[i] > keys[i + 1] for i in range(len(keys) - 1)):
+        err(f"{where}: keys must be non-decreasing")
+    elif _is_num(ty.get("start")) and _is_num(ty.get("end")) and not (ty["start"] <= keys[0] and keys[-1] < ty["end"]):
+        err(f"{where}: keys must lie inside [start, end)")
+    if not _is_num(ty.get("post_at")):
+        err(f"{where}: post_at (seconds) is required")
 
 
 def _validate_flash(fl, where, err):

@@ -27,6 +27,22 @@
   }
   .source { margin-top: 26px; font-size: 28px; font-weight: 500; opacity: 0.6; letter-spacing: 0; }
   .flash { position: absolute; inset: 0; }
+  .rt { box-sizing: border-box; padding: 40px 52px 34px; border-radius: 26px; color: #fff;
+        background: rgba(255,255,255,0.055); border: 1px solid rgba(255,255,255,0.13); }
+  .rt .head { display: flex; align-items: center; gap: 18px; }
+  .rt .avatar { width: 64px; height: 64px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+        font-size: 28px; font-weight: 700; color: #fff; background: linear-gradient(135deg, #2b6fd6, #6ea8ff); flex: none; }
+  .rt .nick { font-size: 33px; font-weight: 600; letter-spacing: -0.01em; }
+  .rt .chip { font-size: 24px; font-weight: 500; color: rgba(255,255,255,0.62); margin-top: 2px; }
+  .rt .date { margin-left: auto; font-size: 24px; color: rgba(255,255,255,0.5); }
+  .rt .body { margin-top: 32px; min-height: 190px; font-size: 64px; font-weight: 500; line-height: 1.45; letter-spacing: -0.01em;
+        word-break: keep-all; white-space: pre-wrap; }
+  .rt .caret { display: inline-block; width: 4px; height: 0.95em; background: #fff; vertical-align: -0.12em; margin-left: 4px; border-radius: 2px; }
+  .rt .caret.off { visibility: hidden; }
+  .rt .foot { display: flex; justify-content: flex-end; margin-top: 22px; }
+  .rt .btn { font-size: 27px; font-weight: 600; padding: 12px 34px; border-radius: 999px; border: 1px solid rgba(255,255,255,0.22);
+        color: rgba(255,255,255,0.7); transform-origin: 50% 50%; }
+  .rt .btn.on { background: #2f7fe0; border-color: #2f7fe0; color: #fff; }
 </style>
 </head>
 <body>
@@ -122,6 +138,24 @@
     return { spec: s, el, sf: toFrame(s.start), ef: toFrame(s.end), maxOpacity: s.opacity };
   }
 
+  const TYPING_DEFAULTS = { width: 1380, x: "center", y: "center", anim_in: "rise", anim_out: "cut", in_frames: 6 };
+  function makeTyping(sp) {
+    const s = Object.assign({}, TYPING_DEFAULTS, sp);
+    const el = document.createElement("div");
+    el.className = "anim rt";
+    el.style.width = s.width + "px";
+    const initial = (s.nick || "").trim().charAt(0) || "N";
+    el.innerHTML = `<div class="head"><div class="avatar">${initial}</div><div><div class="nick"></div><div class="chip"></div></div><div class="date"></div></div>
+      <div class="body"><span class="txt"></span><span class="caret"></span></div>
+      <div class="foot"><span class="btn">등록</span></div>`;
+    el.querySelector(".nick").textContent = s.nick || "";
+    el.querySelector(".chip").textContent = s.chip || "";
+    el.querySelector(".date").textContent = s.date || "";
+    const keysF = s.keys.map(t => toFrame(t));
+    return { spec: s, el, sf: toFrame(s.start), ef: toFrame(s.end), typing: true, keysF, postF: toFrame(s.post_at),
+             txt: el.querySelector(".txt"), caret: el.querySelector(".caret"), btn: el.querySelector(".btn") };
+  }
+
   function makeFlash(f) {
     const s = Object.assign({}, FLASH_DEFAULTS, f);
     const el = document.createElement("div");
@@ -159,16 +193,17 @@
     stage.style.height = tl.height + "px";
     document.body.style.width = tl.width + "px";
     document.body.style.height = tl.height + "px";
-    const texts = [], cards = [], images = [], flashes = [];
+    const texts = [], cards = [], images = [], typings = [], flashes = [];
     pendingImages.length = 0;
     for (const shot of tl.shots) {
       for (const im of shot.images || []) images.push(makeImage(im));
       for (const t of shot.texts || []) texts.push(makeText(t));
       for (const c of shot.cards || []) cards.push(makeCard(c));
+      for (const ty of shot.typing || []) typings.push(makeTyping(ty));
       for (const f of shot.flashes || []) flashes.push(makeFlash(f));
     }
     window.__imagesReady = Promise.all(pendingImages).then(() => true);
-    for (const it of [...images, ...texts, ...cards]) { it.wrap = place(it.spec, it.el); stage.appendChild(it.wrap); items.push(it); }
+    for (const it of [...images, ...texts, ...cards, ...typings]) { it.wrap = place(it.spec, it.el); stage.appendChild(it.wrap); items.push(it); }
     for (const it of flashes) { it.wrap = it.el; stage.appendChild(it.el); items.push(it); }
     for (const it of items) it.wrap.style.display = "none";
     return items.length;
@@ -182,6 +217,20 @@
       it.wrap.style.display = visible ? (it.flash ? "block" : "flex") : "none";
       if (!visible) return;
       if (it.flash) { key.push(i + ":flash"); return; }
+      let tkey = "";
+      if (it.typing) {
+        // 누른 키 개수 -> 표시 문자열. 마지막 키 뒤 10프레임까지는 커서 고정, 그 뒤 15프레임 주기로 깜빡임
+        let n = 0; while (n < it.keysF.length && it.keysF[n] <= f) n++;
+        it.txt.textContent = n ? it.spec.states[n - 1] : "";
+        const sinceKey = n ? f - it.keysF[n - 1] : 99;
+        const posted = f >= it.postF;
+        const caretOn = !posted && (sinceKey < 10 || Math.floor(f / 15) % 2 === 0);
+        it.caret.classList.toggle("off", !caretOn);
+        it.btn.classList.toggle("on", posted);
+        const pop = posted ? Math.max(0, 1 - (f - it.postF) / 6) : 0;
+        it.btn.style.transform = `scale(${r4(1 + 0.1 * Math.sin(Math.PI * pop))})`;
+        tkey = `:t${n}:${caretOn ? 1 : 0}:${posted ? 1 : 0}:${r4(pop)}`;
+      }
       const a = animIn(it.spec.anim_in, f - it.sf, it.spec);
       const opacity = r4(a.opacity * animOut(it.spec.anim_out, it.ef - f, it.spec) * (it.maxOpacity ?? 1));
       // drift_scale: 요소가 보이는 동안 선형으로 커지는 느린 줌 (예: 0.03이면 1.00에서 1.03)
@@ -191,7 +240,7 @@
       it.el.style.opacity = String(opacity);
       it.el.style.transform = transform;
       it.el.style.filter = filter;
-      key.push(`${i}:${opacity}:${transform}:${filter}`);
+      key.push(`${i}:${opacity}:${transform}:${filter}${tkey}`);
     });
     return key.join("|");
   };
