@@ -32,17 +32,17 @@
      "shadow": false,
      "align": "left",
      "x": 300,
-     "y": 730,
+     "y": 780,
      "anim_in": "track",
-     "in_frames": 12,
+     "in_frames": 20,
      "anim_out": "cut",
      "text": "*누가* 진료하나요?",
      "start": 0.0,
      "end": 2.5,
-     "size": 112,
+     "size": 124,
      "color": "#f5f5f7",
      "accent_color": "#9cc3ff",
-     "track_from": 0.5
+     "track_from": 0.1
     }
    ],
    "_sound": "silence",
@@ -57,7 +57,19 @@
      "x": 0,
      "y": 0,
      "anim_in": "none",
-     "anim_out": "cut"
+     "anim_out": "cut",
+     "opacity": 1.0
+    },
+    {
+     "src": "/home/user/Code-Zzamtong/promo/assets/hospital/scrim_bottom.png",
+     "start": 0.0,
+     "end": 2.5,
+     "width": 1920,
+     "x": 0,
+     "y": 0,
+     "anim_in": "none",
+     "anim_out": "cut",
+     "opacity": 0.8
     }
    ]
   },
@@ -123,7 +135,7 @@
      "max_width": 1400,
      "shadow": false,
      "align": "left",
-     "x": 450,
+     "x": 160,
      "y": 262,
      "anim_in": "fade",
      "in_frames": 8,
@@ -143,69 +155,69 @@
      "max_width": 1400,
      "shadow": false,
      "align": "left",
-     "x": 450,
+     "x": 160,
      "anim_in": "rise",
      "in_frames": 8,
      "anim_out": "cut",
-     "text": "전) 한양대 명지병원 정형외과 전문의",
+     "text": "한양대 명지병원 정형외과 출신",
      "start": 6.0,
      "end": 10.5,
      "color": "#1d1d1f",
      "y": 428
     },
     {
-     "size": 64,
-     "weight": 500,
+     "size": 70,
+     "weight": 600,
      "letter_spacing": -0.015,
      "line_height": 1.3,
      "max_width": 1400,
      "shadow": false,
      "align": "left",
-     "x": 450,
+     "x": 160,
      "anim_in": "rise",
      "in_frames": 8,
      "anim_out": "cut",
      "text": "대한견주관절학회 정회원",
      "start": 6.5,
      "end": 10.5,
-     "color": "#6e6e73",
-     "y": 532
+     "color": "#515154",
+     "y": 536
     },
     {
-     "size": 64,
-     "weight": 500,
+     "size": 70,
+     "weight": 600,
      "letter_spacing": -0.015,
      "line_height": 1.3,
      "max_width": 1400,
      "shadow": false,
      "align": "left",
-     "x": 450,
+     "x": 160,
      "anim_in": "rise",
      "in_frames": 8,
      "anim_out": "cut",
      "text": "대한슬관절학회 정회원",
      "start": 7.0,
      "end": 10.5,
-     "color": "#6e6e73",
-     "y": 624
+     "color": "#515154",
+     "y": 634
     },
     {
-     "size": 64,
-     "weight": 500,
+     "size": 70,
+     "weight": 600,
      "letter_spacing": -0.015,
      "line_height": 1.3,
      "max_width": 1400,
      "shadow": false,
      "align": "left",
-     "x": 450,
+     "x": 160,
      "anim_in": "rise",
      "in_frames": 8,
      "anim_out": "cut",
      "text": "정맥통증학회 정회원",
      "start": 7.5,
      "end": 10.5,
-     "color": "#6e6e73",
-     "y": 716
+     "color": "#515154",
+     "y": 732
     }
    ],
    "_sound": "beat",
@@ -231,17 +243,25 @@
      "align": "center",
      "x": "center",
      "y": "center",
-     "anim_in": "fade",
-     "in_frames": 8,
+     "anim_in": "none",
+     "in_frames": 6,
      "anim_out": "cut",
      "text": "“왜 아팠는지\n확실히 알겠더라고요.”",
      "start": 10.5,
      "end": 14.5,
      "color": "#1d1d1f",
-     "accent_color": "#003070"
+     "accent_color": "#003070",
+     "hang_quotes": true,
+     "words": [
+      10.5,
+      10.5,
+      11.25,
+      11.25
+     ],
+     "word_frames": 10
     },
     {
-     "size": 54,
+     "size": 56,
      "weight": 500,
      "letter_spacing": 0.0,
      "line_height": 1.2,
@@ -252,10 +272,10 @@
      "anim_in": "fade",
      "in_frames": 8,
      "anim_out": "cut",
-     "text": "네이버 방문자 리뷰 · 영수증 인증 · 2026.1",
-     "start": 10.85,
+     "text": "네이버 영수증 리뷰 · 2026년 1월 · 발췌",
+     "start": 11.75,
      "end": 14.5,
-     "color": "rgba(29,29,31,0.55)",
+     "color": "#515154",
      "y": 734
     }
    ],
@@ -282,15 +302,15 @@
      "x": "center",
      "y": "center",
      "anim_in": "track",
-     "in_frames": 12,
+     "in_frames": 20,
      "anim_out": "cut",
      "text": "*어디까지* 진료하나요?",
      "start": 14.5,
      "end": 17.0,
-     "size": 136,
+     "size": 124,
      "color": "#f5f5f7",
-     "accent_color": "#5b9cff",
-     "track_from": 0.5
+     "accent_color": "#9cc3ff",
+     "track_from": 0.1
     }
    ],
    "_sound": "silence",
@@ -323,11 +343,11 @@
      "end": 20.0,
      "size": 150,
      "color": "#f5f5f7",
-     "accent_color": "#5b9cff",
+     "accent_color": "#9cc3ff",
      "hit_scale": 1.03
     },
     {
-     "size": 76,
+     "size": 84,
      "weight": 500,
      "letter_spacing": -0.015,
      "line_height": 1.3,
@@ -341,11 +361,11 @@
      "text": "목디스크",
      "start": 17.5,
      "end": 20.0,
-     "color": "rgba(245,245,247,0.75)",
-     "y": 536
+     "color": "rgba(245,245,247,0.85)",
+     "y": 540
     },
     {
-     "size": 76,
+     "size": 84,
      "weight": 500,
      "letter_spacing": -0.015,
      "line_height": 1.3,
@@ -359,8 +379,8 @@
      "text": "척추관협착증",
      "start": 18.0,
      "end": 20.0,
-     "color": "rgba(245,245,247,0.75)",
-     "y": 632
+     "color": "rgba(245,245,247,0.85)",
+     "y": 644
     }
    ],
    "_sound": "hit",
@@ -385,19 +405,19 @@
      "align": "center",
      "x": "center",
      "y": 330,
-     "anim_in": "track",
-     "in_frames": 12,
+     "anim_in": "hit",
+     "in_frames": 4,
      "anim_out": "cut",
      "text": "어깨 · 무릎",
      "start": 20.0,
      "end": 23.5,
      "size": 150,
      "color": "#f5f5f7",
-     "accent_color": "#5b9cff",
-     "track_from": 0.5
+     "accent_color": "#9cc3ff",
+     "hit_scale": 1.03
     },
     {
-     "size": 76,
+     "size": 84,
      "weight": 500,
      "letter_spacing": -0.015,
      "line_height": 1.3,
@@ -411,11 +431,11 @@
      "text": "회전근개손상",
      "start": 20.5,
      "end": 23.5,
-     "color": "rgba(245,245,247,0.75)",
-     "y": 536
+     "color": "rgba(245,245,247,0.85)",
+     "y": 540
     },
     {
-     "size": 76,
+     "size": 84,
      "weight": 500,
      "letter_spacing": -0.015,
      "line_height": 1.3,
@@ -429,8 +449,8 @@
      "text": "인공관절 수술 후 재활",
      "start": 21.0,
      "end": 23.5,
-     "color": "rgba(245,245,247,0.75)",
-     "y": 632
+     "color": "rgba(245,245,247,0.85)",
+     "y": 644
     }
    ],
    "_sound": "beat",
@@ -472,7 +492,8 @@
       "발가락골절"
      ],
      "color": "#f5f5f7",
-     "dim_color": "rgba(245,245,247,0.22)",
+     "align": "left",
+     "dim_color": "rgba(245,245,247,0.12)",
      "light_times": [
       23.75,
       24.25,
@@ -488,8 +509,9 @@
       27.0
      ],
      "light_frames": 6,
-     "col_gap": 84,
-     "row_gap": 24,
+     "col_gap": 110,
+     "row_gap": 36,
+     "drift_scale": 0.02,
      "anim_in": "fade",
      "in_frames": 6
     }
@@ -521,14 +543,14 @@
      "end": 33.5,
      "size": 136,
      "color": "#f5f5f7",
-     "accent_color": "#5b9cff",
+     "accent_color": "#9cc3ff",
      "words": [
-      29.55,
-      29.55,
-      30.35,
-      30.35
+      29.5,
+      29.5,
+      30.25,
+      30.75
      ],
-     "word_frames": 8
+     "word_frames": 10
     }
    ],
    "_sound": "swell",
@@ -565,7 +587,25 @@
      "hit_scale": 1.03
     },
     {
-     "size": 76,
+     "size": 84,
+     "weight": 500,
+     "letter_spacing": -0.015,
+     "line_height": 1.3,
+     "max_width": 1500,
+     "shadow": false,
+     "align": "center",
+     "x": "center",
+     "anim_in": "rise",
+     "in_frames": 8,
+     "anim_out": "cut",
+     "text": "척추 진료",
+     "start": 34.0,
+     "end": 37.0,
+     "color": "rgba(245,245,247,0.85)",
+     "y": 540
+    },
+    {
+     "size": 84,
      "weight": 500,
      "letter_spacing": -0.015,
      "line_height": 1.3,
@@ -577,10 +617,10 @@
      "in_frames": 8,
      "anim_out": "cut",
      "text": "하지정맥 시술",
-     "start": 34.0,
+     "start": 34.5,
      "end": 37.0,
-     "color": "rgba(245,245,247,0.75)",
-     "y": 536
+     "color": "rgba(245,245,247,0.85)",
+     "y": 644
     }
    ],
    "_sound": "hit",
@@ -612,12 +652,17 @@
      "letter_spacing": -0.035,
      "y": 350,
      "slot_times": [
-      37.02,
-      37.52,
-      38.02,
-      38.52
+      37.0,
+      37.5,
+      38.0,
+      38.5
      ],
-     "roll_frames": 8,
+     "roll_frames": 6,
+     "roll_frames_last": 12,
+     "roll_overshoot": 1.2,
+     "slot_color_to": "#1d1d1f",
+     "color_at": 39.3,
+     "color_frames": 6,
      "anim_in": "fade",
      "in_frames": 6
     }
@@ -650,17 +695,21 @@
      "size": 168,
      "color": "#1d1d1f",
      "accent_color": "#003070",
-     "y_to": 8,
+     "y_to": 51,
      "scale_to": 0.5,
-     "move_at": 43.0,
-     "move_frames": 18,
+     "move_at": 42.6,
+     "move_frames": 24,
+     "move_ease": "inOut",
+     "ls_to": -0.02,
+     "drift_scale": 0.015,
+     "drift_until": 42.6,
      "words": [
       38.5,
       38.5,
-      39.53,
-      39.53
+      39.5,
+      39.5
      ],
-     "word_frames": 4
+     "word_frames": 6
     }
    ],
    "_sound": "hit",
@@ -670,14 +719,14 @@
   {
    "id": "s13",
    "start": 43.0,
-   "end": 46.0,
+   "end": 45.0,
    "bg": {
     "type": "color",
     "color": "#f5f5f7"
    },
    "texts": [
     {
-     "size": 64,
+     "size": 56,
      "weight": 600,
      "letter_spacing": -0.015,
      "line_height": 1.3,
@@ -687,30 +736,19 @@
      "x": "center",
      "anim_in": "fade",
      "in_frames": 10,
-     "anim_out": "cut",
-     "text": "유병찬 대표원장",
-     "start": 43.7,
+     "anim_out": "fade",
+     "text": "*김철신정형외과의원* 유병찬 대표원장",
+     "start": 43.6,
      "end": 51.0,
      "color": "#1d1d1f",
-     "y": 510
-    },
-    {
-     "size": 46,
-     "weight": 500,
-     "letter_spacing": -0.015,
-     "line_height": 1.3,
-     "max_width": 1500,
-     "shadow": false,
-     "align": "center",
-     "x": "center",
-     "anim_in": "fade",
-     "in_frames": 10,
-     "anim_out": "cut",
-     "text": "김철신정형외과의원",
-     "start": 43.85,
-     "end": 51.0,
-     "color": "#6e6e73",
-     "y": 596
+     "accent_color": "#515154",
+     "y": 659,
+     "y_to": 539,
+     "out_frames": 12,
+     "out_to": 0.35,
+     "move_at": 45.0,
+     "move_frames": 18,
+     "move_ease": "inOut"
     }
    ],
    "_sound": "beat",
@@ -719,19 +757,23 @@
    "images": [
     {
      "src": "/home/user/Code-Zzamtong/promo/assets/hospital/logo_color.png",
-     "start": 43.45,
+     "start": 43.4,
      "end": 51.0,
-     "width": 520,
-     "y": 340,
+     "width": 440,
+     "y": 512,
+     "y_to": 392,
      "anim_in": "fade",
      "in_frames": 12,
-     "anim_out": "none"
+     "anim_out": "none",
+     "move_at": 45.0,
+     "move_frames": 18,
+     "move_ease": "inOut"
     }
    ]
   },
   {
    "id": "s14",
-   "start": 46.0,
+   "start": 45.0,
    "end": 51.0,
    "bg": {
     "type": "color",
@@ -739,7 +781,7 @@
    },
    "texts": [
     {
-     "size": 54,
+     "size": 60,
      "weight": 500,
      "letter_spacing": -0.01,
      "line_height": 1.3,
@@ -748,16 +790,18 @@
      "align": "center",
      "x": "center",
      "anim_in": "fade",
-     "in_frames": 8,
-     "anim_out": "cut",
+     "in_frames": 10,
+     "anim_out": "fade",
      "text": "낙성대역 4번 출구 · 무료 주차",
-     "start": 46.0,
+     "start": 45.4,
      "end": 51.0,
-     "color": "#1d1d1f",
-     "y": 724
+     "color": "#515154",
+     "y": 686,
+     "out_frames": 12,
+     "out_to": 0.35
     },
     {
-     "size": 54,
+     "size": 60,
      "weight": 500,
      "letter_spacing": -0.01,
      "line_height": 1.3,
@@ -766,31 +810,33 @@
      "align": "center",
      "x": "center",
      "anim_in": "fade",
-     "in_frames": 8,
-     "anim_out": "cut",
+     "in_frames": 10,
+     "anim_out": "fade",
      "text": "평일 오후 7시까지 · 토요일 오후 2시까지",
-     "start": 46.12,
+     "start": 45.6,
      "end": 51.0,
-     "color": "#1d1d1f",
-     "y": 796
+     "color": "#515154",
+     "y": 763,
+     "out_frames": 12,
+     "out_to": 0.35
     },
     {
-     "size": 88,
+     "size": 80,
      "weight": 600,
-     "letter_spacing": 0.02,
+     "letter_spacing": 0.01,
      "line_height": 1.3,
      "max_width": 1500,
      "shadow": false,
      "align": "center",
      "x": "center",
      "anim_in": "fade",
-     "in_frames": 8,
+     "in_frames": 10,
      "anim_out": "cut",
      "text": "02-872-3301",
-     "start": 46.24,
+     "start": 45.8,
      "end": 51.0,
      "color": "#1d1d1f",
-     "y": 868
+     "y": 850
     }
    ],
    "_sound": "beat",

@@ -62,3 +62,12 @@
 - `build_film3.py`가 `film3/script.json`을 읽어 타임라인을 만든다. 단어별 등장(words), 줄 단위 등장(stack), 큰 따옴표 인용(quote), 엔딩(브랜드 줄이 위로 물러나고 로고·명칭·정보)을 처리한다
 - 음악은 `music/compose_film3.py`. 120 BPM 킥·스냅·서브·플럭 훅, 컷마다 스냅, "다 듣습니다."와 "듣는 정형외과." 앞에서 완전 무음, 엔딩 코드. -14 LUFS
 - 렌더 뒤 아트 디렉터 심사 워크플로(애플다움, 가독성, 사진 화면, 움직임)로 수정 목록을 받아 반영했다
+
+## 네 번째 영상 (2026-09-27): 뼈부터 정맥까지
+
+의뢰인 요청: 당연한 소리 지양, 완전히 새로운 애플 콘셉트, 질환·치료 범위에 방점, 원장 이력, 유려하고 참신한 글자 효과, 표현 하나하나 검토. 구성안은 `film4/storyboard_film4.md`.
+
+- 원장 이력은 의뢰인이 보낸 프로필 카드(`assets/hospital/doctor_profile_card.jpg`)에서 `facts.md`로 옮겼다. 대표원장은 유병찬
+- 카피 워크플로 기록 `film4/copy_workflow_result.json`, 시각 심사 기록 `film4/visual_qc_result.json`
+- 엔진에 글자 효과를 더했다: track(흐린 글자가 조여지며 선명, track_from), wipe(빛 스윕), slot(빈자리 단어가 굴러 바뀌고 폭이 따라 움직임, 마지막 단어는 살짝 넘쳤다 섬, 강조색이 본문색으로 돌아옴), ticker, grid(격자 점등), count, 따옴표 내밀기(hang_quotes), 위치·크기 이동(y_to, scale_to, move_ease, ls_to), 옅어지다 멈춤(out_to)
+- `build_film4.py`가 `film4/script.json`을 읽는다. 음악은 `tools/score_from_script.py`가 구성안의 소리 표기에서 스코어를 만들고 `music/compose_film3.py`로 렌더한다 (D 단조)

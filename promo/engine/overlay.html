@@ -94,6 +94,8 @@
   const r4 = (v) => Math.round(v * 10000) / 10000;
   const clamp01 = (v) => Math.max(0, Math.min(1, v));
   const easeOut = (p) => 1 - Math.pow(1 - p, 3);
+  const easeInOut = (p) => p < 0.5 ? 4 * p * p * p : 1 - Math.pow(-2 * p + 2, 3) / 2;
+  const easeOutBack = (p, c) => 1 + (c + 1) * Math.pow(p - 1, 3) + c * Math.pow(p - 1, 2);
   const ramp = (lf, n) => clamp01(lf / n);          // geometry: start value shown on frame 0
   const fadeIn = (lf, n) => clamp01((lf + 1) / n);  // opacity: 1/n on frame 0, 1 on frame n-1
 
@@ -129,13 +131,25 @@
           const sp = document.createElement("span");
           sp.style.display = "inline-block";
           let txt = part;
-          if (/^\*[^*]+\*[,.!?…]*$/.test(part)) { txt = part.replace(/\*/g, ""); sp.style.color = s.accent_color || "#003070"; }
-          sp.textContent = txt;
+          const am = /^\*([^*]+)\*([,.!?…]*)$/.exec(part);
+          // 따옴표 내밀기: 여는 “와 닫는 ”를 따로 감싸 음수 여백을 주면 글자 덩어리가 가운데에 선다
+          let openQ = "", closeQ = "";
+          if (s.hang_quotes && !am) {
+            if (txt.startsWith("“")) { openQ = "“"; txt = txt.slice(1); }
+            if (txt.endsWith("”")) { closeQ = "”"; txt = txt.slice(0, -1); }
+          }
+          if (openQ) { const q = document.createElement("span"); q.textContent = openQ; q.style.marginLeft = (-measure(openQ, Object.assign({ font: "Pretendard" }, s))) + "px"; sp.appendChild(q); }
+          if (am) {
+            const inner = document.createElement("span"); inner.textContent = am[1]; inner.style.color = s.accent_color || "#003070"; sp.appendChild(inner);
+            if (am[2]) sp.appendChild(document.createTextNode(am[2]));
+          } else sp.appendChild(document.createTextNode(txt));
+          if (closeQ) { const q = document.createElement("span"); q.textContent = closeQ; q.style.marginRight = (-measure(closeQ, Object.assign({ font: "Pretendard" }, s))) + "px"; sp.appendChild(q); }
           el.appendChild(sp);
           spans.push(sp);
         });
       });
     } else el.textContent = s.text;
+    if (s.hang_quotes) el.style.whiteSpace = "pre";
     if (s.font) el.style.fontFamily = `"${s.font}", "Pretendard", "Noto Sans CJK KR", sans-serif`;
     Object.assign(el.style, {
       fontSize: s.size + "px", fontWeight: String(s.weight), color: s.color,
@@ -215,11 +229,18 @@
       el.appendChild(document.createTextNode(pre)); el.appendChild(slot); el.appendChild(document.createTextNode(post));
       const timesF = (s.slot_times || []).map(t => toFrame(t));
       const rf = s.roll_frames || 8;
+      const rfLast = s.roll_frames_last || rf;
+      const colF = s.color_at !== undefined ? toFrame(s.color_at) : null, colN = s.color_frames || 6;
       it.update = (f) => {
         let i = -1; while (i + 1 < timesF.length && timesF[i + 1] <= f) i++;
         const cur = Math.max(0, i);
-        const p = i < 0 ? 1 : clamp01((f - timesF[i] + 1) / rf);
-        const e = easeOut(p);
+        const last = cur === words.length - 1;
+        const p = i < 0 ? 0 : clamp01((f - timesF[i] + 1) / (last ? rfLast : rf));
+        const e = last && s.roll_overshoot ? easeOutBack(p, s.roll_overshoot) : easeOut(p);
+        if (colF !== null && s.slot_color_to) {
+          const cp = clamp01((f - colF + 1) / colN);
+          spans[cur].style.color = cp <= 0 ? (s.slot_color || s.color) : (cp >= 1 ? s.slot_color_to : `color-mix(in srgb, ${s.slot_color_to} ${Math.round(cp * 100)}%, ${s.slot_color || s.color})`);
+        }
         spans.forEach((x, k) => {
           let ty = h * 1.2, op = 0;
           if (k === cur) { ty = h * (1 - e); op = 0.15 + 0.85 * e; }
@@ -227,9 +248,9 @@
           x.style.transform = `translateY(${r4(ty)}px)`; x.style.opacity = String(r4(op));
         });
         const wPrev = widths[Math.max(0, cur - 1)], wCur = widths[cur];
-        const sw = r4(cur === 0 ? wCur : wPrev + (wCur - wPrev) * e);
+        const sw = r4(cur === 0 ? wCur : wPrev + (wCur - wPrev) * Math.min(1, e));
         slot.style.width = sw + "px";
-        return `:sl${cur}:${r4(p)}:${sw}`;
+        return `:sl${cur}:${r4(p)}:${sw}:${spans[cur].style.color}`;
       };
     } else if (s.type === "ticker") {
       // 여러 줄의 단어가 좌우로 흐르다 (settle_at부터) 한 단어가 중앙에 멈춘다
@@ -485,7 +506,8 @@
   }
   function animOut(kind, rem, spec) {
     const n = (spec && spec.out_frames) || 5;
-    return kind === "fade" ? clamp01(rem / n) : 1;
+    const to = spec && typeof spec.out_to === "number" ? spec.out_to : 0;
+    return kind === "fade" ? to + (1 - to) * clamp01(rem / n) : 1;
   }
 
   window.setTimeline = function (tl) {
@@ -556,10 +578,15 @@
         // 세로 위치 이동: move_at부터 move_frames 동안 y에서 y_to로 (ease-out)
         const mf = toFrame(it.spec.move_at), mn = it.spec.move_frames || 12;
         const p = f < mf ? 0 : clamp01((f - mf + 1) / mn);
-        const top = r4(it.spec.y + (it.spec.y_to - it.spec.y) * easeOut(p));
+        const me = it.spec.move_ease === "inOut" ? easeInOut(p) : easeOut(p);
+        const top = r4(it.spec.y + (it.spec.y_to - it.spec.y) * me);
         it.wrap.style.top = top + "px";
         tkey += `:y${top}`;
-        if (typeof it.spec.scale_to === "number") { it.moveScale = r4(1 + (it.spec.scale_to - 1) * easeOut(p)); tkey += `:ms${it.moveScale}`; }
+        if (typeof it.spec.scale_to === "number") { it.moveScale = r4(1 + (it.spec.scale_to - 1) * me); tkey += `:ms${it.moveScale}`; }
+        if (typeof it.spec.ls_to === "number") {
+          const ls0 = typeof it.spec.letter_spacing === "number" ? it.spec.letter_spacing : 0;
+          const ls = r4(ls0 + (it.spec.ls_to - ls0) * me); it.el.style.letterSpacing = ls + "em"; tkey += `:lm${ls}`;
+        }
       }
       if (it.update) tkey += it.update(f);
       const a = animIn(it.spec.anim_in, f - it.sf, it.spec);
@@ -572,7 +599,8 @@
       }
       const opacity = r4(a.opacity * animOut(it.spec.anim_out, it.ef - f, it.spec) * (it.maxOpacity ?? 1));
       // drift_scale: 요소가 보이는 동안 선형으로 커지는 느린 줌 (예: 0.03이면 1.00에서 1.03)
-      const drift = it.spec.drift_scale ? it.spec.drift_scale * ((f - it.sf) / Math.max(1, it.ef - it.sf - 1)) : 0;
+      const dEnd = it.spec.drift_until !== undefined ? toFrame(it.spec.drift_until) : it.ef - 1;
+      const drift = it.spec.drift_scale ? it.spec.drift_scale * clamp01((f - it.sf) / Math.max(1, dEnd - it.sf)) : 0;
       const transform = `translateY(${r4(a.dy)}px) scale(${r4((a.scale + drift) * (it.moveScale ?? 1))})`;
       const filter = a.blur > 0.005 ? `blur(${r4(a.blur)}px)` : "none";
       it.el.style.opacity = String(opacity);

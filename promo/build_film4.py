@@ -19,7 +19,7 @@ INK_SOFT = "rgba(29,29,31,0.55)"
 PAPER = "#f5f5f7"
 PAPER_SOFT = "rgba(245,245,247,0.6)"
 ACCENT = "#003070"          # 로고 남색
-ACCENT_ON_BLACK = "#5b9cff"
+ACCENT_ON_BLACK = "#9cc3ff"
 
 # 글자 규격: 한 줄 10자 이하 168, 14자 이하 136, 그 외 118. 두 줄은 150
 def head_size(text):
@@ -39,7 +39,8 @@ QUOTE = dict(size=108, weight=600, letter_spacing=-0.03, line_height=1.28, max_w
              anim_in="fade", in_frames=6, anim_out="cut")
 SRC = dict(size=54, weight=500, letter_spacing=0.0, line_height=1.2, max_width=1400, shadow=False, align="center", x="center",
            anim_in="fade", in_frames=8, anim_out="cut")
-PAPER_SOFT = "rgba(245,245,247,0.75)"
+PAPER_SOFT = "rgba(245,245,247,0.85)"
+GRAY_READ = "#515154"          # 작은 글자용 진회색 (흰 배경 대비 7.3:1)
 NAME_GRAY = "#6e6e73"
 
 
@@ -58,7 +59,7 @@ def accent(bg):
 
 
 def dim_color(bg):
-    return "rgba(245,245,247,0.22)" if bg in ("black", "navy") else "rgba(29,29,31,0.18)"
+    return "rgba(245,245,247,0.12)" if bg in ("black", "navy") else "rgba(29,29,31,0.12)"
 
 
 def bg_of(kind):
@@ -150,75 +151,88 @@ def build(script):
         snd = sc.get("sound", "beat")
         col, soft = tcolor(kind), tcolor(kind, soft=True)
         acc = SKY if kind in ("navy", "photo_reception") else accent(kind)
-        title_anim = dict(anim_in="hit", in_frames=4, hit_scale=1.03) if snd == "hit" else dict(anim_in="track", in_frames=12, track_from=0.5)
+        title_anim = dict(anim_in="hit", in_frames=4, hit_scale=1.03)      # 답 화면(사양표) 제목은 강타로 묶는다. 질문은 track
 
         if role == "brand":
             # 브랜드: 앞 화면 슬롯 줄이 같은 자리에 남고 둘째 줄이 강타에 붙는다. 로고 화면에서 절반 크기로 줄며 위로 올라간다
-            words = line_words(text, [a_f - 1.0, a_f + 0.03])
-            texts.append(dict(HEAD, text=text, start=a_f, end=END, size=168, color=INK, accent_color=ACCENT, y=350, y_to=8, scale_to=0.5,
-                              move_at=logo_at, move_frames=18, anim_in="none", words=words, word_frames=4))
+            words = line_words(text, [a_f - 1.0, a_f])
+            texts.append(dict(HEAD, text=text, start=a_f, end=END, size=168, color=INK, accent_color=ACCENT, y=350, y_to=51, scale_to=0.5,
+                              move_at=round(logo_at - 0.4, 4), move_frames=24, move_ease="inOut", ls_to=-0.02,
+                              drift_scale=0.015, drift_until=round(logo_at - 0.4, 4), anim_in="none", words=words, word_frames=6))
         elif role == "logo":
-            name, _, legal = text.partition("\n")
-            images.append({"src": os.path.join(HOSP, "logo_color.png"), "start": a_f + 0.45, "end": END, "width": 520, "y": 340,
-                           "anim_in": "fade", "in_frames": 12, "anim_out": "none"})
-            texts.append(dict(SUB, text=name, start=a_f + 0.7, end=END, size=64, weight=600, color=INK, y=510, anim_in="fade", in_frames=10))
-            if legal:
-                texts.append(dict(SUB, text=legal, start=a_f + 0.85, end=END, size=46, weight=500, color=NAME_GRAY, y=596, anim_in="fade", in_frames=10))
+            # 로고와 이름 한 줄: 처음엔 가운데 쪽에 있다가 정보가 들어올 때 120px 올라간다
+            lift = dict(move_at=b_f, move_frames=18, move_ease="inOut")
+            images.append(dict({"src": os.path.join(HOSP, "logo_color.png"), "start": round(a_f + 0.4, 4), "end": END, "width": 440, "y": 512, "y_to": 392,
+                                "anim_in": "fade", "in_frames": 12, "anim_out": "none"}, **lift))
+            texts.append(dict(SUB, text=text.replace("\n", " "), start=round(a_f + 0.6, 4), end=END, size=56, weight=600, color=INK, accent_color=GRAY_READ,
+                              y=659, y_to=539, anim_in="fade", in_frames=10, anim_out="fade", out_frames=12, out_to=0.35, **lift))
         elif role == "info":
             lines = text.split("\n")
-            ys = [724, 796, 868]
+            ys = [686, 763, 850]
             for i, ln in enumerate(lines[:3]):
-                last = i == len(lines[:3]) - 1 and any(ch.isdigit() for ch in ln) and "-" in ln
-                texts.append(dict(SUB, text=ln, start=round(a_f + 0.12 * i, 4), end=END, size=88 if last else 54, weight=600 if last else 500,
-                                  letter_spacing=0.02 if last else -0.01, color=INK, y=ys[i], anim_in="fade", in_frames=8))
+                phone = any(ch.isdigit() for ch in ln) and "-" in ln and i == len(lines[:3]) - 1
+                d = dict(SUB, text=ln, start=round(a_f + 0.4 + 0.2 * i, 4), end=END, size=80 if phone else 60, weight=600 if phone else 500,
+                         letter_spacing=0.01 if phone else -0.01, color=INK if phone else GRAY_READ, y=ys[i], anim_in="fade", in_frames=10)
+                if not phone:
+                    d.update(anim_out="fade", out_frames=12, out_to=0.35)     # 마지막 호흡: 정보 두 줄만 옅어지고 전화는 남는다
+                texts.append(d)
         elif motion == "quote":
             body = text.strip().strip('"“”')
             lines = body.split("\n")
             longest = max(len(x) for x in lines)
             size = 108 if longest <= 14 else (96 if longest <= 17 else 84)
-            texts.append(dict(QUOTE, text=f"“{body}”", start=a_f, end=b_f, size=size, color=col, accent_color=acc, anim_in="fade", in_frames=8))
-            texts.append(dict(SRC, text=sc.get("source") or src_label, start=a_f + 0.35, end=b_f, color=soft, y=int(540 + size * 1.28 * len(lines) / 2 + 56)))
+            qtext = f"“{body}”"
+            texts.append(dict(QUOTE, text=qtext, start=a_f, end=b_f, size=size, color=col, accent_color=acc, anim_in="none", hang_quotes=True,
+                              words=line_words(qtext, [a_f + 0.75 * i for i in range(len(lines))]), word_frames=10))
+            texts.append(dict(SRC, text=sc.get("source") or src_label, start=round(a_f + 0.75 * len(lines) - 0.25, 4), end=b_f, size=56,
+                              color=GRAY_READ if kind == "white" else soft, y=int(540 + size * 1.28 * len(lines) / 2 + 56)))
         elif motion == "slot":
             n = max(1, text.count("|") + 1)
             fx.append({"type": "slot", "text": text, "start": a_f, "end": b_f, "size": 168, "weight": 700, "color": col, "slot_color": acc,
-                       "letter_spacing": -0.035, "y": 350, "slot_times": [round(a_f + 0.02 + i * 0.5, 4) for i in range(n)], "roll_frames": 8,
+                       "letter_spacing": -0.035, "y": 350, "slot_times": [round(a_f + i * 0.5, 4) for i in range(n)], "roll_frames": 6,
+                       "roll_frames_last": 12, "roll_overshoot": 1.2, "slot_color_to": INK, "color_at": round(b_f - 0.2, 4), "color_frames": 6,
                        "anim_in": "fade", "in_frames": 6})
         elif motion == "grid":
             cells = items[:12]
             lt = []
             for i in range(len(cells)):
                 lt.append(round(a_f + (0.25 + 0.5 * i if i < 3 else 1.5 + 0.25 * (i - 3)), 4))
-            fx.append({"type": "grid", "start": a_f, "end": b_f, "size": 80, "weight": 600, "cols": 3, "items": cells, "color": col,
-                       "dim_color": dim_color(kind), "light_times": lt, "light_frames": 6, "col_gap": 84, "row_gap": 24, "anim_in": "fade", "in_frames": 6})
+            fx.append({"type": "grid", "start": a_f, "end": b_f, "size": 80, "weight": 600, "cols": 3, "items": cells, "color": col, "align": "left",
+                       "dim_color": dim_color(kind), "light_times": lt, "light_frames": 6, "col_gap": 110, "row_gap": 36, "drift_scale": 0.02,
+                       "anim_in": "fade", "in_frames": 6})
         elif motion == "spec":
             texts.append(dict(HEAD, text=thin_dot(text), start=a_f, end=b_f, size=150, color=col, accent_color=acc, y=330, **title_anim))
             for i, it_ in enumerate(items[:4]):
-                texts.append(dict(SUB, text=it_, start=round(a_f + 0.5 * (i + 1), 4), end=b_f, size=76, weight=500, color=soft, y=536 + i * 96,
+                texts.append(dict(SUB, text=it_, start=round(a_f + 0.5 * (i + 1), 4), end=b_f, size=84, weight=500, color=soft, y=540 + i * 104,
                                   anim_in="rise", in_frames=8))
         elif motion == "list":
-            x0 = 450
+            x0 = 160                                   # 앞 화면 이름(x=160)과 같은 기준선
             texts.append(dict(HEAD, text=text, start=a_f, end=b_f, size=110, color=col, accent_color=acc, x=x0, align="left", max_width=1400, y=262,
                               anim_in="fade", in_frames=8))
             for i, it_ in enumerate(items[:6]):
                 first = i == 0
-                texts.append(dict(SUB, text=it_, start=round(a_f + 0.5 * (i + 1), 4), end=b_f, size=72 if first else 64, weight=600 if first else 500,
-                                  color=col if first else NAME_GRAY, x=x0, align="left", max_width=1400, y=428 + i * 92 + (0 if first else 12),
+                texts.append(dict(SUB, text=it_, start=round(a_f + 0.5 * (i + 1), 4), end=b_f, size=72 if first else 70, weight=600,
+                                  color=col if first else GRAY_READ, x=x0, align="left", max_width=1400, y=428 if first else 536 + (i - 1) * 98,
                                   anim_in="rise", in_frames=8))
         else:
             h = dict(HEAD, text=text, start=a_f, end=b_f, size=head_size(text), color=col, accent_color=acc, **anim_for(snd))
             if kind == "photo_doctor":
                 h.update(x=160, align="left", max_width=1000, color=INK, shadow=False, size=120, y=472, anim_in="hit", in_frames=4, hit_scale=1.03)
             if kind == "photo_reception":
-                h.update(x=300, align="left", max_width=1000, size=112, y=730, shadow=False)
-                images.append({"src": os.path.join(HOSP, "scrim_bottom.png"), "start": a_f, "end": b_f, "width": 1920, "x": 0, "y": 0,
-                               "anim_in": "none", "anim_out": "cut"})
+                h.update(x=300, align="left", max_width=1000, size=124, y=780, shadow=False)
+                for op in (1.0, 0.8):                  # 스크림 두 겹: 글자 뒤 검정 알파 약 0.4~0.5
+                    images.append({"src": os.path.join(HOSP, "scrim_bottom.png"), "start": a_f, "end": b_f, "width": 1920, "x": 0, "y": 0,
+                                   "anim_in": "none", "anim_out": "cut", "opacity": op})
             if motion == "track":
-                h.update(anim_in="track", in_frames=12, track_from=0.5)
+                h.update(anim_in="track", in_frames=20, track_from=0.1, size=124)
             elif motion == "wipe":
                 h.update(anim_in="wipe", in_frames=18)
             elif motion == "stack":
                 nl = text.count("\n") + 1
-                h.update(anim_in="none", words=line_words(text, [a_f + 0.05 + 0.8 * i for i in range(nl)]), word_frames=8)
+                ws = line_words(text, [a_f + 0.75 * i for i in range(nl)])
+                if ", " in text.split("\n")[-1]:
+                    ws[-1] = round(ws[-1] + 0.5, 4)          # '허리일까,' 다음 한 박 뒤에 '혈관일까?'
+                h.update(anim_in="none", words=ws, word_frames=10)
             elif motion == "words":
                 h.update(anim_in="none", words=word_times(text, a_f), word_frames=8)
             texts.append(h)

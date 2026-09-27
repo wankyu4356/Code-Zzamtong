@@ -28,7 +28,7 @@
    "motion": "list",
    "sound": "beat",
    "items": [
-    "전) 한양대 명지병원 정형외과 전문의",
+    "한양대 명지병원 정형외과 출신",
     "대한견주관절학회 정회원",
     "대한슬관절학회 정회원",
     "정맥통증학회 정회원"
@@ -41,7 +41,7 @@
    "seconds": 4,
    "motion": "quote",
    "sound": "beat",
-   "source": "네이버 방문자 리뷰 · 영수증 인증 · 2026.1"
+   "source": "네이버 영수증 리뷰 · 2026년 1월 · 발췌"
   },
   {
    "no": 5,
@@ -113,6 +113,7 @@
    "motion": "spec",
    "sound": "hit",
    "items": [
+    "척추 진료",
     "하지정맥 시술"
    ]
   },
@@ -135,9 +136,9 @@
   },
   {
    "no": 13,
-   "text": "유병찬 대표원장\n김철신정형외과의원",
+   "text": "*김철신정형외과의원* 유병찬 대표원장",
    "bg": "white",
-   "seconds": 3,
+   "seconds": 2.0,
    "motion": "cut",
    "sound": "beat",
    "role": "logo"
@@ -146,7 +147,7 @@
    "no": 14,
    "text": "낙성대역 4번 출구 · 무료 주차\n평일 오후 7시까지 · 토요일 오후 2시까지\n02-872-3301",
    "bg": "white",
-   "seconds": 5,
+   "seconds": 6.0,
    "motion": "cut",
    "sound": "beat",
    "role": "info"
