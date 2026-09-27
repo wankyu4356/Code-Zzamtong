@@ -1,6 +1,6 @@
 """
 네 번째 영상: 진료 범위와 원장 이력을 중심에 둔 애플풍 타이포그래피 필름.
-구성은 film4/script.json에서 읽는다. motion: cut words stack track wipe slot ticker grid spec count list quote. bg: white black navy photo_doctor photo_reception.
+구성은 film4/script.json에서 읽는다. motion: cut words stack track wipe slot ticker grid spec count list quote. bg: white black navy photo_doctor photo_reception photo_building.
 사용: python3 build_film4.py [film4/script.json] [out.json]
 """
 import json
@@ -44,8 +44,11 @@ GRAY_READ = "#515154"          # 작은 글자용 진회색 (흰 배경 대비 7
 NAME_GRAY = "#6e6e73"
 
 
+DARK_BG = ("black", "navy", "photo_reception", "photo_building")
+
+
 def tcolor(bg, soft=False):
-    if bg in ("black", "navy", "photo_reception"):
+    if bg in DARK_BG:
         return PAPER_SOFT if soft else PAPER
     return INK_SOFT if soft else INK
 
@@ -76,6 +79,10 @@ def bg_of(kind):
         return {"type": "image", "src": os.path.join(HOSP, "reception_16x9.jpg"), "zoom": "in", "zoom_amount": 0.06,
                 "grade": {"contrast": 1.02, "saturation": 0.88, "brightness": -0.10, "gamma": 0.92}, "vignette": False, "grain": 0.03,
                 "fade_out": 4, "fade_color": "white"}
+    if kind == "photo_building":
+        # 건물 외관: 1.2배로 당겨 '김철신 정형외과' 간판이 브랜드 문장 아래에 오게 한다. 감마로 어둡게(밝기만 내리면 외벽이 붉게 뜬다)
+        return {"type": "image", "src": os.path.join(HOSP, "building_16x9.jpg"), "zoom": "in", "zoom_amount": 0.03, "punch": 1.2, "anchor": [0.5, 0.0],
+                "grade": {"contrast": 1.05, "saturation": 0.6, "brightness": -0.05, "gamma": 0.5}, "vignette": True, "grain": 0.03}
     raise ValueError(kind)
 
 
@@ -150,13 +157,13 @@ def build(script):
         role = sc.get("role")
         snd = sc.get("sound", "beat")
         col, soft = tcolor(kind), tcolor(kind, soft=True)
-        acc = SKY if kind in ("navy", "photo_reception") else accent(kind)
+        acc = SKY if kind in ("navy", "photo_reception", "photo_building") else accent(kind)
         title_anim = dict(anim_in="hit", in_frames=4, hit_scale=1.03)      # 답 화면(사양표) 제목은 강타로 묶는다. 질문은 track
 
         if role == "brand":
             # 브랜드: 앞 화면 슬롯 줄이 같은 자리에 남고 둘째 줄이 강타에 붙는다. 로고 화면에서 절반 크기로 줄며 위로 올라간다
             words = line_words(text, [a_f - 1.0, a_f])
-            texts.append(dict(HEAD, text=text, start=a_f, end=END, size=168, color=INK, accent_color=ACCENT, y=350, y_to=51, scale_to=0.5,
+            texts.append(dict(HEAD, text=text, start=a_f, end=END, size=168, color=col, accent_color=acc, y=350, y_to=51, scale_to=0.5,
                               move_at=round(logo_at - 0.4, 4), move_frames=24, move_ease="inOut", ls_to=-0.02,
                               drift_scale=0.015, drift_until=round(logo_at - 0.4, 4), anim_in="none", words=words, word_frames=6))
         elif role == "logo":
@@ -298,7 +305,7 @@ def _apply_text_keys(t, src, shot):
 def apply_motion(shots, script, motion):
     """film4/motion.json(모션 디자인 워크플로 최종 사양)을 타임라인에 입힌다. 카피는 바꾸지 않는다."""
     by_no = {int(m["no"]): m for m in motion.get("screens", [])}
-    bg_color = {"white": WHITE, "black": BLACK, "navy": ACCENT, "photo_doctor": WHITE, "photo_reception": WHITE}
+    bg_color = {"white": WHITE, "black": BLACK, "navy": ACCENT, "photo_doctor": WHITE, "photo_reception": WHITE, "photo_building": BLACK}
     scr = {sc["no"]: sc for sc in script["screens"]}
     for idx, shot in enumerate(shots):
         no = int(shot["id"][1:])
@@ -493,6 +500,22 @@ def apply_motion(shots, script, motion):
             fxs.append(f)
         if not fxs:
             shot.pop("fx", None)
+
+        # --- 브랜드 문장이 어두운 배경(건물 사진) 위에 있을 때: 흰 글자는 화면 끝에서 끊고, 다음 흰 화면부터 같은 자리의 검은 머리글로 잇는다
+        if role == "brand" and sc["bg"] in DARK_BG and main is not None and main.get("end", 0) > shot["end"] + 0.01 and idx + 1 < len(shots):
+            head = {k: v for k, v in main.items() if k not in ("reveal", "exit", "sheen", "underline", "hit_scale", "hit_blur", "in_frames", "words", "word_frames")}
+            if main.get("reveal"):
+                # 단어 단위 배치를 그대로 써야 줄 위치가 같다. 등장 시각을 앞당겨 첫 프레임부터 모두 서 있게 한다
+                rv = dict(main["reveal"]); n_lines = len(main["text"].split("\n"))
+                rv["line_times"] = [round(shot["end"] - 2.0, 4)] * n_lines
+                head["reveal"] = rv
+            ds = float(main.get("drift_scale") or 0)
+            head.update(start=shot["end"], end=main["end"], color=INK, accent_color=ACCENT, anim_in="none", drift_scale=0,
+                        move_at=round(float(main["move_at"]) - 1.0, 4), scale_to=round(float(main.get("scale_to", 1)) * (1 + ds), 5))
+            head.pop("drift_until", None)
+            main["end"] = shot["end"]
+            main.pop("sheen", None)                                  # 흰 글자 위 빛 스윕은 보이지 않는다
+            shots[idx + 1].setdefault("texts", []).append(head)    # 맨 뒤에: 다음 화면의 texts[0](로고 화면 이름 줄)을 건드리지 않게
 
 
 if __name__ == "__main__":

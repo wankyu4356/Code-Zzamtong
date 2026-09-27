@@ -128,7 +128,7 @@
   {
    "no": 12,
    "text": "뼈부터 정맥까지,\n*여기서* 봅니다.",
-   "bg": "white",
+   "bg": "photo_building",
    "seconds": 3.5,
    "motion": "stack",
    "sound": "hit",

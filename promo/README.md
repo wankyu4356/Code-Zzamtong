@@ -77,4 +77,5 @@
 - `build_film4.py`가 `film4/script.json`을 읽는다. 음악은 `tools/score_from_script.py`가 구성안의 소리 표기에서 스코어를 만들고 `music/compose_film3.py`로 렌더한다 (D 단조)
 - 글자 모션 사양은 `film4/motion.json`, 어휘 설명은 `film4/motion_api.md`, 프레임 검수 기록은 `film4/motion_qc_result.json`. 빌더가 사양을 타임라인에 입힌다(`--no-motion`으로 끌 수 있음). 엔진 추가: 글자·단어·줄 단위 등장(reveal)과 퇴장(exit, zoom 포함), 빛 스윕(sheen), 밑줄, 초점 등장(focus), 원형 전환(shape_wipe, 가장자리가 번질수록 넓어짐), 선 긋기(line_draw), 배경 밀어 넣기(push_out)
 - 접수 데스크 사진은 의뢰인이 다시 보낸 원본(`assets/hospital/reception.png`)으로 바꿨다. 이전 사진은 `reception_old.png`로 남겼다. `reception_16x9.jpg`는 이 사진을 1920×1080으로 채워 만든 것이라 첫~세 번째 영상도 다시 렌더하면 새 사진이 들어간다
+- 2026-09-27 네 번째 영상에 새 건물 외관 사진을 넣었다(`render/kimcheolsin_brand_film_v4c_building_*`). 이전에는 외부 사진 장면이 없었고, 의뢰인이 고른 자리는 12번 "뼈부터 정맥까지, 여기서 봅니다." 배경이다. `film4/script.json` 12번 bg를 `photo_building`으로 바꿨다. 사진은 1.2배로 당겨 '김철신 정형외과' 간판이 문장 아래에 오게 했고 감마로 어둡게 했다. 브랜드 문장은 사진 위에서 흰 글자로 올라가다가 43초 흰 끝 화면 컷에서 같은 자리의 검은 머리글로 바뀐다(빌더가 머리글 복사본을 13번에 붙인다. 단어 단위 배치를 그대로 써야 줄 위치가 같다). 사진 위에서는 빛 스윕을 뺐다. 끝 화면과 소리는 이전 수정본과 같다
 - 합성 버그 수정: 화면을 완전히 덮는 프레임을 Chromium이 알파 없는 PNG로 저장하면 ffmpeg이 필터를 다시 초기화하며 한 프레임을 버리고 앞 프레임을 반복했다. `engine/compose.py`가 합성 전에 모든 오버레이 프레임을 RGBA로 맞춘다

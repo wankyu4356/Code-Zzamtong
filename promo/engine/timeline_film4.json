@@ -1032,8 +1032,23 @@
    "start": 39.5,
    "end": 43.0,
    "bg": {
-    "type": "color",
-    "color": "#f5f5f7"
+    "type": "image",
+    "src": "/home/user/Code-Zzamtong/promo/assets/hospital/building_16x9.jpg",
+    "zoom": "in",
+    "zoom_amount": 0.03,
+    "punch": 1.2,
+    "anchor": [
+     0.5,
+     0.0
+    ],
+    "grade": {
+     "contrast": 1.05,
+     "saturation": 0.6,
+     "brightness": -0.05,
+     "gamma": 0.5
+    },
+    "vignette": true,
+    "grain": 0.03
    },
    "texts": [
     {
@@ -1050,10 +1065,10 @@
      "anim_out": "cut",
      "text": "뼈부터 정맥까지,\n*여기서* 봅니다.",
      "start": 39.5,
-     "end": 51.0,
+     "end": 43.0,
      "size": 168,
-     "color": "#1d1d1f",
-     "accent_color": "#003070",
+     "color": "#f5f5f7",
+     "accent_color": "#9cc3ff",
      "y_to": 51,
      "scale_to": 0.5,
      "move_at": 42.5,
@@ -1076,14 +1091,7 @@
       ]
      },
      "hit_scale": 1.08,
-     "hit_blur": 60,
-     "sheen": {
-      "at": 41.0,
-      "dur": 22,
-      "color": "#c7c7cc",
-      "width": 22,
-      "opacity": 0.5
-     }
+     "hit_blur": 60
     }
    ],
    "_sound": "hit",
@@ -1124,6 +1132,43 @@
      "move_frames": 15,
      "move_ease": "inOut",
      "out_at": 50.0
+    },
+    {
+     "weight": 700,
+     "letter_spacing": -0.035,
+     "line_height": 1.14,
+     "max_width": 1700,
+     "shadow": false,
+     "align": "center",
+     "x": "center",
+     "y": 350,
+     "anim_in": "none",
+     "anim_out": "cut",
+     "text": "뼈부터 정맥까지,\n*여기서* 봅니다.",
+     "start": 43.0,
+     "end": 51.0,
+     "size": 168,
+     "color": "#1d1d1f",
+     "accent_color": "#003070",
+     "y_to": 51,
+     "scale_to": 0.515,
+     "move_at": 41.5,
+     "move_frames": 15,
+     "move_ease": "inOut",
+     "ls_to": -0.02,
+     "drift_scale": 0,
+     "reveal": {
+      "unit": "word",
+      "style": "rise",
+      "stagger": 0.2,
+      "dur": 10,
+      "ease": "expo",
+      "distance": 1,
+      "line_times": [
+       41.0,
+       41.0
+      ]
+     }
     }
    ],
    "_sound": "beat",
