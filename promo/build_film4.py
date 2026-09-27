@@ -250,7 +250,9 @@ def build(script):
 def _abs_t(t, shot):
     """모션 사양의 시각: 화면 시작보다 작으면 화면 기준 상대 시각으로 본다."""
     t = float(t)
-    return round(t + shot["start"], 4) if t < shot["start"] - 1e-6 else round(t, 4)
+    dur = shot["end"] - shot["start"]
+    rel = t < shot["start"] - 1e-6 and t <= dur + 1e-6      # 38.5처럼 화면보다 앞선 절대 시각은 그대로 둔다
+    return round(t + shot["start"], 4) if rel else round(t, 4)
 
 
 def _line_times_from_words(text, words):

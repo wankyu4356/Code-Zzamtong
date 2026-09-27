@@ -826,7 +826,14 @@
           const L = Math.min(...run.map(w => w.el.offsetLeft)), R2 = Math.max(...run.map(w => w.el.offsetLeft + w.el.offsetWidth));
           const T = run[0].el.offsetTop, W = R2 - L, H = run[0].el.offsetHeight;
           const p = clamp01((f - toFrame(Ud.at) + 1) / (Ud.dur || 12)), e = EASES.expo(p);
-          Object.assign(it.bar.style, { left: L + "px", top: (T + H * 0.98 + (Ud.offset || 0)) + "px", width: W + "px", transform: `scaleX(${r4(e)})` });
+          // 글자가 퇴장하면 밑줄도 함께 사라진다
+          let bo = 1;
+          if (it.units && it.spec.exit && it.spec.exit.style !== "zoom") {
+            const xf0 = Math.min(...it.units.map(u => u.xf ?? 1e9));
+            if (f >= xf0) bo = 1 - clamp01((f - xf0 + 1) / ((it.spec.exit.dur || 8) + Math.round((it.units.length - 1) * (it.spec.exit.stagger || 0) * fps)));
+          }
+          Object.assign(it.bar.style, { left: L + "px", top: (T + H * 0.98 + (Ud.offset || 0)) + "px", width: W + "px", transform: `scaleX(${r4(e)})`, opacity: String(r4(bo)) });
+          tkey += `:bo${r4(bo)}`;
           tkey += `:ul${r4(e)}:${L},${T},${W}`;
         }
       }
