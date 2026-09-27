@@ -145,5 +145,53 @@
   "mixkit_id": "33729",
   "source": "s43.mp4",
   "source_in_point": 0.6
+ },
+ "c38": {
+  "file": "/home/user/Code-Zzamtong/promo/assets/footage/final/c38.mp4",
+  "in_point": 0.4,
+  "mixkit_id": "45161",
+  "source": "cov_45161.mp4",
+  "source_in_point": 13.3,
+  "note": "손목 시큰: 한 손이 반대쪽 손목을 감싸 쥔다"
+ },
+ "c39": {
+  "file": "/home/user/Code-Zzamtong/promo/assets/footage/final/c39.mp4",
+  "in_point": 0.4,
+  "mixkit_id": "48618",
+  "source": "cov_48618.mp4",
+  "source_in_point": 1.6,
+  "note": "다리 묵직: 종아리를 움켜쥔다 (흰 스튜디오, 밝기 낮춤)"
+ },
+ "c40": {
+  "file": "/home/user/Code-Zzamtong/promo/assets/footage/final/c40.mp4",
+  "in_point": 0.4,
+  "mixkit_id": "4755",
+  "source": "cov_4755.mp4",
+  "source_in_point": 0.5,
+  "note": "발목 삐끗: 운동화 신은 발목을 손바닥으로 감싼다"
+ },
+ "c41": {
+  "file": "/home/user/Code-Zzamtong/promo/assets/footage/final/c41.mp4",
+  "in_point": 0.4,
+  "mixkit_id": "37039",
+  "source": "cov_37039.mp4",
+  "source_in_point": 1.2,
+  "note": "발바닥 찌릿: 침대에서 한 발로 다른 발바닥을 문지른다 (자기 발)"
+ },
+ "c42": {
+  "file": "/home/user/Code-Zzamtong/promo/assets/footage/final/c42.mp4",
+  "in_point": 0.4,
+  "mixkit_id": "33025",
+  "source": "cov_33025.mp4",
+  "source_in_point": 5.0,
+  "note": "사고 후 뻐근: 뒷모습의 중년 여성이 자기 목덜미를 짚는다 (얼굴 없음)"
+ },
+ "c43": {
+  "file": "/home/user/Code-Zzamtong/promo/assets/footage/final/c43.mp4",
+  "in_point": 0.4,
+  "mixkit_id": "14988",
+  "source": "cov_14988.mp4",
+  "source_in_point": 0.5,
+  "note": "아이 꽈당: 쓰러진 자전거 옆에서 아이가 다리를 감싼다"
  }
 }

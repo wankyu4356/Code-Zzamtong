@@ -64,6 +64,12 @@ OVERRIDES = {
     "s25": {"punch": 1.35, "anchor": [0.32, 0.6]},   # 도서관 와이드샷, 인물이 왼쪽
     "s26": {"brightness": -0.15},                     # 피부와 흰 티가 밝아 흰 글자 대비 확보
     "s27": {"punch": 1.25, "anchor": [0.5, 0.3]},     # 실루엣이 상단 중앙에 작게 있음
+    # 증상 드롭: 밝은 배경은 감마로 낮춘다(밝기만 내리면 어두운 쪽 색이 붉게 뜬다)
+    "c39": {"brightness": -0.2, "gamma": 0.65, "saturation": 0.65},   # 흰 스튜디오 배경, 흰 글자 대비
+    "c40": {"punch": 1.3, "anchor": [0.6, 0.0]},      # 앞쪽 연고 튜브를 화면 밖으로
+    "c41": {"punch": 1.15, "anchor": [0.3, 0.5], "brightness": -0.1, "gamma": 0.8},   # 발이 글자 오른쪽으로
+    "c42": {"brightness": -0.1, "gamma": 0.75},       # 밝은 흰 배경
+    "c43": {"punch": 1.15, "anchor": [0.2, 0.5], "brightness": -0.1},   # 아이가 글자 오른쪽으로
 }
 
 
@@ -75,17 +81,19 @@ def clip_bg(shot_id, zoom="in", amount=0.05, brightness=0.0, vignette=True):
     o = OVERRIDES.get(shot_id, {})
     g = dict(GRADE)
     g["brightness"] = o.get("brightness", brightness)
+    g.update({k: o[k] for k in ("gamma", "saturation", "contrast") if k in o})
     return {"type": "clip", "src": file, "in": inp, "fit": "cover", "zoom": zoom, "zoom_amount": amount, "grade": g, "vignette": vignette, "grain": 0.08,
             "punch": o.get("punch", 1.0), "anchor": o.get("anchor", [0.5, 0.5])}
 
 
-def photo_bg(name, brightness=-0.3, zoom="in", amount=0.03):
+def photo_bg(name, brightness=-0.3, zoom="in", amount=0.03, grade=None, punch=1.0):
     p = os.path.join(HOSP, name)
     if not os.path.exists(p):
         return {"type": "black"}
     g = dict(GRADE)
     g["brightness"] = brightness
-    return {"type": "image", "src": p, "fit": "cover", "zoom": zoom, "zoom_amount": amount, "grade": g, "vignette": True, "grain": 0.06}
+    g.update(grade or {})
+    return {"type": "image", "src": p, "fit": "cover", "zoom": zoom, "zoom_amount": amount, "grade": g, "vignette": True, "grain": 0.06, "punch": punch}
 
 
 def T(text, start, end, size, **kw):
@@ -177,9 +185,11 @@ shots.append(shot("s08", 6.0, 8.0, {"type": "black"}, [T("어디로 가야 하�
 shots.append(shot("s09", 8.0, 9.0, clip_bg("s09", amount=0.04), [T("수능 앞, 목.", 8.0, 9.0, 170, in_frames=3, shadow=True)]))
 shots.append(shot("s10", 9.0, 10.0, clip_bg("s10", amount=0.04), [T("모니터 앞, 거북목.", 9.0, 10.0, 170, in_frames=3, shadow=True)]))
 shots.append(shot("s11", 10.0, 11.0, clip_bg("s11", amount=0.04), [T("계단 앞, 무릎.", 10.0, 11.0, 170, in_frames=3, shadow=True)]))
-shots.append(shot("s12", 11.0, 12.0, photo_bg("doctor_portrait_16x9.jpg", brightness=-0.3), [T("10년, 일대일로.", 11.0, 12.0, 170, in_frames=3, shadow=True, x="left", align="left")]))
+# 원장 소개: '일대일'은 병원이면 당연한 말이라 이름과 직함으로 바꿨다. 다음 두 화면과 이어져 한 문장이 된다
+shots.append(shot("s12", 11.0, 12.0, photo_bg("doctor_portrait_16x9.jpg", brightness=-0.3), [T("유병찬 대표원장,", 11.0, 12.0, 150, in_frames=3, shadow=True, x="left", align="left")]))
 shots.append(shot("s13", 12.0, 13.0, photo_bg("reception_16x9.jpg", brightness=-0.3), [T("짧은 시간이라도,", 12.0, 13.0, 170, in_frames=3, shadow=True)]))
-shots.append(shot("s14", 13.0, 14.0, {"type": "black"}, [T("누구보다, 귀 기울여.", 13.0, 14.0, 170, in_frames=3)]))
+# 앞 화면이 원장 이름이라 '누구보다'는 특정 의사의 비교 주장이 된다. '끝까지'로 바꿨다
+shots.append(shot("s14", 13.0, 14.0, {"type": "black"}, [T("끝까지, 귀 기울여.", 13.0, 14.0, 170, in_frames=3)]))
 shots.append(shot("s15", 14.0, 15.0, {"type": "black"}, [T("몸은 원래,", 14.0, 15.0, 170, in_frames=3)]))
 shots.append(shot("s16", 15.0, 472 * F, {"type": "black"}, [T("이렇게.", 15.0, 472 * F, 170, in_frames=3)]))
 shots.append(shot("s17", 472 * F, 16.0, {"type": "black"}))
@@ -237,23 +247,29 @@ shots.append(shot("s34", 32.0, 33.0, {"type": "black"}, [T("먼저 듣고,", 32.
 shots.append(shot("s35", 33.0, 34.0, {"type": "black"}, [T("왜 아픈지 말하고,", 33.0, 34.0, 170, in_frames=3)]))
 shots.append(shot("s36", 34.0, 1072 * F, {"type": "black"}, [T("필요한 치료만.", 34.0, 1072 * F, 170, in_frames=3)]))
 shots.append(shot("s37", 1072 * F, 36.0, {"type": "black"}))
-# 요일 드롭
+# 증상 드롭: 부위와 느낌을 환자의 입말로, 진료 범위의 다른 묶음을 한 박씩 (관절, 혈관, 족부, 교통사고, 소아)
+# 16~20초 드롭에서 나온 목·어깨·무릎·허리는 글자로 다시 쓰지 않는다. 영상은 final/c38~c43 (자기 손이 아픈 곳을 짚는 장면 위주)
 t = 36.0
-for sid, w, flash in [("s38", "월", True), ("s39", "화", False), ("s40", "수", False), ("s41", "목", False), ("s42", "금", True), ("s43", "토", False)]:
+for sid, clip, w, flash in [("s38", "c38", "손목 시큰", True), ("s39", "c39", "다리 묵직", False), ("s40", "c40", "발목 삐끗", False),
+                            ("s41", "c41", "발바닥 찌릿", False), ("s42", "c42", "사고 후 뻐근", True), ("s43", "c43", "아이 꽈당", False)]:
     fl = [{"at": t, "frames": 2, "color": "#fff", "opacity": 0.9}] if flash else None
-    shots.append(shot(sid, t, t + 0.5, clip_bg(sid, amount=0.06), [T(w, t, t + 0.5, 320, anim_in="slam", hit_scale=1.15, in_frames=3, shadow=True)], flashes=fl))
+    shots.append(shot(sid, t, t + 0.5, clip_bg(clip, amount=0.06), [T(w, t, t + 0.5, 220, anim_in="slam", hit_scale=1.15, in_frames=3, shadow=True)], flashes=fl))
     t += 0.5
-shots.append(shot("s44", 39.0, 40.0, photo_bg("building_16x9.jpg", brightness=-0.5, amount=0.04),
-                  [T("일", 39.0, 40.0, 320, anim_in="slam", hit_scale=1.15, in_frames=3, shadow=True)],
+# 병원이 먼저 묻고, 바로 뒤 리뷰가 '어디 아프면'으로 받는다 (6초 '어디로 가야 하나.'에서 시작한 질문을 닫는다)
+# 건물 두 화면(39~43초)은 같은 사진이라 색 보정을 같게 하고 줌을 컷 너머로 이어 간다 (감마로 어둡게 해 외벽 색 유지)
+BLD_GRADE = {"contrast": 1.05, "saturation": 0.55, "brightness": -0.1, "gamma": 0.45}
+shots.append(shot("s44", 39.0, 40.0, photo_bg("building_16x9.jpg", amount=0.015, grade=BLD_GRADE),
+                  [T("어디 아프세요?", 39.0, 40.0, 240, anim_in="slam", hit_scale=1.15, in_frames=3, shadow=True)],
                   flashes=[{"at": 39.0, "frames": 2, "color": "#fff", "opacity": 0.9}]))
-# 일요일 리뷰 (건물 사진 유지, 밝기 30%)
-s45 = shot("s45", 40.0, 43.0, photo_bg("building_16x9.jpg", brightness=-0.7, amount=0.04))
+# 리뷰 (건물 사진 유지, 밝기 30%)
+s45 = shot("s45", 40.0, 43.0, photo_bg("building_16x9.jpg", amount=0.045, grade=BLD_GRADE, punch=round(1.015 * (1 + 0.015 / 29), 5)))
 if REVIEWS == "receipt":
-    s45["receipts"] = [receipt("담에는 어디 아프면 꼭 여기 가려구요.", 40.0, 43.0, "Sept****", "2025.02.09 (일)", chip="예약 인증 · 발췌", print_secs=1.7, seed=45, anim_out="fade", out_frames=8)]
+    s45["receipts"] = [receipt("담에는 어디 아프면 꼭 여기 가려구요.", 40.0, 43.0, "Sept****", "2025.02.09", chip="예약 인증", print_secs=1.7, seed=45, anim_out="fade", out_frames=8)]
 elif REVIEWS == "chat":
-    s45["chat"] = [chat_scene(40.0, 43.0, [("담에는 어디 아프면 꼭 여기 가려구요.", "Sept****", "예약 인증 · 일요일 방문 · 발췌", "2025.02.09", 40.0, 40.5)], anim_out="fade", out_frames=8, height=420)]
+    s45["chat"] = [chat_scene(40.0, 43.0, [("담에는 어디 아프면 꼭 여기 가려구요.", "Sept****", "예약 인증", "2025.02.09", 40.0, 40.5)], anim_out="fade", out_frames=8, height=420)]
+    s45["chat"][0]["y"] = 200                      # 말풍선이 건물 간판('김철신 정형외과')을 가리지 않게 위로
 else:
-    s45["typing"] = [typing_card("담에는 어디 아프면 꼭 여기 가려구요.", 40.0, 43.0, "Sept****", "네이버 방문자 리뷰 · 예약 인증 · 발췌", "2025.02.09 일요일 방문", seed=45, anim_out="fade", out_frames=8)]
+    s45["typing"] = [typing_card("담에는 어디 아프면 꼭 여기 가려구요.", 40.0, 43.0, "Sept****", "네이버 방문자 리뷰 · 예약 인증", "2025.02.09 방문", seed=45, anim_out="fade", out_frames=8)]
 shots.append(s45)
 # 엔딩
 shots.append(shot("s46", 43.0, 45.5, {"type": "black"},
