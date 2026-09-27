@@ -186,6 +186,119 @@
     return { spec: s, el, sf: toFrame(s.start), ef: toFrame(s.end), maxOpacity: s.opacity };
   }
 
+  // ---------------------------------------------------------------- fx: slot / ticker / grid / count
+  const FX_DEFAULTS = { size: 150, weight: 700, color: "#1d1d1f", letter_spacing: -0.035, line_height: 1.14, x: "center", y: "center",
+                        align: "center", anim_in: "none", anim_out: "cut", font: "Pretendard" };
+  const _canvas = document.createElement("canvas").getContext("2d");
+  function measure(text, s) { _canvas.font = `${s.weight} ${s.size}px "${s.font}", "Pretendard", sans-serif`; return Math.max(1, _canvas.measureText(text).width + s.size * s.letter_spacing * text.length); }
+  function styleText(el, s) {
+    Object.assign(el.style, { fontFamily: `"${s.font}", "Pretendard", "Noto Sans CJK KR", sans-serif`, fontSize: s.size + "px", fontWeight: String(s.weight),
+      color: s.color, letterSpacing: s.letter_spacing + "em", lineHeight: String(s.line_height), whiteSpace: "nowrap" });
+  }
+  function makeFx(sp) {
+    const s = Object.assign({}, FX_DEFAULTS, sp);
+    const el = document.createElement("div");
+    el.className = "anim fx";
+    styleText(el, s);
+    const it = { spec: s, el, sf: toFrame(s.start), ef: toFrame(s.end) };
+    if (s.type === "slot") {
+      // "{허리|무릎|어깨} 아프면," : 빈자리 단어가 위로 굴러 바뀐다
+      const m = /^([\s\S]*?)\{([^}]+)\}([\s\S]*)$/.exec(s.text);
+      const pre = m ? m[1] : "", words = m ? m[2].split("|") : [s.text], post = m ? m[3] : "";
+      const w = Math.ceil(Math.max(...words.map(x => measure(x, s)))) + 6;
+      const h = Math.ceil(s.size * s.line_height);
+      const slot = document.createElement("span");
+      Object.assign(slot.style, { display: "inline-block", position: "relative", width: w + "px", height: h + "px", overflow: "hidden", verticalAlign: "bottom", textAlign: "left" });
+      const spans = words.map(wd => { const x = document.createElement("span"); x.textContent = wd; x.style.color = s.slot_color || s.color;
+        Object.assign(x.style, { position: "absolute", left: 0, top: 0, height: h + "px", lineHeight: h + "px", willChange: "transform" }); slot.appendChild(x); return x; });
+      el.appendChild(document.createTextNode(pre)); el.appendChild(slot); el.appendChild(document.createTextNode(post));
+      const timesF = (s.slot_times || []).map(t => toFrame(t));
+      const rf = s.roll_frames || 8;
+      it.update = (f) => {
+        let i = -1; while (i + 1 < timesF.length && timesF[i + 1] <= f) i++;
+        const cur = Math.max(0, i);
+        const p = i < 0 ? 1 : clamp01((f - timesF[i] + 1) / rf);
+        const e = easeOut(p);
+        spans.forEach((x, k) => {
+          let ty = h * 1.2, op = 0;
+          if (k === cur) { ty = h * (1 - e); op = 0.15 + 0.85 * e; }
+          else if (k === cur - 1) { ty = -h * e; op = 1 - e; }
+          x.style.transform = `translateY(${r4(ty)}px)`; x.style.opacity = String(r4(op));
+        });
+        return `:sl${cur}:${r4(p)}`;
+      };
+    } else if (s.type === "ticker") {
+      // 여러 줄의 단어가 좌우로 흐르다 (settle_at부터) 한 단어가 중앙에 멈춘다
+      el.style.position = "relative"; el.style.width = "1920px"; el.style.height = "1080px";
+      const rows = (s.rows || []).map((r, ri) => {
+        const div = document.createElement("div");
+        const rs = Object.assign({}, s, { size: r.size || s.size, color: r.color || s.color });
+        styleText(div, rs);
+        Object.assign(div.style, { position: "absolute", left: 0, top: (r.y) + "px", willChange: "transform" });
+        const unit = r.words.join("   ") + "   ";
+        const uw = measure(unit, rs);
+        const reps = Math.ceil((1920 + 2 * uw) / uw) + 3;      // 어느 위상에서도 화면을 다 덮게 넉넉히
+        div.textContent = unit.repeat(reps);
+        return { div, speed: r.speed || 240, dir: r.dir || -1, uw, phase: r.phase || 0 };
+      });
+      rows.forEach(r => el.appendChild(r.div));
+      const settle = document.createElement("div");
+      styleText(settle, Object.assign({}, s, { size: s.settle_size || s.size * 1.35, color: s.settle_color || "#1d1d1f" }));
+      Object.assign(settle.style, { position: "absolute", left: 0, right: 0, top: 0, bottom: 0, display: "flex", alignItems: "center", justifyContent: "center", opacity: 0 });
+      settle.textContent = s.settle || "";
+      el.appendChild(settle);
+      const settleF = s.settle_at !== undefined ? toFrame(s.settle_at) : null;
+      const fadeN = s.settle_frames || 10;
+      it.update = (f) => {
+        const t = (f - it.sf) / fps;
+        let key = "";
+        const fade = settleF === null ? 0 : clamp01((f - settleF + 1) / fadeN);
+        rows.forEach((r, i) => {
+          const travel = (r.speed * t + r.phase) % r.uw;
+          const x = r.dir < 0 ? -travel - r.uw : travel - r.uw * 2;   // 항상 왼쪽 밖에서 시작해 오른쪽 밖까지 덮인다
+          r.div.style.transform = `translateX(${r4(x)}px)`;
+          r.div.style.opacity = String(r4(1 - fade));
+          key += `:r${i}=${r4(x)}`;
+        });
+        const e = easeOut(fade);
+        settle.style.opacity = String(r4(fade)); settle.style.transform = `scale(${r4(1.06 - 0.06 * e)})`;
+        settle.style.filter = fade > 0 && fade < 1 ? `blur(${r4(6 * (1 - e))}px)` : "none";
+        return key + `:st${r4(fade)}`;
+      };
+    } else if (s.type === "grid") {
+      // 단어 격자가 하나씩 켜지고 마지막에 전부 켜진다
+      const cols = s.cols || 4;
+      Object.assign(el.style, { display: "grid", gridTemplateColumns: `repeat(${cols}, auto)`, columnGap: (s.col_gap || 72) + "px", rowGap: (s.row_gap || 18) + "px", textAlign: s.align });
+      const cells = (s.items || []).map(txt => { const c = document.createElement("div"); c.textContent = txt; c.style.color = s.dim_color || "rgba(29,29,31,0.18)"; c.style.willChange = "transform"; el.appendChild(c); return c; });
+      const timesF = (s.light_times || []).map(t => toFrame(t));
+      const allF = s.all_at !== undefined ? toFrame(s.all_at) : null;
+      const n = s.light_frames || 6;
+      it.update = (f) => {
+        let lit = 0;
+        cells.forEach((c, k) => {
+          const tf = timesF[k] !== undefined ? timesF[k] : (allF !== null ? allF : 1e9);
+          const p = f < tf ? 0 : clamp01((f - tf + 1) / n);
+          if (p > 0) lit++;
+          const e = easeOut(p);
+          c.style.color = p <= 0 ? (s.dim_color || "rgba(29,29,31,0.18)") : (p >= 1 ? s.color : `color-mix(in srgb, ${s.color} ${Math.round(e * 100)}%, ${s.dim_color || "rgba(29,29,31,0.18)"})`);
+          c.style.transform = `scale(${r4(1 + 0.05 * Math.sin(Math.PI * p))})`;
+        });
+        return `:g${lit}:${r4(clamp01((f - (timesF[timesF.length - 1] || 0)) / n))}`;
+      };
+    } else if (s.type === "count") {
+      // 숫자가 올라간다
+      const from = s.from || 0, to = s.to || 0;
+      const cf = toFrame(s.count_start !== undefined ? s.count_start : s.start), cN = s.count_frames || 24;
+      it.update = (f) => {
+        const p = clamp01((f - cf + 1) / cN);
+        const v = Math.round(from + (to - from) * (1 - Math.pow(1 - p, 3)));
+        el.textContent = (s.prefix || "") + v + (s.suffix || "");
+        return `:n${v}`;
+      };
+    }
+    return it;
+  }
+
   const TYPING_DEFAULTS = { width: 1380, x: "center", y: "center", anim_in: "rise", anim_out: "cut", in_frames: 6 };
   function makeTyping(sp) {
     const s = Object.assign({}, TYPING_DEFAULTS, sp);
@@ -351,6 +464,17 @@
       case "slam": { const e = easeOut(ramp(lf, n || 3)); const s0 = hs || 1.7; return { scale: s0 - (s0 - 1) * e, dy: 0, opacity: fadeIn(lf, 2), blur: 0 }; }
       case "fade": { const p = ramp(lf, n || 8); return { scale: 1, dy: 12 * (1 - p), opacity: fadeIn(lf, n || 8), blur: 0 }; }
       case "rise": { const e = easeOut(ramp(lf, n || 6)); return { scale: 1, dy: 40 * (1 - e), opacity: fadeIn(lf, n || 6), blur: 0 }; }
+      case "track": {
+        // 자간이 넓고 흐린 상태에서 조여지며 선명해진다 (키노트 타이틀)
+        const N = n || 16; const e = easeOut(ramp(lf, N));
+        const base = (spec && typeof spec.letter_spacing === "number") ? spec.letter_spacing : -0.04;
+        return { scale: 1.015 - 0.015 * e, dy: 0, opacity: fadeIn(lf, Math.ceil(N * 0.6)), blur: 10 * (1 - e), ls: base + 0.14 * (1 - e) };
+      }
+      case "wipe": {
+        // 빛이 왼쪽에서 오른쪽으로 지나가며 글자가 드러난다
+        const N = n || 18; const p = ramp(lf, N);
+        return { scale: 1, dy: 0, opacity: 1, blur: 0, wipe: p };
+      }
       default: return { scale: 1, dy: 0, opacity: 1, blur: 0 };
     }
   }
@@ -378,6 +502,7 @@
       for (const ch of shot.chat || []) typings.push(makeChat(ch));
       for (const rc of shot.receipts || []) typings.push(makeReceipt(rc));
       for (const f of shot.flashes || []) flashes.push(makeFlash(f));
+      for (const x of shot.fx || []) typings.push(makeFx(x));
     }
     window.__imagesReady = Promise.all(pendingImages).then(() => true);
     for (const it of [...images, ...texts, ...cards, ...typings]) { it.wrap = place(it.spec, it.el); stage.appendChild(it.wrap); items.push(it); }
@@ -430,7 +555,15 @@
         it.wrap.style.top = top + "px";
         tkey += `:y${top}`;
       }
+      if (it.update) tkey += it.update(f);
       const a = animIn(it.spec.anim_in, f - it.sf, it.spec);
+      if (a.ls !== undefined) { it.el.style.letterSpacing = r4(a.ls) + "em"; tkey += `:ls${r4(a.ls)}`; }
+      if (a.wipe !== undefined) {
+        const edge = -25 + 150 * a.wipe;            // -25% -> 125%
+        const m = a.wipe >= 1 ? "none" : `linear-gradient(90deg, #000 ${r4(edge)}%, rgba(0,0,0,0) ${r4(edge + 22)}%)`;
+        it.el.style.webkitMaskImage = m; it.el.style.maskImage = m;
+        tkey += `:wp${r4(a.wipe)}`;
+      }
       const opacity = r4(a.opacity * animOut(it.spec.anim_out, it.ef - f, it.spec) * (it.maxOpacity ?? 1));
       // drift_scale: 요소가 보이는 동안 선형으로 커지는 느린 줌 (예: 0.03이면 1.00에서 1.03)
       const drift = it.spec.drift_scale ? it.spec.drift_scale * ((f - it.sf) / Math.max(1, it.ef - it.sf - 1)) : 0;

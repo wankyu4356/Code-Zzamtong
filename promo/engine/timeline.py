@@ -13,7 +13,7 @@ import os
 
 BG_TYPES = ("black", "white", "color", "clip", "image")
 ZOOMS = ("in", "out", "none")
-ANIM_IN = ("hit", "slam", "fade", "rise", "none")
+ANIM_IN = ("hit", "slam", "fade", "rise", "none", "track", "wipe")
 ANIM_OUT = ("cut", "fade", "none")
 CARD_TYPES = ("review",)
 GRADE_DEFAULTS = {"contrast": 1.0, "saturation": 1.0, "brightness": 0.0, "gamma": 1.0, "temperature": 6500}
@@ -126,6 +126,8 @@ def validate(tl, base_dir):
             _validate_receipt(rc, f"shot {sid} receipts[{j}]", err)
         for j, fl in enumerate(s.get("flashes") or []):
             _validate_flash(fl, f"shot {sid} flashes[{j}]", err)
+        for j, fx in enumerate(s.get("fx") or []):
+            _validate_fx(fx, f"shot {sid} fx[{j}]", err)
 
     if abs(prev_end - dur) > 1e-6:
         err(f"last shot ends at {prev_end} but duration is {dur}")
@@ -287,6 +289,34 @@ def _validate_receipt(rc, where, err):
         err(f"{where}: line_times must be a non-empty list of seconds")
     if not _is_num(rc.get("tear_at")):
         err(f"{where}: tear_at (seconds) is required")
+
+
+FX_TYPES = ("slot", "ticker", "grid", "count")
+
+
+def _validate_fx(fx, where, err):
+    if fx.get("type") not in FX_TYPES:
+        err(f"{where}: type must be one of {FX_TYPES}")
+        return
+    _validate_span(fx, where, err)
+    t = fx["type"]
+    if t == "slot":
+        if not isinstance(fx.get("text"), str) or "{" not in fx["text"]:
+            err(f"{where}: slot text must contain {{a|b|c}}")
+        st = fx.get("slot_times")
+        if not (isinstance(st, list) and st and all(_is_num(v) for v in st)):
+            err(f"{where}: slot_times must be a non-empty list of seconds")
+    if t == "ticker":
+        rows = fx.get("rows")
+        if not (isinstance(rows, list) and rows and all(isinstance(r.get("words"), list) and r["words"] and _is_num(r.get("y")) for r in rows)):
+            err(f"{where}: rows must be a list of {{words: [...], y: px, speed?, dir?, size?}}")
+    if t == "grid":
+        if not (isinstance(fx.get("items"), list) and fx["items"]):
+            err(f"{where}: items must be a non-empty list")
+    if t == "count":
+        for k in ("from", "to"):
+            if not _is_num(fx.get(k)):
+                err(f"{where}: {k} must be a number")
 
 
 def _validate_flash(fl, where, err):
