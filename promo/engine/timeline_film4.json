@@ -23,7 +23,7 @@
     "vignette": false,
     "grain": 0.03,
     "push_out": {
-     "frames": 8,
+     "frames": 10,
      "amount": 0.1,
      "blur": 10
     }
@@ -59,7 +59,7 @@
      },
      "exit": {
       "style": "zoom",
-      "dur": 8
+      "dur": 10
      }
     }
    ],
@@ -122,7 +122,7 @@
      "x": 160,
      "y": 472,
      "anim_in": "hit",
-     "in_frames": 4,
+     "in_frames": 6,
      "anim_out": "cut",
      "text": "유병찬 대표원장",
      "start": 2.5,
@@ -130,7 +130,7 @@
      "size": 120,
      "color": "#1d1d1f",
      "accent_color": "#003070",
-     "hit_scale": 1.03,
+     "hit_scale": 1.08,
      "reveal": {
       "unit": "word",
       "style": "rise",
@@ -146,7 +146,8 @@
       "style": "rise",
       "unit": "word",
       "stagger": 0.06,
-      "dur": 8
+      "dur": 8,
+      "ease": "inOut"
      }
     }
    ],
@@ -177,14 +178,14 @@
      "anim_out": "cut",
      "text": "정형외과 전문의",
      "start": 5.5,
-     "end": 10.4,
+     "end": 10.5,
      "size": 110,
      "color": "#1d1d1f",
      "accent_color": "#003070",
      "reveal": {
       "unit": "char",
       "style": "rise",
-      "stagger": 0.03,
+      "stagger": 0.02,
       "dur": 14,
       "delay": 0,
       "ease": "expo"
@@ -209,8 +210,8 @@
      "in_frames": 8,
      "anim_out": "cut",
      "text": "한양대 명지병원 정형외과 출신",
-     "start": 5.9,
-     "end": 10.4,
+     "start": 5.65,
+     "end": 10.5,
      "color": "#1d1d1f",
      "y": 432,
      "reveal": {
@@ -240,8 +241,8 @@
      "in_frames": 8,
      "anim_out": "cut",
      "text": "대한견주관절학회 정회원",
-     "start": 6.15,
-     "end": 10.4,
+     "start": 5.9,
+     "end": 10.5,
      "color": "#515154",
      "y": 548,
      "reveal": {
@@ -271,8 +272,8 @@
      "in_frames": 8,
      "anim_out": "cut",
      "text": "대한슬관절학회 정회원",
-     "start": 6.4,
-     "end": 10.4,
+     "start": 6.15,
+     "end": 10.5,
      "color": "#515154",
      "y": 664,
      "reveal": {
@@ -302,8 +303,8 @@
      "in_frames": 8,
      "anim_out": "cut",
      "text": "정맥통증학회 정회원",
-     "start": 6.65,
-     "end": 10.4,
+     "start": 6.4,
+     "end": 10.5,
      "color": "#515154",
      "y": 780,
      "reveal": {
@@ -328,10 +329,10 @@
     {
      "type": "line_draw",
      "start": 5.5,
-     "end": 10.4,
-     "draw_start": 5.75,
+     "end": 10.5,
+     "draw_start": 5.6,
      "anim_out": "fade",
-     "out_frames": 8,
+     "out_frames": 5,
      "x1": 160,
      "y1": 408,
      "x2": 1760,
@@ -343,10 +344,10 @@
     {
      "type": "line_draw",
      "start": 5.5,
-     "end": 10.4,
-     "draw_start": 6.0,
+     "end": 10.5,
+     "draw_start": 5.75,
      "anim_out": "fade",
-     "out_frames": 8,
+     "out_frames": 5,
      "x1": 160,
      "y1": 535,
      "x2": 1760,
@@ -358,10 +359,10 @@
     {
      "type": "line_draw",
      "start": 5.5,
-     "end": 10.4,
-     "draw_start": 6.25,
+     "end": 10.5,
+     "draw_start": 6.0,
      "anim_out": "fade",
-     "out_frames": 8,
+     "out_frames": 5,
      "x1": 160,
      "y1": 651,
      "x2": 1760,
@@ -373,10 +374,10 @@
     {
      "type": "line_draw",
      "start": 5.5,
-     "end": 10.4,
-     "draw_start": 6.5,
+     "end": 10.5,
+     "draw_start": 6.25,
      "anim_out": "fade",
-     "out_frames": 8,
+     "out_frames": 5,
      "x1": 160,
      "y1": 767,
      "x2": 1760,
@@ -388,10 +389,10 @@
     {
      "type": "line_draw",
      "start": 5.5,
-     "end": 10.4,
-     "draw_start": 6.75,
+     "end": 10.5,
+     "draw_start": 6.5,
      "anim_out": "fade",
-     "out_frames": 8,
+     "out_frames": 5,
      "x1": 160,
      "y1": 883,
      "x2": 1760,
@@ -436,12 +437,12 @@
      "reveal": {
       "unit": "word",
       "style": "fill",
-      "stagger": 0.25,
+      "stagger": 0.2,
       "dur": 10,
       "ease": "cubic",
       "line_times": [
        10.5,
-       11.25
+       11.0
       ]
      },
      "drift_scale": 0.012,
@@ -464,7 +465,7 @@
      "in_frames": 8,
      "anim_out": "cut",
      "text": "네이버 방문자 리뷰",
-     "start": 12.0,
+     "start": 11.75,
      "end": 14.5,
      "color": "#515154",
      "y": 734,
@@ -523,10 +524,10 @@
       "ease": "expo",
       "blur": 18
      },
-     "drift_scale": 0.015,
+     "drift_scale": 0.04,
      "exit": {
       "style": "zoom",
-      "dur": 8
+      "dur": 10
      }
     }
    ],
@@ -553,7 +554,7 @@
      "x": "center",
      "y": 270,
      "anim_in": "hit",
-     "in_frames": 4,
+     "in_frames": 8,
      "anim_out": "cut",
      "text": "목 · 허리",
      "start": 17.0,
@@ -561,12 +562,13 @@
      "size": 220,
      "color": "#f5f5f7",
      "accent_color": "#9cc3ff",
-     "hit_scale": 1.05,
-     "drift_scale": 0.012,
+     "hit_scale": 1.14,
+     "drift_scale": 0.03,
      "exit": {
       "style": "rise",
       "stagger": 0,
-      "dur": 6
+      "dur": 6,
+      "ease": "inOut"
      }
     },
     {
@@ -593,11 +595,12 @@
       "ease": "expo",
       "distance": 1
      },
-     "drift_scale": 0.012,
+     "drift_scale": 0.03,
      "exit": {
       "style": "rise",
       "stagger": 0,
-      "dur": 6
+      "dur": 6,
+      "ease": "inOut"
      }
     },
     {
@@ -624,11 +627,12 @@
       "ease": "expo",
       "distance": 1
      },
-     "drift_scale": 0.012,
+     "drift_scale": 0.03,
      "exit": {
       "style": "rise",
       "stagger": 0,
-      "dur": 6
+      "dur": 6,
+      "ease": "inOut"
      }
     }
    ],
@@ -665,18 +669,20 @@
      "accent_color": "#9cc3ff",
      "hit_scale": 1.03,
      "reveal": {
-      "unit": "word",
+      "unit": "char",
       "style": "rise",
-      "dur": 12,
+      "dur": 14,
       "delay": 0,
       "ease": "expo",
-      "distance": 1
+      "distance": 1,
+      "stagger": 0.035
      },
-     "drift_scale": 0.012,
+     "drift_scale": 0.03,
      "exit": {
       "style": "rise",
       "stagger": 0,
-      "dur": 8
+      "dur": 8,
+      "ease": "inOut"
      }
     },
     {
@@ -703,11 +709,12 @@
       "ease": "expo",
       "distance": 1
      },
-     "drift_scale": 0.012,
+     "drift_scale": 0.03,
      "exit": {
       "style": "rise",
       "stagger": 0,
-      "dur": 8
+      "dur": 8,
+      "ease": "inOut"
      }
     },
     {
@@ -734,11 +741,12 @@
       "ease": "expo",
       "distance": 1
      },
-     "drift_scale": 0.012,
+     "drift_scale": 0.03,
      "exit": {
       "style": "rise",
       "stagger": 0,
-      "dur": 8
+      "dur": 8,
+      "ease": "inOut"
      }
     }
    ],
@@ -785,17 +793,17 @@
      "dim_color": "rgba(245,245,247,0.12)",
      "light_times": [
       23.5,
+      23.75,
       24.0,
+      24.25,
       24.5,
+      24.625,
+      24.75,
+      24.875,
       25.0,
+      25.125,
       25.25,
-      25.5,
-      25.75,
-      26.0,
-      26.125,
-      26.25,
-      26.375,
-      26.5
+      25.375
      ],
      "light_frames": 10,
      "col_gap": 110,
@@ -804,7 +812,7 @@
      "anim_in": "none",
      "in_frames": 6,
      "anim_out": "fade",
-     "out_frames": 12,
+     "out_frames": 8,
      "out_to": 0,
      "cell_style": "blur"
     }
@@ -865,10 +873,11 @@
       621
      ],
      "color": "#003070",
-     "start": 33.25,
+     "start": 33.125,
      "end": 33.5,
-     "ease": "expoIn",
-     "feather": 12
+     "ease": "cubicIn",
+     "feather": 40,
+     "feather_grow": 0.2
     }
    ]
   },
@@ -891,7 +900,7 @@
      "x": "center",
      "y": 325,
      "anim_in": "hit",
-     "in_frames": 6,
+     "in_frames": 9,
      "anim_out": "cut",
      "text": "*둘* *다* 봅니다.",
      "start": 33.5,
@@ -899,8 +908,8 @@
      "size": 200,
      "color": "#f5f5f7",
      "accent_color": "#9cc3ff",
-     "hit_scale": 1.08,
-     "drift_scale": 0.015
+     "hit_scale": 1.18,
+     "drift_scale": 0.045
     },
     {
      "size": 84,
@@ -922,11 +931,11 @@
      "reveal": {
       "unit": "line",
       "style": "rise",
-      "dur": 10,
+      "dur": 12,
       "ease": "expo",
       "distance": 1
      },
-     "drift_scale": 0.015
+     "drift_scale": 0.045
     },
     {
      "size": 84,
@@ -941,18 +950,18 @@
      "in_frames": 8,
      "anim_out": "cut",
      "text": "하지정맥 시술",
-     "start": 33.9,
+     "start": 34.025,
      "end": 37.0,
      "color": "rgba(245,245,247,0.85)",
      "y": 640,
      "reveal": {
       "unit": "line",
       "style": "rise",
-      "dur": 10,
+      "dur": 12,
       "ease": "expo",
       "distance": 1
      },
-     "drift_scale": 0.015
+     "drift_scale": 0.045
     }
    ],
    "_sound": "hit",
@@ -964,13 +973,13 @@
      "start": 33.5,
      "end": 37.0,
      "draw_start": 33.75,
-     "anim_out": "fade",
+     "anim_out": "none",
      "out_frames": 8,
      "x1": 960,
      "y1": 632,
      "x2": 960,
      "y2": 756,
-     "color": "rgba(245,245,247,0.55)",
+     "color": "rgba(245,245,247,0.8)",
      "thickness": 4,
      "dur": 8
     }
@@ -1006,11 +1015,11 @@
       38.0,
       38.5
      ],
-     "roll_frames": 4,
+     "roll_frames": 3,
      "roll_frames_last": 14,
      "roll_overshoot": 0,
-     "anim_in": "fade",
-     "in_frames": 4,
+     "anim_in": "none",
+     "in_frames": 6,
      "roll_blur": 6
     }
    ]
@@ -1034,7 +1043,7 @@
      "x": "center",
      "y": 350,
      "anim_in": "hit",
-     "in_frames": 4,
+     "in_frames": 6,
      "anim_out": "cut",
      "text": "뼈부터 정맥까지,\n*여기서* 봅니다.",
      "start": 39.5,
@@ -1048,28 +1057,28 @@
      "move_frames": 15,
      "move_ease": "inOut",
      "ls_to": -0.02,
-     "drift_scale": 0.015,
+     "drift_scale": 0.03,
      "drift_until": 42.5,
      "word_frames": 6,
      "reveal": {
       "unit": "word",
       "style": "rise",
-      "stagger": 0.65,
+      "stagger": 0.2,
       "dur": 10,
       "ease": "expo",
       "distance": 1,
       "line_times": [
        38.5,
-       39.0
+       39.5
       ]
      },
-     "hit_scale": 1.03,
+     "hit_scale": 1.08,
      "sheen": {
       "at": 41.0,
-      "dur": 18,
-      "color": "#8e8e93",
-      "width": 14,
-      "opacity": 0.22
+      "dur": 22,
+      "color": "#c7c7cc",
+      "width": 22,
+      "opacity": 0.5
      }
     }
    ],
@@ -1104,9 +1113,9 @@
      "color": "#1d1d1f",
      "accent_color": "#515154",
      "y": 659,
-     "y_to": 539,
+     "y_to": 555,
      "out_frames": 12,
-     "out_to": 0.35,
+     "out_to": 0.5,
      "move_at": 45.0,
      "move_frames": 15,
      "move_ease": "inOut",
@@ -1123,9 +1132,9 @@
      "end": 51.0,
      "width": 440,
      "y": 512,
-     "y_to": 392,
-     "anim_in": "fade",
-     "in_frames": 12,
+     "y_to": 412,
+     "anim_in": "focus",
+     "in_frames": 16,
      "anim_out": "none",
      "move_at": 45.0,
      "move_frames": 15,
@@ -1153,14 +1162,12 @@
      "x": "center",
      "anim_in": "none",
      "in_frames": 10,
-     "anim_out": "fade",
+     "anim_out": "cut",
      "text": "낙성대역 4번 출구 · 무료 주차",
      "start": 45.4,
      "end": 51.0,
      "color": "#515154",
      "y": 686,
-     "out_frames": 12,
-     "out_to": 0.35,
      "reveal": {
       "unit": "line",
       "style": "rise",
@@ -1168,8 +1175,7 @@
       "ease": "expo",
       "distance": 0.8
      },
-     "drift_scale": 0.01,
-     "out_at": 50.0
+     "drift_scale": 0.01
     },
     {
      "size": 60,
@@ -1182,14 +1188,12 @@
      "x": "center",
      "anim_in": "none",
      "in_frames": 10,
-     "anim_out": "fade",
+     "anim_out": "cut",
      "text": "평일 오후 7시까지 · 토요일 오후 2시까지",
      "start": 45.65,
      "end": 51.0,
      "color": "#515154",
      "y": 763,
-     "out_frames": 12,
-     "out_to": 0.35,
      "reveal": {
       "unit": "line",
       "style": "rise",
@@ -1197,8 +1201,7 @@
       "ease": "expo",
       "distance": 0.8
      },
-     "drift_scale": 0.01,
-     "out_at": 50.0
+     "drift_scale": 0.01
     },
     {
      "size": 100,

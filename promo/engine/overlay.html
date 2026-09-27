@@ -472,17 +472,17 @@
       Object.assign(el.style, { width: "1920px", height: "1080px", background: s.color || "#000", clipPath: "circle(0px at 50% 50%)" });
       const o = s.origin || [960, 540];
       const R = Math.hypot(Math.max(o[0], 1920 - o[0]), Math.max(o[1], 1080 - o[1])) + 4;
-      const fe = s.feather || 0;
+      const fe = s.feather || 0, fg = s.feather_grow || 0;
       it.update = (f) => {
         const p = clamp01((f - it.sf + 1) / Math.max(1, it.ef - it.sf));
-        const e = s.ease === "expoIn" ? (p >= 1 ? 1 : Math.pow(2, 10 * (p - 1))) : easeInOut(p);
+        const e = s.ease === "expoIn" ? (p >= 1 ? 1 : Math.pow(2, 10 * (p - 1))) : s.ease === "cubicIn" ? p * p * p : easeInOut(p);
         if (s.shape === "panel_up" || s.shape === "panel_left") {
           el.style.clipPath = s.shape === "panel_up" ? `inset(${r4((1 - e) * 100)}% 0 0 0)` : `inset(0 0 0 ${r4((1 - e) * 100)}%)`;
-        } else if (fe > 0) {
-          // 부드러운 가장자리의 원: 마스크 방사형 그라데이션. 마지막 프레임에 화면을 완전히 덮는다
+        } else if (fe > 0 || fg > 0) {
+          // 부드러운 가장자리의 원: 마스크 방사형 그라데이션. 번질수록 가장자리가 넓어지고(feather_grow), 마지막 프레임에 화면을 완전히 덮는다
           el.style.clipPath = "none";
-          const r = e * (R + fe);
-          const m = `radial-gradient(circle at ${o[0]}px ${o[1]}px, #000 ${r4(Math.max(0, r - fe))}px, rgba(0,0,0,0) ${r4(r)}px)`;
+          const inner = e * R, r = inner + fe + fg * inner;
+          const m = `radial-gradient(circle at ${o[0]}px ${o[1]}px, #000 ${r4(inner)}px, rgba(0,0,0,0) ${r4(r)}px)`;
           el.style.webkitMaskImage = m; el.style.maskImage = m;
         } else el.style.clipPath = `circle(${r4(e * R)}px at ${o[0]}px ${o[1]}px)`;
         return `:sw${r4(e)}`;
@@ -675,7 +675,12 @@
     const n = spec && spec.in_frames;
     const hs = spec && spec.hit_scale;
     switch (kind) {
-      case "hit": { const e = easeOut(ramp(lf, n || 4)); const s0 = hs || 1.10; return { scale: s0 - (s0 - 1) * e, dy: 0, opacity: 1, blur: 1 - e }; }
+      case "hit": { const e = easeOut(ramp(lf, n || 4)); const s0 = hs || 1.10; return { scale: s0 - (s0 - 1) * e, dy: 0, opacity: 1, blur: (s0 - 1) * 60 * (1 - e) }; }
+      case "focus": {
+        // 초점이 맞듯 흐림 12px·1.04배에서 선명해진다 (로고·서명)
+        const N = n || 16, e = EASES.expo(ramp(lf, N));
+        return { scale: 1.04 - 0.04 * e, dy: 0, opacity: fadeIn(lf, Math.ceil(N * 0.5)), blur: 12 * (1 - e) };
+      }
       case "slam": { const e = easeOut(ramp(lf, n || 3)); const s0 = hs || 1.7; return { scale: s0 - (s0 - 1) * e, dy: 0, opacity: fadeIn(lf, 2), blur: 0 }; }
       case "fade": { const p = ramp(lf, n || 8); return { scale: 1, dy: 12 * (1 - p), opacity: fadeIn(lf, n || 8), blur: 0 }; }
       case "rise": { const e = easeOut(ramp(lf, n || 6)); return { scale: 1, dy: 40 * (1 - e), opacity: fadeIn(lf, n || 6), blur: 0 }; }
@@ -862,7 +867,8 @@
       let zs = 1, zb = 0, zo = 1;
       if (it.spec.exit && it.spec.exit.style === "zoom") {
         const zn = it.spec.exit.dur || 10, zf = it.ef - zn;
-        if (f >= zf) { const q = clamp01((f - zf + 1) / zn), e = EASES.cubic(q) * q; zs = 1 + 0.7 * e; zb = 14 * e; zo = 1 - EASES.cubic(q); tkey += `:zx${r4(q)}`; }
+        // 앞부분은 글자가 보인 채로 커지고, 뒤로 갈수록 흐려지며 사라진다 (opacity 1-q³, scale 1+0.9q², blur 16q²)
+        if (f >= zf) { const q = clamp01((f - zf + 1) / zn), q2 = q * q; zs = 1 + (it.spec.exit.amount || 0.9) * q2; zb = 16 * q2; zo = 1 - q2 * q; tkey += `:zx${r4(q)}`; }
       }
       const transform = `translateY(${r4(a.dy)}px) scale(${r4((a.scale + drift) * (it.moveScale ?? 1) * zs)})`;
       const blurAll = a.blur + zb;

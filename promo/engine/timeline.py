@@ -13,7 +13,7 @@ import os
 
 BG_TYPES = ("black", "white", "color", "clip", "image")
 ZOOMS = ("in", "out", "none")
-ANIM_IN = ("hit", "slam", "fade", "rise", "none", "track", "wipe")
+ANIM_IN = ("hit", "slam", "fade", "rise", "none", "track", "wipe", "focus")
 ANIM_OUT = ("cut", "fade", "none")
 CARD_TYPES = ("review",)
 GRADE_DEFAULTS = {"contrast": 1.0, "saturation": 1.0, "brightness": 0.0, "gamma": 1.0, "temperature": 6500}

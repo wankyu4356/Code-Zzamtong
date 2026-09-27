@@ -173,8 +173,6 @@ def build(script):
                 phone = any(ch.isdigit() for ch in ln) and "-" in ln and i == len(lines[:3]) - 1
                 d = dict(SUB, text=ln, start=round(a_f + 0.4 + 0.2 * i, 4), end=END, size=80 if phone else 60, weight=600 if phone else 500,
                          letter_spacing=0.01 if phone else -0.01, color=INK if phone else GRAY_READ, y=ys[i], anim_in="fade", in_frames=10)
-                if not phone:
-                    d.update(anim_out="fade", out_frames=12, out_to=0.35)     # 마지막 호흡: 정보 두 줄만 옅어지고 전화는 남는다
                 texts.append(d)
         elif motion == "quote":
             body = text.strip().strip('"“”')
@@ -452,7 +450,7 @@ def apply_motion(shots, script, motion):
             nxt = script["screens"][idx + 1]["bg"] if idx + 1 < len(script["screens"]) else "white"
             f = {"type": "shape_wipe", "shape": tr.get("shape", "circle"), "origin": tr.get("origin", [960, 540]),
                  "color": tr.get("color") or bg_color.get(nxt, WHITE), "start": _abs_t(tr["start"], shot), "end": _abs_t(tr.get("end", shot["end"]), shot)}
-            for k in ("ease", "feather"):
+            for k in ("ease", "feather", "feather_grow"):
                 if k in tr:
                     f[k] = tr[k]
             fxs.append(f)
@@ -487,7 +485,8 @@ def apply_motion(shots, script, motion):
         line_end = sp.get("element_end") or x.get("element_end")
         for ld in lds:
             f = {"type": "line_draw", "start": shot["start"], "end": _abs_t(ld.get("end", line_end or shot["end"]), shot),
-                 "draw_start": _abs_t(ld.get("start", shot["start"]), shot), "anim_out": "fade", "out_frames": 8}
+                 "draw_start": _abs_t(ld.get("start", shot["start"]), shot), "anim_out": ld.get("anim_out", "fade"),
+                 "out_frames": ld.get("out_frames", sp.get("line_out_frames", 8))}
             f.update({k: ld[k] for k in ("x1", "y1", "x2", "y2", "color", "thickness", "dur") if k in ld})
             fxs.append(f)
         if not fxs:

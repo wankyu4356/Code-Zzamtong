@@ -25,6 +25,22 @@ def count_frames(path):
     return int(p.stdout.strip() or 0)
 
 
+def ensure_rgba(overlay_dir, n):
+    """Chromium saves a fully opaque screenshot as RGB PNG. A color-type change mid-sequence makes ffmpeg
+    re-init the filter graph and drop/duplicate a frame, so every overlay frame is normalized to RGBA."""
+    fixed = 0
+    for i in range(n):
+        path = os.path.join(overlay_dir, f"{i:05d}.png")
+        with open(path, "rb") as fh:
+            head = fh.read(26)
+        if len(head) == 26 and head[25] != 6:            # IHDR color type 6 = RGBA
+            from PIL import Image
+            Image.open(path).convert("RGBA").save(path)
+            fixed += 1
+    if fixed:
+        print(f"  overlay: {fixed} opaque frame(s) converted to RGBA")
+
+
 def compose(tl, footage, overlay_dir, out_path, preview=False):
     n, fps = tl["total_frames"], tl["fps"]
     if not os.path.isfile(footage):
@@ -32,6 +48,7 @@ def compose(tl, footage, overlay_dir, out_path, preview=False):
     missing = [i for i in range(n) if not os.path.isfile(os.path.join(overlay_dir, f"{i:05d}.png"))]
     if missing:
         raise ComposeError(f"overlay is missing {len(missing)} of {n} frames (first: {missing[0]:05d}.png) in {overlay_dir}")
+    ensure_rgba(overlay_dir, n)
     got = count_frames(footage)
     if got != n:
         raise ComposeError(f"footage has {got} frames, timeline needs {n}")

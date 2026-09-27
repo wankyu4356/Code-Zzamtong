@@ -71,3 +71,6 @@
 - 카피 워크플로 기록 `film4/copy_workflow_result.json`, 시각 심사 기록 `film4/visual_qc_result.json`
 - 엔진에 글자 효과를 더했다: track(흐린 글자가 조여지며 선명, track_from), wipe(빛 스윕), slot(빈자리 단어가 굴러 바뀌고 폭이 따라 움직임, 마지막 단어는 살짝 넘쳤다 섬, 강조색이 본문색으로 돌아옴), ticker, grid(격자 점등), count, 따옴표 내밀기(hang_quotes), 위치·크기 이동(y_to, scale_to, move_ease, ls_to), 옅어지다 멈춤(out_to)
 - `build_film4.py`가 `film4/script.json`을 읽는다. 음악은 `tools/score_from_script.py`가 구성안의 소리 표기에서 스코어를 만들고 `music/compose_film3.py`로 렌더한다 (D 단조)
+- 글자 모션 사양은 `film4/motion.json`, 어휘 설명은 `film4/motion_api.md`, 프레임 검수 기록은 `film4/motion_qc_result.json`. 빌더가 사양을 타임라인에 입힌다(`--no-motion`으로 끌 수 있음). 엔진 추가: 글자·단어·줄 단위 등장(reveal)과 퇴장(exit, zoom 포함), 빛 스윕(sheen), 밑줄, 초점 등장(focus), 원형 전환(shape_wipe, 가장자리가 번질수록 넓어짐), 선 긋기(line_draw), 배경 밀어 넣기(push_out)
+- 접수 데스크 사진은 의뢰인이 다시 보낸 원본(`assets/hospital/reception.png`)으로 바꿨다. 이전 사진은 `reception_old.png`로 남겼다. `reception_16x9.jpg`는 이 사진을 1920×1080으로 채워 만든 것이라 첫~세 번째 영상도 다시 렌더하면 새 사진이 들어간다
+- 합성 버그 수정: 화면을 완전히 덮는 프레임을 Chromium이 알파 없는 PNG로 저장하면 ffmpeg이 필터를 다시 초기화하며 한 프레임을 버리고 앞 프레임을 반복했다. `engine/compose.py`가 합성 전에 모든 오버레이 프레임을 RGBA로 맞춘다
