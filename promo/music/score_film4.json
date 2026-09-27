@@ -1,0 +1,115 @@
+{
+ "bpm": 120,
+ "duration": 51.0,
+ "key_root": "D",
+ "target_lufs": -14.0,
+ "fade_out": 1.0,
+ "sections": [
+  {
+   "start": 0.0,
+   "end": 2.5,
+   "pattern": "silence"
+  },
+  {
+   "start": 2.5,
+   "end": 14.5,
+   "pattern": "groove"
+  },
+  {
+   "start": 14.5,
+   "end": 17.0,
+   "pattern": "silence"
+  },
+  {
+   "start": 17.0,
+   "end": 29.5,
+   "pattern": "groove"
+  },
+  {
+   "start": 29.5,
+   "end": 43.0,
+   "pattern": "lift"
+  },
+  {
+   "start": 43.0,
+   "end": 51.0,
+   "pattern": "tail"
+  }
+ ],
+ "events": [
+  {
+   "t": 0.0,
+   "type": "cut",
+   "len": 2.5
+  },
+  {
+   "t": 0.0,
+   "type": "tick",
+   "gain": 0.5
+  },
+  {
+   "t": 2.5,
+   "type": "hit"
+  },
+  {
+   "t": 5.5,
+   "type": "snap"
+  },
+  {
+   "t": 10.5,
+   "type": "snap"
+  },
+  {
+   "t": 14.5,
+   "type": "cut",
+   "len": 2.5
+  },
+  {
+   "t": 14.5,
+   "type": "tick",
+   "gain": 0.5
+  },
+  {
+   "t": 17.0,
+   "type": "hit"
+  },
+  {
+   "t": 20.0,
+   "type": "snap"
+  },
+  {
+   "t": 23.5,
+   "type": "snap"
+  },
+  {
+   "t": 29.5,
+   "type": "snap"
+  },
+  {
+   "t": 33.5,
+   "type": "riser",
+   "len": 2.0
+  },
+  {
+   "t": 33.5,
+   "type": "hit"
+  },
+  {
+   "t": 37.0,
+   "type": "snap"
+  },
+  {
+   "t": 39.5,
+   "type": "riser",
+   "len": 2.0
+  },
+  {
+   "t": 39.5,
+   "type": "hit"
+  },
+  {
+   "t": 43.0,
+   "type": "chord"
+  }
+ ]
+}

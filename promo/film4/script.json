@@ -1,0 +1,156 @@
+{
+ "title": "뼈부터 정맥까지",
+ "bpm": 120,
+ "key_root": "D",
+ "brand_line": "뼈부터 정맥까지, 여기서 봅니다.",
+ "screens": [
+  {
+   "no": 1,
+   "text": "*누가* 진료하나요?",
+   "bg": "photo_reception",
+   "seconds": 2.5,
+   "motion": "track",
+   "sound": "silence"
+  },
+  {
+   "no": 2,
+   "text": "유병찬 대표원장",
+   "bg": "photo_doctor",
+   "seconds": 3,
+   "motion": "cut",
+   "sound": "hit"
+  },
+  {
+   "no": 3,
+   "text": "정형외과 전문의",
+   "bg": "white",
+   "seconds": 5,
+   "motion": "list",
+   "sound": "beat",
+   "items": [
+    "전) 한양대 명지병원 정형외과 전문의",
+    "대한견주관절학회 정회원",
+    "대한슬관절학회 정회원",
+    "정맥통증학회 정회원"
+   ]
+  },
+  {
+   "no": 4,
+   "text": "왜 아팠는지\n확실히 알겠더라고요.",
+   "bg": "white",
+   "seconds": 4,
+   "motion": "quote",
+   "sound": "beat",
+   "source": "네이버 방문자 리뷰 · 영수증 인증 · 2026.1"
+  },
+  {
+   "no": 5,
+   "text": "*어디까지* 진료하나요?",
+   "bg": "black",
+   "seconds": 2.5,
+   "motion": "track",
+   "sound": "silence"
+  },
+  {
+   "no": 6,
+   "text": "목·허리",
+   "bg": "black",
+   "seconds": 3,
+   "motion": "spec",
+   "sound": "hit",
+   "items": [
+    "목디스크",
+    "척추관협착증"
+   ]
+  },
+  {
+   "no": 7,
+   "text": "어깨·무릎",
+   "bg": "black",
+   "seconds": 3.5,
+   "motion": "spec",
+   "sound": "beat",
+   "items": [
+    "회전근개손상",
+    "인공관절 수술 후 재활"
+   ]
+  },
+  {
+   "no": 8,
+   "text": "",
+   "bg": "black",
+   "seconds": 6,
+   "motion": "grid",
+   "sound": "beat",
+   "items": [
+    "성장판 검사",
+    "척추측만증 검사",
+    "소아 외상",
+    "발목골절",
+    "족저근막염",
+    "아킬레스건염",
+    "손목터널증후군",
+    "방아쇠수지증후군",
+    "지방종",
+    "교통사고 후유증",
+    "관절탈구",
+    "발가락골절"
+   ]
+  },
+  {
+   "no": 9,
+   "text": "다리가 저리면\n허리일까, *혈관일까*?",
+   "bg": "black",
+   "seconds": 4,
+   "motion": "stack",
+   "sound": "swell"
+  },
+  {
+   "no": 10,
+   "text": "*둘 다* 봅니다.",
+   "bg": "navy",
+   "seconds": 3.5,
+   "motion": "spec",
+   "sound": "hit",
+   "items": [
+    "하지정맥 시술"
+   ]
+  },
+  {
+   "no": 11,
+   "text": "뼈부터 {관절|인대|힘줄|정맥}까지,",
+   "bg": "white",
+   "seconds": 2.5,
+   "motion": "slot",
+   "sound": "swell"
+  },
+  {
+   "no": 12,
+   "text": "뼈부터 정맥까지,\n*여기서* 봅니다.",
+   "bg": "white",
+   "seconds": 3.5,
+   "motion": "stack",
+   "sound": "hit",
+   "role": "brand"
+  },
+  {
+   "no": 13,
+   "text": "유병찬 대표원장\n김철신정형외과의원",
+   "bg": "white",
+   "seconds": 3,
+   "motion": "cut",
+   "sound": "beat",
+   "role": "logo"
+  },
+  {
+   "no": 14,
+   "text": "낙성대역 4번 출구 · 무료 주차\n평일 오후 7시까지 · 토요일 오후 2시까지\n02-872-3301",
+   "bg": "white",
+   "seconds": 5,
+   "motion": "cut",
+   "sound": "beat",
+   "role": "info"
+  }
+ ],
+ "quote_source": "네이버 방문자 리뷰 · 영수증 인증"
+}

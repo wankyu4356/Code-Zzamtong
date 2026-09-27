@@ -100,12 +100,39 @@ def anim_for(sound):
     return dict(anim_in="fade", in_frames=6)
 
 
+SKY = "#9cc3ff"           # 사진·남색 위 강조색
+
+
+def line_words(text, times):
+    """줄 단위 등장: times[i]는 i번째 줄의 모든 단어가 뜨는 시각."""
+    out = []
+    for li, line in enumerate(text.split("\n")):
+        for _ in [w for w in line.split(" ") if w]:
+            out.append(round(times[min(li, len(times) - 1)], 4))
+    return out
+
+
+def split_accents(text):
+    """'*둘 다*'처럼 여러 단어에 걸친 강조를 '*둘* *다*'로 나눈다 (엔진은 단어 단위로 칠한다)."""
+    import re
+    return re.sub(r"\*([^*]+)\*", lambda m: " ".join(f"*{w}*" for w in m.group(1).split(" ") if w), text)
+
+
+def thin_dot(text):
+    return text.replace("·", "\u2009·\u2009")
+
+
 def build(script):
     END = round(sum(float(sc["seconds"]) for sc in script["screens"]), 3)
-    src_label = script.get("quote_source", "네이버 방문자 리뷰 · 영수증 인증 · 발췌")
+    src_label = script.get("quote_source", "네이버 방문자 리뷰 · 영수증 인증")
     shots = []
     t = 0.0
-    prev = None
+    marks = []
+    for sc in script["screens"]:
+        marks.append(t)
+        t += float(sc["seconds"])
+    logo_at = next((round(marks[i], 3) for i, sc in enumerate(script["screens"]) if sc.get("role") == "logo"), END)
+    t = 0.0
     for sc in script["screens"]:
         sid = f"s{sc['no']:02d}"
         secs = float(sc["seconds"])
@@ -113,116 +140,95 @@ def build(script):
         a_f, b_f = round(round(a * FPS) / FPS, 6), round(round(b * FPS) / FPS, 6)
         kind = sc["bg"]
         bg = bg_of(kind)
+        if kind == "photo_reception":
+            bg.pop("fade_out", None); bg.pop("fade_color", None)          # 다음 강타에 하드 컷
         texts, images, fx = [], [], []
-        text = sc["text"].replace("\\n", "\n")
+        text = split_accents(sc["text"].replace("\\n", "\n"))
         motion = sc.get("motion", "cut")
         items = [str(x) for x in (sc.get("items") or [])]
         role = sc.get("role")
-        col, soft, acc = tcolor(kind), tcolor(kind, soft=True), accent(kind)
-        same_photo = prev is not None and kind == "photo_reception" and prev["bg"] == "photo_reception"
-        on_doctor = kind == "photo_doctor"
+        snd = sc.get("sound", "beat")
+        col, soft = tcolor(kind), tcolor(kind, soft=True)
+        acc = SKY if kind in ("navy", "photo_reception") else accent(kind)
+        title_anim = dict(anim_in="hit", in_frames=4, hit_scale=1.03) if snd == "hit" else dict(anim_in="track", in_frames=12, track_from=0.5)
 
         if role == "brand":
-            texts.append(dict(HEAD, text=text, start=a_f + 0.17, end=END, size=220, color=INK, accent_color=ACCENT, y=414, y_to=170,
-                              move_at=b_f, move_frames=18, anim_in="track", in_frames=16))
+            # 브랜드: 앞 화면 슬롯 줄이 같은 자리에 남고 둘째 줄이 강타에 붙는다. 로고 화면에서 절반 크기로 줄며 위로 올라간다
+            words = line_words(text, [a_f - 1.0, a_f + 0.03])
+            texts.append(dict(HEAD, text=text, start=a_f, end=END, size=168, color=INK, accent_color=ACCENT, y=350, y_to=8, scale_to=0.5,
+                              move_at=logo_at, move_frames=18, anim_in="none", words=words, word_frames=4))
         elif role == "logo":
-            images.append({"src": os.path.join(HOSP, "logo_color.png"), "start": a_f + 0.2, "end": END, "width": 600, "y": 470,
+            name, _, legal = text.partition("\n")
+            images.append({"src": os.path.join(HOSP, "logo_color.png"), "start": a_f + 0.45, "end": END, "width": 520, "y": 340,
                            "anim_in": "fade", "in_frames": 12, "anim_out": "none"})
-            texts.append(dict(SUB, text=text, start=a_f + 0.55, end=END, size=52, weight=500, color=NAME_GRAY, y=660, anim_in="fade", in_frames=10))
+            texts.append(dict(SUB, text=name, start=a_f + 0.7, end=END, size=64, weight=600, color=INK, y=510, anim_in="fade", in_frames=10))
+            if legal:
+                texts.append(dict(SUB, text=legal, start=a_f + 0.85, end=END, size=46, weight=500, color=NAME_GRAY, y=596, anim_in="fade", in_frames=10))
         elif role == "info":
-            l1, _, l2 = text.partition("\n")
-            texts.append(dict(SUB, text=l1, start=a_f, end=END, size=60, weight=500, color=INK, y=796, anim_in="fade", in_frames=8))
-            if l2:
-                texts.append(dict(SUB, text=l2, start=a_f + 0.15, end=END, size=96, weight=600, letter_spacing=0.02, color=INK, y=872, anim_in="fade", in_frames=8))
+            lines = text.split("\n")
+            ys = [724, 796, 868]
+            for i, ln in enumerate(lines[:3]):
+                last = i == len(lines[:3]) - 1 and any(ch.isdigit() for ch in ln) and "-" in ln
+                texts.append(dict(SUB, text=ln, start=round(a_f + 0.12 * i, 4), end=END, size=88 if last else 54, weight=600 if last else 500,
+                                  letter_spacing=0.02 if last else -0.01, color=INK, y=ys[i], anim_in="fade", in_frames=8))
         elif motion == "quote":
             body = text.strip().strip('"“”')
             lines = body.split("\n")
             longest = max(len(x) for x in lines)
             size = 108 if longest <= 14 else (96 if longest <= 17 else 84)
-            texts.append(dict(QUOTE, text=f"“{body}”", start=a_f, end=b_f, size=size, color=col, accent_color=acc, **anim_for(sc.get("sound"))))
-            label = sc.get("source") or src_label
-            texts.append(dict(SRC, text=label, start=a_f + 0.35, end=b_f, color=soft, y=int(540 + size * 1.28 * len(lines) / 2 + 56)))
+            texts.append(dict(QUOTE, text=f"“{body}”", start=a_f, end=b_f, size=size, color=col, accent_color=acc, anim_in="fade", in_frames=8))
+            texts.append(dict(SRC, text=sc.get("source") or src_label, start=a_f + 0.35, end=b_f, color=soft, y=int(540 + size * 1.28 * len(lines) / 2 + 56)))
         elif motion == "slot":
             n = max(1, text.count("|") + 1)
-            hold = 1.1
-            step = max(0.3, (secs - hold - 0.1) / max(1, n - 1))
-            fx.append({"type": "slot", "text": text, "start": a_f, "end": b_f, "size": 168 if len(text) <= 22 else 136, "weight": 700, "color": col,
-                       "slot_color": acc, "slot_times": [round(a_f + 0.1 + i * step, 4) for i in range(n)], "roll_frames": 7, "anim_in": "fade", "in_frames": 6})
-        elif motion == "ticker":
-            rows = [x for x in items if x.strip()][:6]
-            n = len(rows)
-            ys = [int(540 - (n - 1) * 90 + i * 180) - 60 for i in range(n)] if n else []
-            speeds = [260, 180, 320, 210, 290, 240]
-            fx.append({"type": "ticker", "start": a_f, "end": b_f, "size": 96, "weight": 600, "color": dim_color(kind).replace("0.18", "0.38").replace("0.22", "0.38"),
-                       "settle": sc.get("settle") or "", "settle_at": round(b_f - max(1.2, secs * 0.4), 3), "settle_size": 176, "settle_color": col,
-                       "rows": [{"words": r.split(), "y": ys[i], "speed": speeds[i % 6], "dir": -1 if i % 2 == 0 else 1, "phase": (i * 370) % 1000} for i, r in enumerate(rows)],
+            fx.append({"type": "slot", "text": text, "start": a_f, "end": b_f, "size": 168, "weight": 700, "color": col, "slot_color": acc,
+                       "letter_spacing": -0.035, "y": 350, "slot_times": [round(a_f + 0.02 + i * 0.5, 4) for i in range(n)], "roll_frames": 8,
                        "anim_in": "fade", "in_frames": 6})
         elif motion == "grid":
             cells = items[:12]
-            cols = 3 if len(cells) in (5, 6, 9) else (4 if len(cells) >= 7 else 3)
-            step = max(0.12, (secs - 1.2) / max(1, len(cells)))
-            fx.append({"type": "grid", "start": a_f, "end": b_f, "size": 84 if len(cells) <= 9 else 72, "weight": 600, "cols": cols, "items": cells,
-                       "color": col, "dim_color": dim_color(kind), "light_times": [round(a_f + 0.25 + i * step, 4) for i in range(len(cells))],
-                       "light_frames": 6, "col_gap": 84, "row_gap": 22, "anim_in": "fade", "in_frames": 6})
-            if text.strip():
-                texts.append(dict(SUB, text=text, start=a_f, end=b_f, size=44, weight=500, color=soft, y=120, anim_in="fade", in_frames=6))
-        elif motion == "count":
-            try:
-                to = int("".join(ch for ch in text if ch.isdigit()))
-            except ValueError:
-                to = 0
-            fx.append({"type": "count", "start": a_f, "end": b_f, "from": 0, "to": to, "count_start": a_f + 0.1, "count_frames": 30,
-                       "size": 300, "weight": 700, "color": acc, "letter_spacing": -0.04, "y": 300, "anim_in": "fade", "in_frames": 6})
-            if items:
-                texts.append(dict(SUB, text=items[0], start=a_f + 1.1, end=b_f, size=72, weight=600, color=col, y=660, anim_in="rise", in_frames=8))
+            lt = []
+            for i in range(len(cells)):
+                lt.append(round(a_f + (0.25 + 0.5 * i if i < 3 else 1.5 + 0.25 * (i - 3)), 4))
+            fx.append({"type": "grid", "start": a_f, "end": b_f, "size": 80, "weight": 600, "cols": 3, "items": cells, "color": col,
+                       "dim_color": dim_color(kind), "light_times": lt, "light_frames": 6, "col_gap": 84, "row_gap": 24, "anim_in": "fade", "in_frames": 6})
         elif motion == "spec":
-            h = dict(HEAD, text=text, start=a_f, end=b_f, size=136, color=col, accent_color=acc, y=248, anim_in="track", in_frames=14)
-            texts.append(h)
-            rows = items[:6]
-            for i, it_ in enumerate(rows):
-                texts.append(dict(SUB, text=it_, start=round(a_f + 0.35 + i * 0.16, 4), end=b_f, size=64, weight=500, color=soft, y=460 + i * 88,
+            texts.append(dict(HEAD, text=thin_dot(text), start=a_f, end=b_f, size=150, color=col, accent_color=acc, y=330, **title_anim))
+            for i, it_ in enumerate(items[:4]):
+                texts.append(dict(SUB, text=it_, start=round(a_f + 0.5 * (i + 1), 4), end=b_f, size=76, weight=500, color=soft, y=536 + i * 96,
                                   anim_in="rise", in_frames=8))
         elif motion == "list":
-            x0 = 160
-            h = dict(HEAD, text=text, start=a_f, end=b_f, size=84, color=INK if on_doctor else col, accent_color=acc, x=x0, align="left", max_width=1000,
-                     y=180, anim_in="fade", in_frames=8)
-            texts.append(h)
-            rows = items[:8]
-            for i, it_ in enumerate(rows):
-                texts.append(dict(SUB, text=it_, start=round(a_f + 0.4 + i * 0.22, 4), end=b_f, size=50, weight=500, color=(INK if on_doctor else col),
-                                  x=x0, align="left", max_width=1000, y=330 + i * 74, anim_in="rise", in_frames=8))
+            x0 = 450
+            texts.append(dict(HEAD, text=text, start=a_f, end=b_f, size=110, color=col, accent_color=acc, x=x0, align="left", max_width=1400, y=262,
+                              anim_in="fade", in_frames=8))
+            for i, it_ in enumerate(items[:6]):
+                first = i == 0
+                texts.append(dict(SUB, text=it_, start=round(a_f + 0.5 * (i + 1), 4), end=b_f, size=72 if first else 64, weight=600 if first else 500,
+                                  color=col if first else NAME_GRAY, x=x0, align="left", max_width=1400, y=428 + i * 92 + (0 if first else 12),
+                                  anim_in="rise", in_frames=8))
         else:
-            h = dict(HEAD, text=text, start=a_f, end=b_f, size=head_size(text), color=col, accent_color=acc, **anim_for(sc.get("sound")))
-            if on_doctor:
-                h.update(x=160, align="left", max_width=1000, color=INK, shadow=False, size=min(head_size(text), 140), y=int(540 - 140 * 1.14))
+            h = dict(HEAD, text=text, start=a_f, end=b_f, size=head_size(text), color=col, accent_color=acc, **anim_for(snd))
+            if kind == "photo_doctor":
+                h.update(x=160, align="left", max_width=1000, color=INK, shadow=False, size=120, y=472, anim_in="hit", in_frames=4, hit_scale=1.03)
             if kind == "photo_reception":
-                h.update(x=300, align="left", max_width=900, size=104, y=660, shadow=False, anim_in="fade", in_frames=8)
-                if not same_photo:
-                    images.append({"src": os.path.join(HOSP, "scrim_bottom.png"), "start": a_f, "end": b_f, "width": 1920, "x": 0, "y": 0,
-                                   "anim_in": "none", "anim_out": "fade", "out_frames": 4})
+                h.update(x=300, align="left", max_width=1000, size=112, y=730, shadow=False)
+                images.append({"src": os.path.join(HOSP, "scrim_bottom.png"), "start": a_f, "end": b_f, "width": 1920, "x": 0, "y": 0,
+                               "anim_in": "none", "anim_out": "cut"})
             if motion == "track":
-                h.update(anim_in="track", in_frames=16)
+                h.update(anim_in="track", in_frames=12, track_from=0.5)
             elif motion == "wipe":
                 h.update(anim_in="wipe", in_frames=18)
-            elif sc.get("words_rel"):
-                h.update(anim_in="none", words=[round(a_f + w, 4) for w in sc["words_rel"]], word_frames=8)
-            elif motion in ("words", "stack"):
+            elif motion == "stack":
+                nl = text.count("\n") + 1
+                h.update(anim_in="none", words=line_words(text, [a_f + 0.05 + 0.8 * i for i in range(nl)]), word_frames=8)
+            elif motion == "words":
                 h.update(anim_in="none", words=word_times(text, a_f), word_frames=8)
             texts.append(h)
 
-        if same_photo:
-            shots[-1]["end"] = b_f
-            shots[-1]["texts"] += texts
-            if shots[-1].get("images"):
-                shots[-1]["images"][0]["end"] = b_f
-        else:
-            shot = {"id": sid, "start": a_f, "end": b_f, "bg": bg, "texts": texts, "_sound": sc.get("sound", "beat"), "_motion": motion, "_note": sc.get("note", "")}
-            if images:
-                shot["images"] = images
-            if fx:
-                shot["fx"] = fx
-            shots.append(shot)
-        prev = sc
+        shot = {"id": sid, "start": a_f, "end": b_f, "bg": bg, "texts": texts, "_sound": snd, "_motion": motion, "_note": sc.get("note", "")}
+        if images:
+            shot["images"] = images
+        if fx:
+            shot["fx"] = fx
+        shots.append(shot)
         t = b_f
     return shots, t
 

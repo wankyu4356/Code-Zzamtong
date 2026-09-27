@@ -1,0 +1,801 @@
+{
+ "fps": 30,
+ "width": 1920,
+ "height": 1080,
+ "duration": 51.0,
+ "audio": "/home/user/Code-Zzamtong/promo/music/render/film4_music.wav",
+ "shots": [
+  {
+   "id": "s01",
+   "start": 0.0,
+   "end": 2.5,
+   "bg": {
+    "type": "image",
+    "src": "/home/user/Code-Zzamtong/promo/assets/hospital/reception_16x9.jpg",
+    "zoom": "in",
+    "zoom_amount": 0.06,
+    "grade": {
+     "contrast": 1.02,
+     "saturation": 0.88,
+     "brightness": -0.1,
+     "gamma": 0.92
+    },
+    "vignette": false,
+    "grain": 0.03
+   },
+   "texts": [
+    {
+     "weight": 700,
+     "letter_spacing": -0.035,
+     "line_height": 1.14,
+     "max_width": 1000,
+     "shadow": false,
+     "align": "left",
+     "x": 300,
+     "y": 730,
+     "anim_in": "track",
+     "in_frames": 12,
+     "anim_out": "cut",
+     "text": "*누가* 진료하나요?",
+     "start": 0.0,
+     "end": 2.5,
+     "size": 112,
+     "color": "#f5f5f7",
+     "accent_color": "#9cc3ff",
+     "track_from": 0.5
+    }
+   ],
+   "_sound": "silence",
+   "_motion": "track",
+   "_note": "",
+   "images": [
+    {
+     "src": "/home/user/Code-Zzamtong/promo/assets/hospital/scrim_bottom.png",
+     "start": 0.0,
+     "end": 2.5,
+     "width": 1920,
+     "x": 0,
+     "y": 0,
+     "anim_in": "none",
+     "anim_out": "cut"
+    }
+   ]
+  },
+  {
+   "id": "s02",
+   "start": 2.5,
+   "end": 5.5,
+   "bg": {
+    "type": "image",
+    "src": "/home/user/Code-Zzamtong/promo/assets/hospital/doctor_portrait_16x9.jpg",
+    "zoom": "in",
+    "zoom_amount": 0.05,
+    "anchor": [
+     0.62,
+     0.0
+    ],
+    "grade": {
+     "contrast": 1.0,
+     "saturation": 0.95
+    },
+    "vignette": false,
+    "grain": 0.03
+   },
+   "texts": [
+    {
+     "weight": 700,
+     "letter_spacing": -0.035,
+     "line_height": 1.14,
+     "max_width": 1000,
+     "shadow": false,
+     "align": "left",
+     "x": 160,
+     "y": 472,
+     "anim_in": "hit",
+     "in_frames": 4,
+     "anim_out": "cut",
+     "text": "유병찬 대표원장",
+     "start": 2.5,
+     "end": 5.5,
+     "size": 120,
+     "color": "#1d1d1f",
+     "accent_color": "#003070",
+     "hit_scale": 1.03
+    }
+   ],
+   "_sound": "hit",
+   "_motion": "cut",
+   "_note": ""
+  },
+  {
+   "id": "s03",
+   "start": 5.5,
+   "end": 10.5,
+   "bg": {
+    "type": "color",
+    "color": "#f5f5f7"
+   },
+   "texts": [
+    {
+     "weight": 700,
+     "letter_spacing": -0.035,
+     "line_height": 1.14,
+     "max_width": 1400,
+     "shadow": false,
+     "align": "left",
+     "x": 450,
+     "y": 262,
+     "anim_in": "fade",
+     "in_frames": 8,
+     "anim_out": "cut",
+     "text": "정형외과 전문의",
+     "start": 5.5,
+     "end": 10.5,
+     "size": 110,
+     "color": "#1d1d1f",
+     "accent_color": "#003070"
+    },
+    {
+     "size": 72,
+     "weight": 600,
+     "letter_spacing": -0.015,
+     "line_height": 1.3,
+     "max_width": 1400,
+     "shadow": false,
+     "align": "left",
+     "x": 450,
+     "anim_in": "rise",
+     "in_frames": 8,
+     "anim_out": "cut",
+     "text": "전) 한양대 명지병원 정형외과 전문의",
+     "start": 6.0,
+     "end": 10.5,
+     "color": "#1d1d1f",
+     "y": 428
+    },
+    {
+     "size": 64,
+     "weight": 500,
+     "letter_spacing": -0.015,
+     "line_height": 1.3,
+     "max_width": 1400,
+     "shadow": false,
+     "align": "left",
+     "x": 450,
+     "anim_in": "rise",
+     "in_frames": 8,
+     "anim_out": "cut",
+     "text": "대한견주관절학회 정회원",
+     "start": 6.5,
+     "end": 10.5,
+     "color": "#6e6e73",
+     "y": 532
+    },
+    {
+     "size": 64,
+     "weight": 500,
+     "letter_spacing": -0.015,
+     "line_height": 1.3,
+     "max_width": 1400,
+     "shadow": false,
+     "align": "left",
+     "x": 450,
+     "anim_in": "rise",
+     "in_frames": 8,
+     "anim_out": "cut",
+     "text": "대한슬관절학회 정회원",
+     "start": 7.0,
+     "end": 10.5,
+     "color": "#6e6e73",
+     "y": 624
+    },
+    {
+     "size": 64,
+     "weight": 500,
+     "letter_spacing": -0.015,
+     "line_height": 1.3,
+     "max_width": 1400,
+     "shadow": false,
+     "align": "left",
+     "x": 450,
+     "anim_in": "rise",
+     "in_frames": 8,
+     "anim_out": "cut",
+     "text": "정맥통증학회 정회원",
+     "start": 7.5,
+     "end": 10.5,
+     "color": "#6e6e73",
+     "y": 716
+    }
+   ],
+   "_sound": "beat",
+   "_motion": "list",
+   "_note": ""
+  },
+  {
+   "id": "s04",
+   "start": 10.5,
+   "end": 14.5,
+   "bg": {
+    "type": "color",
+    "color": "#f5f5f7"
+   },
+   "texts": [
+    {
+     "size": 108,
+     "weight": 600,
+     "letter_spacing": -0.03,
+     "line_height": 1.28,
+     "max_width": 1560,
+     "shadow": false,
+     "align": "center",
+     "x": "center",
+     "y": "center",
+     "anim_in": "fade",
+     "in_frames": 8,
+     "anim_out": "cut",
+     "text": "“왜 아팠는지\n확실히 알겠더라고요.”",
+     "start": 10.5,
+     "end": 14.5,
+     "color": "#1d1d1f",
+     "accent_color": "#003070"
+    },
+    {
+     "size": 54,
+     "weight": 500,
+     "letter_spacing": 0.0,
+     "line_height": 1.2,
+     "max_width": 1400,
+     "shadow": false,
+     "align": "center",
+     "x": "center",
+     "anim_in": "fade",
+     "in_frames": 8,
+     "anim_out": "cut",
+     "text": "네이버 방문자 리뷰 · 영수증 인증 · 2026.1",
+     "start": 10.85,
+     "end": 14.5,
+     "color": "rgba(29,29,31,0.55)",
+     "y": 734
+    }
+   ],
+   "_sound": "beat",
+   "_motion": "quote",
+   "_note": ""
+  },
+  {
+   "id": "s05",
+   "start": 14.5,
+   "end": 17.0,
+   "bg": {
+    "type": "color",
+    "color": "#000000"
+   },
+   "texts": [
+    {
+     "weight": 700,
+     "letter_spacing": -0.035,
+     "line_height": 1.14,
+     "max_width": 1700,
+     "shadow": false,
+     "align": "center",
+     "x": "center",
+     "y": "center",
+     "anim_in": "track",
+     "in_frames": 12,
+     "anim_out": "cut",
+     "text": "*어디까지* 진료하나요?",
+     "start": 14.5,
+     "end": 17.0,
+     "size": 136,
+     "color": "#f5f5f7",
+     "accent_color": "#5b9cff",
+     "track_from": 0.5
+    }
+   ],
+   "_sound": "silence",
+   "_motion": "track",
+   "_note": ""
+  },
+  {
+   "id": "s06",
+   "start": 17.0,
+   "end": 20.0,
+   "bg": {
+    "type": "color",
+    "color": "#000000"
+   },
+   "texts": [
+    {
+     "weight": 700,
+     "letter_spacing": -0.035,
+     "line_height": 1.14,
+     "max_width": 1700,
+     "shadow": false,
+     "align": "center",
+     "x": "center",
+     "y": 330,
+     "anim_in": "hit",
+     "in_frames": 4,
+     "anim_out": "cut",
+     "text": "목 · 허리",
+     "start": 17.0,
+     "end": 20.0,
+     "size": 150,
+     "color": "#f5f5f7",
+     "accent_color": "#5b9cff",
+     "hit_scale": 1.03
+    },
+    {
+     "size": 76,
+     "weight": 500,
+     "letter_spacing": -0.015,
+     "line_height": 1.3,
+     "max_width": 1500,
+     "shadow": false,
+     "align": "center",
+     "x": "center",
+     "anim_in": "rise",
+     "in_frames": 8,
+     "anim_out": "cut",
+     "text": "목디스크",
+     "start": 17.5,
+     "end": 20.0,
+     "color": "rgba(245,245,247,0.75)",
+     "y": 536
+    },
+    {
+     "size": 76,
+     "weight": 500,
+     "letter_spacing": -0.015,
+     "line_height": 1.3,
+     "max_width": 1500,
+     "shadow": false,
+     "align": "center",
+     "x": "center",
+     "anim_in": "rise",
+     "in_frames": 8,
+     "anim_out": "cut",
+     "text": "척추관협착증",
+     "start": 18.0,
+     "end": 20.0,
+     "color": "rgba(245,245,247,0.75)",
+     "y": 632
+    }
+   ],
+   "_sound": "hit",
+   "_motion": "spec",
+   "_note": ""
+  },
+  {
+   "id": "s07",
+   "start": 20.0,
+   "end": 23.5,
+   "bg": {
+    "type": "color",
+    "color": "#000000"
+   },
+   "texts": [
+    {
+     "weight": 700,
+     "letter_spacing": -0.035,
+     "line_height": 1.14,
+     "max_width": 1700,
+     "shadow": false,
+     "align": "center",
+     "x": "center",
+     "y": 330,
+     "anim_in": "track",
+     "in_frames": 12,
+     "anim_out": "cut",
+     "text": "어깨 · 무릎",
+     "start": 20.0,
+     "end": 23.5,
+     "size": 150,
+     "color": "#f5f5f7",
+     "accent_color": "#5b9cff",
+     "track_from": 0.5
+    },
+    {
+     "size": 76,
+     "weight": 500,
+     "letter_spacing": -0.015,
+     "line_height": 1.3,
+     "max_width": 1500,
+     "shadow": false,
+     "align": "center",
+     "x": "center",
+     "anim_in": "rise",
+     "in_frames": 8,
+     "anim_out": "cut",
+     "text": "회전근개손상",
+     "start": 20.5,
+     "end": 23.5,
+     "color": "rgba(245,245,247,0.75)",
+     "y": 536
+    },
+    {
+     "size": 76,
+     "weight": 500,
+     "letter_spacing": -0.015,
+     "line_height": 1.3,
+     "max_width": 1500,
+     "shadow": false,
+     "align": "center",
+     "x": "center",
+     "anim_in": "rise",
+     "in_frames": 8,
+     "anim_out": "cut",
+     "text": "인공관절 수술 후 재활",
+     "start": 21.0,
+     "end": 23.5,
+     "color": "rgba(245,245,247,0.75)",
+     "y": 632
+    }
+   ],
+   "_sound": "beat",
+   "_motion": "spec",
+   "_note": ""
+  },
+  {
+   "id": "s08",
+   "start": 23.5,
+   "end": 29.5,
+   "bg": {
+    "type": "color",
+    "color": "#000000"
+   },
+   "texts": [],
+   "_sound": "beat",
+   "_motion": "grid",
+   "_note": "",
+   "fx": [
+    {
+     "type": "grid",
+     "start": 23.5,
+     "end": 29.5,
+     "size": 80,
+     "weight": 600,
+     "cols": 3,
+     "items": [
+      "성장판 검사",
+      "척추측만증 검사",
+      "소아 외상",
+      "발목골절",
+      "족저근막염",
+      "아킬레스건염",
+      "손목터널증후군",
+      "방아쇠수지증후군",
+      "지방종",
+      "교통사고 후유증",
+      "관절탈구",
+      "발가락골절"
+     ],
+     "color": "#f5f5f7",
+     "dim_color": "rgba(245,245,247,0.22)",
+     "light_times": [
+      23.75,
+      24.25,
+      24.75,
+      25.0,
+      25.25,
+      25.5,
+      25.75,
+      26.0,
+      26.25,
+      26.5,
+      26.75,
+      27.0
+     ],
+     "light_frames": 6,
+     "col_gap": 84,
+     "row_gap": 24,
+     "anim_in": "fade",
+     "in_frames": 6
+    }
+   ]
+  },
+  {
+   "id": "s09",
+   "start": 29.5,
+   "end": 33.5,
+   "bg": {
+    "type": "color",
+    "color": "#000000"
+   },
+   "texts": [
+    {
+     "weight": 700,
+     "letter_spacing": -0.035,
+     "line_height": 1.14,
+     "max_width": 1700,
+     "shadow": false,
+     "align": "center",
+     "x": "center",
+     "y": "center",
+     "anim_in": "none",
+     "in_frames": 6,
+     "anim_out": "cut",
+     "text": "다리가 저리면\n허리일까, *혈관일까*?",
+     "start": 29.5,
+     "end": 33.5,
+     "size": 136,
+     "color": "#f5f5f7",
+     "accent_color": "#5b9cff",
+     "words": [
+      29.55,
+      29.55,
+      30.35,
+      30.35
+     ],
+     "word_frames": 8
+    }
+   ],
+   "_sound": "swell",
+   "_motion": "stack",
+   "_note": ""
+  },
+  {
+   "id": "s10",
+   "start": 33.5,
+   "end": 37.0,
+   "bg": {
+    "type": "color",
+    "color": "#003070"
+   },
+   "texts": [
+    {
+     "weight": 700,
+     "letter_spacing": -0.035,
+     "line_height": 1.14,
+     "max_width": 1700,
+     "shadow": false,
+     "align": "center",
+     "x": "center",
+     "y": 330,
+     "anim_in": "hit",
+     "in_frames": 4,
+     "anim_out": "cut",
+     "text": "*둘* *다* 봅니다.",
+     "start": 33.5,
+     "end": 37.0,
+     "size": 150,
+     "color": "#f5f5f7",
+     "accent_color": "#9cc3ff",
+     "hit_scale": 1.03
+    },
+    {
+     "size": 76,
+     "weight": 500,
+     "letter_spacing": -0.015,
+     "line_height": 1.3,
+     "max_width": 1500,
+     "shadow": false,
+     "align": "center",
+     "x": "center",
+     "anim_in": "rise",
+     "in_frames": 8,
+     "anim_out": "cut",
+     "text": "하지정맥 시술",
+     "start": 34.0,
+     "end": 37.0,
+     "color": "rgba(245,245,247,0.75)",
+     "y": 536
+    }
+   ],
+   "_sound": "hit",
+   "_motion": "spec",
+   "_note": ""
+  },
+  {
+   "id": "s11",
+   "start": 37.0,
+   "end": 39.5,
+   "bg": {
+    "type": "color",
+    "color": "#f5f5f7"
+   },
+   "texts": [],
+   "_sound": "swell",
+   "_motion": "slot",
+   "_note": "",
+   "fx": [
+    {
+     "type": "slot",
+     "text": "뼈부터 {관절|인대|힘줄|정맥}까지,",
+     "start": 37.0,
+     "end": 39.5,
+     "size": 168,
+     "weight": 700,
+     "color": "#1d1d1f",
+     "slot_color": "#003070",
+     "letter_spacing": -0.035,
+     "y": 350,
+     "slot_times": [
+      37.02,
+      37.52,
+      38.02,
+      38.52
+     ],
+     "roll_frames": 8,
+     "anim_in": "fade",
+     "in_frames": 6
+    }
+   ]
+  },
+  {
+   "id": "s12",
+   "start": 39.5,
+   "end": 43.0,
+   "bg": {
+    "type": "color",
+    "color": "#f5f5f7"
+   },
+   "texts": [
+    {
+     "weight": 700,
+     "letter_spacing": -0.035,
+     "line_height": 1.14,
+     "max_width": 1700,
+     "shadow": false,
+     "align": "center",
+     "x": "center",
+     "y": 350,
+     "anim_in": "none",
+     "in_frames": 6,
+     "anim_out": "cut",
+     "text": "뼈부터 정맥까지,\n*여기서* 봅니다.",
+     "start": 39.5,
+     "end": 51.0,
+     "size": 168,
+     "color": "#1d1d1f",
+     "accent_color": "#003070",
+     "y_to": 8,
+     "scale_to": 0.5,
+     "move_at": 43.0,
+     "move_frames": 18,
+     "words": [
+      38.5,
+      38.5,
+      39.53,
+      39.53
+     ],
+     "word_frames": 4
+    }
+   ],
+   "_sound": "hit",
+   "_motion": "stack",
+   "_note": ""
+  },
+  {
+   "id": "s13",
+   "start": 43.0,
+   "end": 46.0,
+   "bg": {
+    "type": "color",
+    "color": "#f5f5f7"
+   },
+   "texts": [
+    {
+     "size": 64,
+     "weight": 600,
+     "letter_spacing": -0.015,
+     "line_height": 1.3,
+     "max_width": 1500,
+     "shadow": false,
+     "align": "center",
+     "x": "center",
+     "anim_in": "fade",
+     "in_frames": 10,
+     "anim_out": "cut",
+     "text": "유병찬 대표원장",
+     "start": 43.7,
+     "end": 51.0,
+     "color": "#1d1d1f",
+     "y": 510
+    },
+    {
+     "size": 46,
+     "weight": 500,
+     "letter_spacing": -0.015,
+     "line_height": 1.3,
+     "max_width": 1500,
+     "shadow": false,
+     "align": "center",
+     "x": "center",
+     "anim_in": "fade",
+     "in_frames": 10,
+     "anim_out": "cut",
+     "text": "김철신정형외과의원",
+     "start": 43.85,
+     "end": 51.0,
+     "color": "#6e6e73",
+     "y": 596
+    }
+   ],
+   "_sound": "beat",
+   "_motion": "cut",
+   "_note": "",
+   "images": [
+    {
+     "src": "/home/user/Code-Zzamtong/promo/assets/hospital/logo_color.png",
+     "start": 43.45,
+     "end": 51.0,
+     "width": 520,
+     "y": 340,
+     "anim_in": "fade",
+     "in_frames": 12,
+     "anim_out": "none"
+    }
+   ]
+  },
+  {
+   "id": "s14",
+   "start": 46.0,
+   "end": 51.0,
+   "bg": {
+    "type": "color",
+    "color": "#f5f5f7"
+   },
+   "texts": [
+    {
+     "size": 54,
+     "weight": 500,
+     "letter_spacing": -0.01,
+     "line_height": 1.3,
+     "max_width": 1500,
+     "shadow": false,
+     "align": "center",
+     "x": "center",
+     "anim_in": "fade",
+     "in_frames": 8,
+     "anim_out": "cut",
+     "text": "낙성대역 4번 출구 · 무료 주차",
+     "start": 46.0,
+     "end": 51.0,
+     "color": "#1d1d1f",
+     "y": 724
+    },
+    {
+     "size": 54,
+     "weight": 500,
+     "letter_spacing": -0.01,
+     "line_height": 1.3,
+     "max_width": 1500,
+     "shadow": false,
+     "align": "center",
+     "x": "center",
+     "anim_in": "fade",
+     "in_frames": 8,
+     "anim_out": "cut",
+     "text": "평일 오후 7시까지 · 토요일 오후 2시까지",
+     "start": 46.12,
+     "end": 51.0,
+     "color": "#1d1d1f",
+     "y": 796
+    },
+    {
+     "size": 88,
+     "weight": 600,
+     "letter_spacing": 0.02,
+     "line_height": 1.3,
+     "max_width": 1500,
+     "shadow": false,
+     "align": "center",
+     "x": "center",
+     "anim_in": "fade",
+     "in_frames": 8,
+     "anim_out": "cut",
+     "text": "02-872-3301",
+     "start": 46.24,
+     "end": 51.0,
+     "color": "#1d1d1f",
+     "y": 868
+    }
+   ],
+   "_sound": "beat",
+   "_motion": "cut",
+   "_note": ""
+  }
+ ]
+}

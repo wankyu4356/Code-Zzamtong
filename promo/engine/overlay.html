@@ -470,9 +470,10 @@
       case "rise": { const e = easeOut(ramp(lf, n || 6)); return { scale: 1, dy: 40 * (1 - e), opacity: fadeIn(lf, n || 6), blur: 0 }; }
       case "track": {
         // 자간이 넓고 흐린 상태에서 조여지며 선명해진다 (키노트 타이틀)
-        const N = n || 16; const e = easeOut(ramp(lf, N));
+        const N = n || 16; const tf = (spec && typeof spec.track_from === "number") ? spec.track_from : 0;
+        const e = easeOut(tf + (1 - tf) * ramp(lf, N));      // track_from: 0이면 완전히 흐린 상태, 0.5면 반쯤 선명한 상태에서 시작
         const base = (spec && typeof spec.letter_spacing === "number") ? spec.letter_spacing : -0.04;
-        return { scale: 1.015 - 0.015 * e, dy: 0, opacity: fadeIn(lf, Math.ceil(N * 0.6)), blur: 10 * (1 - e), ls: base + 0.14 * (1 - e) };
+        return { scale: 1.015 - 0.015 * e, dy: 0, opacity: tf > 0 ? Math.max(tf, fadeIn(lf, Math.ceil(N * 0.6))) : fadeIn(lf, Math.ceil(N * 0.6)), blur: 10 * (1 - e), ls: base + 0.14 * (1 - e) };
       }
       case "wipe": {
         // 빛이 왼쪽에서 오른쪽으로 지나가며 글자가 드러난다
@@ -558,6 +559,7 @@
         const top = r4(it.spec.y + (it.spec.y_to - it.spec.y) * easeOut(p));
         it.wrap.style.top = top + "px";
         tkey += `:y${top}`;
+        if (typeof it.spec.scale_to === "number") { it.moveScale = r4(1 + (it.spec.scale_to - 1) * easeOut(p)); tkey += `:ms${it.moveScale}`; }
       }
       if (it.update) tkey += it.update(f);
       const a = animIn(it.spec.anim_in, f - it.sf, it.spec);
@@ -571,7 +573,7 @@
       const opacity = r4(a.opacity * animOut(it.spec.anim_out, it.ef - f, it.spec) * (it.maxOpacity ?? 1));
       // drift_scale: 요소가 보이는 동안 선형으로 커지는 느린 줌 (예: 0.03이면 1.00에서 1.03)
       const drift = it.spec.drift_scale ? it.spec.drift_scale * ((f - it.sf) / Math.max(1, it.ef - it.sf - 1)) : 0;
-      const transform = `translateY(${r4(a.dy)}px) scale(${r4(a.scale + drift)})`;
+      const transform = `translateY(${r4(a.dy)}px) scale(${r4((a.scale + drift) * (it.moveScale ?? 1))})`;
       const filter = a.blur > 0.005 ? `blur(${r4(a.blur)}px)` : "none";
       it.el.style.opacity = String(opacity);
       it.el.style.transform = transform;
