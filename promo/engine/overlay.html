@@ -205,7 +205,8 @@
       // "{허리|무릎|어깨} 아프면," : 빈자리 단어가 위로 굴러 바뀐다
       const m = /^([\s\S]*?)\{([^}]+)\}([\s\S]*)$/.exec(s.text);
       const pre = m ? m[1] : "", words = m ? m[2].split("|") : [s.text], post = m ? m[3] : "";
-      const w = Math.ceil(Math.max(...words.map(x => measure(x, s)))) + 6;
+      const widths = words.map(x => Math.ceil(measure(x, s)) + 4);   // 단어마다 폭이 달라 슬롯 폭을 함께 움직인다 (문장이 다시 가운데로 맞춰진다)
+      const w = Math.max(...widths);
       const h = Math.ceil(s.size * s.line_height);
       const slot = document.createElement("span");
       Object.assign(slot.style, { display: "inline-block", position: "relative", width: w + "px", height: h + "px", overflow: "hidden", verticalAlign: "bottom", textAlign: "left" });
@@ -225,7 +226,10 @@
           else if (k === cur - 1) { ty = -h * e; op = 1 - e; }
           x.style.transform = `translateY(${r4(ty)}px)`; x.style.opacity = String(r4(op));
         });
-        return `:sl${cur}:${r4(p)}`;
+        const wPrev = widths[Math.max(0, cur - 1)], wCur = widths[cur];
+        const sw = r4(cur === 0 ? wCur : wPrev + (wCur - wPrev) * e);
+        slot.style.width = sw + "px";
+        return `:sl${cur}:${r4(p)}:${sw}`;
       };
     } else if (s.type === "ticker") {
       // 여러 줄의 단어가 좌우로 흐르다 (settle_at부터) 한 단어가 중앙에 멈춘다

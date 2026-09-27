@@ -159,7 +159,7 @@ def build(script):
                        "anim_in": "fade", "in_frames": 6})
         elif motion == "grid":
             cells = items[:12]
-            cols = 4 if len(cells) >= 8 else 3
+            cols = 3 if len(cells) in (5, 6, 9) else (4 if len(cells) >= 7 else 3)
             step = max(0.12, (secs - 1.2) / max(1, len(cells)))
             fx.append({"type": "grid", "start": a_f, "end": b_f, "size": 84 if len(cells) <= 9 else 72, "weight": 600, "cols": cols, "items": cells,
                        "color": col, "dim_color": dim_color(kind), "light_times": [round(a_f + 0.25 + i * step, 4) for i in range(len(cells))],
@@ -180,7 +180,7 @@ def build(script):
             texts.append(h)
             rows = items[:6]
             for i, it_ in enumerate(rows):
-                texts.append(dict(SUB, text=it_, start=round(a_f + 0.35 + i * 0.16, 4), end=b_f, size=54, weight=500, color=soft, y=470 + i * 78,
+                texts.append(dict(SUB, text=it_, start=round(a_f + 0.35 + i * 0.16, 4), end=b_f, size=64, weight=500, color=soft, y=460 + i * 88,
                                   anim_in="rise", in_frames=8))
         elif motion == "list":
             x0 = 160
