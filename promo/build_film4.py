@@ -247,11 +247,152 @@ def build(script):
     return shots, t
 
 
+def _abs_t(t, shot):
+    """모션 사양의 시각: 화면 시작보다 작으면 화면 기준 상대 시각으로 본다."""
+    t = float(t)
+    return round(t + shot["start"], 4) if t < shot["start"] - 1e-6 else round(t, 4)
+
+
+def _line_times_from_words(text, words):
+    out, k = [], 0
+    for line in text.split("\n"):
+        n = len([w for w in line.split(" ") if w])
+        if n and k < len(words):
+            out.append(words[k])
+        k += n
+    return out
+
+
+def apply_motion(shots, script, motion):
+    """film4/motion.json(모션 디자인 워크플로 최종 사양)을 타임라인에 입힌다. 카피는 바꾸지 않는다."""
+    by_no = {int(m["no"]): m for m in motion.get("screens", [])}
+    bg_color = {"white": WHITE, "black": BLACK, "navy": ACCENT, "photo_doctor": WHITE, "photo_reception": WHITE}
+    scr = {sc["no"]: sc for sc in script["screens"]}
+    for idx, shot in enumerate(shots):
+        no = int(shot["id"][1:])
+        m = by_no.get(no)
+        if not m:
+            continue
+        sc = scr[no]
+        texts = shot.get("texts", [])
+        fxs = shot.get("fx", [])
+        main = texts[0] if texts else (fxs[0] if fxs else None)
+        role = sc.get("role")
+        items = texts[1:] if sc.get("motion") not in ("quote",) else []
+        source = texts[1] if sc.get("motion") == "quote" and len(texts) > 1 else None
+        if role == "info":
+            main, items = None, texts
+        # --- 등장
+        e = m.get("entry") or {}
+        if main is not None and e and not e.get("special_only"):
+            if "reveal" in e:
+                rv = dict(e["reveal"])
+                if "line_times" in rv:
+                    rv["line_times"] = [_abs_t(x, shot) for x in rv["line_times"]]
+                elif main.get("words") and "\n" in main.get("text", ""):
+                    rv["line_times"] = _line_times_from_words(main["text"], main["words"])
+                main["reveal"] = rv
+                main["anim_in"] = "none"
+                main.pop("words", None)
+            for k in ("anim_in", "in_frames", "hit_scale", "track_from"):
+                if k in e:
+                    main[k] = e[k]
+                    if k == "anim_in":
+                        main.pop("words", None)
+            if "element_start" in e and role != "brand":
+                main["start"] = _abs_t(e["element_start"], shot)
+        if e.get("logo") and shot.get("images"):
+            lg = e["logo"]
+            for k in ("anim_in", "in_frames"):
+                if k in lg:
+                    shot["images"][0][k] = lg[k]
+            if "start" in lg:
+                shot["images"][0]["start"] = _abs_t(lg["start"], shot)
+        # --- 항목 등장
+        ie = m.get("items_entry") or {}
+        targets = items if items else ([source] if source else [])
+        if ie and targets and "reveal" in ie:
+            starts = ie.get("element_starts") or ([ie["element_start"]] if "element_start" in ie else None)
+            for i, t in enumerate(targets):
+                t["reveal"] = dict(ie["reveal"])
+                t["anim_in"] = "none"
+                t.pop("words", None)
+                if starts and i < len(starts):
+                    t["start"] = _abs_t(starts[i], shot)
+        # --- 퇴장
+        x = m.get("exit") or {}
+        if x and x.get("style") and not x.get("out_to"):
+            ex = {k: v for k, v in x.items() if k in ("style", "unit", "stagger", "dur", "ease")}
+            if x["style"] == "zoom":
+                if main is not None:
+                    main["exit"] = ex
+                for t in items + ([source] if source else []):     # 항목은 같은 길이의 흐림으로 함께 빠진다
+                    if t.get("end", 0) <= shot["end"] + 0.01:
+                        t["exit"] = {"style": "blur", "dur": ex.get("dur", 10)}
+            else:
+                els = ([main] if main is not None else []) + items + ([source] if source else [])
+                ends = x.get("element_ends")
+                for i, t in enumerate(els):
+                    if t is None or t.get("end", 0) > shot["end"] + 0.01:      # 다음 화면까지 이어지는 요소(브랜드·엔딩)는 퇴장 없음
+                        continue
+                    t["exit"] = dict(ex)
+                    if ends and i < len(ends):
+                        t["end"] = _abs_t(ends[i], shot)
+        # --- 스윕·밑줄
+        a = m.get("accent_fx") or {}
+        if main is not None and "text" in main:
+            for k in ("sheen", "underline"):
+                if a.get(k):
+                    v = dict(a[k])
+                    v["at"] = _abs_t(v.get("at", shot["start"]), shot)
+                    main[k] = v
+        # --- 전환
+        tr = m.get("transition_out") or {}
+        if tr.get("type") == "shape_wipe":
+            nxt = script["screens"][idx + 1]["bg"] if idx + 1 < len(script["screens"]) else "white"
+            fxs.append({"type": "shape_wipe", "shape": tr.get("shape", "circle"), "origin": tr.get("origin", [960, 540]),
+                        "color": tr.get("color") or bg_color.get(nxt, WHITE), "start": _abs_t(tr["start"], shot), "end": _abs_t(tr.get("end", shot["end"]), shot)})
+        elif tr.get("type") == "exit_zoom" and main is not None and not main.get("exit"):
+            main["exit"] = {"style": "zoom", "dur": tr.get("dur", 10)}
+            for t in items:
+                if t.get("end", 0) <= shot["end"] + 0.01 and not t.get("exit"):
+                    t["exit"] = {"style": "blur", "dur": tr.get("dur", 10)}
+        # --- 특수 요소
+        sp = m.get("special") or {}
+        for f in fxs:
+            if f["type"] in sp and isinstance(sp[f["type"]], dict):
+                for k, v in sp[f["type"]].items():
+                    if k in ("light_times", "slot_times"):
+                        v = [_abs_t(t, shot) for t in v]
+                    elif k in ("color_at",):
+                        v = _abs_t(v, shot)
+                    f[k] = v
+        if isinstance(sp.get("odometer"), dict):
+            od = sp["odometer"]
+            phone = next((t for t in texts if "-" in t["text"] and any(c.isdigit() for c in t["text"])), None)
+            if phone is not None:
+                texts.remove(phone)
+                fxs.append({"type": "odometer", "text": phone["text"], "start": phone["start"], "end": phone["end"], "roll_start": _abs_t(od.get("start", phone["start"]), shot),
+                            "size": phone["size"], "weight": phone["weight"], "color": phone["color"], "letter_spacing": phone.get("letter_spacing", 0.01),
+                            "line_height": 1.2, "x": "center", "y": phone["y"], "stagger": od.get("stagger", 0.05), "dur": od.get("dur", 20), "spins": od.get("spins", 1),
+                            "anim_in": "none"})
+        for ld in (sp.get("line_draw") if isinstance(sp.get("line_draw"), list) else ([sp["line_draw"]] if isinstance(sp.get("line_draw"), dict) else [])):
+            f = {"type": "line_draw", "start": shot["start"], "end": ld.get("end", shot["end"]), "draw_start": _abs_t(ld.get("start", shot["start"]), shot)}
+            f.update({k: ld[k] for k in ("x1", "y1", "x2", "y2", "color", "thickness", "dur") if k in ld})
+            fxs.append(f)
+        if fxs:
+            shot["fx"] = fxs
+
+
 if __name__ == "__main__":
-    args = [x for x in sys.argv[1:]]
+    args = [x for x in sys.argv[1:] if not x.startswith("--")]
     script_p = args[0] if args else os.path.join(HERE, "film4", "script.json")
     script = json.load(open(script_p, encoding="utf-8"))
     shots, total = build(script)
+    motion_p = os.path.join(HERE, "film4", "motion.json")
+    if os.path.exists(motion_p) and "--no-motion" not in sys.argv:
+        apply_motion(shots, script, json.load(open(motion_p, encoding="utf-8")))
+        print("motion spec applied:", motion_p)
     audio = os.path.join(HERE, "music", "render", "film4_music.wav")
     tl = {"fps": FPS, "width": 1920, "height": 1080, "duration": total, "audio": audio if os.path.exists(audio) else None, "shots": shots}
     out = args[1] if len(args) > 1 else os.path.join(HERE, "engine", "timeline_film4.json")
