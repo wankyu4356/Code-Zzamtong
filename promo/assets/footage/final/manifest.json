@@ -193,5 +193,13 @@
   "source": "cov_14988.mp4",
   "source_in_point": 0.5,
   "note": "아이 꽈당: 쓰러진 자전거 옆에서 아이가 다리를 감싼다"
+ },
+ "s09": {
+  "file": "/home/user/Code-Zzamtong/promo/assets/footage/final/s09.mp4",
+  "in_point": 0.4,
+  "mixkit_id": "33354",
+  "source": "s09_33354.mp4",
+  "source_in_point": 10.3,
+  "note": "수능 전, 목: 책 더미 앞 학생이 고개를 뒤로 젖혔다가 옆으로 돌리며 목을 푼다 (처음 제작 때는 맞는 영상이 없어 검은 화면이었음)"
  }
 }

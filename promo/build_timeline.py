@@ -65,11 +65,12 @@ OVERRIDES = {
     "s26": {"brightness": -0.15},                     # 피부와 흰 티가 밝아 흰 글자 대비 확보
     "s27": {"punch": 1.25, "anchor": [0.5, 0.3]},     # 실루엣이 상단 중앙에 작게 있음
     # 증상 드롭: 밝은 배경은 감마로 낮춘다(밝기만 내리면 어두운 쪽 색이 붉게 뜬다)
+    "s09": {"brightness": -0.05, "gamma": 0.8},        # 밝은 흰·하늘색 방이라 흰 글자 대비 확보
     "c39": {"brightness": -0.2, "gamma": 0.65, "saturation": 0.65},   # 흰 스튜디오 배경, 흰 글자 대비
     "c40": {"punch": 1.3, "anchor": [0.6, 0.0]},      # 앞쪽 연고 튜브를 화면 밖으로
     "c41": {"punch": 1.15, "anchor": [0.3, 0.5], "brightness": -0.1, "gamma": 0.8},   # 발이 글자 오른쪽으로
     "c42": {"brightness": -0.1, "gamma": 0.75},       # 밝은 흰 배경
-    "c43": {"punch": 1.15, "anchor": [0.2, 0.5], "brightness": -0.1},   # 아이가 글자 오른쪽으로
+    "c43": {"punch": 1.2, "anchor": [0.0, 0.45], "brightness": -0.1, "amount": 0.015},  # 아이가 글자 오른쪽에, 줌은 작게(끝까지 화면 안)
 }
 
 
@@ -82,7 +83,7 @@ def clip_bg(shot_id, zoom="in", amount=0.05, brightness=0.0, vignette=True):
     g = dict(GRADE)
     g["brightness"] = o.get("brightness", brightness)
     g.update({k: o[k] for k in ("gamma", "saturation", "contrast") if k in o})
-    return {"type": "clip", "src": file, "in": inp, "fit": "cover", "zoom": zoom, "zoom_amount": amount, "grade": g, "vignette": vignette, "grain": 0.08,
+    return {"type": "clip", "src": file, "in": inp, "fit": "cover", "zoom": zoom, "zoom_amount": o.get("amount", amount), "grade": g, "vignette": vignette, "grain": 0.08,
             "punch": o.get("punch", 1.0), "anchor": o.get("anchor", [0.5, 0.5])}
 
 
@@ -182,7 +183,7 @@ shots.append(shot("s06", 4.0, 5.0, {"type": "black"}, [T("일주일.", 4.0, 5.0,
 shots.append(shot("s07", 5.0, 6.0, {"type": "black"}, [T("병원은 나중에.", 5.0, 6.0, 170, in_frames=3)]))
 shots.append(shot("s08", 6.0, 8.0, {"type": "black"}, [T("어디로 가야 하나.", 6.0, 8.0, 170, in_frames=3, drift_scale=0.03)]))
 # 빌드
-shots.append(shot("s09", 8.0, 9.0, clip_bg("s09", amount=0.04), [T("수능 앞, 목.", 8.0, 9.0, 170, in_frames=3, shadow=True)]))
+shots.append(shot("s09", 8.0, 9.0, clip_bg("s09", amount=0.04), [T("수능 전, 목.", 8.0, 9.0, 170, in_frames=3, shadow=True)]))
 shots.append(shot("s10", 9.0, 10.0, clip_bg("s10", amount=0.04), [T("모니터 앞, 거북목.", 9.0, 10.0, 170, in_frames=3, shadow=True)]))
 shots.append(shot("s11", 10.0, 11.0, clip_bg("s11", amount=0.04), [T("계단 앞, 무릎.", 10.0, 11.0, 170, in_frames=3, shadow=True)]))
 # 원장 소개: '일대일'은 병원이면 당연한 말이라 이름과 직함으로 바꿨다. 다음 두 화면과 이어져 한 문장이 된다
@@ -251,7 +252,7 @@ shots.append(shot("s37", 1072 * F, 36.0, {"type": "black"}))
 # 16~20초 드롭에서 나온 목·어깨·무릎·허리는 글자로 다시 쓰지 않는다. 영상은 final/c38~c43 (자기 손이 아픈 곳을 짚는 장면 위주)
 t = 36.0
 for sid, clip, w, flash in [("s38", "c38", "손목 시큰", True), ("s39", "c39", "다리 묵직", False), ("s40", "c40", "발목 삐끗", False),
-                            ("s41", "c41", "발바닥 찌릿", False), ("s42", "c42", "사고 후 뻐근", True), ("s43", "c43", "아이 꽈당", False)]:
+                            ("s41", "c41", "발바닥 찌릿", False), ("s42", "c42", "사고 후 뻐근", True), ("s43", "c43", "넘어진 아이", False)]:
     fl = [{"at": t, "frames": 2, "color": "#fff", "opacity": 0.9}] if flash else None
     shots.append(shot(sid, t, t + 0.5, clip_bg(clip, amount=0.06), [T(w, t, t + 0.5, 220, anim_in="slam", hit_scale=1.15, in_frames=3, shadow=True)], flashes=fl))
     t += 0.5
