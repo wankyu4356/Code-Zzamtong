@@ -319,7 +319,7 @@
       // "{허리|무릎|어깨} 아프면," : 빈자리 단어가 위로 굴러 바뀐다
       const m = /^([\s\S]*?)\{([^}]+)\}([\s\S]*)$/.exec(s.text);
       const pre = m ? m[1] : "", words = m ? m[2].split("|") : [s.text], post = m ? m[3] : "";
-      const widths = words.map(x => Math.ceil(measure(x, s)) + 4);   // 단어마다 폭이 달라 슬롯 폭을 함께 움직인다 (문장이 다시 가운데로 맞춰진다)
+      const widths = words.map(x => Math.ceil(measure(x, s)));   // 단어마다 폭이 달라 슬롯 폭을 함께 움직인다 (문장이 다시 가운데로 맞춰진다)
       const w = Math.max(...widths);
       const h = Math.ceil(s.size * s.line_height);
       const slot = document.createElement("span");
@@ -472,14 +472,19 @@
       Object.assign(el.style, { width: "1920px", height: "1080px", background: s.color || "#000", clipPath: "circle(0px at 50% 50%)" });
       const o = s.origin || [960, 540];
       const R = Math.hypot(Math.max(o[0], 1920 - o[0]), Math.max(o[1], 1080 - o[1])) + 4;
+      const fe = s.feather || 0;
       it.update = (f) => {
         const p = clamp01((f - it.sf + 1) / Math.max(1, it.ef - it.sf));
-        const e = easeInOut(p);
-        let cp;
-        if (s.shape === "panel_up") cp = `inset(${r4((1 - e) * 100)}% 0 0 0)`;
-        else if (s.shape === "panel_left") cp = `inset(0 0 0 ${r4((1 - e) * 100)}%)`;
-        else cp = `circle(${r4(e * R)}px at ${o[0]}px ${o[1]}px)`;
-        el.style.clipPath = cp;
+        const e = s.ease === "expoIn" ? (p >= 1 ? 1 : Math.pow(2, 10 * (p - 1))) : easeInOut(p);
+        if (s.shape === "panel_up" || s.shape === "panel_left") {
+          el.style.clipPath = s.shape === "panel_up" ? `inset(${r4((1 - e) * 100)}% 0 0 0)` : `inset(0 0 0 ${r4((1 - e) * 100)}%)`;
+        } else if (fe > 0) {
+          // 부드러운 가장자리의 원: 마스크 방사형 그라데이션. 마지막 프레임에 화면을 완전히 덮는다
+          el.style.clipPath = "none";
+          const r = e * (R + fe);
+          const m = `radial-gradient(circle at ${o[0]}px ${o[1]}px, #000 ${r4(Math.max(0, r - fe))}px, rgba(0,0,0,0) ${r4(r)}px)`;
+          el.style.webkitMaskImage = m; el.style.maskImage = m;
+        } else el.style.clipPath = `circle(${r4(e * R)}px at ${o[0]}px ${o[1]}px)`;
         return `:sw${r4(e)}`;
       };
     } else if (s.type === "line_draw") {
@@ -689,9 +694,13 @@
       default: return { scale: 1, dy: 0, opacity: 1, blur: 0 };
     }
   }
-  function animOut(kind, rem, spec) {
+  function animOut(kind, rem, spec, f) {
     const n = (spec && spec.out_frames) || 5;
     const to = spec && typeof spec.out_to === "number" ? spec.out_to : 0;
+    if (kind === "fade" && spec && typeof spec.out_at === "number" && f !== undefined) {
+      // out_at: 요소 끝이 아니라 정한 시각부터 out_frames 동안 옅어지고 그 뒤 out_to 유지
+      return to + (1 - to) * (1 - clamp01((f - toFrame(spec.out_at) + 1) / n));
+    }
     return kind === "fade" ? to + (1 - to) * clamp01(rem / n) : 1;
   }
 
@@ -845,7 +854,7 @@
         (it.root || it.el).style.webkitMaskImage = m; (it.root || it.el).style.maskImage = m;
         tkey += `:wp${r4(a.wipe)}`;
       }
-      const opacity = r4(a.opacity * animOut(it.spec.anim_out, it.ef - f, it.spec) * (it.maxOpacity ?? 1));
+      const opacity = r4(a.opacity * animOut(it.spec.anim_out, it.ef - f, it.spec, f) * (it.maxOpacity ?? 1));
       // drift_scale: 요소가 보이는 동안 선형으로 커지는 느린 줌 (예: 0.03이면 1.00에서 1.03)
       const dEnd = it.spec.drift_until !== undefined ? toFrame(it.spec.drift_until) : it.ef - 1;
       const drift = it.spec.drift_scale ? it.spec.drift_scale * clamp01((f - it.sf) / Math.max(1, dEnd - it.sf)) : 0;

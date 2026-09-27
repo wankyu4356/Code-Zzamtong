@@ -249,10 +249,8 @@ def build(script):
 
 def _abs_t(t, shot):
     """모션 사양의 시각: 화면 시작보다 작으면 화면 기준 상대 시각으로 본다."""
-    t = float(t)
-    dur = shot["end"] - shot["start"]
-    rel = t < shot["start"] - 1e-6 and t <= dur + 1e-6      # 38.5처럼 화면보다 앞선 절대 시각은 그대로 둔다
-    return round(t + shot["start"], 4) if rel else round(t, 4)
+    # 모션 사양의 시각은 모두 절대 시각(영상 처음부터 초)이다. 화면 시작보다 이른 값은 '첫 프레임에 이미 서 있음'을 뜻한다
+    return round(float(t), 4)
 
 
 def _line_times_from_words(text, words):
@@ -263,6 +261,38 @@ def _line_times_from_words(text, words):
             out.append(words[k])
         k += n
     return out
+
+
+UNITS = ("char", "word", "line")
+TEXT_KEYS = ("anim_in", "in_frames", "hit_scale", "track_from", "drift_scale", "drift_until")
+
+
+def _clean_exit(x):
+    ex = {k: v for k, v in x.items() if k in ("style", "unit", "stagger", "dur", "ease")}
+    if ex.get("unit") not in UNITS:
+        ex.pop("unit", None)                      # 설명문이 들어온 경우: 엔진이 reveal 단위를 따른다
+    return ex
+
+
+def _set_reveal(t, rv, shot):
+    rv = dict(rv)
+    if "line_times" in rv:
+        rv["line_times"] = [_abs_t(x, shot) for x in rv["line_times"]]
+    elif t.get("words") and "\n" in t.get("text", ""):
+        rv["line_times"] = _line_times_from_words(t["text"], t["words"])
+    t["reveal"] = rv
+    t.pop("words", None)
+    t.setdefault("anim_in", "none")
+    if t.get("anim_in") not in ("hit", "fade", "track", "none"):
+        t["anim_in"] = "none"
+
+
+def _apply_text_keys(t, src, shot):
+    for k in TEXT_KEYS:
+        if k in src:
+            t[k] = _abs_t(src[k], shot) if k == "drift_until" else src[k]
+            if k == "anim_in":
+                t.pop("words", None)
 
 
 def apply_motion(shots, script, motion):
@@ -277,113 +307,191 @@ def apply_motion(shots, script, motion):
             continue
         sc = scr[no]
         texts = shot.get("texts", [])
-        fxs = shot.get("fx", [])
-        main = texts[0] if texts else (fxs[0] if fxs else None)
+        fxs = shot.setdefault("fx", [])
         role = sc.get("role")
-        items = texts[1:] if sc.get("motion") not in ("quote",) else []
-        source = texts[1] if sc.get("motion") == "quote" and len(texts) > 1 else None
+        motion_kind = sc.get("motion")
+        source = texts[1] if motion_kind == "quote" and len(texts) > 1 else None
         if role == "info":
-            main, items = None, texts
+            phone = next((t for t in texts if "-" in t["text"] and any(c.isdigit() for c in t["text"])), None)
+            main, items = phone, [t for t in texts if t is not phone]
+        else:
+            main = texts[0] if texts else (fxs[0] if fxs else None)
+            items = texts[1:] if motion_kind != "quote" else []
+        sp = m.get("special") or {}
+
+        # --- 배치 조정 (크기·위치)
+        lay = sp.get("layout") or {}
+        if main is not None:
+            if "size" in lay:
+                main["size"] = lay["size"]
+            if isinstance(lay.get("title"), dict):
+                for k in ("size", "y"):
+                    if k in lay["title"]:
+                        main[k] = lay["title"][k]
+            if isinstance(lay.get("phone"), dict):
+                for k in ("size", "weight", "y"):
+                    if k in lay["phone"]:
+                        main[k] = lay["phone"][k]
+        if isinstance(lay.get("items_y"), list):
+            for t, y in zip(items, lay["items_y"]):
+                t["y"] = y
+
         # --- 등장
         e = m.get("entry") or {}
-        if main is not None and e and not e.get("special_only"):
-            if "reveal" in e:
-                rv = dict(e["reveal"])
-                if "line_times" in rv:
-                    rv["line_times"] = [_abs_t(x, shot) for x in rv["line_times"]]
-                elif main.get("words") and "\n" in main.get("text", ""):
-                    rv["line_times"] = _line_times_from_words(main["text"], main["words"])
-                main["reveal"] = rv
-                main["anim_in"] = "none"
-                main.pop("words", None)
-            for k in ("anim_in", "in_frames", "hit_scale", "track_from"):
-                if k in e:
-                    main[k] = e[k]
-                    if k == "anim_in":
-                        main.pop("words", None)
+        if main is not None and e:
+            if "reveal" in e and "text" in main:
+                _set_reveal(main, e["reveal"], shot)
+            _apply_text_keys(main, e, shot)
             if "element_start" in e and role != "brand":
                 main["start"] = _abs_t(e["element_start"], shot)
-        if e.get("logo") and shot.get("images"):
-            lg = e["logo"]
+
+        # --- 항목 등장
+        ie = m.get("items_entry") or {}
+        if ie.get("reveal") and items:
+            starts = ie.get("element_starts")
+            for i, t in enumerate(items):
+                _set_reveal(t, ie["reveal"], shot)
+                _apply_text_keys(t, ie, shot)
+                if starts and i < len(starts):
+                    t["start"] = _abs_t(starts[i], shot)
+            for t, L in zip(items, ie.get("layout") or []):
+                for k in ("x", "y", "align"):
+                    if k in L:
+                        t[k] = L[k]
+        if isinstance(ie.get("source"), dict) and source is not None:
+            so = ie["source"]
+            if so.get("reveal"):
+                _set_reveal(source, so["reveal"], shot)
+            _apply_text_keys(source, so, shot)
+            if "start" in so:
+                source["start"] = _abs_t(so["start"], shot)
+        if isinstance(ie.get("logo_image"), dict) and shot.get("images"):
+            lg = ie["logo_image"]
             for k in ("anim_in", "in_frames"):
                 if k in lg:
                     shot["images"][0][k] = lg[k]
             if "start" in lg:
                 shot["images"][0]["start"] = _abs_t(lg["start"], shot)
-        # --- 항목 등장
-        ie = m.get("items_entry") or {}
-        targets = items if items else ([source] if source else [])
-        if ie and targets and "reveal" in ie:
-            starts = ie.get("element_starts") or ([ie["element_start"]] if "element_start" in ie else None)
-            for i, t in enumerate(targets):
-                t["reveal"] = dict(ie["reveal"])
-                t["anim_in"] = "none"
-                t.pop("words", None)
-                if starts and i < len(starts):
-                    t["start"] = _abs_t(starts[i], shot)
+
         # --- 퇴장
         x = m.get("exit") or {}
-        if x and x.get("style") and not x.get("out_to"):
-            ex = {k: v for k, v in x.items() if k in ("style", "unit", "stagger", "dur", "ease")}
+        if x.get("anim_out"):                                   # 정한 시각부터 옅어지는 마무리 (엔딩)
+            tg = items if role == "info" else ([main] if main is not None else [])
+            for t in tg:
+                t.update(anim_out=x["anim_out"], out_frames=x.get("out_frames", 12), out_to=x.get("out_to", 0))
+                if "out_at" in x:
+                    t["out_at"] = _abs_t(x["out_at"], shot)
+            if role not in ("info",) and main is not None and main.get("type") in ("grid",):
+                main.update(anim_out=x["anim_out"], out_frames=x.get("out_frames", 12))
+        elif x.get("style") and x["style"] != "none":
+            ex = _clean_exit(x)
+            end_all = x.get("element_end")
             if x["style"] == "zoom":
                 if main is not None:
                     main["exit"] = ex
-                for t in items + ([source] if source else []):     # 항목은 같은 길이의 흐림으로 함께 빠진다
+                for t in items + ([source] if source else []):
                     if t.get("end", 0) <= shot["end"] + 0.01:
                         t["exit"] = {"style": "blur", "dur": ex.get("dur", 10)}
             else:
-                els = ([main] if main is not None else []) + items + ([source] if source else [])
+                els = ([main] if main is not None and "text" in main else []) + items + ([source] if source else [])
                 ends = x.get("element_ends")
                 for i, t in enumerate(els):
-                    if t is None or t.get("end", 0) > shot["end"] + 0.01:      # 다음 화면까지 이어지는 요소(브랜드·엔딩)는 퇴장 없음
+                    if t.get("end", 0) > shot["end"] + 0.01:
                         continue
                     t["exit"] = dict(ex)
                     if ends and i < len(ends):
                         t["end"] = _abs_t(ends[i], shot)
+                    elif end_all is not None:
+                        t["end"] = _abs_t(end_all, shot)
+
         # --- 스윕·밑줄
-        a = m.get("accent_fx") or {}
+        a_ = m.get("accent_fx") or {}
         if main is not None and "text" in main:
             for k in ("sheen", "underline"):
-                if a.get(k):
-                    v = dict(a[k])
+                if a_.get(k):
+                    v = dict(a_[k])
                     v["at"] = _abs_t(v.get("at", shot["start"]), shot)
                     main[k] = v
+
+        # --- 이동·호흡 (브랜드 줄, 로고·이름)
+        if isinstance(sp.get("move"), dict) and main is not None:
+            mv = sp["move"]
+            if role == "logo":
+                for k, key in (("logo_y_to", "img"), ("name_y_to", "name")):
+                    pass
+                if shot.get("images"):
+                    im = shot["images"][0]
+                    im.update(move_at=_abs_t(mv.get("move_at", im.get("move_at", shot["end"])), shot), move_frames=mv.get("move_frames", 15),
+                              move_ease=mv.get("move_ease", "inOut"))
+                    if "logo_y_to" in mv:
+                        im["y_to"] = mv["logo_y_to"]
+                main.update(move_at=_abs_t(mv.get("move_at", shot["end"]), shot), move_frames=mv.get("move_frames", 15), move_ease=mv.get("move_ease", "inOut"))
+                if "name_y_to" in mv:
+                    main["y_to"] = mv["name_y_to"]
+            else:
+                for k in ("move_frames", "move_ease", "y_to", "scale_to", "ls_to"):
+                    if k in mv:
+                        main[k] = mv[k]
+                if "move_at" in mv:
+                    main["move_at"] = _abs_t(mv["move_at"], shot)
+        for k in ("drift_scale", "drift_until"):
+            if k in sp and main is not None:
+                main[k] = _abs_t(sp[k], shot) if k == "drift_until" else sp[k]
+
+        # --- 배경: 끝에서 검정으로 가라앉기, 카메라 밀어 넣기
+        if isinstance(sp.get("bg"), dict):
+            for k in ("fade_out", "fade_color"):
+                if k in sp["bg"]:
+                    shot["bg"][k] = sp["bg"][k]
+        if isinstance(sp.get("bg_push_out"), dict) and shot["bg"]["type"] in ("image", "clip"):
+            shot["bg"]["push_out"] = {k: sp["bg_push_out"][k] for k in ("frames", "amount", "blur") if k in sp["bg_push_out"]}
+
         # --- 전환
         tr = m.get("transition_out") or {}
         if tr.get("type") == "shape_wipe":
             nxt = script["screens"][idx + 1]["bg"] if idx + 1 < len(script["screens"]) else "white"
-            fxs.append({"type": "shape_wipe", "shape": tr.get("shape", "circle"), "origin": tr.get("origin", [960, 540]),
-                        "color": tr.get("color") or bg_color.get(nxt, WHITE), "start": _abs_t(tr["start"], shot), "end": _abs_t(tr.get("end", shot["end"]), shot)})
+            f = {"type": "shape_wipe", "shape": tr.get("shape", "circle"), "origin": tr.get("origin", [960, 540]),
+                 "color": tr.get("color") or bg_color.get(nxt, WHITE), "start": _abs_t(tr["start"], shot), "end": _abs_t(tr.get("end", shot["end"]), shot)}
+            for k in ("ease", "feather"):
+                if k in tr:
+                    f[k] = tr[k]
+            fxs.append(f)
         elif tr.get("type") == "exit_zoom" and main is not None and not main.get("exit"):
-            main["exit"] = {"style": "zoom", "dur": tr.get("dur", 10)}
-            for t in items:
-                if t.get("end", 0) <= shot["end"] + 0.01 and not t.get("exit"):
-                    t["exit"] = {"style": "blur", "dur": tr.get("dur", 10)}
+            main["exit"] = {"style": "zoom", "dur": tr.get("dur", 8)}
+
         # --- 특수 요소
-        sp = m.get("special") or {}
-        for f in fxs:
-            if f["type"] in sp and isinstance(sp[f["type"]], dict):
-                for k, v in sp[f["type"]].items():
+        SKIP = {"remove", "text", "note", "request", "pattern"}
+        for fx in fxs:
+            spec_fx = sp.get(fx["type"])
+            if isinstance(spec_fx, dict):
+                for k, v in spec_fx.items():
+                    if k in SKIP:
+                        continue
                     if k in ("light_times", "slot_times"):
                         v = [_abs_t(t, shot) for t in v]
-                    elif k in ("color_at",):
+                    elif k == "color_at":
                         v = _abs_t(v, shot)
-                    f[k] = v
-        if isinstance(sp.get("odometer"), dict):
-            od = sp["odometer"]
-            phone = next((t for t in texts if "-" in t["text"] and any(c.isdigit() for c in t["text"])), None)
-            if phone is not None:
-                texts.remove(phone)
-                fxs.append({"type": "odometer", "text": phone["text"], "start": phone["start"], "end": phone["end"], "roll_start": _abs_t(od.get("start", phone["start"]), shot),
-                            "size": phone["size"], "weight": phone["weight"], "color": phone["color"], "letter_spacing": phone.get("letter_spacing", 0.01),
-                            "line_height": 1.2, "x": "center", "y": phone["y"], "stagger": od.get("stagger", 0.05), "dur": od.get("dur", 20), "spins": od.get("spins", 1),
-                            "anim_in": "none"})
-        for ld in (sp.get("line_draw") if isinstance(sp.get("line_draw"), list) else ([sp["line_draw"]] if isinstance(sp.get("line_draw"), dict) else [])):
-            f = {"type": "line_draw", "start": shot["start"], "end": ld.get("end", shot["end"]), "draw_start": _abs_t(ld.get("start", shot["start"]), shot)}
+                    fx[k] = v
+                if fx["type"] == "slot" and "slot_color_to" not in spec_fx:
+                    for k in ("slot_color_to", "color_at", "color_frames"):
+                        fx.pop(k, None)
+        if isinstance(ie.get("light_times"), list):
+            for fx in fxs:
+                if fx["type"] == "grid":
+                    fx["light_times"] = [_abs_t(t, shot) for t in ie["light_times"]]
+                    for k in ("cell_style", "light_frames"):
+                        if k in ie:
+                            fx[k] = ie[k]
+        lds = sp.get("line_draw")
+        lds = lds if isinstance(lds, list) else ([lds] if isinstance(lds, dict) else [])
+        line_end = sp.get("element_end") or x.get("element_end")
+        for ld in lds:
+            f = {"type": "line_draw", "start": shot["start"], "end": _abs_t(ld.get("end", line_end or shot["end"]), shot),
+                 "draw_start": _abs_t(ld.get("start", shot["start"]), shot), "anim_out": "fade", "out_frames": 8}
             f.update({k: ld[k] for k in ("x1", "y1", "x2", "y2", "color", "thickness", "dur") if k in ld})
             fxs.append(f)
-        if fxs:
-            shot["fx"] = fxs
+        if not fxs:
+            shot.pop("fx", None)
 
 
 if __name__ == "__main__":

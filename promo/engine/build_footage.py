@@ -54,7 +54,7 @@ def count_frames(path):
     return int(p.stdout.strip())
 
 
-def cover_zoom_filters(src_w, src_h, W, H, zoom, amount, n, punch=1.0, anchor=(0.5, 0.5)):
+def cover_zoom_filters(src_w, src_h, W, H, zoom, amount, n, punch=1.0, anchor=(0.5, 0.5), push=None):
     """Scale to cover WxH (times a static punch-in), with an optional linear zoom
     driven by frame number n, then crop around an anchor point (fractions of the
     scaled frame; 0.5,0.5 is center). Sizes are computed in Python so the crop
@@ -68,6 +68,10 @@ def cover_zoom_filters(src_w, src_h, W, H, zoom, amount, n, punch=1.0, anchor=(0
         z = f"(1+{amount}*(1-n/{den}))"
     else:
         z = "1"
+    if push and push.get("frames") and push.get("amount"):
+        # 샷 마지막 frames 프레임 동안 카메라가 밀려 들어간다: 1 + amount*q^3
+        pf, pa = int(push["frames"]), float(push["amount"])
+        z = f"({z}*(1+{pa}*pow(clip((n-{n - pf}+1)/{pf},0,1),3)))"
     sw = f"ceil({cw:.4f}*{z}/2)*2"
     sh = f"ceil({ch:.4f}*{z}/2)*2"
     ax, ay = anchor
@@ -123,7 +127,7 @@ def segment_command(shot, tl, out_path):
     info = probe(bg["src"])
     vf = cover_zoom_filters(info["width"], info["height"], W, H,
                             bg["zoom"], float(bg["zoom_amount"]), n,
-                            float(bg.get("punch", 1.0)), tuple(bg.get("anchor", [0.5, 0.5]))) + look_filters(bg) + fade_filters(bg, n)
+                            float(bg.get("punch", 1.0)), tuple(bg.get("anchor", [0.5, 0.5])), bg.get("push_out")) + look_filters(bg) + fade_filters(bg, n)
     if t == "image":
         return head + ["-loop", "1", "-framerate", str(fps), "-i", bg["src"],
                        "-vf", ",".join(vf + ["format=yuv420p"])] + tail
