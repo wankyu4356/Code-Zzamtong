@@ -115,6 +115,66 @@
     return pos;
   }
 
+  const EASES = {
+    expo: (p) => (p >= 1 ? 1 : 1 - Math.pow(2, -10 * p)),
+    cubic: (p) => 1 - Math.pow(1 - p, 3),
+    back: (p) => easeOutBack(p, 1.35),
+    inOut: (p) => easeInOut(p),
+    linear: (p) => p,
+  };
+  const easeFn = (name, dflt) => EASES[name] || EASES[dflt || "expo"];
+
+  // reveal / exit 용 단위 분해: 줄 > 단어 > 음절. 각 단계에 마스크(겉)와 움직이는 속(안)을 둔다
+  function buildUnits(el, s) {
+    const R = s.reveal || {}, X = s.exit || {};
+    const unit = R.unit || X.unit || "word";
+    const needMask = R.style === "rise" || X.style === "rise";
+    const mask = (e) => { e.style.overflow = "hidden"; e.style.paddingTop = "0.12em"; e.style.paddingBottom = "0.18em"; e.style.marginTop = "-0.12em"; e.style.marginBottom = "-0.18em"; };
+    const units = [], words = [], chars = [];
+    // "*둘 다*"처럼 여러 단어에 걸친 강조를 단어마다 나눈다
+    const txt = s.text.replace(/\*([^*]+)\*/g, (m, g) => g.split(/( +)/).map(w => (/^ +$/.test(w) || !w ? w : `*${w}*`)).join(""));
+    const lines = txt.split("\n");
+    lines.forEach((line, li) => {
+      const lineMask = document.createElement("div"), lineInner = document.createElement("div");
+      lineMask.appendChild(lineInner); el.appendChild(lineMask);
+      let lineUnit = null;
+      if (unit === "line") { if (needMask) mask(lineMask); lineUnit = { el: lineInner, line: li, j: 0, chars: [] }; units.push(lineUnit); }
+      const parts = line.split(/( +)/).filter(Boolean);
+      const wordParts = parts.filter(x => !/^ +$/.test(x));
+      let wi = 0, jInLine = 0;
+      parts.forEach(part => {
+        if (/^ +$/.test(part)) { lineInner.appendChild(document.createTextNode(part)); return; }
+        const am = /^\*([^*]+)\*([,.!?…]*)$/.exec(part);
+        const core = am ? am[1] : part.replace(/\*/g, ""), tail = am ? am[2] : "";
+        const wMask = document.createElement("span"), wInner = document.createElement("span");
+        wMask.style.display = "inline-block"; wMask.style.whiteSpace = "nowrap"; wInner.style.display = "inline-block";
+        wMask.appendChild(wInner); lineInner.appendChild(wMask);
+        let wordUnit = null;
+        if (unit === "word") { if (needMask) mask(wMask); wordUnit = { el: wInner, line: li, j: jInLine++, chars: [] }; units.push(wordUnit); }
+        words.push({ el: wMask, accent: !!am, line: li });
+        const cs = [...Array.from(core).map(c => ({ c, acc: !!am })), ...Array.from(tail).map(c => ({ c, acc: false }))];
+        cs.forEach((ch, ci) => {
+          const cMask = document.createElement("span"), cInner = document.createElement("span");
+          cMask.style.display = "inline-block"; cInner.style.display = "inline-block"; cInner.textContent = ch.c;
+          const full = ch.acc ? (s.accent_color || "#003070") : s.color;
+          if (ch.acc) cInner.style.color = full;
+          cMask.appendChild(cInner); wInner.appendChild(cMask);
+          if (s.hang_quotes) {
+            if (ch.c === "“" && wi === 0 && ci === 0) cMask.style.marginLeft = (-measure("“", Object.assign({}, s, { font: s.font || "Pretendard" }))) + "px";
+            if (ch.c === "”" && wi === wordParts.length - 1 && ci === cs.length - 1) cMask.style.marginRight = (-measure("”", Object.assign({}, s, { font: s.font || "Pretendard" }))) + "px";
+          }
+          const cref = { el: cInner, full };
+          chars.push(cref);
+          if (unit === "char") { if (needMask) mask(cMask); units.push({ el: cInner, line: li, j: jInLine++, chars: [cref] }); }
+          if (wordUnit) wordUnit.chars.push(cref);
+          if (lineUnit) lineUnit.chars.push(cref);
+        });
+        wi++;
+      });
+    });
+    return { units, words, chars };
+  }
+
   function makeText(t) {
     const s = Object.assign({}, TEXT_DEFAULTS, t);
     const el = document.createElement("div");
@@ -122,7 +182,10 @@
     // words: 단어별 등장 시각(초) 배열. *단어*는 강조색(accent_color). 둘 중 하나라도 있으면 단어를 span으로 나눈다.
     const wordsF = Array.isArray(s.words) && s.words.length ? s.words.map(t => toFrame(t)) : null;
     const spans = [];
-    if (wordsF || /\*[^*]+\*/.test(s.text)) {
+    let U = null;
+    if (s.reveal || s.exit) {
+      U = buildUnits(el, s);
+    } else if (wordsF || /\*[^*]+\*/.test(s.text)) {
       s.text.split("\n").forEach((line, li) => {
         if (li > 0) el.appendChild(document.createElement("br"));
         line.split(/(\s+)/).forEach(part => {
@@ -160,7 +223,43 @@
     // Chromium applies letter-spacing after the last glyph too, so a centered line's advance box
     // sits |ls|/2 off center. Pad the right side by |ls| to center the advance box exactly.
     if (s.align === "center" && s.letter_spacing < 0) el.style.paddingRight = (-s.letter_spacing) + "em";
-    return { spec: s, el, sf: toFrame(s.start), ef: toFrame(s.end), spans: wordsF ? spans : null, wordsF };
+    const it = { spec: s, el, sf: toFrame(s.start), ef: toFrame(s.end), spans: wordsF ? spans : null, wordsF };
+    if (U) {
+      // 단위별 등장·퇴장 시각(프레임)
+      const R = s.reveal || null, X = s.exit || null;
+      const n = U.units.length;
+      U.units.forEach((u, i) => {
+        if (R) {
+          const base = Array.isArray(R.line_times) && R.line_times.length ? R.line_times[Math.min(u.line, R.line_times.length - 1)] + u.j * (R.stagger || 0)
+                                                                         : s.start + (R.delay || 0) + i * (R.stagger || 0);
+          if (Array.isArray(R.unit_times) && R.unit_times[i] !== undefined) u.tf = toFrame(R.unit_times[i]); else u.tf = toFrame(base);
+        }
+        if (X && X.style !== "zoom") u.xf = it.ef - (X.dur || 8) - Math.round((n - 1 - i) * (X.stagger || 0) * fps);
+      });
+      it.units = U.units; it.uwords = U.words; it.uchars = U.chars;
+    }
+    if (s.sheen || s.underline) {
+      const holder = document.createElement("div");
+      holder.style.position = "relative"; holder.style.display = "inline-block";
+      holder.appendChild(el);
+      if (s.sheen) {
+        const clone = el.cloneNode(true);
+        const sc = s.sheen.color || "#ffffff";
+        clone.style.color = sc; clone.querySelectorAll("span").forEach(x => { x.style.color = sc; });
+        Object.assign(clone.style, { position: "absolute", left: "0", top: "0", width: "100%", pointerEvents: "none", opacity: "0" });
+        holder.appendChild(clone);
+        it.clone = clone;
+      }
+      if (s.underline) {
+        const bar = document.createElement("div");
+        Object.assign(bar.style, { position: "absolute", height: (s.underline.thickness || 8) + "px", background: s.underline.color || s.accent_color || "#003070",
+                                   transformOrigin: "0 50%", transform: "scaleX(0)", borderRadius: ((s.underline.thickness || 8) / 2) + "px" });
+        holder.appendChild(bar);
+        it.bar = bar;
+      }
+      it.root = holder;
+    }
+    return it;
   }
 
   function makeCard(c) {
@@ -211,6 +310,7 @@
   }
   function makeFx(sp) {
     const s = Object.assign({}, FX_DEFAULTS, sp);
+    if (s.type === "shape_wipe" || s.type === "line_draw") { s.x = 0; s.y = 0; }
     const el = document.createElement("div");
     el.className = "anim fx";
     styleText(el, s);
@@ -227,6 +327,15 @@
       const spans = words.map(wd => { const x = document.createElement("span"); x.textContent = wd; x.style.color = s.slot_color || s.color;
         Object.assign(x.style, { position: "absolute", left: 0, top: 0, height: h + "px", lineHeight: h + "px", willChange: "transform" }); slot.appendChild(x); return x; });
       el.appendChild(document.createTextNode(pre)); el.appendChild(slot); el.appendChild(document.createTextNode(post));
+      let vblur = null;
+      if (s.roll_blur) {
+        const fid = "vb" + Math.random().toString(36).slice(2, 8);
+        const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+        svg.setAttribute("width", "0"); svg.setAttribute("height", "0"); svg.style.position = "absolute";
+        svg.innerHTML = `<filter id="${fid}" x="-10%" y="-50%" width="120%" height="200%"><feGaussianBlur stdDeviation="0 0"/></filter>`;
+        el.appendChild(svg);
+        vblur = { id: fid, node: svg.querySelector("feGaussianBlur") };
+      }
       const timesF = (s.slot_times || []).map(t => toFrame(t));
       const rf = s.roll_frames || 8;
       const rfLast = s.roll_frames_last || rf;
@@ -241,16 +350,19 @@
           const cp = clamp01((f - colF + 1) / colN);
           spans[cur].style.color = cp <= 0 ? (s.slot_color || s.color) : (cp >= 1 ? s.slot_color_to : `color-mix(in srgb, ${s.slot_color_to} ${Math.round(cp * 100)}%, ${s.slot_color || s.color})`);
         }
+        const vb = vblur && i >= 0 && p < 1 ? r4(s.roll_blur * Math.sin(Math.PI * Math.min(1, p * 1.15))) : 0;
+        if (vblur) vblur.node.setAttribute("stdDeviation", `0 ${vb}`);
         spans.forEach((x, k) => {
           let ty = h * 1.2, op = 0;
-          if (k === cur) { ty = h * (1 - e); op = 0.15 + 0.85 * e; }
-          else if (k === cur - 1) { ty = -h * e; op = 1 - e; }
+          if (k === cur) { ty = h * (1 - e); op = 0.15 + 0.85 * Math.min(1, e); }
+          else if (k === cur - 1) { ty = -h * e; op = 1 - Math.min(1, e); }
           x.style.transform = `translateY(${r4(ty)}px)`; x.style.opacity = String(r4(op));
+          x.style.filter = vblur && vb > 0.05 && (k === cur || k === cur - 1) ? `url(#${vblur.id})` : "none";
         });
         const wPrev = widths[Math.max(0, cur - 1)], wCur = widths[cur];
         const sw = r4(cur === 0 ? wCur : wPrev + (wCur - wPrev) * Math.min(1, e));
         slot.style.width = sw + "px";
-        return `:sl${cur}:${r4(p)}:${sw}:${spans[cur].style.color}`;
+        return `:sl${cur}:${r4(p)}:${sw}:${spans[cur].style.color}:${vb}`;
       };
     } else if (s.type === "ticker") {
       // 여러 줄의 단어가 좌우로 흐르다 (settle_at부터) 한 단어가 중앙에 멈춘다
@@ -300,15 +412,88 @@
       const n = s.light_frames || 6;
       it.update = (f) => {
         let lit = 0;
+        const cs = s.cell_style || "color";
         cells.forEach((c, k) => {
           const tf = timesF[k] !== undefined ? timesF[k] : (allF !== null ? allF : 1e9);
           const p = f < tf ? 0 : clamp01((f - tf + 1) / n);
           if (p > 0) lit++;
           const e = easeOut(p);
+          if (cs !== "color") {
+            const ee = EASES.expo(p);
+            c.style.color = s.color;
+            if (cs === "blur") { c.style.opacity = String(r4(clamp01(p * 1.6))); c.style.filter = p < 1 ? `blur(${r4((1 - ee) * 12)}px)` : "none"; c.style.transform = `scale(${r4(1.06 - 0.06 * ee)})`; }
+            else { c.style.opacity = String(r4(clamp01(p * 1.4))); c.style.transform = `translateY(${r4((1 - ee) * 36)}px)`; c.style.filter = "none"; }
+            return;
+          }
           c.style.color = p <= 0 ? (s.dim_color || "rgba(29,29,31,0.18)") : (p >= 1 ? s.color : `color-mix(in srgb, ${s.color} ${Math.round(e * 100)}%, ${s.dim_color || "rgba(29,29,31,0.18)"})`);
           c.style.transform = `scale(${r4(1 + 0.05 * Math.sin(Math.PI * p))})`;
         });
         return `:g${lit}:${r4(clamp01((f - (timesF[timesF.length - 1] || 0)) / n))}`;
+      };
+    } else if (s.type === "odometer") {
+      // 숫자 자리가 기계식 계기판처럼 굴러 목표 숫자에 멈춘다
+      el.style.fontVariantNumeric = "tabular-nums";
+      const h = Math.ceil(s.size * s.line_height);
+      const cols = [];
+      Array.from(s.text).forEach((ch, idx) => {
+        if (/[0-9]/.test(ch)) {
+          const col = document.createElement("span");
+          Object.assign(col.style, { display: "inline-block", height: h + "px", overflow: "hidden", verticalAlign: "bottom", position: "relative" });
+          const strip = document.createElement("span");
+          Object.assign(strip.style, { display: "flex", flexDirection: "column", willChange: "transform" });
+          const target = +ch, spins = s.spins === undefined ? 1 : s.spins;
+          const seq = [];
+          for (let k = 0; k <= spins * 10 + target; k++) seq.push(k % 10);
+          seq.forEach(d => { const x = document.createElement("span"); x.textContent = d; x.style.height = h + "px"; x.style.lineHeight = h + "px"; strip.appendChild(x); });
+          col.appendChild(strip); el.appendChild(col);
+          cols.push({ strip, len: seq.length, k: cols.length });
+        } else {
+          const x = document.createElement("span"); x.textContent = ch; x.style.display = "inline-block"; x.style.opacity = "0";
+          el.appendChild(x); cols.push({ sep: x, k: cols.length });
+        }
+      });
+      const t0 = toFrame(s.roll_start !== undefined ? s.roll_start : s.start), dn = s.dur || 24, st = s.stagger || 0.04;
+      it.update = (f) => {
+        let key = "";
+        cols.forEach(c => {
+          const cf = t0 + Math.round(c.k * st * fps);
+          const p = f < cf ? 0 : clamp01((f - cf + 1) / dn);
+          if (c.sep) { c.sep.style.opacity = String(r4(clamp01(p * 2))); key += r4(p); return; }
+          const e = EASES.expo(p);
+          const y = -(c.len - 1) * h * e;
+          c.strip.style.transform = `translateY(${r4(y)}px)`;
+          c.strip.parentNode.style.opacity = String(r4(clamp01(p * 3)));
+          key += `,${r4(y)}`;
+        });
+        return ":od" + key;
+      };
+    } else if (s.type === "shape_wipe") {
+      // 화면 전환: 다음 배경색의 도형이 화면을 덮는다
+      Object.assign(el.style, { width: "1920px", height: "1080px", background: s.color || "#000", clipPath: "circle(0px at 50% 50%)" });
+      const o = s.origin || [960, 540];
+      const R = Math.hypot(Math.max(o[0], 1920 - o[0]), Math.max(o[1], 1080 - o[1])) + 4;
+      it.update = (f) => {
+        const p = clamp01((f - it.sf + 1) / Math.max(1, it.ef - it.sf));
+        const e = easeInOut(p);
+        let cp;
+        if (s.shape === "panel_up") cp = `inset(${r4((1 - e) * 100)}% 0 0 0)`;
+        else if (s.shape === "panel_left") cp = `inset(0 0 0 ${r4((1 - e) * 100)}%)`;
+        else cp = `circle(${r4(e * R)}px at ${o[0]}px ${o[1]}px)`;
+        el.style.clipPath = cp;
+        return `:sw${r4(e)}`;
+      };
+    } else if (s.type === "line_draw") {
+      Object.assign(el.style, { width: "1920px", height: "1080px", position: "relative" });
+      const ln = document.createElement("div");
+      const len = Math.hypot(s.x2 - s.x1, s.y2 - s.y1), ang = Math.atan2(s.y2 - s.y1, s.x2 - s.x1) * 180 / Math.PI;
+      Object.assign(ln.style, { position: "absolute", left: s.x1 + "px", top: s.y1 + "px", width: len + "px", height: (s.thickness || 3) + "px",
+                                background: s.color || "#1d1d1f", transformOrigin: "0 50%" });
+      el.appendChild(ln);
+      const t0 = toFrame(s.draw_start !== undefined ? s.draw_start : s.start), dn = s.dur || 18;
+      it.update = (f) => {
+        const p = f < t0 ? 0 : clamp01((f - t0 + 1) / dn), e = EASES.expo(p);
+        ln.style.transform = `rotate(${ang}deg) scaleX(${r4(e)})`;
+        return `:ld${r4(e)}`;
       };
     } else if (s.type === "count") {
       // 숫자가 올라간다
@@ -532,7 +717,7 @@
       for (const x of shot.fx || []) typings.push(makeFx(x));
     }
     window.__imagesReady = Promise.all(pendingImages).then(() => true);
-    for (const it of [...images, ...texts, ...cards, ...typings]) { it.wrap = place(it.spec, it.el); stage.appendChild(it.wrap); items.push(it); }
+    for (const it of [...images, ...texts, ...cards, ...typings]) { it.wrap = place(it.spec, it.root || it.el); stage.appendChild(it.wrap); items.push(it); }
     for (const it of flashes) { it.wrap = it.el; stage.appendChild(it.el); items.push(it); }
     for (const it of items) it.wrap.style.display = "none";
     return items.length;
@@ -589,23 +774,87 @@
         }
       }
       if (it.update) tkey += it.update(f);
+      if (it.units) {
+        const R = it.spec.reveal || null, X = it.spec.exit || null;
+        const rE = easeFn(R && R.ease, "expo"), xE = easeFn(X && X.ease, "cubic");
+        it.units.forEach((u, i) => {
+          let tr = "none", op = 1, bl = 0, fill = -1;
+          if (R) {
+            const p = f < u.tf ? 0 : clamp01((f - u.tf + 1) / (R.dur || 12));
+            const e = rE(p);
+            if (R.style === "rise") tr = `translateY(${r4((1 - e) * 110 * (R.distance || 1))}%)`;
+            else if (R.style === "blur") { op = clamp01(p * 1.6); bl = (1 - e) * (R.blur || 14); tr = `scale(${r4(1.08 - 0.08 * e)})`; }
+            else if (R.style === "flip") { op = clamp01(p * 2.2); tr = `perspective(700px) rotateX(${r4((1 - e) * 88)}deg)`; }
+            else if (R.style === "scale") { op = clamp01(p * 1.5); bl = (1 - e) * (R.blur || 10); tr = `scale(${r4(1.5 - 0.5 * e)})`; }
+            else if (R.style === "fade") op = e;
+            else if (R.style === "fill") fill = e;
+          }
+          if (X && u.xf !== undefined && f >= u.xf) {
+            const q = clamp01((f - u.xf + 1) / (X.dur || 8)), e = xE(q);
+            if (X.style === "rise") tr = `translateY(${r4(-e * 110)}%)`;
+            else if (X.style === "blur") { op = Math.min(op, 1 - e); bl = Math.max(bl, e * 12); }
+            else op = Math.min(op, 1 - e);
+          }
+          u.el.style.transform = tr; if (R && R.style === "flip") u.el.style.transformOrigin = "50% 100%";
+          u.el.style.opacity = String(r4(op));
+          u.el.style.filter = bl > 0.05 ? `blur(${r4(bl)}px)` : "none";
+          if (fill >= 0) u.chars.forEach(c => { c.el.style.color = fill >= 1 ? c.full : `color-mix(in srgb, ${c.full} ${Math.round(18 + 82 * fill)}%, transparent)`; });
+          tkey += `|${tr}${r4(op)}${r4(bl)}${fill >= 0 ? r4(fill) : ""}`;
+        });
+      }
+      if (it.clone) {
+        const S = it.spec.sheen, sf0 = toFrame(S.at), sn = S.dur || 18, w = S.width || 14;
+        const p = (f - sf0 + 1) / sn;
+        if (p <= 0 || p >= 1) { it.clone.style.opacity = "0"; tkey += ":sh0"; }
+        else {
+          const x = -w + (100 + 2 * w) * easeInOut(p);
+          const m = `linear-gradient(100deg, rgba(0,0,0,0) ${r4(x - w)}%, #000 ${r4(x)}%, rgba(0,0,0,0) ${r4(x + w)}%)`;
+          it.clone.style.webkitMaskImage = m; it.clone.style.maskImage = m; it.clone.style.opacity = String(S.opacity || 0.9);
+          it.clone.style.letterSpacing = it.el.style.letterSpacing;
+          tkey += `:sh${r4(x)}`;
+        }
+      }
+      if (it.bar) {
+        const Ud = it.spec.underline;
+        // 밑줄 대상: 강조 단어 묶음 전체(같은 줄에서 첫 강조부터 이어진 강조 단어들) 또는 단어 번호
+        let run = [];
+        if (Ud.word === "accent") {
+          const ws = it.uwords || []; const k0 = ws.findIndex(w => w.accent);
+          if (k0 >= 0) { run.push(ws[k0]); for (let k = k0 + 1; k < ws.length && ws[k].accent && ws[k].line === ws[k0].line; k++) run.push(ws[k]); }
+        } else if ((it.uwords || [])[Ud.word || 0]) run = [it.uwords[Ud.word || 0]];
+        if (run.length) {
+          const L = Math.min(...run.map(w => w.el.offsetLeft)), R2 = Math.max(...run.map(w => w.el.offsetLeft + w.el.offsetWidth));
+          const T = run[0].el.offsetTop, W = R2 - L, H = run[0].el.offsetHeight;
+          const p = clamp01((f - toFrame(Ud.at) + 1) / (Ud.dur || 12)), e = EASES.expo(p);
+          Object.assign(it.bar.style, { left: L + "px", top: (T + H * 0.98 + (Ud.offset || 0)) + "px", width: W + "px", transform: `scaleX(${r4(e)})` });
+          tkey += `:ul${r4(e)}:${L},${T},${W}`;
+        }
+      }
       const a = animIn(it.spec.anim_in, f - it.sf, it.spec);
       if (a.ls !== undefined) { it.el.style.letterSpacing = r4(a.ls) + "em"; tkey += `:ls${r4(a.ls)}`; }
       if (a.wipe !== undefined) {
         const edge = -25 + 150 * a.wipe;            // -25% -> 125%
         const m = a.wipe >= 1 ? "none" : `linear-gradient(90deg, #000 ${r4(edge)}%, rgba(0,0,0,0) ${r4(edge + 22)}%)`;
-        it.el.style.webkitMaskImage = m; it.el.style.maskImage = m;
+        (it.root || it.el).style.webkitMaskImage = m; (it.root || it.el).style.maskImage = m;
         tkey += `:wp${r4(a.wipe)}`;
       }
       const opacity = r4(a.opacity * animOut(it.spec.anim_out, it.ef - f, it.spec) * (it.maxOpacity ?? 1));
       // drift_scale: 요소가 보이는 동안 선형으로 커지는 느린 줌 (예: 0.03이면 1.00에서 1.03)
       const dEnd = it.spec.drift_until !== undefined ? toFrame(it.spec.drift_until) : it.ef - 1;
       const drift = it.spec.drift_scale ? it.spec.drift_scale * clamp01((f - it.sf) / Math.max(1, dEnd - it.sf)) : 0;
-      const transform = `translateY(${r4(a.dy)}px) scale(${r4((a.scale + drift) * (it.moveScale ?? 1))})`;
-      const filter = a.blur > 0.005 ? `blur(${r4(a.blur)}px)` : "none";
-      it.el.style.opacity = String(opacity);
-      it.el.style.transform = transform;
-      it.el.style.filter = filter;
+      // 퇴장 zoom: 카메라가 글자를 뚫고 지나가듯 커지며 흐려진다
+      let zs = 1, zb = 0, zo = 1;
+      if (it.spec.exit && it.spec.exit.style === "zoom") {
+        const zn = it.spec.exit.dur || 10, zf = it.ef - zn;
+        if (f >= zf) { const q = clamp01((f - zf + 1) / zn), e = EASES.cubic(q) * q; zs = 1 + 0.7 * e; zb = 14 * e; zo = 1 - EASES.cubic(q); tkey += `:zx${r4(q)}`; }
+      }
+      const transform = `translateY(${r4(a.dy)}px) scale(${r4((a.scale + drift) * (it.moveScale ?? 1) * zs)})`;
+      const blurAll = a.blur + zb;
+      const filter = blurAll > 0.005 ? `blur(${r4(blurAll)}px)` : "none";
+      const root = it.root || it.el;
+      root.style.opacity = String(r4(opacity * zo));
+      root.style.transform = transform;
+      root.style.filter = filter;
       key.push(`${i}:${opacity}:${transform}:${filter}${tkey}`);
     });
     return key.join("|");

@@ -291,7 +291,7 @@ def _validate_receipt(rc, where, err):
         err(f"{where}: tear_at (seconds) is required")
 
 
-FX_TYPES = ("slot", "ticker", "grid", "count")
+FX_TYPES = ("slot", "ticker", "grid", "count", "odometer", "shape_wipe", "line_draw")
 
 
 def _validate_fx(fx, where, err):

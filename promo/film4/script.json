@@ -41,7 +41,7 @@
    "seconds": 4,
    "motion": "quote",
    "sound": "beat",
-   "source": "네이버 영수증 리뷰 · 2026년 1월 · 발췌"
+   "source": "네이버 방문자 리뷰"
   },
   {
    "no": 5,
@@ -153,5 +153,5 @@
    "role": "info"
   }
  ],
- "quote_source": "네이버 방문자 리뷰 · 영수증 인증"
+ "quote_source": "네이버 방문자 리뷰"
 }
