@@ -675,7 +675,11 @@
     const n = spec && spec.in_frames;
     const hs = spec && spec.hit_scale;
     switch (kind) {
-      case "hit": { const e = easeOut(ramp(lf, n || 4)); const s0 = hs || 1.10; return { scale: s0 - (s0 - 1) * e, dy: 0, opacity: 1, blur: (s0 - 1) * 60 * (1 - e) }; }
+      case "hit": {
+        // hit_blur(배율 1당 px)를 주면 시작 흐림이 배율에 비례한다. 없으면 예전 영상과 같은 1px
+        const e = easeOut(ramp(lf, n || 4)); const s0 = hs || 1.10; const hb = spec && spec.hit_blur;
+        return { scale: s0 - (s0 - 1) * e, dy: 0, opacity: 1, blur: hb ? (s0 - 1) * hb * (1 - e) : 1 - e };
+      }
       case "focus": {
         // 초점이 맞듯 흐림 12px·1.04배에서 선명해진다 (로고·서명)
         const N = n || 16, e = EASES.expo(ramp(lf, N));

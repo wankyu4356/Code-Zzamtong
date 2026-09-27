@@ -291,6 +291,8 @@ def _apply_text_keys(t, src, shot):
             t[k] = _abs_t(src[k], shot) if k == "drift_until" else src[k]
             if k == "anim_in":
                 t.pop("words", None)
+    if t.get("anim_in") == "hit":
+        t["hit_blur"] = src.get("hit_blur", 60)          # 강타 시작 흐림: 배율 0.1당 6px
 
 
 def apply_motion(shots, script, motion):

@@ -142,6 +142,7 @@
        2.0
       ]
      },
+     "hit_blur": 60,
      "exit": {
       "style": "rise",
       "unit": "word",
@@ -564,6 +565,7 @@
      "accent_color": "#9cc3ff",
      "hit_scale": 1.14,
      "drift_scale": 0.03,
+     "hit_blur": 60,
      "exit": {
       "style": "rise",
       "stagger": 0,
@@ -909,7 +911,8 @@
      "color": "#f5f5f7",
      "accent_color": "#9cc3ff",
      "hit_scale": 1.18,
-     "drift_scale": 0.045
+     "drift_scale": 0.045,
+     "hit_blur": 60
     },
     {
      "size": 84,
@@ -1073,6 +1076,7 @@
       ]
      },
      "hit_scale": 1.08,
+     "hit_blur": 60,
      "sheen": {
       "at": 41.0,
       "dur": 22,
